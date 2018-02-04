@@ -32,7 +32,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class=" btn btn-primary btn-block enter-btn">Login </button>
-                        <small v-if="!mosignin" class="text-center red-text fontnku">trying to login...</small>
+                        <small v-if="!mosignin" class="text-center red-text fontnku">trying to login.....</small>
                     </div>
                     
                     <p class="sign-up">Don't have an Account?<a href="#"> Sign Up</a></p>
