@@ -46562,9 +46562,26 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm._m(1),
+                      _c("div", { staticClass: "text-center" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: " btn btn-primary btn-block enter-btn",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Login ")]
+                        ),
+                        _vm._v(" "),
+                        !_vm.mosignin
+                          ? _c(
+                              "small",
+                              { staticClass: "text-center red-text fontnku" },
+                              [_vm._v("trying to login...")]
+                            )
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
-                      _vm._m(2)
+                      _vm._m(1)
                     ]
                   )
                 ])
@@ -46605,21 +46622,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: " btn btn-primary btn-block enter-btn",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Login ")]
-      )
-    ])
   },
   function() {
     var _vm = this
