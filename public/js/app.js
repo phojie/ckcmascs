@@ -46576,7 +46576,7 @@ var render = function() {
                           ? _c(
                               "small",
                               { staticClass: "text-center red-text fontnku" },
-                              [_vm._v("trying to login...")]
+                              [_vm._v("trying to login.....")]
                             )
                           : _vm._e()
                       ]),
