@@ -1,0 +1,252 @@
+/* ACS custom styles */
+body{
+    font-family: 'Pontano Sans', sans-serif;
+    background-color:#37474F;
+    color:white;
+    }
+  
+.disable{
+  background-color:#263238 ;
+}
+.enable{
+  background-color:#263238;
+}
+
+.disable:hover{
+  background-color:#ec407a ;
+}
+.enable:hover{
+  background-color:#9ccc65 ;
+}
+.zzz:focus{
+    border:1px solid #263238;
+    outline: none;
+}
+
+.color1{
+    background-color:#263238;
+}
+.color1text{
+   color:#263238;
+}
+.color2{
+    background-color:grey;
+}
+.color2text{
+   color:#37474F;
+}
+.akongtext:hover{
+    color:#263238;
+}
+.akongbtn:hover{
+    background-color:#263238;
+    
+}
+.akongbtndanger:hover{
+    background-color:#ef5350;
+    
+}
+.akongbtndangertext:hover{
+    color:#ef5350;
+}
+.color3{
+    background-color:#4FAAFF;
+}
+.dropdownnkubtn:hover{
+}
+.dropdownnkubtn:focus{
+  color:white;
+  background-color:#263238;
+}
+
+
+/* mao ni ang background color pag e hover nimu ang dropdown */
+.dropdown .dropdown-menu .dropdown-item:active,.dropdown .dropdown-menu .dropdown-item:focus,.dropdown .dropdown-menu .dropdown-item:hover{
+    color:#1679db;background-color:#263238;
+}
+
+
+/* sa navbar nga search ni  */
+
+.navbar.navbar-dark form input[type=text]:focus:not([readonly]){
+    border-color:white;
+}
+
+
+/* sa mga input types ni */
+input[type=file]:focus:not([readonly]) {
+    border-bottom: .5px solid #263238;
+    -webkit-box-shadow: 0 .5px 0 0 #263238;
+    box-shadow: 0 0px 0 0 #263238; }
+    
+input[type=text]:focus:not([readonly]) {
+border-bottom: .5px solid #263238;
+-webkit-box-shadow: 0 .5px 0 0 #263238;
+box-shadow: 0 0px 0 0 #263238; }
+
+input[type=text]:focus:not([readonly]) + label {
+color: #4f4f4f; }
+
+input[type=password]:focus:not([readonly]) {
+border-bottom: 1px solid #263238;
+-webkit-box-shadow: 0 1px 0 0 #263238;
+box-shadow: 0 0px 0 0 #263238; }
+
+input[type=password]:focus:not([readonly]) + label {
+color: #4f4f4f; }
+
+input[type=search]:focus:not([readonly]) {
+    border-bottom: 1px solid #263238;
+    -webkit-box-shadow: 0 1px 0 0 #263238;
+    box-shadow: 0 0px 0 0 #263238; }
+
+input[type=search]:focus:not([readonly]) + label {
+color: #4f4f4f; }
+
+textarea.md-textarea:focus:not([readonly]) {
+border-bottom: 1px solid #263238;
+-webkit-box-shadow: 0 1px 0 0 #263238;
+box-shadow: 0 0px 0 0 #263238; }
+
+textarea.md-textarea:focus:not([readonly]) +label {
+  color: #4f4f4f; }
+
+input[type=date]:focus:not([readonly]) + label {
+  color: #4f4f4f; }
+      
+input[type=date]:focus:not([readonly]) {
+  border-bottom: 1px solid #263238;
+  -webkit-box-shadow: 0 1px 0 0 #263238;
+  box-shadow: 0 0px 0 0 #263238; }
+
+input[type=number]:focus:not([readonly]) + label {
+  color: #4f4f4f; }
+      
+input[type=number]:focus:not([readonly]) {
+  border-bottom: 1px solid #263238;
+  -webkit-box-shadow: 0 1px 0 0 #263238;
+  box-shadow: 0 0px 0 0 #263238; }
+  
+/* dre akong mga animation */
+
+#alertrequired {
+    /* -webkit-animation-duration: 5s; */
+    }
+#tigihap{
+    /* -webkit-animation-duration: 3s; */
+    -webkit-animation-delay: 5s;
+    /* -webkit-animation-iteration-count: infinite; */
+}
+
+
+
+
+
+
+
+
+            
+               
+.scrollbar-#263238::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px; }
+  
+  .scrollbar-#263238::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5; }
+  
+  .scrollbar-#263238::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #ec407a; }
+  
+  .scrollbar-indigo::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px; }
+  
+  .scrollbar-indigo::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5; }
+  
+  .scrollbar-indigo::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #3f51b5; }
+  
+  .scrollbar-black::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px; }
+  
+  .scrollbar-black::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5; }
+  
+  .scrollbar-black::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #000; }
+  
+  .scrollbar-lady-lips::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px; }
+  
+  .scrollbar-lady-lips::-webkit-scrollbar {
+    width:.5px;
+    background-color: #F5F5F5; }
+  
+  .scrollbar-lady-lips::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#263238), color-stop(99%, #fecfef), to(#fecfef));
+    background-image: -webkit-linear-gradient(bottom, #263238 0%, #263238 99%, #263238 100%);
+    background-image: linear-gradient(to top, #263238 0%, #263238 99%, #263238 100%); }
+  
+  .scrollbar-near-moon::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px; }
+  
+  .scrollbar-near-moon::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5; }
+  
+  .scrollbar-near-moon::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#5ee7df), to(#b490ca));
+    background-image: -webkit-linear-gradient(bottom, #5ee7df 0%, #b490ca 100%);
+    background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%); }
+  
+  .bordered-#263238::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border: 1px solid #ec407a; }
+  
+  .bordered-#263238::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none; }
+  
+  .bordered-indigo::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border: 1px solid #3f51b5; }
+  
+  .bordered-indigo::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none; }
+  
+  .bordered-black::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border: 1px solid #000; }
+  
+  .bordered-black::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none; }
+  
+  .square::-webkit-scrollbar-track {
+    border-radius: 0 !important; }
+  
+  .square::-webkit-scrollbar-thumb {
+    border-radius: 0 !important; }
+  
+  .thin::-webkit-scrollbar {
+    width: 6px; }

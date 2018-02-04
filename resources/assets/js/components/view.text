@@ -1,0 +1,238 @@
+<template>
+    <table class="uk-table uk-table-responsive uk-table-hover">
+        <caption>Department Table Data</caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Dean</th>
+                <th>Description</th>
+                
+            </tr>
+        </thead>
+        <tbody >
+            <tr :key="datadepartment.id" v-for="datadepartment in datadepartments ">
+                <td>{{datadepartment.name}}</td>
+                <td>{{datadepartment.dean}}</td>
+                <td>{{datadepartment.description}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</template>
+<script>
+export default {
+    data (){
+        return{
+            datadepartments:[]
+        }
+    },
+    created(){
+        this.fetchDatadepartments();
+    },
+    methods:{
+        fetchDatadepartments(){
+            this.$http.get("departmentdata").then(
+                response=>{this.datadepartments=response.data.datadepartments2}
+            );
+        }
+    }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<template>
+    <table class="uk-table uk-table-responsive uk-table-hover">
+        <caption>Department Table Data</caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Dean</th>
+                <th>Description</th>
+                
+            </tr>
+        </thead>
+        <tbody >
+            <datadepartment v-bind:datadepartment="datadepartment" :key="datadepartment.id" v-for="datadepartment in datadepartments "></datadepartment>
+            
+        </tbody>
+    </table>
+</template>
+<script>
+
+    import datadepartment from './new-department.vue'
+export default {
+    data (){
+        return{
+            datadepartments:[]
+        }
+    },
+    components:{datadepartment},
+    created(){
+        this.fetchDatadepartments();
+    },
+    methods:{
+        fetchDatadepartments(){
+            this.$http.get("departmentdata").then(
+                response=>{this.datadepartments=response.data.datadepartments2}
+            );
+        }
+    }
+}
+</script>
+
+
+
+<template>
+    <div>
+        <form v-on:submit.prevent="createDepartment" method="post">
+        <fieldset class="uk-fieldset">
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Name</label>
+                <div class="uk-form-controls">
+                    <input autofocus ref="name" v-model="insertdepartment.name" class="uk-input" id="form-stacked-text" type="text" placeholder="Some text...">
+                </div>
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Dean/Assciate dean</label>
+                <div class="uk-form-controls">
+                    <input  ref="dean" v-model="insertdepartment.dean" class="uk-input" id="form-stacked-text" type="text" placeholder="Some text...">
+                </div>
+            </div>
+            <div class="uk-form-controls">
+                <div class="uk-margin">
+                        <textarea ref="description" v-model="insertdepartment.description" class="uk-textarea" rows="5" placeholder="Description"></textarea>
+                </div>              
+            </div> 
+            
+                <button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Create</button>
+        </fieldset>
+        </form>
+    </div>
+</template>
+
+<script>
+export default {
+    data(){
+        return{
+            insertdepartment:{ name:'', dean:'', description:''}
+        }
+    },
+    methods:{
+        createDepartment(){
+            this.$http.post("/departmentdata/",this.insertdepartment).then(
+                reponse=>{
+                    this.insertdepartment={name:'',dean:'',description:''};
+                    // console.log(response.data);
+                }
+            )
+        }
+    }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="card-body mx-4" >
+
+        <!--Header-->
+        <div class="text-center">
+            <h3 class=" mb-5 fontnku"><strong>Sign in</strong></h3>
+        </div>
+        
+        <!--Body-->
+        <form method="post" @keydown="evalidatehi" @submit.prevent="evalidate">
+        <div class="md-form" >
+            <input type="text" autocomplete="off" name="email" v-model="inputform.email" id="Form-email1" class="form-control">
+            <label for="Form-email1 ">Your username </label>
+        </div>
+
+        <div class="md-form pb-3">
+            <input type="password" name="password" v-model="inputform.password" id="Form-pass1" class="form-control">
+            <label for="Form-pass1">Your password</label>
+            <p style="font-size:14px;" class="color1text font-small t d-flex justify-content-end">Forgot <a href="#"  class="color1text ml-1"> Password?</a></p>
+        </div>
+        <div v-if="validation" v-bind:class="[moshake]" class=" animated chip  lighten-4" style="margin-top:-10px;height:30px;padding:3px 10px; ">
+            <small class="text-center red-text fontnku">{{messageerror}}</small><i @click="validation=false"  style="font-size:15px" class="mt-1 close fa fa-times"></i>
+        </div>
+        <br>
+        <div class="text-center mb-3 " >
+            <button type="submit" class="color1 btn btn-block btn-rounded z-depth-1a">Sign in</button>
+            <img id="tigihap" v-if="!mosignin" class="animated  ml-3" src="images/4.gif" height="30" alt="">
+        </div>
+        </form>
+    </div>
+    <!--Footer-->
+    <div class="modal-footer mx-5 pt-3 mb-1">
+        <p class="font-small grey-text d-flex justify-content-end" style="font-size:14px;">Not Registered? <a href="#" class="ml-1 color1text"> More Details</a></p>
+    </div>
+  
+
+
+
+    loginnow: _.debounce(function(){
+            
+            let vm = this;
+            axios.post('../public/login', vm.inputform).then(function(reponse){
+                console.log(reponse);
+                window.location.href = '/';
+            })
+            
+            .catch(function(error){
+                var errors =error.response
+                console.log(errors)
+                
+                if(errors.statusText === "Unprocessable Entity" || errors.status ===422){
+                    if(errors.data){
+                     
+                        vm.messageerror="We don't recognize this account";
+                        vm.moshake='shake';
+                        vm.validation=true; 
+                        vm.inputform.password='';
+                        vm.mosignin=true;
+                    }
+                   
+                }
+            
+            })
+            
+                // this.messageerror='Invalid Account! ';
+                // this.moshake='shake';
+                // this.validation=true;
+
+        }, 3000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+/* Backgrounds  */
+@each $color, $value in $theme-gradient-colors {
+	.bg-gradient-#{$color} {
+		background: theme-gradient-color($color);
+	}
+}
