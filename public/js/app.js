@@ -46361,7 +46361,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -46563,30 +46562,9 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("div", { staticClass: "text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: " btn btn-primary btn-block enter-btn",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Login")]
-                        ),
-                        _vm._v(" "),
-                        !_vm.mosignin
-                          ? _c("img", {
-                              staticClass: "animated  ml-3",
-                              attrs: {
-                                id: "tigihap",
-                                src: "images/4.gif",
-                                height: "30",
-                                alt: ""
-                              }
-                            })
-                          : _vm._e()
-                      ]),
+                      _vm._m(1),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _vm._m(2)
                     ]
                   )
                 ])
@@ -46623,10 +46601,25 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("a", { staticClass: "forgot-pass", attrs: { href: "#" } }, [
-          _vm._v("Forgodft password")
+          _vm._v("Forgot password")
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center" }, [
+      _c(
+        "button",
+        {
+          staticClass: " btn btn-primary btn-block enter-btn",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Login ")]
+      )
+    ])
   },
   function() {
     var _vm = this

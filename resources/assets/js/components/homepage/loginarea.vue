@@ -25,14 +25,13 @@
                             Remember me
                             </label>
                         </div>
-                        <a href="#" class="forgot-pass">Forgodft password</a>
+                        <a href="#" class="forgot-pass">Forgot password</a>
                     </div>
                     <div v-if="validation" v-bind:class="[moshake]" class=" animated chip  lighten-4" style="margin-top:-10px;height:30px;padding:3px 10px; ">
                         <small class="text-center red-text fontnku">{{messageerror}}</small><i @click="validation=false"  style="font-size:15px" class="mt-1 close fa fa-times"></i>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class=" btn btn-primary btn-block enter-btn">Login</button>
-                        <img id="tigihap" v-if="!mosignin" class="animated  ml-3" src="images/4.gif" height="30" alt="">
+                        <button type="submit" class=" btn btn-primary btn-block enter-btn">Login </button>
                         
                     </div>
                     
