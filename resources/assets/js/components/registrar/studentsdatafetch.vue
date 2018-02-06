@@ -363,7 +363,7 @@ export default {
                         clickClose: true, 
                         timeout: 5000, 
                         position: 'toast-bottom-right', 
-                        type: 'success' 
+                        type: 'success' ,
                     }
                 );
                

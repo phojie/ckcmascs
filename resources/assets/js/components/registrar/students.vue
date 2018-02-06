@@ -61,7 +61,7 @@ export default {
             axios.get('registrardata').then(
                 response=>{
                     this.registrardatas=response.data.registrardata
-                    // setTimeout(this.fetchUser(), 100); 
+                    setTimeout(this.fetchUser(), 100); 
                     
                 }
             ),

@@ -265,7 +265,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">School Year</label>
                             <div class="col-sm-9 col-md-3">
@@ -276,7 +276,7 @@
                                 <input type="number" disabled class="form-control" v-model="to"  placeholder="to">
                             </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                         </div>
                         <div class="row">
@@ -284,7 +284,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Password</label>
                                     <div class="col-sm-9">
-                                        <input type="password" autocomplete="off" class="form-control" placeholder="Desire Password -Optional">
+                                        <input type="password" v-model="password" autocomplete="off" class="form-control" placeholder="Desire Password -Optional">
                                     </div>
                                 </div>
                             </div>
@@ -422,6 +422,7 @@ export default {
             studentlists:[],
             from:'',
             to:'',
+            password:'',
             addcor:{
                 idno:'',
                 first:'',
@@ -488,7 +489,6 @@ export default {
             if (result) {
             // eslint-disable-next-line
             this.addsave=true;
-            alert('Form Submitted!');
             }
         });
         },
@@ -501,59 +501,26 @@ export default {
         });
         },
         clearCor(){
-            this.addcor.idno=='' 
-            this.addcor.first=='' 
-            this.addcor.second=='' 
-            this.addcor.last=='' 
-            this.addcor.semester==''
-            this.addcor.dob=='' 
-            this.addcor.em==''
-            this.addcor.contactn=='' 
-            this.addcor.sex=='' 
-            this.addcor.yearlevel=='' 
-            this.addcor.pad=='' 
-            this.addcor.had=='' 
-            this.addcor.ffullname=='' 
-            this.addcor.mfullname==''  
-            this.addcor.department==''
-            this.addcor.lastshool==''
-            this.addcor.sy=='' 
-            this.addcor.pob=='' 
-            this.addor.department==''
-        },
-        validateCor(){
-            if( 
-            this.addcor.idno=='' || 
-            this.addcor.first=='' ||
-            this.addcor.second=='' ||
-            this.addcor.last=='' ||
-            this.addcor.semester=='' ||
-            this.addcor.dob=='' ||
-            this.addcor.em==''||
-            this.addcor.contactn=='' ||
-            this.addcor.sex=='' ||
-            this.addcor.yearlevel=='' 
-            ){
-            alert('invalid');
-            }
-            else{
-                this.addsave=true;
-            }
-        },
-        validateCor1(){
-            if( 
-            this.addcor.pad=='' ||
-            this.addcor.had=='' ||
-            this.addcor.ffullname=='' ||
-            this.addcor.mfullname==''  ||
-            this.addcor.department=='' ||
-            this.addcor.lastshool=='' ||
-            this.addcor.sy=='' ||
-            this.addcor.pob=='' ||
-            this.addor.department==''
-            ){
-            alert('invalid');
-            }
+            this.addcor.idno=""
+            this.addcor.first=""
+            this.addcor.second="" 
+            this.addcor.last=""
+            this.addcor.semester=""
+            this.addcor.dob="" 
+            this.addcor.em=""
+            this.addcor.contactn=""
+            this.addcor.sex=""
+            this.addcor.yearlevel=""
+            this.addcor.pad=""
+            this.addcor.had=""
+            this.addcor.ffullname=""
+            this.addcor.mfullname=""  
+            this.addcor.department=""
+            this.addcor.lastshool=""
+            // this.addcor.sy=""
+            this.addcor.pob=""
+            this.addcor.department=""
+            this.password=""
         },
         returnadd(){
             this.addsave=false;

@@ -54226,7 +54226,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2__dev
 
             axios.get('registrardata').then(function (response) {
                 _this.registrardatas = response.data.registrardata;
-                // setTimeout(this.fetchUser(), 100); 
+                setTimeout(_this.fetchUser(), 100);
             }), axios.get("departmentdata").then(function (response) {
                 _this.datadepartments = response.data.datadepartments2;
             });
@@ -54729,6 +54729,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
             studentlists: [],
             from: '',
             to: '',
+            password: '',
             addcor: _defineProperty({
                 idno: '',
                 first: '',
@@ -54792,7 +54793,6 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
                 if (result) {
                     // eslint-disable-next-line
                     _this.addsave = true;
-                    alert('Form Submitted!');
                 }
             });
         },
@@ -54807,37 +54807,26 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
             });
         },
         clearCor: function clearCor() {
-            this.addcor.idno == '';
-            this.addcor.first == '';
-            this.addcor.second == '';
-            this.addcor.last == '';
-            this.addcor.semester == '';
-            this.addcor.dob == '';
-            this.addcor.em == '';
-            this.addcor.contactn == '';
-            this.addcor.sex == '';
-            this.addcor.yearlevel == '';
-            this.addcor.pad == '';
-            this.addcor.had == '';
-            this.addcor.ffullname == '';
-            this.addcor.mfullname == '';
-            this.addcor.department == '';
-            this.addcor.lastshool == '';
-            this.addcor.sy == '';
-            this.addcor.pob == '';
-            this.addor.department == '';
-        },
-        validateCor: function validateCor() {
-            if (this.addcor.idno == '' || this.addcor.first == '' || this.addcor.second == '' || this.addcor.last == '' || this.addcor.semester == '' || this.addcor.dob == '' || this.addcor.em == '' || this.addcor.contactn == '' || this.addcor.sex == '' || this.addcor.yearlevel == '') {
-                alert('invalid');
-            } else {
-                this.addsave = true;
-            }
-        },
-        validateCor1: function validateCor1() {
-            if (this.addcor.pad == '' || this.addcor.had == '' || this.addcor.ffullname == '' || this.addcor.mfullname == '' || this.addcor.department == '' || this.addcor.lastshool == '' || this.addcor.sy == '' || this.addcor.pob == '' || this.addor.department == '') {
-                alert('invalid');
-            }
+            this.addcor.idno = "";
+            this.addcor.first = "";
+            this.addcor.second = "";
+            this.addcor.last = "";
+            this.addcor.semester = "";
+            this.addcor.dob = "";
+            this.addcor.em = "";
+            this.addcor.contactn = "";
+            this.addcor.sex = "";
+            this.addcor.yearlevel = "";
+            this.addcor.pad = "";
+            this.addcor.had = "";
+            this.addcor.ffullname = "";
+            this.addcor.mfullname = "";
+            this.addcor.department = "";
+            this.addcor.lastshool = "";
+            // this.addcor.sy=""
+            this.addcor.pob = "";
+            this.addcor.department = "";
+            this.password = "";
         },
         returnadd: function returnadd() {
             this.addsave = false;
@@ -65224,8 +65213,10 @@ var render = function() {
                                           )
                                         ]
                                       )
-                                    ]),
-                                    _vm._v(" "),
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
                                     _c("div", { staticClass: "col-md-6" }, [
                                       _c(
                                         "div",
@@ -65237,30 +65228,32 @@ var render = function() {
                                               staticClass:
                                                 "col-sm-3 col-form-label"
                                             },
-                                            [_vm._v("School Year")]
+                                            [_vm._v("Password")]
                                           ),
                                           _vm._v(" "),
                                           _c(
                                             "div",
-                                            {
-                                              staticClass: "col-sm-9 col-md-3"
-                                            },
+                                            { staticClass: "col-sm-9" },
                                             [
                                               _c("input", {
                                                 directives: [
                                                   {
                                                     name: "model",
                                                     rawName: "v-model",
-                                                    value: _vm.from,
-                                                    expression: "from"
+                                                    value: _vm.password,
+                                                    expression: "password"
                                                   }
                                                 ],
                                                 staticClass: "form-control",
                                                 attrs: {
-                                                  type: "number",
-                                                  placeholder: "from"
+                                                  type: "password",
+                                                  autocomplete: "off",
+                                                  placeholder:
+                                                    "Desire Password -Optional"
                                                 },
-                                                domProps: { value: _vm.from },
+                                                domProps: {
+                                                  value: _vm.password
+                                                },
                                                 on: {
                                                   input: function($event) {
                                                     if (
@@ -65268,44 +65261,8 @@ var render = function() {
                                                     ) {
                                                       return
                                                     }
-                                                    _vm.from =
+                                                    _vm.password =
                                                       $event.target.value
-                                                  }
-                                                }
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass: "col-sm-9 col-md-3"
-                                            },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: _vm.to,
-                                                    expression: "to"
-                                                  }
-                                                ],
-                                                staticClass: "form-control",
-                                                attrs: {
-                                                  type: "number",
-                                                  disabled: "",
-                                                  placeholder: "to"
-                                                },
-                                                domProps: { value: _vm.to },
-                                                on: {
-                                                  input: function($event) {
-                                                    if (
-                                                      $event.target.composing
-                                                    ) {
-                                                      return
-                                                    }
-                                                    _vm.to = $event.target.value
                                                   }
                                                 }
                                               })
@@ -65314,9 +65271,7 @@ var render = function() {
                                         ]
                                       )
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _vm._m(1)
+                                  ])
                                 ]
                               )
                             ])
@@ -65387,7 +65342,7 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(2),
+        _vm._m(1),
         _vm._v(" "),
         _c("img", {
           staticClass: "mr-2 mb-2 ",
@@ -65485,7 +65440,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(2)
                 ])
               ]
             )
@@ -65500,7 +65455,7 @@ var render = function() {
           },
           [
             _c("table", { staticClass: "table-striped table table-hover" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -65563,31 +65518,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group row" }, [
-          _c("label", { staticClass: "col-sm-3 col-form-label" }, [
-            _vm._v("Password")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-9" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "password",
-                autocomplete: "off",
-                placeholder: "Desire Password -Optional"
-              }
-            })
-          ])
-        ])
-      ])
     ])
   },
   function() {
