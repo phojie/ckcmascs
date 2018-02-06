@@ -15,8 +15,8 @@
 Auth::routes();
 
 
-Route::get('/1', function() {
-    return view('dash');
+Route::get('/test', function() {
+    return view('testing');
 });
 
 Route::get('/ins',function(){

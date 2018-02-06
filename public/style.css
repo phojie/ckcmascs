@@ -1,3 +1,8 @@
+
+
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus, .was-validated .custom-select:invalid:focus, .custom-select.is-invalid:focus {
+  box-shadow: none;
+}
 .addbtn{
   color:grey
 }

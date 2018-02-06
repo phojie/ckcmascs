@@ -18,9 +18,9 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('con
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 // testing area
+Vue.component('test',require('./components/test.vue'));
 Vue.component('inputhead', require('./components/Input.vue'));
 Vue.component('message', require('./components/Message.vue'));
-
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 // testing area exit

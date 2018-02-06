@@ -21,17 +21,18 @@
                     <div class="card-body">
                     <h4 class="card-title">College of {{getdetails.name}} </h4>
                    
-                    <form method="post" class="form-sample">
-                        <div v-if="!addsave">
+                    <div v-if="!addsave">
+                    <form method="post" @submit.prevent="validateForm('form-1')" data-vv-scope="form-1" class="form-sample" novalidate> 
                         <p class="card-description">
                         Personal info
                         </p>
                         <div class="row">
                               <div class="col-md-6">
-                                <div class="form-group row">
+                                <div class="form-group row " :class="{'has-error':errors.has('id no')}">
                                 <label class="col-sm-3 col-form-label">Id No.</label>
                                 <div class="col-sm-9">
-                                    <input type="text" v-model="addcor.idno" class="form-control">
+                                            <input v-model="addcor.idno" autocomplete="false" class="form-control animated " v-validate="'required'" :class="{'input': true, 'is-invalid ': errors.has('form-1.Id No.')}" name="Id No." type="text" placeholder="">
+                                            <span v-show="errors.has('form-1.Id No.')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Id No.')}" class="animated invalid-feedback">{{errors.first("form-1.Id No.")}}</span>
                                 </div>
                                 </div>
                             </div>
@@ -39,7 +40,9 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Surname</label>
                                 <div class="col-sm-9">
-                                    <input type="text" v-model="addcor.last" class="form-control">
+                                    <input autocomplete="false" type="text" v-model="addcor.last" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Surname')}" name="Surname">
+                                    <span v-show="errors.has('form-1.Surname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Surname')}" class="animated invalid-feedback">{{errors.first("form-1.Surname")}}</span>
+                              
                                 </div>
                                 </div>
                             </div>
@@ -51,7 +54,9 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Firstname</label>
                                 <div class="col-sm-9">
-                                    <input type="text" v-model="addcor.first" class="form-control">
+                                    <input autocomplete="false" type="text" v-model="addcor.first" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Firstname')}" name="Firstname">
+                                    <span v-show="errors.has('form-1.Firstname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Firstname')}" class="animated invalid-feedback">{{errors.first("form-1.Firstname")}}</span>
+                              
                                 </div>
                                 </div>
                             </div>
@@ -59,7 +64,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Middlename</label>
                                 <div class="col-sm-9">
-                                    <input type="text" v-model="addcor.second" class="form-control">
+                                    <input autocomplete="false" type="text" v-model="addcor.second" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Middlename')}" name="Middlename">
+                                    <span v-show="errors.has('form-1.Middlename')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Middlename')}" class="animated invalid-feedback">{{errors.first("form-1.Middlename")}}</span>
                                 </div>
                             </div>
                             </div>
@@ -69,12 +75,14 @@
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Semester </label>
                             <div class="col-sm-9">
-                                <select v-model="addcor.semester" class="form-control">
+                                <select v-validate="'required'" :class="{'input':true, 'is-invalid': errors.has('form-1.Semester')}" name="Semester" v-model="addcor.semester" class="form-control">
                                 <option value="1st Semester">1st Semester</option>
                                 <option value="2nd Semester">2nd Semester</option>
                                 <option value="Summer">Summer</option>
 
                                 </select>
+                                <span v-show="errors.has('form-1.Semester')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Semester')}" class="animated invalid-feedback">{{errors.first("form-1.Semester")}}</span>
+                                
                             </div>
                             </div>
                         </div>
@@ -84,7 +92,7 @@
                             <div class="col-sm-4">
                                 <div class="form-radio">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" v-model="addcor.sex"  value="Male" checked="">
+                                    <input name="Sex" type="radio" v-validate="'required|in:Male,Female'" class="form-check-input" v-model="addcor.sex"  value="Male" checked="">
                                     Male
                                 <i class="input-helper"></i></label>
                                 </div>
@@ -92,12 +100,14 @@
                             <div class="col-sm-5">
                                 <div class="form-radio">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input"  v-model="addcor.sex" value="Female">
+                                    <input name="Sex" type="radio" class="form-check-input"  v-model="addcor.sex" value="Female">
                                     Female
                                 <i class="input-helper"></i></label>
                                 </div>
                             </div>
                             </div>
+                                <span v-show="errors.has('form-1.Sex')" style="font-size:10px" class="animated invalid-feedback">{{errors.first("form-1.Sex")}}</span>
+                            
                         </div>
                         </div>
                         <div class="row">
@@ -105,7 +115,9 @@
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Date of Birth</label>
                             <div class="col-sm-9">
-                                <input type="date" v-model="addcor.dob" class="form-control" placeholder="dd/mm/yyyy">
+                                <input type="date" name="Date of Birth" :class="{'input':true, 'is-invalid': errors.has('form-1.Date of Birth')}" v-validate="'required'" v-model="addcor.dob" class="form-control" placeholder="dd/mm/yyyy">
+                                <span v-show="errors.has('form-1.Date of Birth')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Date of Birth')}" class="animated invalid-feedback">{{errors.first("form-1.Date of Birth")}}</span>
+                                
                             </div>
                             </div>
                         </div>
@@ -113,7 +125,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" v-model="addcor.em" placeholder="ckcmascs@eg.com">
+                                    <input type="email" name="Email" :class="{'input':true, 'is-invalid': errors.has('form-1.Email')}" v-validate="'required|email'" class="border-3 form-control" v-model="addcor.em" placeholder="ckcmascs@eg.com">
+                                    <span v-show="errors.has('form-1.Email')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Email')}" class="animated invalid-feedback">{{errors.first("form-1.Email")}}</span>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +136,8 @@
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Contact Number</label>
                             <div class="col-sm-9">
-                                <input class="form-control"  v-model="addcor.contactn" value="+63">
+                                <input class="form-control" name="Contact Number" :class="{'input':true, 'is-invalid': errors.has('form-1.Contact Number')}" v-validate="'required|numeric'" v-model="addcor.contactn" value="+63">
+                                <span v-show="errors.has('form-1.Contact Number')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Contact Number')}" class="animated invalid-feedback">{{errors.first("form-1.Contact Number")}}</span>
                             </div>
                             </div>
                         </div>
@@ -131,29 +145,38 @@
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Year Level</label>
                             <div class="col-sm-9">
-                                <select  v-model="addcor.yearlevel" class="form-control">
+                                <select name="Year Level" :class="{'input':true, 'is-invalid': errors.has('form-1.Year Level')}"  v-validate="'required'" v-model="addcor.yearlevel" class="form-control">
                                 <option>1st Year</option>
                                 <option>2nd Year</option>
                                 <option>3rd Year</option>
                                 <option>4th Year</option>
                                 <option>5th Year</option>
-                           
                                 </select>
+                                <span v-show="errors.has('form-1.Year Level')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Year Level')}" class="animated invalid-feedback">{{errors.first("form-1.Year Level")}}</span>
+                                
+
                             </div>
                             </div>
                         </div>
                         </div>
+                        </form>
                         </div>
 
 
                         <div v-if="addsave">
+
+                    <form method="post" @submit.prevent="validateForm1('form-2')" data-vv-scope="form-2" class="form-sample" novalidate> 
+                    
+
                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Present Address</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" v-model="addcor.pad" id="exampleTextarea1" rows="3"></textarea>
+                                    <textarea name="Present Address" :class="{'input':true, 'is-invalid': errors.has('form-2.Present Address')}"  v-validate="'required'" class="form-control" v-model="addcor.pad" id="exampleTextarea1" rows="3"></textarea>
+                                    <span v-show="errors.has('form-2.Present Address')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Present Address')}" class="animated invalid-feedback">{{errors.first("form-2.Present Address")}}</span>
+                                
                                 </div>
                                 </div>
                             </div>
@@ -161,7 +184,9 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Home Address</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" v-model="addcor.had" id="exampleTextarea2" rows="3"></textarea>
+                                    <textarea name="Home Address" :class="{'input':true, 'is-invalid': errors.has('form-2.Home Address')}"  v-validate="'required'" class="form-control" v-model="addcor.had" id="exampleTextarea2" rows="3"></textarea>
+                                    <span v-show="errors.has('form-2.Home Address')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Home Address')}" class="animated invalid-feedback">{{errors.first("form-2.Home Address")}}</span>
+                                    
                                 </div>
                                 </div>
                             </div>
@@ -170,27 +195,59 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Father's </label>
+                                <label class="col-sm-3 col-form-label">Father's</label>
                                 <div class="col-sm-9">
-                                    <input type="text" v-model="addcor.ffullname" placeholder="Surname/Firstname/Middlename" class="form-control">
+                                    <input name="Fathers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Fathers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.pad" id="exampleTextarea1" >
+                                    <span v-show="errors.has('form-2.Fathers Fullname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Fathers Fullname')}" class="animated invalid-feedback">{{errors.first("form-2.Fathers Fullname")}}</span>
+                                
                                 </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Mother's </label>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Mother's</label>
                                 <div class="col-sm-9">
-                                    <input type="text" v-model="addcor.mfullname"  placeholder="Surname/Firstname/Middlename"  class="form-control">
+                                    <input name="Mothers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Mothers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.had" id="exampleTextarea2" rows="1">
+                                    <span v-show="errors.has('form-2.Mothers Fullname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Mothers Fullname')}" class="animated invalid-feedback">{{errors.first("form-2.Mothers Fullname")}}</span>
+                                    
+                                </div>
                                 </div>
                             </div>
-                            </div>
                         </div>
+                        
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Father's </label>
+                                <div class="col-sm-9">
+                                    <input  name="Fathers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Fathers Fullname')}"  v-validate="'required'" type="text" v-model="addcor.ffullname" placeholder="Surname/Firstname/Middlename" class="form-control">
+                                    <span v-show="errors.has('form-2.Fathers Fullname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Fathers Fullname')}" class="animated invalid-feedback">{{errors.first("form-2.Fathers Fullname")}}</span>
+                                
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Father's </label>
+                                <div class="col-sm-9">
+                                    <input  name="Fathers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Fathers Fullname')}"  v-validate="'required'" type="text" v-model="addcor.ffullname" placeholder="Surname/Firstname/Middlename" class="form-control">
+                                    <span v-show="errors.has('form-2.Fathers Fullname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Fathers Fullname')}" class="animated invalid-feedback">{{errors.first("form-2.Fathers Fullname")}}</span>
+                                
+                                </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        
+                        
                         <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Place of Birth</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" v-model="addcor.pob"  id="exampleTextarea3" rows="3"></textarea>
+                                <textarea name="Place of Birth" :class="{'input':true, 'is-invalid': errors.has('form-2.Place of Birth')}"  v-validate="'required'" class="form-control" v-model="addcor.pob"  id="exampleTextarea3" rows="3"></textarea>
+                                <span v-show="errors.has('form-2.Place of Birth')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Place of Birth')}" class="animated invalid-feedback">{{errors.first("form-2.Place of Birth")}}</span>
+                            
                             </div>
                             </div>
                         </div>
@@ -201,7 +258,9 @@
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">School Last Attended</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" v-model="addcor.lastschool"  id="exampleTextarea4" rows="3"></textarea>
+                                <textarea name="School Last Attended" :class="{'input':true, 'is-invalid': errors.has('form-2.School Last Attended')}"  v-validate="'required'" class="form-control" v-model="addcor.lastschool"  id="exampleTextarea4" rows="3"></textarea>
+                                <span v-show="errors.has('form-2.School Last Attended')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.School Last Attended')}" class="animated invalid-feedback">{{errors.first("form-2.School Last Attended")}}</span>
+                            
                             </div>
                             </div>
                         </div>
@@ -210,7 +269,8 @@
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">School Year</label>
                             <div class="col-sm-9 col-md-3">
-                                <input type="number" class="form-control" v-model="from"  placeholder="from">
+                                <input type="number" class="form-control" v-model="from" placeholder="from">
+                            
                             </div>
                             <div class="col-sm-9 col-md-3">
                                 <input type="number" disabled class="form-control" v-model="to"  placeholder="to">
@@ -237,21 +297,21 @@
                                 </div>
                             </div> -->
                         </div>
-                        </div>
-                        
                     </form>
+                    </div>
+ 
                     </div>
                     </div>
                         </div>
                         <div class="modal-footer">
                             <button v-if="!addsave" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button v-if="!addsave" @click="nextadd" type="button" class="btn btn-primary">Next</button>
+                            <button v-if="!addsave" @click="validateForm('form-1')" type="button" class="btn btn-primary">Next</button>
                             <button v-if="addsave" @click="returnadd" type="submit" class="btn btn-light">Return</button>
-                            <button v-if="addsave" @click="createStudentdata" type="submit" class="btn btn-success">Save changes</button>
+                            <button v-if="addsave" @click="validateForm1('form-2')" type="submit" class="btn btn-success">Save changes</button>
                         </div>
-                    </div>
                 </div>
             </div>
+        </div>
                     
 
             
@@ -350,8 +410,10 @@ import studentslist from './studentsdatafetch'
 import Vue from 'vue'
 import VueToastr from '@deveodk/vue-toastr'
 
-
+import VeeValidate from 'vee-validate'
+Vue.use(VeeValidate);
 export default {
+    name: 'scopes-example',
     data(){
         return{
             search:'',
@@ -420,8 +482,78 @@ export default {
         this.fetchStudentsdata();
     },
     methods:{
-        nextadd(){
+        
+        validateForm(scope) {
+        this.$validator.validateAll(scope).then((result) => {
+            if (result) {
+            // eslint-disable-next-line
             this.addsave=true;
+            alert('Form Submitted!');
+            }
+        });
+        },
+        validateForm1(scope) {
+        this.$validator.validateAll(scope).then((result) => {
+            if (result) {
+            // eslint-disable-next-line
+            this.createStudentdata();
+            }
+        });
+        },
+        clearCor(){
+            this.addcor.idno=='' 
+            this.addcor.first=='' 
+            this.addcor.second=='' 
+            this.addcor.last=='' 
+            this.addcor.semester==''
+            this.addcor.dob=='' 
+            this.addcor.em==''
+            this.addcor.contactn=='' 
+            this.addcor.sex=='' 
+            this.addcor.yearlevel=='' 
+            this.addcor.pad=='' 
+            this.addcor.had=='' 
+            this.addcor.ffullname=='' 
+            this.addcor.mfullname==''  
+            this.addcor.department==''
+            this.addcor.lastshool==''
+            this.addcor.sy=='' 
+            this.addcor.pob=='' 
+            this.addor.department==''
+        },
+        validateCor(){
+            if( 
+            this.addcor.idno=='' || 
+            this.addcor.first=='' ||
+            this.addcor.second=='' ||
+            this.addcor.last=='' ||
+            this.addcor.semester=='' ||
+            this.addcor.dob=='' ||
+            this.addcor.em==''||
+            this.addcor.contactn=='' ||
+            this.addcor.sex=='' ||
+            this.addcor.yearlevel=='' 
+            ){
+            alert('invalid');
+            }
+            else{
+                this.addsave=true;
+            }
+        },
+        validateCor1(){
+            if( 
+            this.addcor.pad=='' ||
+            this.addcor.had=='' ||
+            this.addcor.ffullname=='' ||
+            this.addcor.mfullname==''  ||
+            this.addcor.department=='' ||
+            this.addcor.lastshool=='' ||
+            this.addcor.sy=='' ||
+            this.addcor.pob=='' ||
+            this.addor.department==''
+            ){
+            alert('invalid');
+            }
         },
         returnadd(){
             this.addsave=false;
@@ -448,7 +580,8 @@ export default {
             console.log(this.addcor)
             axios.post('studentsdata',this.addcor).then(response=>{
                 this.fetchStudentsdata();   
-                
+                this.clearCor();
+                this.addsave=false;
                 this.$toastr('add', 
                     { 
                         title: 'Successfully Added', 
