@@ -39,9 +39,24 @@ return [
         //     'prefix' => '',
         // ],
    
+        // 'mysql' => [
+        //     'driver' => 'mysql',
+        //     'host' => 'localhost',
+        //     'port' => '3306',
+        //     'database' => 'ckcmascs',
+        //     'username' => 'root',
+        //     'password' => '',
+        //     'unix_socket' => env('DB_SOCKET', ''),
+        //     'charset' => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix' => '',
+        //     'strict' => true,
+        //     'engine' => null,
+        // ],
+
         'mysql' => [
             'driver' => 'mysql',
-            'host' => 'localhost',
+            'host' => 'sql12.freemysqlhosting.net',
             'port' => '3306',
             'database' => 'sql12223321',
             'username' => 'sql12223321',
@@ -53,21 +68,6 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
-        // 'mysql' => [
-        //     'driver' => 'mysql',
-        //     'host' => 'sql12.freemysqlhosting.net',
-        //     'port' => '3306',
-        //     'database' => 'sql12219463',
-        //     'username' => 'sql12219463',
-        //     'password' => 'Rg9EfsTm4Y',
-        //     'unix_socket' => env('DB_SOCKET', ''),
-        //     'charset' => 'utf8mb4',
-        //     'collation' => 'utf8mb4_unicode_ci',
-        //     'prefix' => '',
-        //     'strict' => true,
-        //     'engine' => null,
-        // ],
 
         // 'pgsql' => [
         //     'driver' => 'pgsql',
