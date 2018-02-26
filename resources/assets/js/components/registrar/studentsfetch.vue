@@ -19,8 +19,7 @@
                     <div class="modal-body">
                     <div class="card">
                     <div class="card-body">
-                    <h4 class="card-title">College of {{getdetails.name}} </h4>
-                   
+                    <h4 class="card-title">College of {{getdetails.name}}</h4>
                     <div v-if="!addsave">
                     <form method="post" @submit.prevent="validateForm('form-1')" data-vv-scope="form-1" class="form-sample" novalidate> 
                         <p class="card-description">
@@ -31,7 +30,7 @@
                                 <div class="form-group row " :class="{'has-error':errors.has('id no')}">
                                 <label class="col-sm-3 col-form-label">Id No.</label>
                                 <div class="col-sm-9">
-                                            <input v-model="addcor.idno" autocomplete="false" class="form-control animated " v-validate="'required'" :class="{'input': true, 'is-invalid ': errors.has('form-1.Id No.')}" name="Id No." type="text" placeholder="">
+                                            <input v-model="addcor.idno" autocomplete="off"  class="form-control animated " v-validate="'required'" :class="{'input': true, 'is-invalid ': errors.has('form-1.Id No.')}" name="Id No." type="text" placeholder="">
                                             <span v-show="errors.has('form-1.Id No.')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Id No.')}" class="animated invalid-feedback">{{errors.first("form-1.Id No.")}}</span>
                                 </div>
                                 </div>
@@ -40,7 +39,7 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Surname</label>
                                 <div class="col-sm-9">
-                                    <input autocomplete="false" type="text" v-model="addcor.last" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Surname')}" name="Surname">
+                                    <input  autocomplete="off" type="text" v-model="addcor.last" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Surname')}" name="Surname">
                                     <span v-show="errors.has('form-1.Surname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Surname')}" class="animated invalid-feedback">{{errors.first("form-1.Surname")}}</span>
                               
                                 </div>
@@ -54,7 +53,7 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Firstname</label>
                                 <div class="col-sm-9">
-                                    <input autocomplete="false" type="text" v-model="addcor.first" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Firstname')}" name="Firstname">
+                                    <input autocomplete="off"  type="text" v-model="addcor.first" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Firstname')}" name="Firstname">
                                     <span v-show="errors.has('form-1.Firstname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Firstname')}" class="animated invalid-feedback">{{errors.first("form-1.Firstname")}}</span>
                               
                                 </div>
@@ -64,7 +63,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Middlename</label>
                                 <div class="col-sm-9">
-                                    <input autocomplete="false" type="text" v-model="addcor.second" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Middlename')}" name="Middlename">
+                                    <input autocomplete="off"  type="text" v-model="addcor.second" class="form-control animated" v-validate="'required|alpha'" :class="{'input':true, 'is-invalid': errors.has('form-1.Middlename')}" name="Middlename">
                                     <span v-show="errors.has('form-1.Middlename')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-1.Middlename')}" class="animated invalid-feedback">{{errors.first("form-1.Middlename")}}</span>
                                 </div>
                             </div>
@@ -197,7 +196,7 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Father's</label>
                                 <div class="col-sm-9">
-                                    <input name="Fathers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Fathers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.pad" id="exampleTextarea1" >
+                                    <input name="Fathers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Fathers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.ffullname" id="exampleTextarea3" >
                                     <span v-show="errors.has('form-2.Fathers Fullname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Fathers Fullname')}" class="animated invalid-feedback">{{errors.first("form-2.Fathers Fullname")}}</span>
                                 
                                 </div>
@@ -207,7 +206,7 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Mother's</label>
                                 <div class="col-sm-9">
-                                    <input name="Mothers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Mothers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.had" id="exampleTextarea2" rows="1">
+                                    <input name="Mothers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Mothers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.mfullname" id="exampleTextarea4" rows="1">
                                     <span v-show="errors.has('form-2.Mothers Fullname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Mothers Fullname')}" class="animated invalid-feedback">{{errors.first("form-2.Mothers Fullname")}}</span>
                                     
                                 </div>
@@ -307,7 +306,8 @@
                             <button v-if="!addsave" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button v-if="!addsave" @click="validateForm('form-1')" type="button" class="btn btn-primary">Next</button>
                             <button v-if="addsave" @click="returnadd" type="submit" class="btn btn-light">Return</button>
-                            <button v-if="addsave" @click="validateForm1('form-2')" type="submit" class="btn btn-success">Save changes</button>
+                            <img v-if="addsave && addingloading"  src="images/loading1.gif"  class="mx-4"  height="50" style="" alt="">
+                            <button v-if="addsave && !addingloading" @click="validateForm1('form-2')" type="submit" class="btn btn-success">Add Student</button>
                         </div>
                 </div>
             </div>
@@ -364,19 +364,29 @@
             <h4 class="card-title mb-5" style="margin-top:-60px;margin-left:70px"> 
                 {{datadepartment.name}} 
                 <br>
-                <i style="font-size:25px;" class="ml-2 mdi mdi-account-multiple text-info"></i><span class="grey-text" style="font-size:15px"> {{datadepartment.stotal}}</span> 
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <i style="font-size:36px" class="grey-text float-left mdi mdi-account-group"></i>
+                    <i style="font-size:36px" class="grey-text float-right mdi mdi-account-search"></i>
+                    
+                </div>
+
+            </div>
+                
+                <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="#000000" d="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M11,6V9H8V11H11V14H13V11H16V9H13V6H11Z" />
+                        </svg> -->
+                <!-- <i style="font-size:25px;" class="ml-2 mdi mdi-account-multiple text-info"></i><span class="grey-text" style="font-size:15px"> {{datadepartment.stotal}}</span> 
                 <i style="font-size:25px;" class="ml-2 mdi mdi-account text-success"></i><span class="grey-text" style="font-size:15px"> {{datadepartment.stotal}}</span> 
-                <i style="font-size:25px;" class="ml-2 mdi mdi-account text-danger"></i><span class="grey-text" style="font-size:15px"> {{datadepartment.stotal}}</span> 
-                <form action="#" class="mt-3 grey d-flex align-items-stretch  " style="height:30px;">
-                    <div class="input-group  ">
-                        <input type="text" v-model="search" style="height:30px;" placeholder="Search"  class=" form-control border-1"> 
+                <i style="font-size:25px;" class="ml-2 mdi mdi-account text-danger"></i><span class="grey-text" style="font-size:15px"> {{datadepartment.stotal}}</span>  -->
+                <!--
                         <div class="input-group-addon bg-transparent border-0 search-button">
                             <button type="submit" class="btn btn-sm bg-transparent px-0">
                                 <i class="mdi mdi-magnify"></i>
                             </button>
                         </div>
                     </div>
-                </form>
+                </form> -->
 
             </h4> 
             
@@ -399,8 +409,8 @@
                         </tbody>
                     </table>
             </div>
-        </div>
-        </div>
+    </div>
+</div>
 </div>
 </template>
 <script>
@@ -416,6 +426,8 @@ export default {
     name: 'scopes-example',
     data(){
         return{
+            datasubmitteds:[],
+            addingloading:false,
             search:'',
             checkedNames:[],
             addsave:false,
@@ -528,7 +540,7 @@ export default {
         fetchStudentsdata(){
             axios.get('studentsdata').then(response=>{
                 this.studentlists=response.data.studentlists;
-                setTimeout(this.fetchStudentsdata,100);
+                setTimeout(this.fetchStudentsdata,1000);
                 }
             )
             // console.log(this.datadepartment.name);
@@ -541,17 +553,19 @@ export default {
             // })
         },
         createStudentdata(){
+            this.addingloading=true;    
             let vm=this;
             this.addcor.sy=this.from;
             this.addcor.department=this.getdetails.name;
             console.log(this.addcor)
             axios.post('studentsdata',this.addcor).then(response=>{
-                this.fetchStudentsdata();   
+                // this.fetchStudentsdata();   
                 this.clearCor();
                 this.addsave=false;
+                this.addingloading=false;    
                 this.$toastr('add', 
                     { 
-                        title: 'Successfully Added', 
+                        title: 'Successfully Added ', 
                         msg: '', 
                         clickClose: true, 
                         timeout: 5000, 
@@ -578,6 +592,8 @@ export default {
                                 type: 'error' 
                             }
                         );
+                        alert('load your page, wla guro connection');
+                        
                     }
                 }
             })
@@ -616,7 +632,7 @@ export default {
                     msg: '', 
                     clickClose: true, 
                     timeout: 5000, 
-                    position: 'toast-bottom-right', 
+                    position: 'toast-top-right', 
                     type: 'success' 
                 }
             ) 
@@ -634,3 +650,14 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.jiesd{
+    position: absolute;
+    top: 25%;
+    right: 0;
+    width: 5px;
+    height: 5px;
+    background-image: linear-gradient(300deg, #ff5858, #f09819);
+    border-radius: 100%;
+}
+</style>

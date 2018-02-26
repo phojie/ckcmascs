@@ -1,6 +1,8 @@
 <template>
 <div class="content-wrapper " >
     <div class="">
+        <center>
+            <img  v-if="loaderarea" height="100px" style="margin-top:20%" src="images/loading1.gif"  alt=""></center>
         <div class="row">
         <!-- <button @click="showToastr"></button> -->
         <fetch v-bind:getdetails="pickedinfo" v-on:getdetails="getdetails" v-bind:datadepartment="datadepartment" :key="datadepartment.id" v-for="datadepartment in datadepartments" ></fetch>
@@ -17,19 +19,14 @@ import Vue from 'vue'
 import VueToastr from '@deveodk/vue-toastr'
 
 
-Vue.use(VueToastr, {
-    defaultPosition: 'toast-bottom-right',
-    defaultType: 'info',
-    defaultTimeout: 5000
-})
 
 export default {
     components:{fetch},
     data(){
         return{
-            msg: 'This is a button.',
+            loaderarea:true,
             checkStudent:[],
-            registrardatas:[],
+            // registrardatas:[],
             datadepartments:[],
             pickedinfo:{
                 id:'',
@@ -58,16 +55,11 @@ export default {
             this.pickedinfo.createdat=datadepartment.created;
         },
         fetchUser(){
-            axios.get('registrardata').then(
-                response=>{
-                    this.registrardatas=response.data.registrardata
-                    setTimeout(this.fetchUser(), 100); 
-                    
-                }
-            ),
             axios.get("departmentdata").then(
                 response=>{
                     this.datadepartments=response.data.datadepartments2;
+                    this.loaderarea=false;
+                    // setTimeout(this.fetchUser(), 1000); 
                 }
             )
             

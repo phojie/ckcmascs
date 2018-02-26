@@ -56,6 +56,9 @@ Vue.component('regstudents', require('./components/registrar/students.vue'));
 Vue.component('tighawidins', require('./components/instructor/tighawid.vue'));
 Vue.component('dash1', require('./components/instructor/dash.vue'));
 
+//  user area
+// Vue.component('tighawiduser', require('./components/user/tighawid.vue'));
+
 
 const app = new Vue({
     el: '#app'

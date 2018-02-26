@@ -251,13 +251,14 @@ export default {
             axios.get('registrardata').then(
                 response=>{
                     this.registrardatas=response.data.registrardata
-                    // setTimeout(this.fetchUser(), 100); 
                     
                 }
             ),
             axios.get("departmentdata").then(
                 response=>{
                     this.datadepartments=response.data.datadepartments2;
+                    setTimeout(this.fetchUser(), 1000); 
+                
                 }
             )
             

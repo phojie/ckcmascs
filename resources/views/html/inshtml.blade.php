@@ -37,8 +37,9 @@
 <link rel="stylesheet" href="style.css">
 
 <!-- endinject -->
-{{--  <link rel="shortcut icon" href="ckcmascs/images/favicon.png" />  --}}
+<link rel="shortcut icon" href="images/4.gif" />
 <link rel="stylesheet" href="{{asset('css/vue-jie.min.css')}}"></link>
+<link href="css/myico/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
 <script src="{{asset('js/vue-jie.min.js')}}"></script>
 <script src="https://unpkg.com/v-tooltip"></script>
 

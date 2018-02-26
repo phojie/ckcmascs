@@ -58,13 +58,15 @@ class studentsController extends Controller
             'em'=> 'required|email|'
         ]);
 
-        User::create([
+        $submitnow=User::create([
             'name' => $request->first,
             'email' => $request->em,
             'password' => bcrypt('ckcm'.$request->first),
             'type'=> '2'
             
         ]);
+
+        
 
 
 
@@ -91,6 +93,7 @@ class studentsController extends Controller
         DB::table('departments')
             ->where('name',$request->department)
             ->update(['stotal'=>$ostotal]);
+            
     }
 
     /**
@@ -124,7 +127,19 @@ class studentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->gender=="Male"){
+            $profilepic="nobody_m.128x128.jpg";
+        }
+        else{
+            $profilepic="nobody_f.128x128.jpg";
+        }
+        $get= Student::find($id);
+        $get->update($request->except('profilepic') + [
+            'profilepic' => $profilepic
+        ]);
+        return response()->json([
+            
+        ]);
     }
 
     /**

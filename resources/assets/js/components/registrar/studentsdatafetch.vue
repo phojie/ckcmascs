@@ -4,8 +4,9 @@
         <td> {{list.idno}}</td>
         <td>{{list.first}}</td>
         <td class="text-success">{{list.last}}</td>
-        <td v-if="!showbtnnaw"><label class="badge badge-gradient-warning px-3">Actions <i class="mdi mdi-border-color"></i></label> </td>
-        <td v-if="showbtnnaw"><label style="cursor:pointer"  class="badge badge-info " ><i class="mdi mdi-account"></i> </label>&nbsp; <label style="cursor:pointer" @click="$emit('getStudent',list)" class="badge badge-warning white-text" data-toggle="modal" :data-target="'#viewModal'+list.id"><i class="mdi mdi-update"></i></label>&nbsp; <label style="cursor:pointer" @click="deleteStudent(list)" class="badge badge-danger " ><i class="mdi mdi-delete"></i> </label> </td>
+        <td v-if="showloading"><img src="images/loading1.gif"  alt="loading..."></td>
+        <td v-if="!showbtnnaw && !showloading"><label class="badge badge-gradient-warning px-3">Actions <i class="mdi mdi-border-color"></i></label> </td>
+        <td v-if="showbtnnaw && !showloading"><label style="cursor:pointer"  class="badge badge-info " ><i class="mdi mdi-account"></i> </label>&nbsp; <label style="cursor:pointer" @click="$emit('getStudent',list)" class="badge badge-warning white-text" data-toggle="modal" :data-target="'#viewModal'+list.id"><i class="mdi mdi-update"></i></label>&nbsp; <label style="cursor:pointer" @click="deleteStudent(list)" class="badge badge-danger " ><i class="mdi mdi-delete"></i> </label> </td>
    <!-- > <a class="btn btn-primary waves-effect waves-light" >Bottom Right</a> -->
 
     
@@ -58,7 +59,7 @@
             <div class="modal-body">
             <div class="card">
             <div class="card-body">
-            <h4 class="card-title">College of {{getcor.department}} </h4>
+            <h4 class="card-title">College of {{getcor.department}}</h4>
             
             <form method="post" class="form-sample">
                 <div v-if="!addsave">
@@ -138,7 +139,7 @@
                         </div>
                     </div>
                     <div v-if="getcor.sex!='Male'" class="form-group row">
-                        <label class="col-sm-3 col-form-label">Membership</label>
+                        <label class="col-sm-3 col-form-label">Sex</label>
                         <div class="col-sm-4">
                         <div class="form-radio">
                             <label class="form-check-label">
@@ -211,7 +212,7 @@
                         <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Present Address</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" v-model="getcor.pad" id="exampleTextarea1" rows="3"></textarea>
+                            <textarea class="form-control" v-model="getcor.pad" rows="3"></textarea>
                         </div>
                         </div>
                     </div>
@@ -219,7 +220,7 @@
                         <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Home Address</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" v-model="getcor.had" id="exampleTextarea2" rows="3"></textarea>
+                            <textarea class="form-control" v-model="getcor.had" rows="3"></textarea>
                         </div>
                         </div>
                     </div>
@@ -248,11 +249,22 @@
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Place of Birth</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control" v-model="getcor.pob"  id="exampleTextarea3" rows="3"></textarea>
+                        <textarea class="form-control" v-model="getcor.pob"  id="exampleTextarea3" rows="4"></textarea>
                     </div>
                     </div>
                 </div>
-
+                <div class="col-md-6">
+                    <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Profile Picture</label>
+                    <div class="col-sm-3 ">
+                        <img :src="'userprofilepic/'+getcor.profilepic" class="" height="100" alt=""> 
+                    </div>
+                    <div class="col-sm-6 ">
+                        
+                    </div>
+                     
+                    </div>
+                </div>
                 </div>
                 <div class="row">
                 
@@ -265,17 +277,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">School Year</label>
-                    <div class="col-sm-9 col-md-3">
-                        <input type="number" class="form-control" v-model="from"  placeholder="from">
-                    </div>
-                    <div class="col-sm-9 col-md-3">
-                        <input type="number" disabled class="form-control" v-model="to"  placeholder="to">
-                    </div>
-                    </div>
-                </div>
                 
                 </div>
                 <div class="row">
@@ -306,7 +307,7 @@
                 <button v-if="!addsave" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button v-if="!addsave" @click="nextadd" type="button" class="btn btn-primary">Next</button>
                 <button v-if="addsave" @click="returnadd" type="submit" class="btn btn-light">Return</button>
-                <!-- <button v-if="addsave" @click="createStudentdata" type="submit" class="btn btn-success">Save changes</button> -->
+                <button v-if="addsave" @click="updateStudent(getcor)" type="submit" class="btn btn-success">Save changes</button>
             </div>
         </div>
     </div>
@@ -327,7 +328,8 @@ export default {
     data(){
         return{
             addsave:false,
-            showbtnnaw:false
+            showbtnnaw:false,
+            showloading:false
         }
     },
     props:['list','getcor'],
@@ -344,18 +346,35 @@ export default {
         returnadd(){
             this.addsave=false;
         },
-        deleteStudentm(){
-            alert(this.checkStudent);
-            axios.delete('/studentsdata/', {id : this.checkStudent}).then(response=>{
-                this.$emit('refresh');
-            })
+        // deleteStudentm(){
+        //     alert(this.checkStudent);
+        //     axios.delete('/studentsdata/', {id : this.checkStudent}).then(response=>{
+        //         this.$emit('refresh');
+        //     })
+        // },
+        updateStudent(newCor){
+            // alert(newCor.idno);
+            this.$http.patch("/studentsdata/" + newCor.id,newCor).then(response=>{
+            this.$emit('refresh');
+
+            this.$toastr('add', 
+                    { 
+                        title: 'Successfully Updated ', 
+                        msg: '', 
+                        clickClose: true, 
+                        timeout: 5000, 
+                        position: 'toast-bottom-right', 
+                        type: 'success' ,
+                    }
+                );
+            });
         },
         deleteStudent(list){
+            this.showloading=true;
             let vm=this
             axios.delete('/studentsdata/'+list.user_id).then(response=>{
                 // console.log(reponse);
-                this.$emit('refresh');
-
+                // this.$emit('refresh');
                 this.$toastr('add', 
                     { 
                         title: 'Successfully Deleted '+list.last, 

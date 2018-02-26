@@ -179,7 +179,7 @@
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
-            <li class="nav-item active">
+            <li class="nav-item" :class="active1">
                 <a class="nav-link " href="#" @click="pageactivedash">
                 <span class="menu-title">Dashboard</span>
                 <span class="menu-sub-title">( 2 new updates )</span>
@@ -200,7 +200,7 @@
                 </ul>
                 </div>
             </li> -->
-            <li class="nav-item">
+            <li class="nav-item" :class="active2">
                 <a class="nav-link" href="#" @click="pageactivestudents">
                 <span class="menu-title">Students</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
@@ -208,7 +208,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="pages/forms/basic_elements.html">
-                <span class="menu-title">Form Elements</span>
+                <span class="menu-title">Request</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                 </a>
             </li>
@@ -220,7 +220,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="pages/tables/bootstrap-table.html">
-                <span class="menu-title">Table</span>
+                <span class="menu-title">My Office</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
                 </a>
             </li>
@@ -264,10 +264,8 @@
             </div>
         </nav>
         <!-- partial -->
-        
         <dash-1 v-if="pagedash"></dash-1>
 		<regstudents v-if="pagestudents"></regstudents>
-
 
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -291,9 +289,11 @@
 export default {
     data(){
       return{
+          active1:'active',
+          active2:'',
 		  registrardatas:[],
-		  pagedash:false,
-		  pagestudents:true
+		  pagedash:true,
+		  pagestudents:false
 	  }
     },
     created(){
@@ -315,14 +315,17 @@ export default {
 		},
 		
 		pageactivedash(){
+            this.active1='active'
+            this.active2=''
 			this.pagedash=true	
 			this.pagestudents=false	
 			
 		},
-
-		pageactivestudents(){
-			this.pagedash=false
-			this.pagestudents=true
+	    pageactivestudents(){
+            this.active1=''
+            this.active2='active'
+            this.pagedash=false
+            this.pagestudents=true
 		}
     },
     mounted() {
