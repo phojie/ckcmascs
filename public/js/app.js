@@ -47951,10 +47951,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            disbtn: 0,
             timer: '',
             messageerror: null,
             moshake: '',
@@ -47976,17 +47982,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         evalidate: function evalidate() {
             if (this.inputform.email == "") {
                 this.messageerror = 'Please provide username ';
-                this.moshake = 'shake';
+                this.moshake = 'bounceIn';
                 this.validation = true;
             } else if (this.inputform.password == "") {
                 this.messageerror = 'Please provide password ';
-                this.moshake = 'shake';
+                this.moshake = 'bounceIn';
                 this.validation = true;
             } else if (this.inputform.email == "" || this.inputform.password == "") {
                 this.messageerror = 'Please provide all fields ';
-                this.moshake = 'shake';
+                this.moshake = 'bounceIn';
                 this.validation = true;
             } else {
+                this.disbtn = 1;
                 this.mosignin = false;
                 this.loginnow();
             }
@@ -48006,11 +48013,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     if (errors.data) {
 
                         vm.messageerror = "We don't recognize this account";
-                        vm.moshake = 'shake';
+                        vm.moshake = 'bounceIn';
                         vm.validation = true;
                         vm.inputform.password = '';
                         vm.mosignin = true;
+                        vm.disbtn = 0;
                     }
+                } else {
+                    vm.messageerror = "Somethings wrong with the Server";
                 }
             });
 
@@ -48030,157 +48040,253 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "container-scroller special-color-dark" }, [
-      _c("div", { staticClass: "container-fluid page-body-wrapper" }, [
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "content-wrapper full-page-wrapper d-flex align-items-center auth-pages"
-            },
-            [
-              _c("div", { staticClass: "card col-lg-4 mx-auto" }, [
-                _c("div", { staticClass: "card-body px-5 py-5" }, [
-                  _c("h3", { staticClass: "card-title text-left mb-3" }, [
-                    _vm._v("Login")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      attrs: { method: "post" },
-                      on: {
-                        keydown: _vm.evalidatehi,
-                        submit: function($event) {
-                          $event.preventDefault()
-                          _vm.evalidate($event)
+    _c(
+      "div",
+      {
+        staticClass: "container-scroller special-color-dark",
+        staticStyle: {
+          "background-image":
+            "url('https://www.jinnah.edu/wp-content/uploads/2014/06/university-background-04.jpg')",
+          "background-repeat": "no-repeat",
+          "background-position": "center"
+        }
+      },
+      [
+        _c("div", { staticClass: "container-fluid page-body-wrapper" }, [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "content-wrapper full-page-wrapper d-flex align-items-center auth-pages"
+              },
+              [
+                _c("div", { staticClass: "card col-lg-4 mx-auto" }, [
+                  _c("div", { staticClass: " card-body px-5 py-5" }, [
+                    _c("h3", { staticClass: "card-title text-left mb-3" }, [
+                      _vm._v("Login")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        attrs: { method: "post" },
+                        on: {
+                          keydown: _vm.evalidatehi,
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.evalidate($event)
+                          }
                         }
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Username or email *")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.inputform.email,
-                              expression: "inputform.email"
-                            }
-                          ],
-                          staticClass: "form-control p_input",
-                          attrs: { autocomplete: "off", type: "text" },
-                          domProps: { value: _vm.inputform.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.inputform,
-                                "email",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Password *")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.inputform.password,
-                              expression: "inputform.password"
-                            }
-                          ],
-                          staticClass: "form-control p_input",
-                          attrs: { type: "password" },
-                          domProps: { value: _vm.inputform.password },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.inputform,
-                                "password",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _vm.validation
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: " animated chip  lighten-4",
-                              class: [_vm.moshake],
-                              staticStyle: {
-                                "margin-top": "-10px",
-                                height: "30px",
-                                padding: "3px 10px"
-                              }
-                            },
-                            [
-                              _c(
-                                "small",
-                                { staticClass: "text-center red-text fontnku" },
-                                [_vm._v(_vm._s(_vm.messageerror))]
-                              ),
-                              _c("i", {
-                                staticClass: "mt-1 close fa fa-times",
-                                staticStyle: { "font-size": "15px" },
+                      },
+                      [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", [_vm._v("Email *")]),
+                          _vm._v(" "),
+                          _vm.disbtn === "checkbox"
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.inputform.email,
+                                    expression: "inputform.email"
+                                  }
+                                ],
+                                staticClass: "form-control p_input",
+                                attrs: {
+                                  disabled: _vm.disbtn == 1,
+                                  autocomplete: "off",
+                                  type: "checkbox"
+                                },
+                                domProps: {
+                                  checked: Array.isArray(_vm.inputform.email)
+                                    ? _vm._i(_vm.inputform.email, null) > -1
+                                    : _vm.inputform.email
+                                },
                                 on: {
-                                  click: function($event) {
-                                    _vm.validation = false
+                                  change: function($event) {
+                                    var $$a = _vm.inputform.email,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          (_vm.inputform.email = $$a.concat([
+                                            $$v
+                                          ]))
+                                      } else {
+                                        $$i > -1 &&
+                                          (_vm.inputform.email = $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1)))
+                                      }
+                                    } else {
+                                      _vm.$set(_vm.inputform, "email", $$c)
+                                    }
                                   }
                                 }
                               })
+                            : _vm.disbtn === "radio"
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.inputform.email,
+                                      expression: "inputform.email"
+                                    }
+                                  ],
+                                  staticClass: "form-control p_input",
+                                  attrs: {
+                                    disabled: _vm.disbtn == 1,
+                                    autocomplete: "off",
+                                    type: "radio"
+                                  },
+                                  domProps: {
+                                    checked: _vm._q(_vm.inputform.email, null)
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.$set(_vm.inputform, "email", null)
+                                    }
+                                  }
+                                })
+                              : _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.inputform.email,
+                                      expression: "inputform.email"
+                                    }
+                                  ],
+                                  staticClass: "form-control p_input",
+                                  attrs: {
+                                    disabled: _vm.disbtn == 1,
+                                    autocomplete: "off",
+                                    type: _vm.disbtn
+                                  },
+                                  domProps: { value: _vm.inputform.email },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.inputform,
+                                        "email",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", [_vm._v("Password *")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.inputform.password,
+                                expression: "inputform.password"
+                              }
+                            ],
+                            staticClass: "form-control p_input",
+                            attrs: {
+                              disabled: _vm.disbtn == 1,
+                              type: "password"
+                            },
+                            domProps: { value: _vm.inputform.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.inputform,
+                                  "password",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _vm.validation
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: " mb-2 animated chip  lighten-4",
+                                class: [_vm.moshake],
+                                staticStyle: {
+                                  "margin-top": "-10px",
+                                  height: "30px",
+                                  padding: "3px 10px"
+                                }
+                              },
+                              [
+                                _c(
+                                  "small",
+                                  {
+                                    staticClass: "text-center red-text fontnku"
+                                  },
+                                  [_vm._v(_vm._s(_vm.messageerror))]
+                                ),
+                                _c("i", {
+                                  staticClass: "mt-1 close fa fa-times",
+                                  staticStyle: { "font-size": "15px" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.validation = false
+                                    }
+                                  }
+                                })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-center" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                " btn btn-primary  btn-block enter-btn",
+                              attrs: { type: "submit" }
+                            },
+                            [
+                              _vm._v("Login \r\n                        "),
+                              !_vm.mosignin
+                                ? _c("img", {
+                                    attrs: {
+                                      src: "/images/loading1.gif",
+                                      height: "30",
+                                      alt: ""
+                                    }
+                                  })
+                                : _vm._e()
                             ]
                           )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: " btn btn-primary btn-block enter-btn",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Login ")]
-                        ),
+                        ]),
                         _vm._v(" "),
-                        !_vm.mosignin
-                          ? _c(
-                              "small",
-                              { staticClass: "text-center red-text fontnku" },
-                              [_vm._v("trying to login.....")]
-                            )
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ]
-                  )
+                        _vm._m(1)
+                      ]
+                    )
+                  ])
                 ])
-              ])
-            ]
-          )
+              ]
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -48205,10 +48311,6 @@ var staticRenderFns = [
               "\r\n                            Remember me\r\n                            "
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "forgot-pass", attrs: { href: "#" } }, [
-          _vm._v("Forgot password")
         ])
       ]
     )
@@ -48219,7 +48321,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "sign-up" }, [
       _vm._v("Don't have an Account?"),
-      _c("a", { attrs: { href: "#" } }, [_vm._v(" Sign Up")])
+      _c("a", { attrs: { href: "#" } }, [_vm._v(" Enroll Now!")])
     ])
   }
 ]
@@ -54171,10 +54273,6 @@ var render = function() {
                             _vm._v("Dashboard")
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "menu-sub-title" }, [
-                            _vm._v("( 2 new updates )")
-                          ]),
-                          _vm._v(" "),
                           _c("i", { staticClass: "mdi mdi-home menu-icon" })
                         ]
                       )
@@ -54202,14 +54300,12 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(6),
                     _vm._v(" "),
-                    _vm._m(7),
-                    _vm._v(" "),
-                    _vm._m(8)
+                    _vm._m(7)
                   ]),
                   _vm._v(" "),
-                  _vm._m(9),
+                  _vm._m(8),
                   _vm._v(" "),
-                  _vm._m(10)
+                  _vm._m(9)
                 ]
               ),
               _vm._v(" "),
@@ -54217,7 +54313,7 @@ var render = function() {
               _vm._v(" "),
               _vm.pagestudents ? _c("regstudents") : _vm._e(),
               _vm._v(" "),
-              _vm._m(11)
+              _vm._m(10)
             ],
             1
           )
@@ -54631,28 +54727,13 @@ var staticRenderFns = [
           attrs: { href: "pages/forms/basic_elements.html" }
         },
         [
-          _c("span", { staticClass: "menu-title" }, [_vm._v("Request")]),
+          _c("span", { staticClass: "menu-title" }, [_vm._v("Request ")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "menu-sub-title" }, [
+            _vm._v("( 2 new updates )")
+          ]),
           _vm._v(" "),
           _c("i", { staticClass: "mdi mdi-format-list-bulleted menu-icon" })
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link",
-          attrs: { href: "pages/charts/chartjs.html" }
-        },
-        [
-          _c("span", { staticClass: "menu-title" }, [_vm._v("Chart")]),
-          _vm._v(" "),
-          _c("i", { staticClass: "mdi mdi-chart-bar menu-icon" })
         ]
       )
     ])
@@ -54687,7 +54768,7 @@ var staticRenderFns = [
           staticClass: "nav-link",
           attrs: {
             "data-toggle": "collapse",
-            href: "#auth",
+            href: "!#auth",
             "aria-expanded": "false",
             "aria-controls": "auth"
           }
@@ -54695,13 +54776,11 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "menu-title" }, [_vm._v("Security")]),
           _vm._v(" "),
-          _c("i", { staticClass: "menu-arrow" }),
-          _vm._v(" "),
           _c("i", { staticClass: "mdi mdi-lock menu-icon" })
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "collapse", attrs: { id: "auth" } }, [
+      _c("div", { attrs: { id: "auth" } }, [
         _c("ul", { staticClass: "nav flex-column sub-menu" }, [
           _c("li", { staticClass: "nav-item" }, [
             _c(
@@ -55104,6 +55183,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -55112,7 +55194,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             registrardatas: [],
-            datadepartments: []
+            datadepartments: [],
+            studentslists: [],
+            studentscount: '',
+            loadarea: true
 
         };
     },
@@ -55127,8 +55212,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('registrardata').then(function (response) {
                 _this.registrardatas = response.data.registrardata;
+                _this.loadarea = false;
             }), axios.get("departmentdata").then(function (response) {
                 _this.datadepartments = response.data.datadepartments2;
+            }), axios.get("studentsdata").then(function (response) {
+                _this.studentslist = response.data.studentslist;
+                _this.studentscount = response.data.count;
                 setTimeout(_this.fetchUser(), 1000);
             });
         },
@@ -55293,41 +55382,81 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "content-wrapper " },
-    _vm._l(_vm.registrardatas, function(registrardata) {
-      return _c("div", { key: registrardata.id }, [
-        _vm._m(0, true),
-        _vm._v(" "),
-        _vm._m(1, true),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12 grid-margin stretch-card" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Department Status")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "table-responsive" }, [
-                  _c("table", { staticClass: "table" }, [
-                    _vm._m(2, true),
+    [
+      _c("center", [
+        _vm.loadarea
+          ? _c("img", {
+              staticStyle: { "margin-top": "20%" },
+              attrs: { height: "100px", src: "images/loading1.gif", alt: "" }
+            })
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.registrardatas, function(registrardata) {
+        return _c("div", { key: registrardata.id }, [
+          _c("div", { staticClass: "row " }, [
+            _c("div", { staticClass: "col-md-4 stretch-card grid-margin " }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card  text-white",
+                  staticStyle: {
+                    height: "130px",
+                    "background-color": "#37474F"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+                      _vm._v("Total Students")
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.datadepartments, function(datadepartment) {
-                        return _c("fetch", {
-                          key: datadepartment.id,
-                          attrs: { datadepartment: datadepartment }
+                    _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+                      _vm._v(" " + _vm._s(_vm.studentscount))
+                    ])
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(0, true),
+            _vm._v(" "),
+            _vm._m(1, true)
+          ]),
+          _vm._v(" "),
+          _vm._m(2, true),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12 grid-margin stretch-card" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h4", { staticClass: "card-title" }, [
+                    _vm._v("Department Status")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "table-responsive" }, [
+                    _c("table", { staticClass: "table" }, [
+                      _vm._m(3, true),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.datadepartments, function(datadepartment) {
+                          return _c("fetch", {
+                            key: datadepartment.id,
+                            attrs: { datadepartment: datadepartment }
+                          })
                         })
-                      })
-                    )
+                      )
+                    ])
                   ])
                 ])
               ])
             ])
           ])
         ])
-      ])
-    })
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = [
@@ -55335,69 +55464,50 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row " }, [
-      _c("div", { staticClass: "col-md-4 stretch-card grid-margin " }, [
-        _c(
-          "div",
-          {
-            staticClass: "card  text-white",
-            staticStyle: { height: "130px", "background-color": "#37474F" }
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h4", { staticClass: "font-weight-normal mb-3" }, [
-                _vm._v("Total Students")
-              ]),
-              _vm._v(" "),
-              _c("h2", { staticClass: "font-weight-normal mb-5" }, [
-                _vm._v(" 15,00000")
-              ])
+    return _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
+      _c(
+        "div",
+        {
+          staticClass: "card text-white",
+          staticStyle: { height: "130px", "background-color": "#4B515D" }
+        },
+        [
+          _c("div", { staticClass: "card-body" }, [
+            _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+              _vm._v("Total Subjects")
+            ]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+              _vm._v("45633456")
             ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
-        _c(
-          "div",
-          {
-            staticClass: "card text-white",
-            staticStyle: { height: "130px", "background-color": "#4B515D" }
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h4", { staticClass: "font-weight-normal mb-3" }, [
-                _vm._v("Total Subjects")
-              ]),
-              _vm._v(" "),
-              _c("h2", { staticClass: "font-weight-normal mb-5" }, [
-                _vm._v("45633456")
-              ])
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
+      _c(
+        "div",
+        {
+          staticClass: "card  text-white",
+          staticStyle: { height: "130px", "background-color": "#3F729B" }
+        },
+        [
+          _c("div", { staticClass: "card-body" }, [
+            _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+              _vm._v("Pending Clearances")
+            ]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+              _vm._v("955741235")
             ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
-        _c(
-          "div",
-          {
-            staticClass: "card  text-white",
-            staticStyle: { height: "130px", "background-color": "#3F729B" }
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h4", { staticClass: "font-weight-normal mb-3" }, [
-                _vm._v("Pending Clearances")
-              ]),
-              _vm._v(" "),
-              _c("h2", { staticClass: "font-weight-normal mb-5" }, [
-                _vm._v("955741235")
-              ])
-            ])
-          ]
-        )
-      ])
+          ])
+        ]
+      )
     ])
   },
   function() {
@@ -55771,6 +55881,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -55817,7 +55928,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get("departmentdata").then(function (response) {
                 _this.datadepartments = response.data.datadepartments2;
                 _this.loaderarea = false;
-                // setTimeout(this.fetchUser(), 1000); 
+                setTimeout(_this.fetchUser(), 1000);
             });
         },
         logout: function logout(e) {
@@ -55935,6 +56046,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vee_validate__ = __webpack_require__(132);
+var _methods;
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -56396,6 +56509,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
                 pob: ''
             }, 'department', ''),
             getcor: (_getcor = {
+                id: '',
                 idno: '',
                 first: '',
                 second: '',
@@ -56430,7 +56544,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
         this.fetchStudentsdata();
     },
 
-    methods: {
+    methods: (_methods = {
         validateForm: function validateForm(scope) {
             var _this = this;
 
@@ -56476,104 +56590,117 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
         returnadd: function returnadd() {
             this.addsave = false;
         },
-        fetchStudentsdata: function fetchStudentsdata() {
+        fetchStudentsdataref: function fetchStudentsdataref() {
             var _this3 = this;
 
             axios.get('studentsdata').then(function (response) {
                 _this3.studentlists = response.data.studentlists;
-                setTimeout(_this3.fetchStudentsdata, 1000);
             });
             // console.log(this.datadepartment.name);
         },
-        deleteStudent: function deleteStudent(getcor) {
-            alert(getcor.idno);
-            this.showToastr();
-            // axios.delete('/studentsdata/'+getcor.user_id).then(response=>{
-            //     this.fetchStudentsdata();
-            // })
-        },
-        createStudentdata: function createStudentdata() {
+        fetchStudentsdata: function fetchStudentsdata() {
             var _this4 = this;
 
-            this.addingloading = true;
-            var vm = this;
-            this.addcor.sy = this.from;
-            this.addcor.department = this.getdetails.name;
-            console.log(this.addcor);
-            axios.post('studentsdata', this.addcor).then(function (response) {
-                // this.fetchStudentsdata();   
-                _this4.clearCor();
-                _this4.addsave = false;
-                _this4.addingloading = false;
-                _this4.$toastr('add', {
-                    title: 'Successfully Added ',
-                    msg: '',
-                    clickClose: true,
-                    timeout: 5000,
-                    position: 'toast-bottom-right',
-                    type: 'success'
-                });
-            }).catch(function (error) {
-                var errors = error.response;
-                console.log(errors);
-
-                if (errors.statusText === "Internal Server Error" || errors.status === 500) {
-                    if (errors.data) {
-                        vm.$toastr('add', {
-                            title: " Somethings wrong :'(",
-                            msg: "",
-                            clickClose: true,
-                            timeout: 5000,
-                            position: 'toast-bottom-right',
-                            type: 'error'
-                        });
-                        alert('load your page, wla guro connection');
-                    }
-                }
+            axios.get('studentsdata').then(function (response) {
+                _this4.studentlists = response.data.studentlists;
+                setTimeout(_this4.fetchStudentsdata, 1000);
             });
-        },
-        getStudent: function getStudent(list) {
-            this.getcor.user_id = list.user_id;
-            this.getcor.idno = list.idno;
-            this.getcor.first = list.first;
-            this.getcor.second = list.second;
-            this.getcor.last = list.last;
-            this.getcor.semester = list.semester;
-            this.getcor.dob = list.dob;
-            this.getcor.em = list.em;
-            this.getcor.contactn = list.contactn;
-            this.getcor.pad = list.pad;
-            this.getcor.had = list.had;
-            this.getcor.ffullname = list.ffullname;
-            this.getcor.mfullname = list.mfullname;
-            this.getcor.department = list.department;
-            this.getcor.sex = list.sex;
-            this.getcor.lastshool = list.lastschool;
-            this.getcor.sy = list.sy;
-            this.getcor.yearlevel = list.yearlevel;
-            this.getcor.pob = list.pob;
-            this.getcor.department = list.department;
-            this.getcor.fullname = list.fullname;
-            this.getcor.profilepic = list.profilepic;
-            this.getcor.modalid = list.id;
-        },
-        showToastr: function showToastr(getcor) {
-            this.$toastr('add', {
-                title: 'Successfully Delete ',
+            // console.log(this.datadepartment.name);
+        }
+    }, _defineProperty(_methods, 'fetchStudentsdataref', function fetchStudentsdataref() {
+        var _this5 = this;
+
+        axios.get('studentsdata').then(function (response) {
+            _this5.studentlists = response.data.studentlists;
+        });
+        // console.log(this.datadepartment.name);
+    }), _defineProperty(_methods, 'deleteStudent', function deleteStudent(getcor) {
+        alert(getcor.idno);
+        this.showToastr();
+        // axios.delete('/studentsdata/'+getcor.user_id).then(response=>{
+        //     this.fetchStudentsdata();
+        // })
+    }), _defineProperty(_methods, 'createStudentdata', function createStudentdata() {
+        var _this6 = this;
+
+        this.addingloading = true;
+        var vm = this;
+        this.addcor.sy = this.from;
+        this.addcor.department = this.getdetails.name;
+        console.log(this.addcor);
+        axios.post('studentsdata', this.addcor).then(function (response) {
+            // this.fetchStudentsdata();   
+            _this6.clearCor();
+            _this6.fetchStudentsdataref();
+            _this6.$toastr('add', {
+                title: 'Successfully Added ',
                 msg: '',
                 clickClose: true,
                 timeout: 5000,
-                position: 'toast-top-right',
+                position: 'toast-bottom-right',
                 type: 'success'
             });
-        }
-    },
+            _this6.addsave = false;
+            _this6.addingloading = false;
+        }).catch(function (error) {
+            var errors = error.response;
+            console.log(errors);
+
+            if (errors.statusText === "Internal Server Error" || errors.status === 500) {
+                if (errors.data) {
+                    vm.$toastr('add', {
+                        title: " Somethings wrong :'(",
+                        msg: "",
+                        clickClose: true,
+                        timeout: 5000,
+                        position: 'toast-bottom-right',
+                        type: 'error'
+                    });
+                    alert('load your page, wla guro connection');
+                }
+            }
+        });
+    }), _defineProperty(_methods, 'getStudent', function getStudent(list) {
+        this.getcor.id = list.id;
+        this.getcor.user_id = list.user_id;
+        this.getcor.idno = list.idno;
+        this.getcor.first = list.first;
+        this.getcor.second = list.second;
+        this.getcor.last = list.last;
+        this.getcor.semester = list.semester;
+        this.getcor.dob = list.dob;
+        this.getcor.em = list.em;
+        this.getcor.contactn = list.contactn;
+        this.getcor.pad = list.pad;
+        this.getcor.had = list.had;
+        this.getcor.ffullname = list.ffullname;
+        this.getcor.mfullname = list.mfullname;
+        this.getcor.department = list.department;
+        this.getcor.sex = list.sex;
+        this.getcor.lastshool = list.lastschool;
+        this.getcor.sy = list.sy;
+        this.getcor.yearlevel = list.yearlevel;
+        this.getcor.pob = list.pob;
+        this.getcor.department = list.department;
+        this.getcor.fullname = list.fullname;
+        this.getcor.profilepic = list.profilepic;
+        this.getcor.modalid = list.id;
+    }), _defineProperty(_methods, 'showToastr', function showToastr(getcor) {
+        this.$toastr('add', {
+            title: 'Successfully Delete ',
+            msg: '',
+            clickClose: true,
+            timeout: 5000,
+            position: 'toast-top-right',
+            type: 'success'
+        });
+    }), _methods),
     computed: {
         filteredList: function filteredList() {
-            var _this5 = this;
+            var _this7 = this;
 
             return this.studentlists.filter(function (studentslist) {
-                return studentslist.fullname.toLowerCase().includes(_this5.search.toLowerCase());
+                return studentslist.fullname.toLowerCase().includes(_this7.search.toLowerCase());
             });
         }
     }
@@ -57001,6 +57128,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -57010,6 +57138,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_v_to
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            addingloading: false,
             addsave: false,
             showbtnnaw: false,
             showloading: false
@@ -57040,10 +57169,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_v_to
         updateStudent: function updateStudent(newCor) {
             var _this = this;
 
-            // alert(newCor.idno);
+            this.addingloading = true;
+            // alert(newCor.id);
             this.$http.patch("/studentsdata/" + newCor.id, newCor).then(function (response) {
                 _this.$emit('refresh');
-
                 _this.$toastr('add', {
                     title: 'Successfully Updated ',
                     msg: '',
@@ -57052,6 +57181,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_v_to
                     position: 'toast-bottom-right',
                     type: 'success'
                 });
+                _this.addingloading = false;
+                _this.addsave = false;
             });
         },
         deleteStudent: function deleteStudent(list) {
@@ -57061,7 +57192,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_v_to
             var vm = this;
             axios.delete('/studentsdata/' + list.user_id).then(function (response) {
                 // console.log(reponse);
-                // this.$emit('refresh');
+                _this2.$emit('refresh');
                 _this2.$toastr('add', {
                     title: 'Successfully Deleted ' + list.last,
                     msg: '',
@@ -64539,41 +64670,6 @@ var render = function() {
                                         ])
                                       ]
                                     )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-6" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "form-group row" },
-                                      [
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass:
-                                              "col-sm-3 col-form-label"
-                                          },
-                                          [_vm._v("Profile Picture")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "col-sm-3 " },
-                                          [
-                                            _c("img", {
-                                              attrs: {
-                                                src:
-                                                  "userprofilepic/" +
-                                                  _vm.getcor.profilepic,
-                                                height: "100",
-                                                alt: ""
-                                              }
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "col-sm-6 " })
-                                      ]
-                                    )
                                   ])
                                 ]),
                                 _vm._v(" "),
@@ -64674,7 +64770,7 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.addsave
+                  _vm.addsave && !_vm.addingloading
                     ? _c(
                         "button",
                         {
@@ -64688,6 +64784,17 @@ var render = function() {
                         },
                         [_vm._v("Save changes")]
                       )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.addsave && _vm.addingloading
+                    ? _c("img", {
+                        staticClass: "mx-4",
+                        attrs: {
+                          src: "images/loading1.gif",
+                          height: "50",
+                          alt: ""
+                        }
+                      })
                     : _vm._e()
                 ])
               ])
@@ -73428,8 +73535,7 @@ var render = function() {
                                                   )
                                                 },
                                                 attrs: {
-                                                  name: "Fathers Fullname",
-                                                  id: "exampleTextarea3"
+                                                  name: "Fathers Fullname"
                                                 },
                                                 domProps: {
                                                   value: _vm.addcor.ffullname
@@ -73535,7 +73641,6 @@ var render = function() {
                                                 },
                                                 attrs: {
                                                   name: "Mothers Fullname",
-                                                  id: "exampleTextarea4",
                                                   rows: "1"
                                                 },
                                                 domProps: {
@@ -73643,7 +73748,6 @@ var render = function() {
                                                 },
                                                 attrs: {
                                                   name: "Place of Birth",
-                                                  id: "exampleTextarea3",
                                                   rows: "3"
                                                 },
                                                 domProps: {
@@ -73753,7 +73857,6 @@ var render = function() {
                                                 },
                                                 attrs: {
                                                   name: "School Last Attended",
-                                                  id: "exampleTextarea4",
                                                   rows: "3"
                                                 },
                                                 domProps: {
@@ -74008,7 +74111,7 @@ var render = function() {
                           list: studentlist
                         },
                         on: {
-                          refresh: _vm.fetchStudentsdata,
+                          refresh: _vm.fetchStudentsdataref,
                           deleteStudent: _vm.deleteStudent,
                           getStudent: _vm.getStudent
                         }

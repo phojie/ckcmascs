@@ -1,12 +1,15 @@
 <template>
 <div class="content-wrapper " >
+    <center>
+            <img  v-if="loadarea" height="100px" style="margin-top:20%" src="images/loading1.gif"  alt="">
+    </center>
     <div :key="registrardata.id" v-for="registrardata in registrardatas" >
         <div class="row ">
         <div class="col-md-4 stretch-card grid-margin " >
             <div class="card  text-white" style="height:130px;background-color:#37474F">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Total Students</h4>
-                <h2 class="font-weight-normal mb-5"> 15,00000</h2>
+                <h2 class="font-weight-normal mb-5"> {{studentscount}}</h2>
                 <!-- <p class="card-text">Incresed by 60%</p> -->
             </div>
             </div>
@@ -238,7 +241,10 @@ export default {
     data(){
         return{
             registrardatas:[],
-        	datadepartments:[]
+        	datadepartments:[],
+            studentslists:[],
+            studentscount:'',
+            loadarea:true
 
         }
     },
@@ -251,17 +257,24 @@ export default {
             axios.get('registrardata').then(
                 response=>{
                     this.registrardatas=response.data.registrardata
+                    this.loadarea=false;
                     
                 }
             ),
             axios.get("departmentdata").then(
                 response=>{
                     this.datadepartments=response.data.datadepartments2;
-                    setTimeout(this.fetchUser(), 1000); 
                 
                 }
+            ),
+            axios.get("studentsdata").then(
+                response=>{
+                    this.studentslist=response.data.studentslist;
+                    this.studentscount=response.data.count;
+                    setTimeout(this.fetchUser(), 1000); 
+                    
+                }
             )
-            
         },
         
         logout(e) {

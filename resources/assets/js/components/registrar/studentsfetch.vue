@@ -196,7 +196,7 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Father's</label>
                                 <div class="col-sm-9">
-                                    <input name="Fathers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Fathers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.ffullname" id="exampleTextarea3" >
+                                    <input name="Fathers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Fathers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.ffullname" >
                                     <span v-show="errors.has('form-2.Fathers Fullname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Fathers Fullname')}" class="animated invalid-feedback">{{errors.first("form-2.Fathers Fullname")}}</span>
                                 
                                 </div>
@@ -206,7 +206,7 @@
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Mother's</label>
                                 <div class="col-sm-9">
-                                    <input name="Mothers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Mothers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.mfullname" id="exampleTextarea4" rows="1">
+                                    <input name="Mothers Fullname" :class="{'input':true, 'is-invalid': errors.has('form-2.Mothers Fullname')}"  v-validate="'required'" class="form-control" v-model="addcor.mfullname" rows="1">
                                     <span v-show="errors.has('form-2.Mothers Fullname')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Mothers Fullname')}" class="animated invalid-feedback">{{errors.first("form-2.Mothers Fullname")}}</span>
                                     
                                 </div>
@@ -244,7 +244,7 @@
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Place of Birth</label>
                             <div class="col-sm-9">
-                                <textarea name="Place of Birth" :class="{'input':true, 'is-invalid': errors.has('form-2.Place of Birth')}"  v-validate="'required'" class="form-control" v-model="addcor.pob"  id="exampleTextarea3" rows="3"></textarea>
+                                <textarea name="Place of Birth" :class="{'input':true, 'is-invalid': errors.has('form-2.Place of Birth')}"  v-validate="'required'" class="form-control" v-model="addcor.pob"   rows="3"></textarea>
                                 <span v-show="errors.has('form-2.Place of Birth')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.Place of Birth')}" class="animated invalid-feedback">{{errors.first("form-2.Place of Birth")}}</span>
                             
                             </div>
@@ -257,7 +257,7 @@
                             <div class="form-group row">
                             <label class="col-sm-3 col-form-label">School Last Attended</label>
                             <div class="col-sm-9">
-                                <textarea name="School Last Attended" :class="{'input':true, 'is-invalid': errors.has('form-2.School Last Attended')}"  v-validate="'required'" class="form-control" v-model="addcor.lastschool"  id="exampleTextarea4" rows="3"></textarea>
+                                <textarea name="School Last Attended" :class="{'input':true, 'is-invalid': errors.has('form-2.School Last Attended')}"  v-validate="'required'" class="form-control" v-model="addcor.lastschool"  rows="3"></textarea>
                                 <span v-show="errors.has('form-2.School Last Attended')" style="font-size:10px" :class="{'input': true, 'flash': errors.has('form-2.School Last Attended')}" class="animated invalid-feedback">{{errors.first("form-2.School Last Attended")}}</span>
                             
                             </div>
@@ -405,7 +405,7 @@
                         </tr>
                         </thead>
                         <tbody > 
-                        <studentslist v-bind:checked="checkedNames" v-on:refresh="fetchStudentsdata" v-on:deleteStudent="deleteStudent" v-bind:getcor="getcor" v-on:getStudent="getStudent" v-if="studentlist.department==datadepartment.name" v-bind:list="studentlist" :key="studentlist.id" v-for="studentlist in filteredList"></studentslist>
+                        <studentslist v-bind:checked="checkedNames" v-on:refresh="fetchStudentsdataref" v-on:deleteStudent="deleteStudent" v-bind:getcor="getcor" v-on:getStudent="getStudent" v-if="studentlist.department==datadepartment.name" v-bind:list="studentlist" :key="studentlist.id" v-for="studentlist in filteredList"></studentslist>
                         </tbody>
                     </table>
             </div>
@@ -457,6 +457,7 @@ export default {
                 department:'',
             },
             getcor:{
+                id:'',
                 idno:'',
                 first:'',
                 second:'',
@@ -537,10 +538,24 @@ export default {
         returnadd(){
             this.addsave=false;
         },
+        fetchStudentsdataref(){
+            axios.get('studentsdata').then(response=>{
+                this.studentlists=response.data.studentlists;
+                }
+            )
+            // console.log(this.datadepartment.name);
+        },
         fetchStudentsdata(){
             axios.get('studentsdata').then(response=>{
                 this.studentlists=response.data.studentlists;
                 setTimeout(this.fetchStudentsdata,1000);
+                }
+            )
+            // console.log(this.datadepartment.name);
+        },
+        fetchStudentsdataref(){
+            axios.get('studentsdata').then(response=>{
+                this.studentlists=response.data.studentlists;
                 }
             )
             // console.log(this.datadepartment.name);
@@ -561,8 +576,7 @@ export default {
             axios.post('studentsdata',this.addcor).then(response=>{
                 // this.fetchStudentsdata();   
                 this.clearCor();
-                this.addsave=false;
-                this.addingloading=false;    
+                this.fetchStudentsdataref();
                 this.$toastr('add', 
                     { 
                         title: 'Successfully Added ', 
@@ -573,6 +587,8 @@ export default {
                         type: 'success' 
                     }
                 );
+                this.addsave=false;
+                this.addingloading=false;    
                
             })
 
@@ -599,6 +615,7 @@ export default {
             })
         },
         getStudent(list){
+                this.getcor.id=list.id;
                 this.getcor.user_id=list.user_id;
                 this.getcor.idno=list.idno;
                 this.getcor.first=list.first;

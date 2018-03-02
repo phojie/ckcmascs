@@ -182,7 +182,6 @@
             <li class="nav-item" :class="active1">
                 <a class="nav-link " href="#" @click="pageactivedash">
                 <span class="menu-title">Dashboard</span>
-                <span class="menu-sub-title">( 2 new updates )</span>
                 <i class="mdi mdi-home menu-icon"></i>
                 </a>
             </li>
@@ -208,16 +207,17 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="pages/forms/basic_elements.html">
-                <span class="menu-title">Request</span>
+                <span class="menu-title">Request </span>
+                <span class="menu-sub-title">( 2 new updates )</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="pages/charts/chartjs.html">
                 <span class="menu-title">Chart</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="pages/tables/bootstrap-table.html">
                 <span class="menu-title">My Office</span>
@@ -225,12 +225,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <a class="nav-link" data-toggle="collapse" href="!#auth" aria-expanded="false" aria-controls="auth">
                 <span class="menu-title">Security</span>
-                <i class="menu-arrow"></i>
+                <!-- <i class="menu-arrow"></i> -->
                 <i class="mdi mdi-lock menu-icon"></i>
                 </a>
-                <div class="collapse" id="auth">
+                <div class="" id="auth">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Setting </a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Profile </a></li>

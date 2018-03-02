@@ -2,7 +2,8 @@
 <div class="content-wrapper " >
     <div class="">
         <center>
-            <img  v-if="loaderarea" height="100px" style="margin-top:20%" src="images/loading1.gif"  alt=""></center>
+            <img  v-if="loaderarea" height="100px" style="margin-top:20%" src="images/loading1.gif"  alt="">
+        </center>
         <div class="row">
         <!-- <button @click="showToastr"></button> -->
         <fetch v-bind:getdetails="pickedinfo" v-on:getdetails="getdetails" v-bind:datadepartment="datadepartment" :key="datadepartment.id" v-for="datadepartment in datadepartments" ></fetch>
@@ -59,7 +60,7 @@ export default {
                 response=>{
                     this.datadepartments=response.data.datadepartments2;
                     this.loaderarea=false;
-                    // setTimeout(this.fetchUser(), 1000); 
+                    setTimeout(this.fetchUser(), 1000); 
                 }
             )
             

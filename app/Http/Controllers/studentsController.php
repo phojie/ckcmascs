@@ -19,7 +19,13 @@ class studentsController extends Controller
     public function index()
     {
         $st=student::all();
-        return response()->json(["studentlists"=>$st]);
+        $count=DB::table('students')
+            ->count();
+
+        return response()->json([
+            "studentlists"=>$st,
+            "count"=>$count
+        ]);
 
     }
 
@@ -127,6 +133,7 @@ class studentsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // \Log::info($request->id);
         if ($request->gender=="Male"){
             $profilepic="nobody_m.128x128.jpg";
         }

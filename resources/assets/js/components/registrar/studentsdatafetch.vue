@@ -61,7 +61,7 @@
             <div class="card-body">
             <h4 class="card-title">College of {{getcor.department}}</h4>
             
-            <form method="post" class="form-sample">
+            <form method="post"  class="form-sample">
                 <div v-if="!addsave">
                 <p class="card-description">
                 Personal info
@@ -253,7 +253,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Profile Picture</label>
                     <div class="col-sm-3 ">
@@ -264,7 +264,7 @@
                     </div>
                      
                     </div>
-                </div>
+                </div> -->
                 </div>
                 <div class="row">
                 
@@ -307,7 +307,8 @@
                 <button v-if="!addsave" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button v-if="!addsave" @click="nextadd" type="button" class="btn btn-primary">Next</button>
                 <button v-if="addsave" @click="returnadd" type="submit" class="btn btn-light">Return</button>
-                <button v-if="addsave" @click="updateStudent(getcor)" type="submit" class="btn btn-success">Save changes</button>
+                <button v-if="addsave && !addingloading"  @click="updateStudent(getcor)" type="submit" class="btn btn-success">Save changes</button>
+                <img v-if="addsave && addingloading"  src="images/loading1.gif"  class="mx-4"  height="50" style="" alt="">
             </div>
         </div>
     </div>
@@ -327,6 +328,7 @@ Vue.use(VTooltip)
 export default {
     data(){
         return{
+            addingloading:false,
             addsave:false,
             showbtnnaw:false,
             showloading:false
@@ -353,10 +355,10 @@ export default {
         //     })
         // },
         updateStudent(newCor){
-            // alert(newCor.idno);
+            this.addingloading=true;
+            // alert(newCor.id);
             this.$http.patch("/studentsdata/" + newCor.id,newCor).then(response=>{
             this.$emit('refresh');
-
             this.$toastr('add', 
                     { 
                         title: 'Successfully Updated ', 
@@ -367,14 +369,19 @@ export default {
                         type: 'success' ,
                     }
                 );
+            this.addingloading=false;
+            this.addsave=false;
+            
             });
+            
+            
         },
         deleteStudent(list){
             this.showloading=true;
             let vm=this
             axios.delete('/studentsdata/'+list.user_id).then(response=>{
                 // console.log(reponse);
-                // this.$emit('refresh');
+                this.$emit('refresh');
                 this.$toastr('add', 
                     { 
                         title: 'Successfully Deleted '+list.last, 
@@ -385,6 +392,7 @@ export default {
                         type: 'success' ,
                     }
                 );
+                
                
             })
 

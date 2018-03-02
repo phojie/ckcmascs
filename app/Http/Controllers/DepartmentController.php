@@ -68,7 +68,7 @@ class DepartmentController extends Controller
             'created'=>$datenw,
             'updated'=>$datenw
 
-        ]);
+        ]); 
         Department::create($request->except('logo') + [
             // 'user_id'=>auth::id(),
             'logo' => $fileName,

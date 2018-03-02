@@ -49,6 +49,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('/staffdata','StaffController@store');
     
 
+    //login
+    
    
 });
 
