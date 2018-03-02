@@ -543,7 +543,7 @@ export default {
                 this.studentlists=response.data.studentlists;
                 }
             )
-            // console.log(this.datadepartment.name);
+            console.log("refresh");
         },
         fetchStudentsdata(){
             axios.get('studentsdata').then(response=>{

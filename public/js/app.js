@@ -56596,7 +56596,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
             axios.get('studentsdata').then(function (response) {
                 _this3.studentlists = response.data.studentlists;
             });
-            // console.log(this.datadepartment.name);
+            console.log("refresh");
         },
         fetchStudentsdata: function fetchStudentsdata() {
             var _this4 = this;
