@@ -538,17 +538,11 @@ export default {
         returnadd(){
             this.addsave=false;
         },
-        fetchStudentsdataref(){
-            axios.get('studentsdata').then(response=>{
-                this.studentlists=response.data.studentlists;
-                }
-            )
-            console.log("refresh");
-        },
         fetchStudentsdata(){
             axios.get('studentsdata').then(response=>{
                 this.studentlists=response.data.studentlists;
                 setTimeout(this.fetchStudentsdata,1000);
+                
                 }
             )
             // console.log(this.datadepartment.name);
@@ -556,6 +550,8 @@ export default {
         fetchStudentsdataref(){
             axios.get('studentsdata').then(response=>{
                 this.studentlists=response.data.studentlists;
+                console.log("refresh");
+                
                 }
             )
             // console.log(this.datadepartment.name);

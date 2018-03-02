@@ -56046,8 +56046,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vee_validate__ = __webpack_require__(132);
-var _methods;
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -56544,7 +56542,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
         this.fetchStudentsdata();
     },
 
-    methods: (_methods = {
+    methods: {
         validateForm: function validateForm(scope) {
             var _this = this;
 
@@ -56590,117 +56588,115 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
         returnadd: function returnadd() {
             this.addsave = false;
         },
-        fetchStudentsdataref: function fetchStudentsdataref() {
+        fetchStudentsdata: function fetchStudentsdata() {
             var _this3 = this;
 
             axios.get('studentsdata').then(function (response) {
                 _this3.studentlists = response.data.studentlists;
+                setTimeout(_this3.fetchStudentsdata, 1000);
             });
-            console.log("refresh");
+            // console.log(this.datadepartment.name);
         },
-        fetchStudentsdata: function fetchStudentsdata() {
+        fetchStudentsdataref: function fetchStudentsdataref() {
             var _this4 = this;
 
             axios.get('studentsdata').then(function (response) {
                 _this4.studentlists = response.data.studentlists;
-                setTimeout(_this4.fetchStudentsdata, 1000);
+                console.log("refresh");
             });
             // console.log(this.datadepartment.name);
-        }
-    }, _defineProperty(_methods, 'fetchStudentsdataref', function fetchStudentsdataref() {
-        var _this5 = this;
+        },
+        deleteStudent: function deleteStudent(getcor) {
+            alert(getcor.idno);
+            this.showToastr();
+            // axios.delete('/studentsdata/'+getcor.user_id).then(response=>{
+            //     this.fetchStudentsdata();
+            // })
+        },
+        createStudentdata: function createStudentdata() {
+            var _this5 = this;
 
-        axios.get('studentsdata').then(function (response) {
-            _this5.studentlists = response.data.studentlists;
-        });
-        // console.log(this.datadepartment.name);
-    }), _defineProperty(_methods, 'deleteStudent', function deleteStudent(getcor) {
-        alert(getcor.idno);
-        this.showToastr();
-        // axios.delete('/studentsdata/'+getcor.user_id).then(response=>{
-        //     this.fetchStudentsdata();
-        // })
-    }), _defineProperty(_methods, 'createStudentdata', function createStudentdata() {
-        var _this6 = this;
+            this.addingloading = true;
+            var vm = this;
+            this.addcor.sy = this.from;
+            this.addcor.department = this.getdetails.name;
+            console.log(this.addcor);
+            axios.post('studentsdata', this.addcor).then(function (response) {
+                // this.fetchStudentsdata();   
+                _this5.clearCor();
+                _this5.fetchStudentsdataref();
+                _this5.$toastr('add', {
+                    title: 'Successfully Added ',
+                    msg: '',
+                    clickClose: true,
+                    timeout: 5000,
+                    position: 'toast-bottom-right',
+                    type: 'success'
+                });
+                _this5.addsave = false;
+                _this5.addingloading = false;
+            }).catch(function (error) {
+                var errors = error.response;
+                console.log(errors);
 
-        this.addingloading = true;
-        var vm = this;
-        this.addcor.sy = this.from;
-        this.addcor.department = this.getdetails.name;
-        console.log(this.addcor);
-        axios.post('studentsdata', this.addcor).then(function (response) {
-            // this.fetchStudentsdata();   
-            _this6.clearCor();
-            _this6.fetchStudentsdataref();
-            _this6.$toastr('add', {
-                title: 'Successfully Added ',
+                if (errors.statusText === "Internal Server Error" || errors.status === 500) {
+                    if (errors.data) {
+                        vm.$toastr('add', {
+                            title: " Somethings wrong :'(",
+                            msg: "",
+                            clickClose: true,
+                            timeout: 5000,
+                            position: 'toast-bottom-right',
+                            type: 'error'
+                        });
+                        alert('load your page, wla guro connection');
+                    }
+                }
+            });
+        },
+        getStudent: function getStudent(list) {
+            this.getcor.id = list.id;
+            this.getcor.user_id = list.user_id;
+            this.getcor.idno = list.idno;
+            this.getcor.first = list.first;
+            this.getcor.second = list.second;
+            this.getcor.last = list.last;
+            this.getcor.semester = list.semester;
+            this.getcor.dob = list.dob;
+            this.getcor.em = list.em;
+            this.getcor.contactn = list.contactn;
+            this.getcor.pad = list.pad;
+            this.getcor.had = list.had;
+            this.getcor.ffullname = list.ffullname;
+            this.getcor.mfullname = list.mfullname;
+            this.getcor.department = list.department;
+            this.getcor.sex = list.sex;
+            this.getcor.lastshool = list.lastschool;
+            this.getcor.sy = list.sy;
+            this.getcor.yearlevel = list.yearlevel;
+            this.getcor.pob = list.pob;
+            this.getcor.department = list.department;
+            this.getcor.fullname = list.fullname;
+            this.getcor.profilepic = list.profilepic;
+            this.getcor.modalid = list.id;
+        },
+        showToastr: function showToastr(getcor) {
+            this.$toastr('add', {
+                title: 'Successfully Delete ',
                 msg: '',
                 clickClose: true,
                 timeout: 5000,
-                position: 'toast-bottom-right',
+                position: 'toast-top-right',
                 type: 'success'
             });
-            _this6.addsave = false;
-            _this6.addingloading = false;
-        }).catch(function (error) {
-            var errors = error.response;
-            console.log(errors);
-
-            if (errors.statusText === "Internal Server Error" || errors.status === 500) {
-                if (errors.data) {
-                    vm.$toastr('add', {
-                        title: " Somethings wrong :'(",
-                        msg: "",
-                        clickClose: true,
-                        timeout: 5000,
-                        position: 'toast-bottom-right',
-                        type: 'error'
-                    });
-                    alert('load your page, wla guro connection');
-                }
-            }
-        });
-    }), _defineProperty(_methods, 'getStudent', function getStudent(list) {
-        this.getcor.id = list.id;
-        this.getcor.user_id = list.user_id;
-        this.getcor.idno = list.idno;
-        this.getcor.first = list.first;
-        this.getcor.second = list.second;
-        this.getcor.last = list.last;
-        this.getcor.semester = list.semester;
-        this.getcor.dob = list.dob;
-        this.getcor.em = list.em;
-        this.getcor.contactn = list.contactn;
-        this.getcor.pad = list.pad;
-        this.getcor.had = list.had;
-        this.getcor.ffullname = list.ffullname;
-        this.getcor.mfullname = list.mfullname;
-        this.getcor.department = list.department;
-        this.getcor.sex = list.sex;
-        this.getcor.lastshool = list.lastschool;
-        this.getcor.sy = list.sy;
-        this.getcor.yearlevel = list.yearlevel;
-        this.getcor.pob = list.pob;
-        this.getcor.department = list.department;
-        this.getcor.fullname = list.fullname;
-        this.getcor.profilepic = list.profilepic;
-        this.getcor.modalid = list.id;
-    }), _defineProperty(_methods, 'showToastr', function showToastr(getcor) {
-        this.$toastr('add', {
-            title: 'Successfully Delete ',
-            msg: '',
-            clickClose: true,
-            timeout: 5000,
-            position: 'toast-top-right',
-            type: 'success'
-        });
-    }), _methods),
+        }
+    },
     computed: {
         filteredList: function filteredList() {
-            var _this7 = this;
+            var _this6 = this;
 
             return this.studentlists.filter(function (studentslist) {
-                return studentslist.fullname.toLowerCase().includes(_this7.search.toLowerCase());
+                return studentslist.fullname.toLowerCase().includes(_this6.search.toLowerCase());
             });
         }
     }
