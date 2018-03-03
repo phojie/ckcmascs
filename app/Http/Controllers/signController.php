@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use auth;
-use App\requestfrom;
-class requestController extends Controller
+use signed;
+
+class signController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,23 +16,31 @@ class requestController extends Controller
      */
     public function index()
     {
-        // $getrequest=requestfrom::all();
         $getid=auth::user()->id;
        
-        $getrequest=DB::table('requestfroms')
+        $getrequest=DB::table('signeds')
             ->where('toid',$getid)
-            ->leftJoin('students', 'requestfroms.bid', '=', 'students.user_id')
+            ->where('status','Signed')
+            ->leftJoin('students', 'signeds.byid', '=', 'students.user_id')
             ->get();
 
-
+        $getcount=DB::table('signeds')
+            ->where('toid',$getid)
+            ->where('status','Signed')
+            ->leftJoin('students', 'signeds.byid', '=', 'students.user_id')
+            ->count();
          
+        $getcountt=DB::table('students')
+            ->count();
         // $getdatafromid=DB::table('students')
         //     ->where('user_id','2')
         //     ->get();
 
         // return $getrequest->all();
         return response()->json([
-            'requestdata'=>$getrequest
+            'requestsucc'=>$getrequest,
+            'count'=>$getcount,
+            'countt'=>$getcountt
         ]);
     }
 
@@ -42,7 +51,7 @@ class requestController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -53,7 +62,22 @@ class requestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datenw = date("F j, Y");
+
+        $myid=auth::user()->id;
+        \Log::info($request->byid);
+        DB::table('signeds')->insert([
+            'byid'=> $request->bid,
+            'toid'=> $myid,
+            'status' => 'Signed',
+            'updated'=>$datenw
+        ]);
+
+        DB::table('requestfroms')
+            ->where('bid',$request->bid)
+            ->where('toid',$myid)
+            ->delete();
+        
     }
 
     /**
@@ -64,7 +88,8 @@ class requestController extends Controller
      */
     public function show($id)
     {
-        //
+       
+     
     }
 
     /**
@@ -87,7 +112,10 @@ class requestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('signeds')
+            ->where('byid', $request->byid)
+            ->where('toid', $request->toid)
+            ->update(['status' => 'Rejected']);
     }
 
     /**
@@ -98,11 +126,6 @@ class requestController extends Controller
      */
     public function destroy($id)
     {
-        $myid=auth::user()->id;
-        \Log::info($id);
-        DB::table('requestfroms')
-            ->where('bid',$id)
-            ->where('toid',$myid)
-            ->delete();
+        //
     }
 }

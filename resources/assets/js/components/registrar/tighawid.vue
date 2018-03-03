@@ -241,15 +241,15 @@
             <div class="sidebar-progress">
             <p>Clearance Target</p>
             <div class="progress progress-sm">
-                <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-gradient-success" role="progressbar" :style="'width:'+ percent +'%'"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <p>200 Cleared Students</p>
-            </div>
+            <p>{{count}} Successfully Signed </p>
+            </div>  
 
              <div class="sidebar-progress">
            
             <p>School Year: 2017-2018</p>
-            <p>1st Semester</p>
+            <p>2nd Semester</p>
             
             </div>
         </nav>
@@ -290,21 +290,39 @@ export default {
 		  pagedash:false,
 		  pagestudents:false,
           pageoffice:false,
-          pagerequest:true
+          pagerequest:true,
+
+          count:'',
+          countt:'',
+          percent:''
           
 	  }
     },
     created(){
-        this.fetcUser();
+        this.fetchUserre();
     },
     methods: {
      
-        fetcUser(){
+        fetchUserre(){
             axios.get('registrardata').then(
                 response=>{
                     this.registrardatas=response.data.registrardata
+                    setTimeout(this.fetchUserre(), 1000); 
+
                 }	
-			)
+            ),
+            axios.get('signdata').then(
+                response=>{
+                    this.count=response.data.count;
+                    this.countt=response.data.countt;
+                    var dec = this.countt - this.count
+                    var nice = dec / this.countt
+                    var nicer = nice * 100
+                    this.percent= 100 - nicer;
+
+                }	
+            )
+            
         },
         
         logout(e) {

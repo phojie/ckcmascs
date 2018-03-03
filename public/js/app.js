@@ -47983,7 +47983,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         evalidate: function evalidate() {
             if (this.inputform.email == "") {
-                this.messageerror = 'Please provide username ';
+                this.messageerror = 'Please provide email ';
                 this.moshake = 'bounceIn';
                 this.validation = true;
             } else if (this.inputform.password == "") {
@@ -54072,20 +54072,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pagedash: false,
             pagestudents: false,
             pageoffice: false,
-            pagerequest: true
+            pagerequest: true,
+
+            count: '',
+            countt: '',
+            percent: ''
 
         };
     },
     created: function created() {
-        this.fetcUser();
+        this.fetchUserre();
     },
 
     methods: {
-        fetcUser: function fetcUser() {
+        fetchUserre: function fetchUserre() {
             var _this = this;
 
             axios.get('registrardata').then(function (response) {
                 _this.registrardatas = response.data.registrardata;
+                setTimeout(_this.fetchUserre(), 1000);
+            }), axios.get('signdata').then(function (response) {
+                _this.count = response.data.count;
+                _this.countt = response.data.countt;
+                var dec = _this.countt - _this.count;
+                var nice = dec / _this.countt;
+                var nicer = nice * 100;
+                _this.percent = 100 - nicer;
             });
         },
         logout: function logout(e) {
@@ -54399,9 +54411,28 @@ var render = function() {
                     _vm._m(6)
                   ]),
                   _vm._v(" "),
-                  _vm._m(7),
+                  _c("div", { staticClass: "sidebar-progress" }, [
+                    _c("p", [_vm._v("Clearance Target")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "progress progress-sm" }, [
+                      _c("div", {
+                        staticClass: "progress-bar bg-gradient-success",
+                        style: "width:" + _vm.percent + "%",
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow": "100",
+                          "aria-valuemin": "0",
+                          "aria-valuemax": "100"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(_vm._s(_vm.count) + " Successfully Signed ")
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _vm._m(8)
+                  _vm._m(7)
                 ]
               ),
               _vm._v(" "),
@@ -54413,7 +54444,7 @@ var render = function() {
               _vm._v(" "),
               _vm.pageoffice ? _c("office") : _vm._e(),
               _vm._v(" "),
-              _vm._m(9)
+              _vm._m(8)
             ],
             1
           )
@@ -54862,32 +54893,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "sidebar-progress" }, [
-      _c("p", [_vm._v("Clearance Target")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "progress progress-sm" }, [
-        _c("div", {
-          staticClass: "progress-bar bg-gradient-success",
-          staticStyle: { width: "90%" },
-          attrs: {
-            role: "progressbar",
-            "aria-valuenow": "90",
-            "aria-valuemin": "0",
-            "aria-valuemax": "100"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("p", [_vm._v("200 Cleared Students")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "sidebar-progress" }, [
       _c("p", [_vm._v("School Year: 2017-2018")]),
       _vm._v(" "),
-      _c("p", [_vm._v("1st Semester")])
+      _c("p", [_vm._v("2nd Semester")])
     ])
   },
   function() {
@@ -55236,6 +55244,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -55247,7 +55257,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             datadepartments: [],
             studentslists: [],
             studentscount: '',
-            loadarea: true
+            loadarea: true,
+            count: '',
+            countt: '',
+            countde: ''
 
         };
     },
@@ -55265,7 +55278,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.loadarea = false;
             }), axios.get("departmentdata").then(function (response) {
                 _this.datadepartments = response.data.datadepartments2;
-            }), axios.get("studentsdata").then(function (response) {
+                _this.countde = response.data.countde;
+            }), axios.get('signdata').then(function (response) {
+                _this.count = response.data.count;
+                _this.countt = response.data.countt;
+            });
+            axios.get("studentsdata").then(function (response) {
                 _this.studentslist = response.data.studentslist;
                 _this.studentscount = response.data.count;
                 setTimeout(_this.fetchUser(), 1000);
@@ -55429,135 +55447,206 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "content-wrapper " },
-    [
-      _c("center", [
-        _vm.loadarea
-          ? _c("img", {
-              staticStyle: { "margin-top": "20%" },
-              attrs: { height: "100px", src: "images/loading1.gif", alt: "" }
-            })
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.registrardatas, function(registrardata) {
-        return _c("div", { key: registrardata.id }, [
-          _c("div", { staticClass: "row " }, [
-            _c("div", { staticClass: "col-md-4 stretch-card grid-margin " }, [
-              _c(
-                "div",
-                {
-                  staticClass: "card  text-white",
-                  staticStyle: {
-                    height: "130px",
-                    "background-color": "#37474F"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("h4", { staticClass: "font-weight-normal mb-3" }, [
-                      _vm._v("Total Students")
-                    ]),
-                    _vm._v(" "),
-                    _c("h2", { staticClass: "font-weight-normal mb-5" }, [
-                      _vm._v(" " + _vm._s(_vm.studentscount))
+  return _c("div", { staticClass: "content-wrapper " }, [
+    _c(
+      "div",
+      {},
+      [
+        _c("center", [
+          _vm.loadarea
+            ? _c("img", {
+                staticStyle: { "margin-top": "20%" },
+                attrs: { height: "100px", src: "images/loading1.gif", alt: "" }
+              })
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.registrardatas, function(registrardata) {
+          return _c("div", { key: registrardata.id }, [
+            _c("div", { staticClass: "row " }, [
+              _c("div", { staticClass: "col-md-4 stretch-card grid-margin " }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card  text-white",
+                    staticStyle: {
+                      height: "130px",
+                      "background-color": "#37474F"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+                        _vm._v("Total Students")
+                      ]),
+                      _vm._v(" "),
+                      _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+                        _vm._v(" " + _vm._s(_vm.countt))
+                      ])
                     ])
-                  ])
-                ]
-              )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card text-white",
+                    staticStyle: {
+                      height: "130px",
+                      "background-color": "#4B515D"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+                        _vm._v("Total Deparment")
+                      ]),
+                      _vm._v(" "),
+                      _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+                        _vm._v(_vm._s(_vm.countde))
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card  text-white",
+                    staticStyle: {
+                      height: "130px",
+                      "background-color": "#3F729B"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+                        _vm._v("Pending Clearances")
+                      ]),
+                      _vm._v(" "),
+                      _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+                        _vm._v(_vm._s(1 - _vm.count))
+                      ])
+                    ])
+                  ]
+                )
+              ])
             ]),
             _vm._v(" "),
-            _vm._m(0, true),
-            _vm._v(" "),
-            _vm._m(1, true)
-          ]),
-          _vm._v(" "),
-          _vm._m(2, true),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12 grid-margin stretch-card" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h4", { staticClass: "card-title" }, [
-                    _vm._v("Department Status")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "table-responsive" }, [
-                    _c("table", { staticClass: "table" }, [
-                      _vm._m(3, true),
-                      _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v("Recent Updates from your Subjects")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "d-flex" }, [
                       _c(
-                        "tbody",
-                        _vm._l(_vm.datadepartments, function(datadepartment) {
-                          return _c("fetch", {
-                            key: datadepartment.id,
-                            attrs: { datadepartment: datadepartment }
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex align-items-center mr-4 text-muted"
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "mdi mdi-account icon-sm mr-2"
+                          }),
+                          _vm._v(" "),
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(registrardata.first) +
+                                " " +
+                                _vm._s(registrardata.last)
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(0, true)
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1, true)
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(2, true),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12 grid-margin stretch-card" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v("Department Status")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "table-responsive" }, [
+                      _c("table", { staticClass: "table" }, [
+                        _vm._m(3, true),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.datadepartments, function(datadepartment) {
+                            return _c("fetch", {
+                              key: datadepartment.id,
+                              attrs: { datadepartment: datadepartment }
+                            })
                           })
-                        })
-                      )
+                        )
+                      ])
                     ])
                   ])
                 ])
               ])
             ])
           ])
-        ])
-      })
-    ],
-    2
-  )
+        })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
-      _c(
-        "div",
-        {
-          staticClass: "card text-white",
-          staticStyle: { height: "130px", "background-color": "#4B515D" }
-        },
-        [
-          _c("div", { staticClass: "card-body" }, [
-            _c("h4", { staticClass: "font-weight-normal mb-3" }, [
-              _vm._v("Total Subjects")
-            ]),
-            _vm._v(" "),
-            _c("h2", { staticClass: "font-weight-normal mb-5" }, [
-              _vm._v("45633456")
-            ])
-          ])
-        ]
-      )
+    return _c("div", { staticClass: "d-flex align-items-center text-muted" }, [
+      _c("i", { staticClass: "mdi mdi-calendar-blank icon-sm mr-2" }),
+      _vm._v(" "),
+      _c("span", [_vm._v("October 3rd, 2018")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
-      _c(
-        "div",
-        {
-          staticClass: "card  text-white",
-          staticStyle: { height: "130px", "background-color": "#3F729B" }
-        },
-        [
-          _c("div", { staticClass: "card-body" }, [
-            _c("h4", { staticClass: "font-weight-normal mb-3" }, [
-              _vm._v("Pending Clearances")
-            ]),
-            _vm._v(" "),
-            _c("h2", { staticClass: "font-weight-normal mb-5" }, [
-              _vm._v("955741235")
-            ])
-          ])
-        ]
-      )
+    return _c("div", { staticClass: "d-flex mt-5 align-items-top" }, [
+      _c("img", {
+        staticClass: "img-sm rounded-circle mr-3",
+        attrs: { src: "ckcmascs/images/faces/face3.jpg", alt: "image" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-0 flex-grow" }, [
+        _c("p", { staticClass: "font-weight-bold mr-2 mb-0" }, [
+          _vm._v("Jack Manque ")
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Cleared his Clearance")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ml-auto" }, [
+        _c("i", {
+          staticClass: "fa fa-check-circle ",
+          staticStyle: { color: "#00C851" }
+        })
+      ])
     ])
   },
   function() {
@@ -55955,6 +56044,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 logo: '',
                 srclogo: '',
                 createdat: ''
+
             }
         };
     },
@@ -77105,7 +77195,7 @@ var render = function() {
       [
         _c("center"),
         _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
           _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-body" }, [
@@ -77129,7 +77219,80 @@ var render = function() {
                       _vm._l(_vm.requests, function(request) {
                         return _c("fetchrequest", {
                           key: request.id,
-                          attrs: { requestdata: request }
+                          attrs: { requestdata: request },
+                          on: { refresh: _vm.fetchrequestdata }
+                        })
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
+          _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v("Already Sign List")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-description" }),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table-responsive scrollbar-pink table table-striped"
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.requestdones, function(requestdone) {
+                        return _c("fetchsucc", {
+                          key: requestdone.id,
+                          attrs: { requestdata: requestdone },
+                          on: { refresh: _vm.fetchrequestdata }
+                        })
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
+          _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v("Rejected List")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-description" }),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table-responsive scrollbar-pink table table-striped"
+                  },
+                  [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.requestrejects, function(requestreject) {
+                        return _c("fetchreject", {
+                          key: requestreject.id,
+                          attrs: { requestdata: requestreject },
+                          on: { refresh: _vm.fetchrequestdata }
                         })
                       })
                     )
@@ -77145,6 +77308,86 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\n                            User\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Full name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Id No.\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Year level\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\n                            User\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Full name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Id No.\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Year level\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -77203,6 +77446,10 @@ if (false) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchrequest__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchrequest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchrequest__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsucc__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsucc___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fetchsucc__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__fetchrej__);
 //
 //
 //
@@ -77252,13 +77499,99 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { fetchrequest: __WEBPACK_IMPORTED_MODULE_0__fetchrequest___default.a },
+    components: { fetchrequest: __WEBPACK_IMPORTED_MODULE_0__fetchrequest___default.a, fetchsucc: __WEBPACK_IMPORTED_MODULE_1__fetchsucc___default.a, fetchreject: __WEBPACK_IMPORTED_MODULE_2__fetchrej___default.a },
     data: function data() {
         return {
-            requests: []
+            requests: [],
+            requestdones: [],
+            requestrejects: []
+
         };
     },
     created: function created() {
@@ -77271,6 +77604,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('requestdata').then(function (response) {
                 _this.requests = response.data.requestdata;
+            }), axios.get('signdata').then(function (response) {
+                _this.requestdones = response.data.requestsucc;
+            });
+            axios.get('rejectdata').then(function (response) {
+                _this.requestrejects = response.data.requestreject;
+                setTimeout(_this.fetchrequestdata(), 1000);
             });
         }
     }
@@ -77360,6 +77699,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['requestdata'],
     data: function data() {
         return {};
+    },
+
+    methods: {
+        rejectClearance: function rejectClearance(requestdata) {
+            var _this = this;
+
+            // alert(requestdata.id);
+            axios.delete('/requestdata/' + requestdata.bid).then(function (response) {
+                _this.$emit('refresh');
+            });
+        },
+        signClearance: function signClearance(requestdata) {
+            var _this2 = this;
+
+            axios.post('/signdata/', requestdata).then(function (response) {
+                _this2.$emit('refresh');
+            });
+        }
     }
 });
 
@@ -77391,21 +77748,18 @@ var render = function() {
       _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
     ]),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
+    _c("td", [
       _c(
         "button",
         {
           staticClass: "btn btn-danger btn-sm",
           staticStyle: { cursor: "pointer" },
-          attrs: { type: "button" }
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.rejectClearance(_vm.requestdata)
+            }
+          }
         },
         [_c("i", { staticClass: "mdi mdi-delete-empty" }), _vm._v("Reject")]
       ),
@@ -77415,7 +77769,12 @@ var staticRenderFns = [
         {
           staticClass: "btn btn-success btn-sm",
           staticStyle: { cursor: "pointer" },
-          attrs: { type: "button" }
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.signClearance(_vm.requestdata)
+            }
+          }
         },
         [
           _c("i", { staticClass: "mdi mdi-clipboard-check" }),
@@ -77423,14 +77782,332 @@ var staticRenderFns = [
         ]
       )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-b357d18a", module.exports)
+  }
+}
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(164)
+/* template */
+var __vue_template__ = __webpack_require__(165)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\registrar\\fetchsucc.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5ecdfa74", Component.options)
+  } else {
+    hotAPI.reload("data-v-5ecdfa74", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 164 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['requestdata'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {
+        rejectClearance: function rejectClearance(requestdata) {
+            var _this = this;
+
+            axios.patch('/signdata/' + requestdata.id, requestdata).then(function (response) {
+                _this.$emit('refresh');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", { staticClass: "py-1" }, [
+      _c("img", {
+        attrs: {
+          src: "userprofilepic/" + _vm.requestdata.profilepic,
+          alt: "image"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.fullname) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.idno) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.yearlevel) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger btn-sm",
+          staticStyle: { cursor: "pointer" },
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.rejectClearance(_vm.requestdata)
+            }
+          }
+        },
+        [_c("i", { staticClass: "mdi mdi-delete-empty" }), _vm._v("Reject")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5ecdfa74", module.exports)
+  }
+}
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(167)
+/* template */
+var __vue_template__ = __webpack_require__(168)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\registrar\\fetchrej.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-81d6f97a", Component.options)
+  } else {
+    hotAPI.reload("data-v-81d6f97a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 167 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['requestdata'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {
+        rejectClearance: function rejectClearance(requestdata) {
+            var _this = this;
+
+            // alert(requestdata.id);
+            axios.delete('/requestdata/' + requestdata.bid).then(function (response) {
+                _this.$emit('refresh');
+            });
+        },
+        signClearance: function signClearance(requestdata) {
+            var _this2 = this;
+
+            axios.patch('/rejectdata/' + requestdata.id, requestdata).then(function (response) {
+                _this2.$emit('refresh');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 168 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", { staticClass: "py-1" }, [
+      _c("img", {
+        attrs: {
+          src: "userprofilepic/" + _vm.requestdata.profilepic,
+          alt: "image"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.fullname) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.idno) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.yearlevel) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success btn-sm",
+          staticStyle: { cursor: "pointer" },
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.signClearance(_vm.requestdata)
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "mdi mdi-clipboard-check" }),
+          _vm._v("Sign Now")
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-81d6f97a", module.exports)
   }
 }
 

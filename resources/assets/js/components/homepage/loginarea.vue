@@ -84,7 +84,7 @@ export default {
         },
         evalidate(){
             if (this.inputform.email == ""){
-                this.messageerror='Please provide username ';
+                this.messageerror='Please provide email ';
                 this.moshake='bounceIn';
                 this.validation=true;
             }

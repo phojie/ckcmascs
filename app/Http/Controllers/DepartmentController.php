@@ -19,7 +19,12 @@ class DepartmentController extends Controller
         // $data=DB::table('departments')
             // ->get();
         $data=Department::orderby('id','DESC')->get();
-        return response()->json(["datadepartments2"=>$data]);
+        $datacount=Department::orderby('id','DESC')->count();
+        
+        return response()->json([
+            "datadepartments2"=>$data,
+            "countde"=>$datacount
+        ]);
     }
 
     /**

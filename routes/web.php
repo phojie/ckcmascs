@@ -41,6 +41,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('studentsdata', 'studentsController');
     Route::resource('requirementdata', 'requirementsController');
     Route::resource('requestdata', 'requestController');
+    Route::resource('signdata', 'signController');
+    Route::resource('rejectdata', 'rejectController');
     
     
     Route::post('/updatedartmentlogo', 'uploadimageController@updatedartmentlogo');

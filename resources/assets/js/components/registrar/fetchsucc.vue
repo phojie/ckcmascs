@@ -17,7 +17,7 @@
         </td>
         <td>
         <button type="button" @click="rejectClearance(requestdata)" style="cursor:pointer" class="btn btn-danger btn-sm"><i class="mdi mdi-delete-empty"></i>Reject</button>
-        <button type="button" @click="signClearance(requestdata)" style="cursor:pointer" class="btn btn-success btn-sm"><i class="mdi mdi-clipboard-check"></i>Sign Now</button>
+        <!-- <button type="button" @click="signClearance(requestdata)" style="cursor:pointer" class="btn btn-success btn-sm"><i class="mdi mdi-clipboard-check"></i>Sign Now</button> -->
         
         </td>
     </tr>
@@ -33,16 +33,9 @@ export default {
         }
     },
     methods:{
+        
         rejectClearance(requestdata){
-            // alert(requestdata.id);
-            axios.delete('/requestdata/'+requestdata.bid).then(
-                response=>{
-                    this.$emit('refresh');
-                }
-            )
-        },
-        signClearance(requestdata){
-            axios.post('/signdata/',requestdata).then(
+            axios.patch('/signdata/'+requestdata.id,requestdata).then(
                 response=>{
                     this.$emit('refresh');
                 }

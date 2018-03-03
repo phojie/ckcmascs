@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use auth;
-use App\requestfrom;
-class requestController extends Controller
+use signed;
+class rejectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +15,12 @@ class requestController extends Controller
      */
     public function index()
     {
-        // $getrequest=requestfrom::all();
         $getid=auth::user()->id;
        
-        $getrequest=DB::table('requestfroms')
+        $getrequest=DB::table('signeds')
             ->where('toid',$getid)
-            ->leftJoin('students', 'requestfroms.bid', '=', 'students.user_id')
+            ->where('status','Rejected')
+            ->leftJoin('students', 'signeds.byid', '=', 'students.user_id')
             ->get();
 
 
@@ -31,7 +31,7 @@ class requestController extends Controller
 
         // return $getrequest->all();
         return response()->json([
-            'requestdata'=>$getrequest
+            'requestreject'=>$getrequest
         ]);
     }
 
@@ -87,7 +87,10 @@ class requestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('signeds')
+        ->where('byid', $request->byid)
+        ->where('toid', $request->toid)
+        ->update(['status' => 'Signed']);
     }
 
     /**
@@ -98,11 +101,6 @@ class requestController extends Controller
      */
     public function destroy($id)
     {
-        $myid=auth::user()->id;
-        \Log::info($id);
-        DB::table('requestfroms')
-            ->where('bid',$id)
-            ->where('toid',$myid)
-            ->delete();
+        //
     }
 }

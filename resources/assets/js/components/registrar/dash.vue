@@ -1,5 +1,6 @@
 <template>
 <div class="content-wrapper " >
+    <div class="">
     <center>
             <img  v-if="loadarea" height="100px" style="margin-top:20%" src="images/loading1.gif"  alt="">
     </center>
@@ -9,7 +10,7 @@
             <div class="card  text-white" style="height:130px;background-color:#37474F">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Total Students</h4>
-                <h2 class="font-weight-normal mb-5"> {{studentscount}}</h2>
+                <h2 class="font-weight-normal mb-5"> {{countt}}</h2>
                 <!-- <p class="card-text">Incresed by 60%</p> -->
             </div>
             </div>
@@ -17,8 +18,8 @@
         <div class="col-md-4 stretch-card grid-margin">
             <div class="card text-white" style="height:130px;background-color:#4B515D">
             <div class="card-body">
-                <h4 class="font-weight-normal mb-3">Total Subjects</h4>
-                <h2 class="font-weight-normal mb-5">45633456</h2>
+                <h4 class="font-weight-normal mb-3">Total Deparment</h4>
+                <h2 class="font-weight-normal mb-5">{{countde}}</h2>
             </div>
             </div>
         </div>
@@ -26,13 +27,13 @@
             <div class="card  text-white" style="height:130px;background-color:#3F729B">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Pending Clearances</h4>
-                <h2 class="font-weight-normal mb-5">955741235</h2>
+                <h2 class="font-weight-normal mb-5">{{1-count}}</h2>
             </div>
             </div>
         </div>
         </div>
         
-        <!-- <div class="row">
+        <div class="row">
         <div class="col-lg-12 grid-margin stretch-card" >
             <div class="card">
             <div class="card-body">
@@ -62,7 +63,7 @@
             </div>
             </div>
         </div>
-        </div> -->
+        </div>
         <div class="row">
             <div class="col-12 grid-margin">
                 <div class="card">
@@ -229,6 +230,7 @@
         </div>
 
     </div>
+    </div>
 </div>  
 
 </template>
@@ -244,7 +246,10 @@ export default {
         	datadepartments:[],
             studentslists:[],
             studentscount:'',
-            loadarea:true
+            loadarea:true,
+            count:'',
+            countt:'',
+            countde:''
 
         }
     },
@@ -264,9 +269,16 @@ export default {
             axios.get("departmentdata").then(
                 response=>{
                     this.datadepartments=response.data.datadepartments2;
-                
+                    this.countde=response.data.countde;
+                    
                 }
             ),
+            axios.get('signdata').then(
+                response=>{
+                    this.count=response.data.count;
+                    this.countt=response.data.countt;
+                }	
+            )
             axios.get("studentsdata").then(
                 response=>{
                     this.studentslist=response.data.studentslist;
