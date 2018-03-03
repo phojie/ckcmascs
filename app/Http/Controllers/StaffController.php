@@ -7,6 +7,7 @@ use App\Staff;
 use App\log;
 use DB;
 use App\user;
+use auth;
 
 class StaffController extends Controller
 {
@@ -26,8 +27,14 @@ class StaffController extends Controller
         ->where('ad',1)
         ->count();
 
+        $gid=auth::user()->id;
+
+        $gestaff=DB::table('staff')
+            ->where('user_id',$gid)
+            ->get();
+
         $getdata=Staff::orderBy('id', 'DESC')->get();
-        return response()->json(["datastaffs"=>$getdata,"enabled"=>$geten,"disabled"=>$getdi]);
+        return response()->json(["staffdata"=>$gestaff,"datastaffs"=>$getdata,"enabled"=>$geten,"disabled"=>$getdi]);
 
     }
 

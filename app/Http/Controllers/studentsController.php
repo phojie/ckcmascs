@@ -190,6 +190,14 @@ class studentsController extends Controller
         DB::table('students')
             ->Where('user_id',$id)
             ->delete();
+
+        DB::table('signeds')
+        ->Where('byid',$id)
+        ->delete();
+
+        DB::table('requestfrins')
+        ->Where('bid',$id)
+        ->delete();
           
        
     }

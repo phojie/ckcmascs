@@ -2,16 +2,15 @@
 <div>
     <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    <nav v-for="instructordata in instructordatas" :key="instructordata.id" class=" navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <nav v-for="staffdata in staffdatas" :key="staffdata.id" class=" navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <!-- <a class="navbar-brand brand-logo" href="/"><img src="ckcmascs/images/logo.svg" alt="logo"/></a> -->
-        <!-- <a class="navbar-brand brand-logo" href="/"><H1>SDFSDF</H1></a>
-        <a class="navbar-brand brand-logo-mini" href="/"></a> -->
-        <!-- <a class="navbar-brand brand-logo-mini" href="/"><img src="ckcmascs/images/logo-mini.svg" alt="logo"/></a> -->
+       <!-- <center><a class="navbar-brand brand-logo" href="/">Ckcmascs.cf</a></center> -->
+        <a class="navbar-brand brand-logo-mini" href="/"></a>
+        <!-- <a class="navbar-brand brand-logo-mini" href="/"><img src="https://scontent.fcgy1-1.fna.fbcdn.net/v/t34.0-12/s851x315/28512235_1892307170841763_1072588819_n.png?efg=eyJpIjoidCJ9&oh=cb86a7f4163d09db1a2c5703ff7506dc&oe=5A9B7DD9" alt="logo"/></a> -->
 
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
-        <div class="search-field ml-4 d-none d-md-block">
+        <!-- <div class="search-field ml-4 d-none d-md-block">
             <form class="d-flex align-items-stretch h-100" action="#">
             <div class="input-group">
                 <input type="text" class="form-control bg-transparent border-0" placeholder="Search">
@@ -34,15 +33,15 @@
                 </div>
             </div>
             </form>
-        </div>
+        </div> -->
         <ul class="navbar-nav navbar-nav-right">
            
             <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+            <!-- <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <i class="mdi mdi-email-outline"></i>
                 <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+            </a> -->
+            <!-- <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                 <h6 class="p-3 mb-0">Messages</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
@@ -82,9 +81,9 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <h6 class="p-3 mb-0 text-center">4 new messages</h6>
-            </div>
+            </div> -->
             </li>
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
                 <span class="count"></span>
@@ -136,19 +135,22 @@
                 <div class="dropdown-divider"></div>
                 <h6 class="p-3 mb-0 text-center">See all notifications</h6>
             </div>
-            </li>
+            </li> -->
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-profile" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img :src="'userprofilepic/'+instructordata.profilepic" alt="image">
-                <span class="d-none d-lg-inline"> {{instructordata.first}} {{instructordata.last}}</span>
+                <img :src="'userprofilepic/'+staffdata.profilepic" alt="image">
+                <!-- <img :src="ckcmascs/images/faces-clipart/pic-1.png" alt="image"> -->
+                
+                <span class="d-none d-lg-inline"> {{staffdata.first}} {{staffdata.last}}</span>
+               
                 <span class="d-none d-lg-inline teal-text ml-1" style="font-size:9px;">Instructor</span>
                 
             </a>
             <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">
+                <!-- <a class="dropdown-item" href="#">
                 <i class="mdi mdi-cached mr-2 text-success"></i>
                 Activity Log
-                </a>
+                </a> -->
                 <div class="dropdown-divider"></div>
                     <form id="logout-form" action="/logout" method="POST" style="display: none;">
                         <input type="hidden" name="_token" :value="csrf">
@@ -177,67 +179,58 @@
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item" :class="active1">
+                <a class="nav-link " href="#" @click="pageactivedash">
                 <span class="menu-title">Dashboard</span>
-                <span class="menu-sub-title">( 2 new updates )</span>
                 <i class="mdi mdi-home menu-icon"></i>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Status</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                 </a>
-                 <!-- class="collapse" id="ui-basic" -->
+                 class="collapse" id="ui-basic"
                 <div>
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Cleared</a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Pending</a></li>
                 </ul>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="pages/icons/font-awesome.html">
-                <span class="menu-title">Students</span>
+            </li> -->
+            <li class="nav-item" :class="active2">
+                <a class="nav-link" href="#" @click="pageactivestudents">
+                <span class="menu-title">My Subjects</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
                 </a>
             </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="pages/forms/basic_elements.html">
-                <span class="menu-title">Form Elements</span>
+            <li class="nav-item" :class="active3">
+                <a class="nav-link" href="#" @click="pageactiverequest">
+                <span class="menu-title">Request </span>
+                <span class="menu-sub-title">( 2 new updates )</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="pages/charts/chartjs.html">
                 <span class="menu-title">Chart</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="pages/tables/bootstrap-table.html">
-                <span class="menu-title">Table</span>
+            </li> -->
+            <li class="nav-item"  :class="active4">
+                <a class="nav-link" href="#"  @click="pageactiveoffice">
+                <span class="menu-title">My Office</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
                 </a>
-            </li> -->
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <span class="menu-title">Security</span>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="!#auth" aria-expanded="false" aria-controls="auth">
+                <span class="menu-title">Setting</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-lock menu-icon"></i>
                 </a>
-                <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Setting </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Profile </a></li>
-                    <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li> -->
-                </ul>
-                </div>
-            </li>
+            </li> -->
             </ul>
             <!-- <div class="sidebar-progress">
             <p>Total Sales</p>
@@ -249,22 +242,24 @@
             <div class="sidebar-progress">
             <p>Clearance Target</p>
             <div class="progress progress-sm">
-                <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-gradient-success" role="progressbar" :style="'width:'+ percent +'%'"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <p>200 Cleared Students</p>
-            </div>
+            <p>{{count}} Successfully Signed </p>
+            </div>  
 
              <div class="sidebar-progress">
            
             <p>School Year: 2017-2018</p>
-            <p>1st Semester</p>
+            <p>2nd Semester</p>
             
             </div>
         </nav>
         <!-- partial -->
-        
-        <dash1></dash1>
-      
+        <dashins v-if="pagedash"></dashins>
+		<insstudents v-if="pagestudents"></insstudents>
+		<insrequest v-if="pagerequest"></insrequest>
+		<insoffice v-if="pageoffice"></insoffice>
+
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
@@ -287,26 +282,102 @@
 export default {
     data(){
       return{
-          instructordatas:[],
-        
-      }
+          active1:'active',
+          active2:'',
+          active3:'',
+          active4:'',
+          
+		  staffdatas:[],
+		  pagedash:true,
+		  pagestudents:false,
+          pageoffice:false,
+          pagerequest:false,
+
+          count:'',
+          countt:'',
+          percent:''
+          
+	  }
     },
     created(){
-        this.fetcUser();
+        this.fetchUserre();
     },
     methods: {
-        fetcUser(){
-            axios.get('instructor').then(
+     
+        fetchUserre(){
+            axios.get('staffdata').then(
                 response=>{
-                    this.instructordatas=response.data.instructordata
-                }
+                    this.staffdatas=response.data.staffdata
+                    setTimeout(this.fetchUserre(), 1000); 
+
+                }	
+            ),
+            axios.get('signdata').then(
+                response=>{
+                    this.count=response.data.count;
+                    this.countt=response.data.countt;
+                    var dec = this.countt - this.count
+                    var nice = dec / this.countt
+                    var nicer = nice * 100
+                    this.percent= 100 - nicer;
+
+                }	
             )
+            
         },
         
         logout(e) {
             e.preventDefault();
             document.getElementById('logout-form').submit()
+		},
+		
+		pageactivedash(){
+            this.active1='active'
+            this.active2=''
+            this.active3=''
+            this.active4=''
+            
+			this.pagedash=true	
+            this.pagestudents=false	
+            this.pagerequest=false
+            this.pageoffice=false
+			
+		},
+	    pageactivestudents(){
+            this.active1=''
+            this.active2='active'
+            this.active3=''
+            this.active4=''
+
+            this.pagedash=false
+            this.pagestudents=true
+            this.pagerequest=false
+            this.pageoffice=false
+            
         },
+        pageactiverequest(){
+            this.active1=''
+            this.active2=''
+            this.active3='active'
+            this.active4=''
+
+            this.pagedash=false
+            this.pagestudents=false
+            this.pagerequest=true   
+            this.pageoffice=false
+		},
+        pageactiveoffice(){
+            this.active1=''
+            this.active2=''
+            this.active3=''
+            this.active4='active'
+
+            this.pagedash=false
+            this.pagestudents=false
+            this.pagerequest=false
+            this.pageoffice=true
+            
+		}
     },
     mounted() {
         this.csrf = window.myToken.csrfToken

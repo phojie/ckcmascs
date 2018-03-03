@@ -56,7 +56,10 @@ Vue.component('regrequest', require('./components/registrar/request.vue'));
 
 // instructor area
 Vue.component('tighawidins', require('./components/instructor/tighawid.vue'));
-Vue.component('dash1', require('./components/instructor/dash.vue'));
+Vue.component('dashins', require('./components/instructor/dash.vue'));
+Vue.component('insstudents', require('./components/instructor/students.vue'));
+Vue.component('insoffice', require('./components/instructor/office.vue'));
+Vue.component('insrequest', require('./components/instructor/request.vue'));
 
 //  user area
 // Vue.component('tighawiduser', require('./components/user/tighawid.vue'));
