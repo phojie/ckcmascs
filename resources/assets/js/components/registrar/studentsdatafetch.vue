@@ -2,13 +2,12 @@
     <tr  style="border-left:1px solid #2ecc71" @mouseover="showbtn" @mouseleave="hidebtn">
         
         <td> {{list.idno}}</td>
-        <td>{{list.first}}</td>
-        <td class="text-success">{{list.last}}</td>
+        <td class="text-success">{{list.fullname}}</td>
         <td v-if="showloading"><img src="images/loading1.gif"  alt="loading..."></td>
         <td v-if="!showbtnnaw && !showloading"><label class="badge badge-gradient-warning px-3">Actions <i class="mdi mdi-border-color"></i></label> </td>
-        <td v-if="showbtnnaw && !showloading"><label style="cursor:pointer"  class="badge badge-info " ><i class="mdi mdi-account"></i> </label>&nbsp; <label style="cursor:pointer" @click="$emit('getStudent',list)" class="badge badge-warning white-text" data-toggle="modal" :data-target="'#viewModal'+list.id"><i class="mdi mdi-update"></i></label>&nbsp; <label style="cursor:pointer" @click="deleteStudent(list)" class="badge badge-danger " ><i class="mdi mdi-delete"></i> </label> </td>
+        <td v-if="showbtnnaw && !showloading"><label style="cursor:pointer" @click="$emit('getStudent',list)" class="badge badge-warning white-text" data-toggle="modal" :data-target="'#viewModal'+list.id"><i class="mdi mdi-update"></i></label>&nbsp; <label style="cursor:pointer" @click="deleteStudent(list)" class="badge badge-danger " ><i class="mdi mdi-delete"></i> </label> </td>
    <!-- > <a class="btn btn-primary waves-effect waves-light" >Bottom Right</a> -->
-
+<!-- <label style="cursor:pointer"  class="badge badge-info " ><i class="mdi mdi-account"></i> </label>&nbsp;  -->
     
 <!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document" >

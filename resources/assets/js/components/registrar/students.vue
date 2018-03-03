@@ -30,6 +30,7 @@ export default {
             // registrardatas:[],
             datadepartments:[],
             pickedinfo:{
+                stotal:'',
                 id:'',
                 name:'',
                 dean:'',
@@ -47,6 +48,7 @@ export default {
     methods: {
        
         getdetails(datadepartment){
+            this.pickedinfo.stotal=datadepartment.stotal;
             this.pickedinfo.id=datadepartment.id;
             this.pickedinfo.name=datadepartment.name;
             this.pickedinfo.dean=datadepartment.dean;

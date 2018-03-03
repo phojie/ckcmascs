@@ -50,6 +50,8 @@ Vue.component('dash', require('./components/admin/dash.vue'));
 Vue.component('tighawidreg', require('./components/registrar/tighawid.vue'));
 Vue.component('dash-1', require('./components/registrar/dash.vue'));
 Vue.component('regstudents', require('./components/registrar/students.vue'));
+Vue.component('office', require('./components/registrar/office.vue'));
+Vue.component('regrequest', require('./components/registrar/request.vue'));
 
 
 // instructor area

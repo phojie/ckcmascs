@@ -44,7 +44,7 @@ return [
         //     'host' => 'localhost',
         //     'port' => '3306',
         //     'database' => 'ckcmascs',
-        //     'username' => 'root',
+        //     'username' => 'root',!
         //     'password' => '',
         //     'unix_socket' => env('DB_SOCKET', ''),
         //     'charset' => 'utf8mb4',

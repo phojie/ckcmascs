@@ -4,7 +4,10 @@
     <div class="card">
        
     <div class="card-body">
-        <i @click="$emit('getdetails',datadepartment)" class="float-right  mdi mdi-plus-circle addbtn" style="font-size:30px;cursor:pointer" data-toggle="modal" data-target="#exampleModal"></i>
+        <i @click="$emit('getdetails',datadepartment)" class="float-right  mdi mdi-account-multiple-plus addbtn" style="font-size:30px;cursor:pointer" data-toggle="modal" data-target="#exampleModal"></i>
+        
+     
+      
         <div class="modal fade scrollbar-pink" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -313,82 +316,131 @@
             </div>
         </div>
                     
-
-            
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                    <h6 class="p-3 mb-0">Messages</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                        <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+        <div class="modal fade scrollbar-pink" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">College of {{getdetails.name}} Information
+                            <!-- <span class="card-description" style="font-size:12px;">(School Year: 2017-2018)</span> -->
+                            </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
-                        <p class="text-gray mb-0">
-                        1 Minutes ago
-                        </p>
+                    <div class="modal-body">
+                    <div class="card">
+                    <div class="card-header white">
+                        <div class="media">
+                        <img :src="getdetails.srclogo" alt="Department Logo" height="80px" width="80px" class="mx-5 my-2 " style="border-radius: 50%;">
+                        <i style="font-size:24px" class="mdi mdi-clipboard-account text-info d-flex align-self-start mr-3"></i>
+                        <div class="media-body col-sm-0">
+                        <p class="card-text mt-2">{{getdetails.stotal}} Registered Students</p>
+                        </div>
                     </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                        <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
+                    
+                    <div class="card-body">
+                    <h4 class="card-title">Department Description</h4>
+                    <div class="media">
+                        <i class="mdi mdi-information-variant icon-md text-info d-flex align-self-start mr-3"></i>
+                        <div class="media-body">
+                        <p class="card-text text-success">Associate Dean: {{getdetails.dean}}</p>
+                            
+                        <p class="card-text">{{getdetails.description}}</p>
+                        </div>
                     </div>
-                    <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
-                        <p class="text-gray mb-0">
-                        15 Minutes ago
-                        </p>
                     </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                        <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
                     </div>
-                    <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
-                        <p class="text-gray mb-0">
-                        18 Minutes ago
-                        </p>
+                    
+                  
                     </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="p-3 mb-0 text-center">4 new messages</h6>
+                    <div class="modal-footer">
+                        <button v-if="!addsave" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+            
+        <!-- <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+            <h6 class="p-3 mb-0">Messages</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+                <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+            </div>
+            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
+                <p class="text-gray mb-0">
+                1 Minutes ago
+                </p>
+            </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+                <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
+            </div>
+            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
+                <p class="text-gray mb-0">
+                15 Minutes ago
+                </p>
+            </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+                <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
+            </div>
+            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
+                <p class="text-gray mb-0">
+                18 Minutes ago
+                </p>
+            </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <h6 class="p-3 mb-0 text-center">4 new messages</h6>
+        </div> -->
 
             
             <img :src="'/departmentlogo/'+datadepartment.logo" class="mr-2 mb-2 " alt="Department Logo" height="60px" width="60px" style="border-radius:50%;">
             <!-- <img :src="'/departmentlogo/'+datadepartment.logo" class="mr-2 mb-2 " alt="Department Logo" height="60px" width="60px" style="border-radius:50%;"> -->
 
-            <h4 class="card-title mb-5" style="margin-top:-60px;margin-left:70px"> 
-                {{datadepartment.name}} 
-                <br>
-            <div class="row mt-2">
+            <h4 class="card-title mb-3" style="margin-top:-60px;margin-left:70px"> 
+                {{datadepartment.name}}  
+                 <i @click="$emit('getdetails',datadepartment)" class=" mdi mdi-information-outline addbtn" style="font-size:20px;cursor:pointer" data-toggle="modal" data-target="#exampleModal2"></i>
+
+            </h4> 
+            <br>
+            <div class="pull-right row mx-2">
+            <input type="" class="  form-control"  v-model="search" placeholder="Search Id No...">
+            </div>
+            <hr>
+            <!-- <div class="row mt-2">
                 <div class="col-md-12">
-                    <i style="font-size:36px" class="grey-text float-left mdi mdi-account-group"></i>
+                    <i style="font-size:36px" class="grey-text float-left mdi mdi-account-plus"></i>
                     <i style="font-size:36px" class="grey-text float-right mdi mdi-account-search"></i>
                     
                 </div>
 
-            </div>
+            </div> -->
                 
                 <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                             <path fill="#000000" d="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M11,6V9H8V11H11V14H13V11H16V9H13V6H11Z" />
                         </svg> -->
+
+              
+               
                 <!-- <i style="font-size:25px;" class="ml-2 mdi mdi-account-multiple text-info"></i><span class="grey-text" style="font-size:15px"> {{datadepartment.stotal}}</span> 
                 <i style="font-size:25px;" class="ml-2 mdi mdi-account text-success"></i><span class="grey-text" style="font-size:15px"> {{datadepartment.stotal}}</span> 
                 <i style="font-size:25px;" class="ml-2 mdi mdi-account text-danger"></i><span class="grey-text" style="font-size:15px"> {{datadepartment.stotal}}</span>  -->
-                <!--
-                        <div class="input-group-addon bg-transparent border-0 search-button">
+                        <!-- <div class="input-group-addon bg-transparent border-0 search-button">
                             <button type="submit" class="btn btn-sm bg-transparent px-0">
-                                <i class="mdi mdi-magnify"></i>
+                                <i class="mdi mdi-account-multiple-plus"></i>
                             </button>
-                        </div>
-                    </div>
-                </form> -->
+                        </div> -->
 
-            </h4> 
             
         
 
@@ -398,8 +450,7 @@
                         <thead>
                         <tr>
                             <th>Id No.</th>
-                            <th>Firstname</th>
-                            <th>Surname</th>
+                            <th>Fullname</th>
 							
                             <th></th>
                         </tr>
@@ -655,7 +706,7 @@ export default {
   
         filteredList() {
             return this.studentlists.filter(studentslist => {
-                return studentslist.fullname.toLowerCase().includes(this.search.toLowerCase())
+                return studentslist.idno.toLowerCase().includes(this.search.toLowerCase())
                     })
         }
     }

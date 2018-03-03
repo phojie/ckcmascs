@@ -8,6 +8,7 @@ use App\user;
 use DB;
 use Auth;
 use App\department;
+use App\clearance;
 class studentsController extends Controller
 {
   
@@ -72,14 +73,18 @@ class studentsController extends Controller
             
         ]);
 
-        
-
-
-
         $gettheid=DB::table('users')
         ->where('email',$request->em)
         ->first();
 
+
+        clearance::create([
+            'idno'=> $gettheid->id, 
+            'status'=> 'Onhold',
+            'updated'=>$datenw
+        ]);
+           
+            
         student::create($request->except('fullname') + [
             'user_id' => $gettheid->id,
             'fullname' => $request->first." ".$request->second." ".$request->last,
@@ -177,6 +182,10 @@ class studentsController extends Controller
             ->update(['stotal'=>$ostotal]);
         
         User::destroy($id); 
+    
+        DB::table('clearances')
+            ->Where('idno',$id)
+            ->delete();
     
         DB::table('students')
             ->Where('user_id',$id)

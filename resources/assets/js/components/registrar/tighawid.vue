@@ -4,10 +4,9 @@
     <!-- partial:partials/_navbar.html -->
     <nav v-for="registrardata in registrardatas" :key="registrardata.id" class=" navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <!-- <a class="navbar-brand brand-logo" href="/"><img src="ckcmascs/images/logo.svg" alt="logo"/></a> -->
-        <!-- <a class="navbar-brand brand-logo" href="/"><H1>SDFSDF</H1></a>
-        <a class="navbar-brand brand-logo-mini" href="/"></a> -->
-        <!-- <a class="navbar-brand brand-logo-mini" href="/"><img src="ckcmascs/images/logo-mini.svg" alt="logo"/></a> -->
+       <center><a class="navbar-brand brand-logo" href="/">Ckcmascs.cf</a></center>
+        <a class="navbar-brand brand-logo-mini" href="/"></a>
+        <a class="navbar-brand brand-logo-mini" href="/"><img src="https://scontent.fcgy1-1.fna.fbcdn.net/v/t34.0-12/s851x315/28512235_1892307170841763_1072588819_n.png?efg=eyJpIjoidCJ9&oh=cb86a7f4163d09db1a2c5703ff7506dc&oe=5A9B7DD9" alt="logo"/></a>
 
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -205,8 +204,8 @@
                 <i class="mdi mdi-contacts menu-icon"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="pages/forms/basic_elements.html">
+            <li class="nav-item" :class="active3">
+                <a class="nav-link" href="#" @click="pageactiverequest">
                 <span class="menu-title">Request </span>
                 <span class="menu-sub-title">( 2 new updates )</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
@@ -218,27 +217,18 @@
                 <i class="mdi mdi-chart-bar menu-icon"></i>
                 </a>
             </li> -->
-            <li class="nav-item">
-                <a class="nav-link" href="pages/tables/bootstrap-table.html">
+            <li class="nav-item"  :class="active4">
+                <a class="nav-link" href="#"  @click="pageactiveoffice">
                 <span class="menu-title">My Office</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="!#auth" aria-expanded="false" aria-controls="auth">
-                <span class="menu-title">Security</span>
+                <span class="menu-title">Setting</span>
                 <!-- <i class="menu-arrow"></i> -->
                 <i class="mdi mdi-lock menu-icon"></i>
                 </a>
-                <div class="" id="auth">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Setting </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Profile </a></li>
-                    <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li> -->
-                </ul>
-                </div>
             </li>
             </ul>
             <!-- <div class="sidebar-progress">
@@ -266,6 +256,8 @@
         <!-- partial -->
         <dash-1 v-if="pagedash"></dash-1>
 		<regstudents v-if="pagestudents"></regstudents>
+		<regrequest v-if="pagerequest"></regrequest>
+		<office v-if="pageoffice"></office>
 
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -291,9 +283,15 @@ export default {
       return{
           active1:'active',
           active2:'',
+          active3:'',
+          active4:'',
+          
 		  registrardatas:[],
-		  pagedash:true,
-		  pagestudents:false
+		  pagedash:false,
+		  pagestudents:false,
+          pageoffice:false,
+          pagerequest:true
+          
 	  }
     },
     created(){
@@ -317,15 +315,49 @@ export default {
 		pageactivedash(){
             this.active1='active'
             this.active2=''
+            this.active3=''
+            this.active4=''
+            
 			this.pagedash=true	
-			this.pagestudents=false	
+            this.pagestudents=false	
+            this.pagerequest=false
+            this.pageoffice=false
 			
 		},
 	    pageactivestudents(){
             this.active1=''
             this.active2='active'
+            this.active3=''
+            this.active4=''
+
             this.pagedash=false
             this.pagestudents=true
+            this.pagerequest=false
+            this.pageoffice=false
+            
+        },
+        pageactiverequest(){
+            this.active1=''
+            this.active2=''
+            this.active3='active'
+            this.active4=''
+
+            this.pagedash=false
+            this.pagestudents=false
+            this.pagerequest=true   
+            this.pageoffice=false
+		},
+        pageactiveoffice(){
+            this.active1=''
+            this.active2=''
+            this.active3=''
+            this.active4='active'
+
+            this.pagedash=false
+            this.pagestudents=false
+            this.pagerequest=false
+            this.pageoffice=true
+            
 		}
     },
     mounted() {
