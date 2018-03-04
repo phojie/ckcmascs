@@ -35,8 +35,11 @@ public function __construct()
         if($gettype==0){
             return view('adminfiles.superadmin');
         }
-        elseif($gettype== -1){
+        elseif($gettype== 2){
             return view('registrarfiles.dashregistrar');
+        }
+        elseif($gettype== -1){
+            return view('instructorfiles.dashstudents');
         }
         else{
             if($user->ad==1){

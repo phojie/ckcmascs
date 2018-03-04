@@ -61,11 +61,11 @@ class studentsController extends Controller
               
         $datenw = date("F j, Y");
         
-        $this->validate($request,[
-            'em'=> 'required|email|'
-        ]);
+        // $this->validate($request,[
+        //     'em'=> 'required|email|'
+        // ]);
 
-        $submitnow=User::create([
+        User::create([
             'name' => $request->first,
             'email' => $request->em,
             'password' => bcrypt('ckcm'.$request->first),
@@ -77,6 +77,7 @@ class studentsController extends Controller
         ->where('email',$request->em)
         ->first();
 
+        
 
         clearance::create([
             'idno'=> $gettheid->id, 
@@ -104,6 +105,9 @@ class studentsController extends Controller
         DB::table('departments')
             ->where('name',$request->department)
             ->update(['stotal'=>$ostotal]);
+
+
+        
             
     }
 
