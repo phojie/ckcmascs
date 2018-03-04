@@ -78816,26 +78816,6 @@ var render = function() {
                           })
                         ]
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item", class: _vm.active4 }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { href: "#" },
-                          on: { click: _vm.pageactiveoffice }
-                        },
-                        [
-                          _c("span", { staticClass: "menu-title" }, [
-                            _vm._v("Manage Offices")
-                          ]),
-                          _vm._v(" "),
-                          _c("i", {
-                            staticClass: "mdi mdi-table-large menu-icon"
-                          })
-                        ]
-                      )
                     ])
                   ]),
                   _vm._v(" "),

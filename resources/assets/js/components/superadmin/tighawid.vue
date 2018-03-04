@@ -73,12 +73,12 @@
                 </a>
             </li>
      
-            <li class="nav-item"  :class="active4">
+            <!-- <li class="nav-item"  :class="active4">
                 <a class="nav-link" href="#"  @click="pageactiveoffice">
                 <span class="menu-title">Manage Offices</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
                 </a>
-            </li>
+            </li> -->
           
             </ul>
           
