@@ -124,7 +124,7 @@ class DepartmentController extends Controller
         //     ->first();
         // \Log::info($id ." ". $request->logo. " " . $getlogo->logo);
         \Log::info($request->logo);    
-        if ($request->logo == "s"){
+        if ($request->logo == ""){
             $get= Department::find($id);
             $get->update($request->except('logo') + [
                 'updated'=> $datenw
@@ -190,28 +190,28 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $getdp=DB::table('departments')
-            ->where('id',$id)
-            ->get();
+        // $getdp=DB::table('departments')
+        //     ->where('id',$id)
+        //     ->first();
         
-        $getid=DB::table('staffs')
-            ->where('department',$getdp->name)
-            ->get(); 
+        // $getid=DB::table('staff')
+        //     ->where('department',$getdp->name)
+        //     ->first(); 
 
 
-        $get=DB::table('staff')
-        ->where('id',$getid)
-        ->get();
+        // $get=DB::table('staff')
+        // ->where('id',$getid)
+        // ->get();
         
-        User::destroy($get->user_id); 
-
-          
+        // User::destroy($get->user_id);
+        
         Department::destroy($id);
-        DB::table('staffs')
-            ->where('department',$getdp->name)
-            ->delete(); 
+      
+        // DB::table('staff')
+        //     ->where('department',$getdp->name)
+        //     ->delete(); 
 
-        return response()->json([
-        ]);
+        // return response()->json([
+        // ]);
     }
 }

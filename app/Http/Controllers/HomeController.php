@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use app\user;
 use auth;
-
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -27,16 +27,18 @@ public function __construct()
     {
         $gettype=auth::user()->type;
         $getid=auth::user()->id;
-        $user=USER::find($getid)->staff;
+        // $user=user::find($getid)->staff;
+        $user=DB::table('staff')
+            ->where('user_id',$getid)
+            ->first();
 
         if($gettype==0){
-            return view('adminfiles.dashadmin');
+            return view('adminfiles.superadmin');
         }
         elseif($gettype== -1){
             return view('registrarfiles.dashregistrar');
         }
         else{
-            
             if($user->ad==1){
                 return "your account was disable";
                 // return view('adminfiles.dashadmin');
@@ -44,10 +46,10 @@ public function __construct()
             }
             elseif($user->ad==0){
     
-                if($gettype==1){
+                // if($gettype==1){
                     return view('instructorfiles.dashinstructor');
                     
-                }
+                // }
             }
 
         }

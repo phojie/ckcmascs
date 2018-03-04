@@ -11,6 +11,9 @@ class adminController extends Controller
 {
     public function getdata(){
 
+        $getstaff=DB::table('staff')
+            ->count();
+
         $getdata=DB::table('users')
             ->where('id',auth::user()->id)
             ->get();
@@ -18,7 +21,11 @@ class adminController extends Controller
         // $getdata=User::find(5)->staff;
 
         
-        return response()->json(["admindata"=>$getdata]);
+        return response()->json([
+            "admindata"=>$getdata,
+            "staffcount"=>$getstaff,
+            
+        ]);
 
 
     }

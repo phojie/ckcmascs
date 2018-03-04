@@ -34,7 +34,11 @@ class StaffController extends Controller
             ->get();
 
         $getdata=Staff::orderBy('id', 'DESC')->get();
-        return response()->json(["staffdata"=>$gestaff,"datastaffs"=>$getdata,"enabled"=>$geten,"disabled"=>$getdi]);
+        return response()->json([
+            "staffdata"=>$gestaff,
+            "datastaffs"=>$getdata,
+            "enabled"=>$geten,
+            "disabled"=>$getdi]);
 
     }
 
