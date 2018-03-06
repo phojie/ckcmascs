@@ -43,6 +43,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('requestdata', 'requestController');
     Route::resource('signdata', 'signController');
     Route::resource('rejectdata', 'rejectController');
+    Route::resource('subjectdata', 'subjectController');
     
     
     Route::post('/updatedartmentlogo', 'uploadimageController@updatedartmentlogo');

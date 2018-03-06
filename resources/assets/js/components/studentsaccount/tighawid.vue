@@ -2,7 +2,7 @@
 <div>
     <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    <nav v-for="staffdata in staffdatas" :key="staffdata.id" class=" navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <nav v-for="studentdata in studentdatas" :key="studentdata.id" class=" navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
        <!-- <center><a class="navbar-brand brand-logo" href="/">Ckcmascs.cf</a></center> -->
         <a class="navbar-brand brand-logo-mini" href="/"></a>
@@ -138,12 +138,12 @@
             </li> -->
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-profile" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img :src="'userprofilepic/'+staffdata.profilepic" alt="image">
+                <img :src="'userprofilepic/'+studentdata.profilepic" alt="image">
                 <!-- <img :src="ckcmascs/images/faces-clipart/pic-1.png" alt="image"> -->
                 
-                <span class="d-none d-lg-inline"> {{staffdata.first}} {{staffdata.last}}</span>
+                <span class="d-none d-lg-inline"> {{studentdata.first}} {{studentdata.last}}</span>
                
-                <span class="d-none d-lg-inline teal-text ml-1" style="font-size:9px;">Instructor</span>
+                <span class="d-none d-lg-inline teal-text ml-1" style="font-size:9px;">Student</span>
                 
             </a>
             <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
@@ -181,7 +181,7 @@
             <ul class="nav">
             <li class="nav-item" :class="active1">
                 <a class="nav-link " href="#" @click="pageactivedash">
-                <span class="menu-title">Dashboard</span>
+                <span class="menu-title">Clearance</span>
                 <i class="mdi mdi-home menu-icon"></i>
                 </a>
             </li>
@@ -199,12 +199,12 @@
                 </ul>
                 </div>
             </li> -->
-            <li class="nav-item" :class="active2">
+            <!-- <li class="nav-item" :class="active2">
                 <a class="nav-link" href="#" @click="pageactivestudents">
-                <span class="menu-title">Manage</span>
+                <span class="menu-title">Request</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item" :class="active3">
                 <a class="nav-link" href="#" @click="pageactiverequest">
                 <span class="menu-title">Request </span>
@@ -220,7 +220,7 @@
             </li> -->
             <li class="nav-item"  :class="active4">
                 <a class="nav-link" href="#"  @click="pageactiveoffice">
-                <span class="menu-title">My Office</span>
+                <span class="menu-title">My Profile</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
                 </a>
             </li>
@@ -255,9 +255,9 @@
             </div>
         </nav>
         <!-- partial -->
-        <dashins v-if="pagedash"></dashins>
-		<insstudents v-if="pagestudents"></insstudents>
-		<insrequest v-if="pagerequest"></insrequest>
+        <dashstu v-if="pagedash"></dashstu>
+		<!-- <insstudents v-if="pagestudents"></insstudents> -->
+		<dashreq v-if="pagerequest"></dashreq>
 		<insoffice v-if="pageoffice"></insoffice>
 
         <!-- content-wrapper ends -->
@@ -287,7 +287,7 @@ export default {
           active3:'',
           active4:'',
           
-		  staffdatas:[],
+		  studentdatas:[],
 		  pagedash:true,
 		  pagestudents:false,
           pageoffice:false,
@@ -305,11 +305,10 @@ export default {
     methods: {
      
         fetchUserre(){
-            axios.get('staffdata').then(
+            axios.get('studentsdata').then(
                 response=>{
-                    this.staffdatas=response.data.staffdata
+                    this.studentdatas=response.data.studentsdata
                     setTimeout(this.fetchUserre(), 1000); 
-
                 }	
             ),
             axios.get('signdata').then(

@@ -5,8 +5,6 @@
        
     <div class="card-body">
         <i @click="$emit('getdetails',datadepartment)" class="float-right  mdi mdi-account-multiple-plus addbtn" style="font-size:30px;cursor:pointer" data-toggle="modal" data-target="#exampleModal"></i>
-        
-     
       
         <div class="modal fade scrollbar-pink" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">

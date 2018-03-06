@@ -70,7 +70,10 @@ Vue.component('insrequest', require('./components/instructor/request.vue'));
 //  user area
 // Vue.component('tighawiduser', require('./components/user/tighawid.vue'));
 
-
+// students area
+Vue.component('tighawidstu', require('./components/studentsaccount/tighawid.vue'));
+Vue.component('dashstu', require('./components/studentsaccount/dash.vue'));
+Vue.component('dashreq', require('./components/studentsaccount/request/requestdash.vue'));
 
 
 const app = new Vue({

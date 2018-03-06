@@ -19,13 +19,20 @@ class studentsController extends Controller
      */
     public function index()
     {
+        $getid=auth::user()->id;
+
         $st=student::all();
         $count=DB::table('students')
             ->count();
 
-        return response()->json([
+        $getdata=DB::table('students')
+            ->where('user_id',$getid)
+            ->get();
+
+    return response()->json([
             "studentlists"=>$st,
-            "count"=>$count
+            "count"=>$count,
+            'studentsdata'=>$getdata
         ]);
 
     }
@@ -77,15 +84,12 @@ class studentsController extends Controller
         ->where('email',$request->em)
         ->first();
 
-        
-
         clearance::create([
             'idno'=> $gettheid->id, 
             'status'=> 'Onhold',
             'updated'=>$datenw
         ]);
            
-            
         student::create($request->except('fullname') + [
             'user_id' => $gettheid->id,
             'fullname' => $request->first." ".$request->second." ".$request->last,
