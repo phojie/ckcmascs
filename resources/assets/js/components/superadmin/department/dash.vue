@@ -114,6 +114,7 @@ export default {
                 name:'',
                 dean:'',
                 description:'',
+                adean:'',
                 logo:'',
             },
         }
@@ -122,7 +123,7 @@ export default {
         createDepartment(){
             this.newdepartmentform.logo=this.image;
             this.addingloading=true;
-            this.$http.post("departmentdata",this.newdepartmentform).then(
+            axios.post("departmentdata",this.newdepartmentform).then(
                 response=>{
                     this.fetchDepartment();
                     this.$toastr('add', 

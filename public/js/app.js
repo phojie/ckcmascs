@@ -63539,6 +63539,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 name: '',
                 dean: '',
                 description: '',
+                adean: '',
                 logo: ''
             }
         };
@@ -63550,7 +63551,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.newdepartmentform.logo = this.image;
             this.addingloading = true;
-            this.$http.post("departmentdata", this.newdepartmentform).then(function (response) {
+            axios.post("departmentdata", this.newdepartmentform).then(function (response) {
                 _this.fetchDepartment();
                 _this.$toastr('add', {
                     title: 'Successfully Added',
@@ -63695,6 +63696,9 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchstaff__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchstaff___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchstaff__);
+//
+//
+//
 //
 //
 //
@@ -64152,10 +64156,18 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
+            _c("p", { staticClass: "text-success card-description" }, [
+              _vm._v(
+                "\n                Dean : " +
+                  _vm._s(_vm.data.dean) +
+                  "\n            "
+              )
+            ]),
+            _vm._v(" "),
             _c("p", { staticClass: "card-description" }, [
               _vm._v(
                 "\n                Associate Dean : " +
-                  _vm._s(_vm.data.dean) +
+                  _vm._s(_vm.data.adean) +
                   "\n            "
               )
             ]),

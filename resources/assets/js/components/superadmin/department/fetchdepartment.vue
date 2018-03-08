@@ -19,8 +19,11 @@
                     <!-- <i style="font-size:12px" class="text-gray mdi mdi-information menu-icon"></i>  -->
 
                 </h5>
+                <p class="text-success card-description">
+                    Dean : {{data.dean}}
+                </p>
                 <p class="card-description">
-                    Associate Dean : {{data.dean}}
+                    Associate Dean : {{data.adean}}
                 </p>
                 <div class="media">
                     <i class="mdi mdi-information icon-md text-info d-flex align-self-start mr-3"></i>
