@@ -81,6 +81,10 @@ class DepartmentController extends Controller
             'updated'=> $datenw,
         ]);
 
+        return response()->json([
+            'updatenow'=>'updated'
+            
+        ]);
       
 
             
@@ -130,10 +134,7 @@ class DepartmentController extends Controller
                 'updated'=> $datenw
                 
             ]);
-            return response()->json([
-                
-            ]);
-            
+           
         }
         else{
            
@@ -159,11 +160,10 @@ class DepartmentController extends Controller
                 'logo'=> $fileName
                 
             ]);
-            return response()->json([
-                
-            ]);
+           
         }
        
+        
 
         log::create([
             'act'=>'You',
@@ -173,7 +173,10 @@ class DepartmentController extends Controller
             'updated'=>$datenw
 
         ]);
-             
+        return response()->json([
+            'updatenow'=>'updated'
+            
+        ]);
         
 
 

@@ -63529,6 +63529,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pickedinfo: {
                 id: '',
                 name: '',
+                adean: '',
                 dean: '',
                 description: '',
                 logo: '',
@@ -63552,23 +63553,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.newdepartmentform.logo = this.image;
             this.addingloading = true;
             axios.post("departmentdata", this.newdepartmentform).then(function (response) {
-                _this.fetchDepartment();
-                _this.$toastr('add', {
-                    title: 'Successfully Added',
-                    msg: 'Department of ' + _this.newdepartmentform.name,
-                    clickClose: true,
-                    timeout: 5000,
-                    position: 'toast-bottom-right',
-                    type: 'success'
-                });
-                _this.newdepartmentform = { name: '', dean: '', description: '', logo: '' };
-                _this.none = '';
-                _this.addingloading = false;
+                if (response.data.updatenow == "updated") {
 
-                // this.$emit('refresh',this.success);
+                    _this.fetchDepartment();
+                    _this.addingloading = false;
+                    _this.$toastr('add', {
+                        title: 'Successfully Added',
+                        msg: 'Department of ' + _this.newdepartmentform.name,
+                        clickClose: true,
+                        timeout: 5000,
+                        position: 'toast-bottom-right',
+                        type: 'success'
+                    });
+                    _this.newdepartmentform = { name: '', dean: '', description: '', logo: '' };
+                    _this.none = '';
 
-                // this.datadepartments.push(response.data.insertdepartment);
-                // console.log(response.data);
+                    // this.$emit('refresh',this.success);
+
+                    // this.datadepartments.push(response.data.insertdepartment);
+                    // console.log(response.data);
+                }
             });
         },
         deleteDepartment: function deleteDepartment(datade) {
@@ -63600,6 +63604,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.pickedinfo.id = datadepartment.id;
             this.pickedinfo.name = datadepartment.name;
             this.pickedinfo.dean = datadepartment.dean;
+            this.pickedinfo.adean = datadepartment.adean;
             this.pickedinfo.description = datadepartment.description;
             this.pickedinfo.logo = datadepartment.logo;
             this.pickedinfo.srclogo = "/departmentlogo/" + datadepartment.logo;
@@ -63886,6 +63891,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -63918,8 +63927,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.addingloading = true;
             this.get.logo = this.image;
             this.$http.patch("/departmentdata/" + newdatadepartment.id, newdatadepartment).then(function (response) {
+                // if(response.data.updatenow=="updated"){
                 _this2.$emit('refresh');
                 _this2.addingloading = false;
+                // console.log(response.data.updated)
+                // }
+                // alert(response.data.updateno)
             });
         },
         onFileChange: function onFileChange(e) {
@@ -64090,7 +64103,7 @@ var render = function() {
       "div",
       {
         staticClass: "card ",
-        staticStyle: { height: "450px", "border-top": "3px solid #37474F" }
+        staticStyle: { height: "490px", "border-top": "3px solid #37474F" }
       },
       [
         _c(
@@ -64131,7 +64144,7 @@ var render = function() {
                 staticStyle: { height: "150px" }
               },
               [
-                _c("center", { staticClass: "ml-4" }, [
+                _c("center", {}, [
                   _c("img", {
                     staticClass: "rounded-circle",
                     attrs: {
@@ -64399,7 +64412,7 @@ var render = function() {
                             _c(
                               "label",
                               { attrs: { for: "exampleInputEmail3" } },
-                              [_vm._v("Associate Dean")]
+                              [_vm._v("Dean")]
                             ),
                             _vm._v(" "),
                             _c("input", {
@@ -64415,7 +64428,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 id: "exampleInputEmail3",
-                                placeholder: "Associate Dean"
+                                placeholder: "Dean"
                               },
                               domProps: { value: _vm.get.dean },
                               on: {
@@ -64424,6 +64437,44 @@ var render = function() {
                                     return
                                   }
                                   _vm.$set(_vm.get, "dean", $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "exampleInputEmail3" } },
+                              [_vm._v("Associate Dean")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.get.adean,
+                                  expression: "get.adean"
+                                }
+                              ],
+                              staticClass: "text-capitalize form-control",
+                              attrs: {
+                                type: "text",
+                                id: "exampleInputEmail3",
+                                placeholder: "Associate Dean"
+                              },
+                              domProps: { value: _vm.get.adean },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.get,
+                                    "adean",
+                                    $event.target.value
+                                  )
                                 }
                               }
                             })

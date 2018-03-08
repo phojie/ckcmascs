@@ -104,6 +104,7 @@ export default {
             pickedinfo:{
                 id:'',
                 name:'',
+                adean:'',
                 dean:'',
                 description:'',
                 logo:'',
@@ -125,7 +126,10 @@ export default {
             this.addingloading=true;
             axios.post("departmentdata",this.newdepartmentform).then(
                 response=>{
+                    if(response.data.updatenow=="updated"){
+          
                     this.fetchDepartment();
+                    this.addingloading=false;
                     this.$toastr('add', 
                         { 
                             title: 'Successfully Added', 
@@ -138,13 +142,12 @@ export default {
                     );
                     this.newdepartmentform={ name:'', dean:'', description:'',logo:''};
                     this.none='';
-                    this.addingloading=false;
 
                     // this.$emit('refresh',this.success);
 
                     // this.datadepartments.push(response.data.insertdepartment);
                     // console.log(response.data);
-                    
+                    }
                 }
             )
         },
@@ -177,6 +180,7 @@ export default {
             this.pickedinfo.id=datadepartment.id;
             this.pickedinfo.name=datadepartment.name;
             this.pickedinfo.dean=datadepartment.dean;
+            this.pickedinfo.adean=datadepartment.adean;
             this.pickedinfo.description=datadepartment.description;
             this.pickedinfo.logo=datadepartment.logo;
             this.pickedinfo.srclogo="/departmentlogo/"+datadepartment.logo;

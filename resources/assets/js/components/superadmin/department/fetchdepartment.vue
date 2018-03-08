@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-4 grid-margin">
-        <div class="card " style="height:450px;border-top:3px solid #37474F;">
+        <div class="card " style="height:490px;border-top:3px solid #37474F;">
             <div class="card-body" style="margin-top:-10px">
                     <div class="float-right">
                         <i v-on:click="$emit('getdetails',data)"  data-toggle="modal" data-target="#update" style="cursor:pointer;font-size:20px" class="addbtn mdi mdi-delete-sweep menu-icon"></i>
@@ -11,7 +11,7 @@
                     </div>
 
                 <p style="height:150px" class="card-description">
-                <center class="ml-4"><img class="rounded-circle" width="150px" height="150px" :src="'/departmentlogo/'+data.logo"  alt="Upload a logo"></center>
+                <center class=""><img class="rounded-circle" width="150px" height="150px" :src="'/departmentlogo/'+data.logo"  alt="Upload a logo"></center>
                 </p>
                 <hr>
                 <h5 class="card-title">
@@ -122,8 +122,12 @@
                         <input type="text" v-model="get.name" class="text-capitalize form-control" id="exampleInputName1" placeholder="Department Name">
                         </div>
                         <div class="form-group">
+                        <label for="exampleInputEmail3">Dean</label>
+                        <input type="text" v-model="get.dean" class="text-capitalize form-control" id="exampleInputEmail3" placeholder="Dean">
+                        </div>
+                        <div class="form-group">
                         <label for="exampleInputEmail3">Associate Dean</label>
-                        <input type="text" v-model="get.dean" class="text-capitalize form-control" id="exampleInputEmail3" placeholder="Associate Dean">
+                        <input type="text" v-model="get.adean" class="text-capitalize form-control" id="exampleInputEmail3" placeholder="Associate Dean">
                         </div>
                         <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
@@ -216,9 +220,12 @@ export default {
         this.addingloading=true;
         this.get.logo=this.image;
         this.$http.patch("/departmentdata/" + newdatadepartment.id,newdatadepartment).then(response=>{
-            this.$emit('refresh');
-            this.addingloading=false;
-            
+            // if(response.data.updatenow=="updated"){
+                this.$emit('refresh');
+                this.addingloading=false;
+                // console.log(response.data.updated)
+            // }
+            // alert(response.data.updateno)
             })
         },
         
