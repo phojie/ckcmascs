@@ -259,7 +259,7 @@ export default {
                 response=>{
                     this.studentslist=response.data.studentslist;
                     this.studentscount=response.data.count;
-                    setTimeout(this.fetchUser(), 1000); 
+                    // setTimeout(this.fetchUser(), 1000); 
                     
                 }
             )

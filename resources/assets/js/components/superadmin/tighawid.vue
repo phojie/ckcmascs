@@ -131,9 +131,9 @@ export default {
           active4:'',
           
 		  admindatas:[],
-		  pagedash:false,
+		  pagedash:true,
           pagestudents:false,
-          pagerequest:true,
+          pagerequest:false,
           pageoffice:false,
 
           count:'',
@@ -151,7 +151,7 @@ export default {
             axios.get('admindata').then(
                 response=>{
                     this.admindatas=response.data.admindata
-                    setTimeout(this.fetchUserre(), 1000); 
+                    // setTimeout(this.fetchUserre(), 1000); 
 
                 }	
             ),

@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-4 grid-margin">
-        <div class="card " style="height:400px;border-top:3px solid #37474F;">
+        <div class="card" style="height:400px;border-top:3px solid #37474F;">
             <div class="card-body" style="margin-top:-10px">
                     <div class="float-right">
                         <i  v-on:click="$emit('getdetails',datastaff)" data-toggle="modal" data-target="#update" style="cursor:pointer;font-size:20px" class="addbtn mdi mdi-delete-sweep menu-icon"></i>

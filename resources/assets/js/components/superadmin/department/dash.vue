@@ -3,6 +3,7 @@
     <center>
             <img  v-if="loadarea" height="100px" style="margin-top:20%" src="images/loading1.gif"  alt="">
     </center>
+  
 
     <div class="row">
         <div v-if="!loadarea"  class="col-md-12 stretch-card grid-margin">
@@ -42,8 +43,13 @@
                       <input type="text" v-model="newdepartmentform.name" class="text-capitalize form-control" id="exampleInputName1" placeholder="Department Name">
                     </div>
                     <div class="form-group">
+                      <label for="exampleInputEmail3">Dean</label>
+                      <input type="text" v-model="newdepartmentform.dean" class="text-capitalize form-control" id="exampleInputEmail3" placeholder="Dean Fullname">
+                    
+                    </div>
+                    <div class="form-group">
                       <label for="exampleInputEmail3">Associate Dean</label>
-                      <input type="text" v-model="newdepartmentform.dean" class="text-capitalize form-control" id="exampleInputEmail3" placeholder="Associate Dean">
+                      <input type="text" v-model="newdepartmentform.adean" class="text-capitalize form-control" id="exampleInputEmail3" placeholder="Associate Dean">
                     </div>
                     <div class="form-group">
                       <label for="exampleTextarea1">Description</label>
@@ -93,6 +99,7 @@ export default {
 
             searchde:'',
             loadarea:true,
+            
             datades:[],
             pickedinfo:{
                 id:'',
@@ -118,6 +125,16 @@ export default {
             this.$http.post("departmentdata",this.newdepartmentform).then(
                 response=>{
                     this.fetchDepartment();
+                    this.$toastr('add', 
+                        { 
+                            title: 'Successfully Added', 
+                            msg: 'Department of '+ this.newdepartmentform.name, 
+                            clickClose: true, 
+                            timeout: 5000, 
+                            position: 'toast-bottom-right', 
+                            type: 'success' ,
+                        }
+                    );
                     this.newdepartmentform={ name:'', dean:'', description:'',logo:''};
                     this.none='';
                     this.addingloading=false;
@@ -126,16 +143,27 @@ export default {
 
                     // this.datadepartments.push(response.data.insertdepartment);
                     // console.log(response.data);
-
+                    
                 }
             )
         },
-        deleteDepartment(de){
-        this.$http.delete("/departmentdata/"+ de.id).then(response => {
-            // let index = this.datadepartments.indexOf(datadepartment);
-            // this.datadepartments.splice(index, 1);
-            this.fetchDepartment();
+        deleteDepartment(datade){
+        this.$http.delete("/departmentdata/"+ datade.id).then(response => {
+            // let index = this.datades.indexOf(datade);
+            // this.datades.splice(index, 1);
+            this.$toastr('add', 
+                    { 
+                        title: 'Successfully Deleted ', 
+                        msg: 'Department of '+ datade.name, 
+                        clickClose: true, 
+                        timeout: 5000, 
+                        position: 'toast-bottom-right', 
+                        type: 'info' ,
+                    }
+                );
             })
+            this.fetchDepartment();
+            
         },
         fetchDepartment(){
             axios.get("departmentdata").then(

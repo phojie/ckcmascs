@@ -62036,9 +62036,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             active4: '',
 
             admindatas: [],
-            pagedash: false,
+            pagedash: true,
             pagestudents: false,
-            pagerequest: true,
+            pagerequest: false,
             pageoffice: false,
 
             count: '',
@@ -62057,7 +62057,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('admindata').then(function (response) {
                 _this.admindatas = response.data.admindata;
-                setTimeout(_this.fetchUserre(), 1000);
+                // setTimeout(this.fetchUserre(), 1000); 
             }), axios.get('signdata').then(function (response) {
                 _this.count = response.data.count;
                 _this.countt = response.data.countt;
@@ -62768,7 +62768,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get("studentsdata").then(function (response) {
                 _this.studentslist = response.data.studentslist;
                 _this.studentscount = response.data.count;
-                setTimeout(_this.fetchUser(), 1000);
+                // setTimeout(this.fetchUser(), 1000); 
             });
         },
         logout: function logout(e) {
@@ -63503,6 +63503,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -63518,6 +63524,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             searchde: '',
             loadarea: true,
+
             datades: [],
             pickedinfo: {
                 id: '',
@@ -63545,6 +63552,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.addingloading = true;
             this.$http.post("departmentdata", this.newdepartmentform).then(function (response) {
                 _this.fetchDepartment();
+                _this.$toastr('add', {
+                    title: 'Successfully Added',
+                    msg: 'Department of ' + _this.newdepartmentform.name,
+                    clickClose: true,
+                    timeout: 5000,
+                    position: 'toast-bottom-right',
+                    type: 'success'
+                });
                 _this.newdepartmentform = { name: '', dean: '', description: '', logo: '' };
                 _this.none = '';
                 _this.addingloading = false;
@@ -63555,14 +63570,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 // console.log(response.data);
             });
         },
-        deleteDepartment: function deleteDepartment(de) {
+        deleteDepartment: function deleteDepartment(datade) {
             var _this2 = this;
 
-            this.$http.delete("/departmentdata/" + de.id).then(function (response) {
-                // let index = this.datadepartments.indexOf(datadepartment);
-                // this.datadepartments.splice(index, 1);
-                _this2.fetchDepartment();
+            this.$http.delete("/departmentdata/" + datade.id).then(function (response) {
+                // let index = this.datades.indexOf(datade);
+                // this.datades.splice(index, 1);
+                _this2.$toastr('add', {
+                    title: 'Successfully Deleted ',
+                    msg: 'Department of ' + datade.name,
+                    clickClose: true,
+                    timeout: 5000,
+                    position: 'toast-bottom-right',
+                    type: 'info'
+                });
             });
+            this.fetchDepartment();
         },
         fetchDepartment: function fetchDepartment() {
             var _this3 = this;
@@ -64836,7 +64859,7 @@ var render = function() {
                               _c(
                                 "label",
                                 { attrs: { for: "exampleInputEmail3" } },
-                                [_vm._v("Associate Dean")]
+                                [_vm._v("Dean")]
                               ),
                               _vm._v(" "),
                               _c("input", {
@@ -64852,7 +64875,7 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   id: "exampleInputEmail3",
-                                  placeholder: "Associate Dean"
+                                  placeholder: "Dean Fullname"
                                 },
                                 domProps: { value: _vm.newdepartmentform.dean },
                                 on: {
@@ -64863,6 +64886,46 @@ var render = function() {
                                     _vm.$set(
                                       _vm.newdepartmentform,
                                       "dean",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                { attrs: { for: "exampleInputEmail3" } },
+                                [_vm._v("Associate Dean")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.newdepartmentform.adean,
+                                    expression: "newdepartmentform.adean"
+                                  }
+                                ],
+                                staticClass: "text-capitalize form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "exampleInputEmail3",
+                                  placeholder: "Associate Dean"
+                                },
+                                domProps: {
+                                  value: _vm.newdepartmentform.adean
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.newdepartmentform,
+                                      "adean",
                                       $event.target.value
                                     )
                                   }
@@ -65900,7 +65963,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "card ",
+        staticClass: "card",
         staticStyle: { height: "400px", "border-top": "3px solid #37474F" }
       },
       [
