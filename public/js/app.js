@@ -65484,12 +65484,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (response.data.updatenow == "updated") {
 
                     _this.$toastr('add', {
-                        title: 'Successfully Deleted ',
-                        msg: 'Department of ' + datade.name,
+                        title: 'Successfully Added ',
+                        msg: _this.addnewstaff.last,
                         clickClose: true,
                         timeout: 5000,
                         position: 'toast-bottom-right',
-                        type: 'info'
+                        type: 'success'
                     });
 
                     _this.fetchStaff();
@@ -66011,10 +66011,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.addingloading = false;
             this.$http.delete("/staffdata/" + get.id).then(function (response) {
+                if (response.data.updatenow == "updated") {
+                    _this.$emit('refresh');
+                    _this.addingloading = true;
+                    _this.$toastr('add', {
+                        title: 'Successfully Deleted ',
+                        msg: '',
+                        clickClose: true,
+                        timeout: 5000,
+                        position: 'toast-bottom-right',
+                        type: 'success'
+                    });
+                }
                 // let index = this.datadepartments.indexOf(datadepartment);
                 // this.datadepartments.splice(index, 1);
-                _this.$emit('refresh');
-                _this.addingloading = true;
+
             });
         },
         fetchdepartment: function fetchdepartment() {

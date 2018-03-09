@@ -32,16 +32,18 @@ public function __construct()
             ->where('user_id',$getid)
             ->first();
 
-        if($gettype==0){
+        if($gettype == 0){
             return view('adminfiles.superadmin');
         }
-        elseif($gettype== -1){
+        elseif($gettype == -1){
             return view('registrarfiles.dashregistrar');
         }
-        elseif($gettype== 2){
+        elseif($gettype == 2){
             return view('instructorfiles.dashstudents');
+            // return 'Im in';
         }
-        else{
+        elseif($gettype == 1)
+        {
             if($user->ad==1){
                 return "your account was disable";
                 // return view('adminfiles.dashadmin');

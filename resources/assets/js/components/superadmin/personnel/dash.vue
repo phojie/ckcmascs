@@ -247,26 +247,26 @@ export default {
                   
                    this.$toastr('add', 
                     { 
-                        title: 'Successfully Deleted ', 
-                        msg: 'Department of '+ datade.name, 
+                        title: 'Successfully Added ', 
+                        msg:this.addnewstaff.last, 
                         clickClose: true, 
                         timeout: 5000, 
                         position: 'toast-bottom-right', 
-                        type: 'info' ,
+                        type: 'success' ,
                     });
             
-                this.fetchStaff();
-                this.addnewstaff.first='';
-                this.addnewstaff.second='';
-                this.addnewstaff.last='';
-                this.addnewstaff.address='';
-                this.addnewstaff.dob='';
-                this.addnewstaff.age='';
-                this.addnewstaff.em='';
-                this.addnewstaff.contactn='';
-                this.addnewstaff.pob='';
-                this.addnewstaff.jobtitle='';
-                this.addingloading=false;
+                  this.fetchStaff();
+                  this.addnewstaff.first='';
+                  this.addnewstaff.second='';
+                  this.addnewstaff.last='';
+                  this.addnewstaff.address='';
+                  this.addnewstaff.dob='';
+                  this.addnewstaff.age='';
+                  this.addnewstaff.em='';
+                  this.addnewstaff.contactn='';
+                  this.addnewstaff.pob='';
+                  this.addnewstaff.jobtitle='';
+                  this.addingloading=false;
                 }
               }
                 

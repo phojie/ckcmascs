@@ -111,6 +111,11 @@ class StaffController extends Controller
             'user'=> $gettheid->name,
 
         ]);
+        
+        return response()->json([
+            'updatenow'=>'updated'
+            
+        ]);
 
     }
 

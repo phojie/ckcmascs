@@ -401,10 +401,22 @@ export default {
         deleteStaff(get){
             this.addingloading=false;
             this.$http.delete("/staffdata/"+get.id).then(response => {
+               if(response.data.updatenow=="updated"){  
+                  this.$emit('refresh')
+                  this.addingloading=true;
+                   this.$toastr('add', 
+                    { 
+                        title: 'Successfully Deleted ', 
+                        msg:'', 
+                        clickClose: true, 
+                        timeout: 5000, 
+                        position: 'toast-bottom-right', 
+                        type: 'success' ,
+                    });
+               }
                 // let index = this.datadepartments.indexOf(datadepartment);
                 // this.datadepartments.splice(index, 1);
-                this.$emit('refresh')
-                this.addingloading=true;
+                
                 
             })
         },
