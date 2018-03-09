@@ -243,6 +243,18 @@ export default {
             this.addingloading=true
             axios.post("staffdata",this.addnewstaff).then(
                 response=>{
+              if(response.data.updatenow=="updated"){
+                  
+                   this.$toastr('add', 
+                    { 
+                        title: 'Successfully Deleted ', 
+                        msg: 'Department of '+ datade.name, 
+                        clickClose: true, 
+                        timeout: 5000, 
+                        position: 'toast-bottom-right', 
+                        type: 'info' ,
+                    });
+            
                 this.fetchStaff();
                 this.addnewstaff.first='';
                 this.addnewstaff.second='';
@@ -256,6 +268,7 @@ export default {
                 this.addnewstaff.jobtitle='';
                 this.addingloading=false;
                 }
+              }
                 
             )
         },  

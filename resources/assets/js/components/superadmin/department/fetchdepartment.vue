@@ -220,9 +220,22 @@ export default {
         this.addingloading=true;
         this.get.logo=this.image;
         this.$http.patch("/departmentdata/" + newdatadepartment.id,newdatadepartment).then(response=>{
-            // if(response.data.updatenow=="updated"){
+            if(response.data.updatenow=="updated"){
                 this.$emit('refresh');
                 this.addingloading=false;
+                this.$toastr('add', 
+                        { 
+                            title: 'Successfully Updated', 
+                            msg: '', 
+                            clickClose: true, 
+                            timeout: 5000, 
+                            position: 'toast-bottom-right', 
+                            type: 'success' ,
+                        }
+                    );
+            }
+            // if(response.data.updatenow=="updated"){
+               
                 // console.log(response.data.updated)
             // }
             // alert(response.data.updateno)

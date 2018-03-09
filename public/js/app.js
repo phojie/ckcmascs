@@ -63929,9 +63929,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.addingloading = true;
             this.get.logo = this.image;
             this.$http.patch("/departmentdata/" + newdatadepartment.id, newdatadepartment).then(function (response) {
+                if (response.data.updatenow == "updated") {
+                    _this2.$emit('refresh');
+                    _this2.addingloading = false;
+                    _this2.$toastr('add', {
+                        title: 'Successfully Updated',
+                        msg: '',
+                        clickClose: true,
+                        timeout: 5000,
+                        position: 'toast-bottom-right',
+                        type: 'success'
+                    });
+                }
                 // if(response.data.updatenow=="updated"){
-                _this2.$emit('refresh');
-                _this2.addingloading = false;
+
                 // console.log(response.data.updated)
                 // }
                 // alert(response.data.updateno)
@@ -65470,18 +65481,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.addingloading = true;
             axios.post("staffdata", this.addnewstaff).then(function (response) {
-                _this.fetchStaff();
-                _this.addnewstaff.first = '';
-                _this.addnewstaff.second = '';
-                _this.addnewstaff.last = '';
-                _this.addnewstaff.address = '';
-                _this.addnewstaff.dob = '';
-                _this.addnewstaff.age = '';
-                _this.addnewstaff.em = '';
-                _this.addnewstaff.contactn = '';
-                _this.addnewstaff.pob = '';
-                _this.addnewstaff.jobtitle = '';
-                _this.addingloading = false;
+                if (response.data.updatenow == "updated") {
+
+                    _this.$toastr('add', {
+                        title: 'Successfully Deleted ',
+                        msg: 'Department of ' + datade.name,
+                        clickClose: true,
+                        timeout: 5000,
+                        position: 'toast-bottom-right',
+                        type: 'info'
+                    });
+
+                    _this.fetchStaff();
+                    _this.addnewstaff.first = '';
+                    _this.addnewstaff.second = '';
+                    _this.addnewstaff.last = '';
+                    _this.addnewstaff.address = '';
+                    _this.addnewstaff.dob = '';
+                    _this.addnewstaff.age = '';
+                    _this.addnewstaff.em = '';
+                    _this.addnewstaff.contactn = '';
+                    _this.addnewstaff.pob = '';
+                    _this.addnewstaff.jobtitle = '';
+                    _this.addingloading = false;
+                }
             });
         },
         fetchStaff: function fetchStaff() {

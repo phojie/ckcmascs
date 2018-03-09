@@ -166,7 +166,6 @@ class DepartmentController extends Controller
            
         }
        
-        
 
         log::create([
             'act'=>'You',
