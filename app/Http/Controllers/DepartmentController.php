@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Department;
 use App\log;
 use DB;
+use App\User;
+use auth;
+
 class DepartmentController extends Controller
 {
     /**
@@ -193,28 +196,45 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        // $getdp=DB::table('departments')
-        //     ->where('id',$id)
-        //     ->first();
-        
-        // $getid=DB::table('staff')
-        //     ->where('department',$getdp->name)
-        //     ->first(); 
+        $getdp=DB::table('departments')
+            ->where('id',$id)
+            ->first();
+
+        //staff & users
+        $jie=DB::table('users')
+            ->leftJoin('staff','users.id','=','staff.user_id')
+            ->where('staff.department','=',$getdp->name)
+            ->delete();
+
+        DB::table('staff')
+            ->where('department','=',$getdp->name)
+            ->delete();
+           
+        //end
 
 
-        // $get=DB::table('staff')
-        // ->where('id',$getid)
-        // ->get();
+        //students & users
+        DB::table('users')
+            ->leftJoin('students','users.id','=','students.user_id')
+            ->where('students.department','=',$getdp->name)
+            ->delete();
         
-        // User::destroy($get->user_id);
-        
-        Department::destroy($id);
-      
-        // DB::table('staff')
-        //     ->where('department',$getdp->name)
-        //     ->delete(); 
+        DB::table('students')
+            ->where('department',$getdp->name)
+            ->delete();
 
-        // return response()->json([
-        // ]);
+
+        //end
+
+
+        DB::table('departments')
+        ->where('id',$id)
+        ->delete();
+
+        return response()->json([
+            'updatenow'=>'updated'
+            
+        ]);
+       
     }
 }

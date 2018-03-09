@@ -155,6 +155,8 @@ export default {
         this.$http.delete("/departmentdata/"+ datade.id).then(response => {
             // let index = this.datades.indexOf(datade);
             // this.datades.splice(index, 1);
+            if(response.data.updatenow=="updated"){
+            this.fetchDepartment();
             this.$toastr('add', 
                     { 
                         title: 'Successfully Deleted ', 
@@ -165,8 +167,8 @@ export default {
                         type: 'info' ,
                     }
                 );
+            }
             })
-            this.fetchDepartment();
             
         },
         fetchDepartment(){

@@ -63581,16 +63581,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$http.delete("/departmentdata/" + datade.id).then(function (response) {
                 // let index = this.datades.indexOf(datade);
                 // this.datades.splice(index, 1);
-                _this2.$toastr('add', {
-                    title: 'Successfully Deleted ',
-                    msg: 'Department of ' + datade.name,
-                    clickClose: true,
-                    timeout: 5000,
-                    position: 'toast-bottom-right',
-                    type: 'info'
-                });
+                if (response.data.updatenow == "updated") {
+                    _this2.fetchDepartment();
+                    _this2.$toastr('add', {
+                        title: 'Successfully Deleted ',
+                        msg: 'Department of ' + datade.name,
+                        clickClose: true,
+                        timeout: 5000,
+                        position: 'toast-bottom-right',
+                        type: 'info'
+                    });
+                }
             });
-            this.fetchDepartment();
         },
         fetchDepartment: function fetchDepartment() {
             var _this3 = this;
