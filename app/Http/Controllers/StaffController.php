@@ -86,7 +86,6 @@ class StaffController extends Controller
             'message'=> $request->first." ".$request->second." ".$request->last." as a staff",
             'created'=>$datenw,
             'updated'=>$datenw
-
         ]);
 
         User::create([
@@ -157,10 +156,12 @@ class StaffController extends Controller
             $profilepic="nobody_f.128x128.jpg";
         }
         $get= Staff::find($id);
-        $get->update($request->except('profilepic') + [
-            'profilepic' => $profilepic
+        $get->update($request->except('fullname','profilepic') + [
+            'fullname' => $request->first." ".$request->second." ".$request->last,
+            'profilepic' => $profilepic,
         ]);
         return response()->json([
+            'updatenow'=>'updated'
             
         ]);
     }
@@ -197,6 +198,8 @@ class StaffController extends Controller
             ->update(['total' => $overall]);
 
         return response()->json([
+            'updatenow'=>'updated'
+            
         ]);
 
      

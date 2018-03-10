@@ -34,7 +34,7 @@
             <div class="card  text-white bg-gradient-warning" style="height:130px;">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Total Offices</h4>
-                <h2 class="font-weight-normal mb-5">0</h2>
+                <h2 class="font-weight-normal mb-5">{{countoff}}</h2>
             </div>
             </div>
         </div>
@@ -226,7 +226,8 @@ export default {
             loadarea:true,
             count:'',
             countt:'',
-            countde:''
+            countde:'',
+            countoff:''
 
         }
     },
@@ -239,6 +240,7 @@ export default {
                 response=>{
                     this.admindatas=response.data.admindata
                     this.staffcount=response.data.staffcount
+                    this.countoff=response.data.countoff
                     this.loadarea=false;
                 }
             ),

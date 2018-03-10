@@ -21,7 +21,7 @@ class registrarController extends Controller
         //     ->where('id',$user)
         //     ->get();
 
-        // $userdata=DB::table("staff")
+        // $userdata=DB::table("staff")                         
         //     ->where('user_id',$user)
         //     ->get();
 

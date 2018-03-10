@@ -73,12 +73,12 @@
                 </a>
             </li>
      
-            <!-- <li class="nav-item"  :class="active4">
+            <li class="nav-item"  :class="active4">
                 <a class="nav-link" href="#"  @click="pageactiveoffice">
                 <span class="menu-title">Manage Offices</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
                 </a>
-            </li> -->
+            </li>
           
             </ul>
           
@@ -101,7 +101,7 @@
         <dashad v-if="pagedash"></dashad>
 		<managedash v-if="pagestudents"></managedash>
 		<managep v-if="pagerequest"></managep>
-		<insoffice v-if="pageoffice"></insoffice>
+		<manageoff v-if="pageoffice"></manageoff>
 
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -131,14 +131,15 @@ export default {
           active4:'',
           
 		  admindatas:[],
-		  pagedash:true,
+		  pagedash:false,
           pagestudents:false,
           pagerequest:false,
-          pageoffice:false,
+          pageoffice:true,
 
           count:'',
           countt:'',
-          percent:''
+          percent:'',
+          percentov:''
           
 	  }
     },

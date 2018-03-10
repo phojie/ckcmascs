@@ -23,6 +23,10 @@ class requestController extends Controller
             ->leftJoin('students', 'requestfroms.bid', '=', 'students.user_id')
             ->get();
 
+        $getrest=DB::table('clearances')
+            ->where('status','Onhold')
+            ->leftJoin('students','clearances.idno','=','students.user_id')
+            ->get();
 
          
         // $getdatafromid=DB::table('students')
@@ -31,6 +35,7 @@ class requestController extends Controller
 
         // return $getrequest->all();
         return response()->json([
+            'rest'=>$getrest,
             'requestdata'=>$getrequest
         ]);
     }

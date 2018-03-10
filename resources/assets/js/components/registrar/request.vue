@@ -123,6 +123,46 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row" style="height:400px">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                        <h4 class="card-title">Students List (Pending)</h4>
+                        <p class="card-description">
+                        </p>
+                        <table class="table-responsive scrollbar-pink table table-striped">
+                            <thead>
+                            <tr>
+                                <th>
+                                User
+                                </th>
+                                <th>
+                                Full name
+                                </th>
+                                <th>
+                                Id No.
+                                </th>
+                                <th>
+                                Year level
+                                </th>
+                                <th>
+                                Department
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                               
+                                <fetchrest v-on:refresh="fetchrequestdata" v-bind:requestdata="requestrest" :key="requestrest.id" v-for="requestrest in requestrests"></fetchrest>
+                           
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -131,14 +171,18 @@
 import fetchrequest from './fetchrequest'
 import fetchsucc from './fetchsucc'
 import fetchreject from './fetchrej'
+import fetchrest from './fetchrest'
+
 
 export default {
-    components:{fetchrequest, fetchsucc, fetchreject},
+    components:{fetchrequest, fetchsucc, fetchreject,fetchrest},
     data(){
         return{
             requests:[],
             requestdones:[],
-            requestrejects:[]
+            requestrejects:[],
+            requestrests:[]
+            
             
         }
     },
@@ -150,6 +194,7 @@ export default {
         fetchrequestdata(){
             axios.get('requestdata').then(response=>{
                 this.requests=response.data.requestdata;
+                this.requestrests=response.data.rest;
             }),
             axios.get('signdata').then(response=>{
                 this.requestdones=response.data.requestsucc;
@@ -158,6 +203,7 @@ export default {
                 this.requestrejects=response.data.requestreject;
                 setTimeout(this.fetchrequestdata(), 1000); 
             })
+
         }
     }
 }

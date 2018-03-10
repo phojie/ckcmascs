@@ -170,7 +170,10 @@ class studentsController extends Controller
      */
     public function destroy($id)
     {
-        
+        DB::table('clearances')
+            ->where('idno',$id)
+            ->delete();
+            
         $get=DB::table('students')
             ->where('user_id',$id)
             ->first();

@@ -14,6 +14,9 @@ class adminController extends Controller
         $getstaff=DB::table('staff')
             ->count();
 
+        $getoffices=DB::table('offices')
+            ->count();
+
         $getdata=DB::table('users')
             ->where('id',auth::user()->id)
             ->get();
@@ -24,6 +27,7 @@ class adminController extends Controller
         return response()->json([
             "admindata"=>$getdata,
             "staffcount"=>$getstaff,
+            "countoff"=>$getoffices
             
         ]);
 

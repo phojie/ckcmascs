@@ -16,13 +16,15 @@ class requirementsController extends Controller
     public function index()
     {
         $userid=auth::user()->id;        
-        
+        $allclearance=DB::table('requirements')
+            ->get();
         $clearance=DB::table('requirements')
             ->where('byid',$userid)
             ->get();
 
         return response()->json([
-            'rlists'=>$clearance
+            'rlists'=>$clearance,
+            'all'=>$allclearance
         ]);
     }
 

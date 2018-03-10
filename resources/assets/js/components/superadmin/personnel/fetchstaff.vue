@@ -215,7 +215,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button v-if="!addingloading" @click="updateStaff(get)" type="button" class="btn btn-primary">Save Changes</button>
+                <button v-if="!addingloading" @click="updateStaff(datastaff,get)" type="button" class="btn btn-primary">Save Changes</button>
                 <img v-if="addingloading" src="images/loading1.gif"  class="mx-4"  height="50" style="" alt="">
 
             </div>
@@ -432,11 +432,24 @@ export default {
                 response=>{this.datadepartments=response.data.datadepartments2
                 })
         },
-        updateStaff(newdatastaff){
+        updateStaff(olddatastaff,newdatastaff){
+            this.addingloading=true
             this.$http.patch("/staffdata/" + newdatastaff.id,newdatastaff).then(response=>{
             
-            this.$emit('refresh');
-            
+            if(response.data.updatenow=="updated"){ 
+              this.$emit('refresh')
+              this.addingloading=false
+              this.$toastr('add', 
+                    { 
+                        title: 'Successfully Updated ', 
+                        msg:'', 
+                        clickClose: true, 
+                        timeout: 5000, 
+                        position: 'toast-bottom-right', 
+                        type: 'success' ,
+                    }); 
+                  
+            }
                                 
   
             });

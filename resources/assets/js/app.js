@@ -50,6 +50,7 @@ Vue.component('tighawid', require('./components/superadmin/tighawid.vue'));
 Vue.component('dashad', require('./components/superadmin/dash.vue'));
 Vue.component('managedash', require('./components/superadmin/department/dash.vue'));
 Vue.component('managep', require('./components/superadmin/personnel/dash.vue'));
+Vue.component('manageoff', require('./components/superadmin/offices/dash.vue'));
 
 
 // registrar area
