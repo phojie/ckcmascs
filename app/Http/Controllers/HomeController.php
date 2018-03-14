@@ -35,13 +35,19 @@ public function __construct()
         if($gettype == 0){
             return view('adminfiles.superadmin');
         }
-        elseif($gettype == -1){
+        elseif($gettype == -1 || $gettype == 3){
             return view('registrarfiles.dashregistrar');
         }
-        elseif($gettype == 2){
+        //  elseif($gettype == -1 ){
+        //     return view('registrarfiles.dashregistrar');
+        //  }
+        elseif($gettype == 2 ){
             return view('instructorfiles.dashstudents');
             // return 'Im in';
         }
+       
+  
+
         elseif($gettype == 1)
         {
             if($user->ad==1){

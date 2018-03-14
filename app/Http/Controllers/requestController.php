@@ -58,7 +58,10 @@ class requestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $getid=auth::user()->id;
+        DB::table('requestfroms')->insert([
+            'bid'=>$getid,'toid'=>$request->user_id
+        ]);
     }
 
     /**
@@ -103,6 +106,18 @@ class requestController extends Controller
      */
     public function destroy($id)
     {
+        // $get=DB::table('requestfroms')
+        //     ->where('id',$id)
+        //     ->first();
+
+        // \Log::info($id);
+
+        // DB::table('signeds')
+        //     ->where('byid', $get->bid)
+        //     ->where('toid', $get->toid)
+        //     ->update(['status' => 'Rejected']);
+
+
         $myid=auth::user()->id;
         \Log::info($id);
         DB::table('requestfroms')

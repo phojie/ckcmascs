@@ -77,6 +77,13 @@ Vue.component('dashstu', require('./components/studentsaccount/dash.vue'));
 Vue.component('dashreq', require('./components/studentsaccount/request/requestdash.vue'));
 
 
+// registrar area
+Vue.component('rtighawidreg', require('./components/office/registrar/tighawid.vue'));
+Vue.component('rdash-1', require('./components/office/registrar/dash.vue'));
+Vue.component('rregstudents', require('./components/office/registrar/students.vue'));
+Vue.component('roffice', require('./components/office/registrar/office.vue'));
+Vue.component('rregrequest', require('./components/office/registrar/request.vue'));
+
 const app = new Vue({
     el: '#app'
 });

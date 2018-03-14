@@ -46,7 +46,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('subjectdata', 'subjectController');
     Route::resource('officedata', 'officeController');
     
-    
+    Route::post('/act','adminController@act');
     Route::post('/updatedartmentlogo', 'uploadimageController@updatedartmentlogo');
     Route::get('/admindata','adminController@getdata');
 

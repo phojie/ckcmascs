@@ -65,7 +65,7 @@ class signController extends Controller
         $datenw = date("F j, Y");
 
         $myid=auth::user()->id;
-        \Log::info($request->byid);
+        \Log::info('ds');
         DB::table('signeds')->insert([
             'byid'=> $request->bid,
             'toid'=> $myid,
@@ -77,6 +77,10 @@ class signController extends Controller
             ->where('bid',$request->bid)
             ->where('toid',$myid)
             ->delete();
+            \Log::info('sfdf');
+        return response()->json([
+            'alert'=>'alert'
+        ]);
         
     }
 
@@ -100,7 +104,7 @@ class signController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -108,7 +112,7 @@ class signController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\<Response></Response>
      */
     public function update(Request $request, $id)
     {

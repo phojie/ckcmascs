@@ -5,7 +5,7 @@
             <img  v-if="loadarea" height="100px" style="margin-top:20%" src="images/loading1.gif"  alt="">
     </center> -->
 
-    <div class="row" style="height:400px" >
+    <div class="row" >
         <div class="col-lg-12 grid-margin stretch-card" >
             <div class="card"><div class="card-body"><h4 class="card-title">List of Offices</h4> <div class="table-responsive">
                 <table class="scrollbar-pink table"><thead>
@@ -18,7 +18,7 @@
                     Assignee
                     </th> 
                     <th>
-                    Description
+                    Location
                     </th> 
                     <th>
                     
@@ -39,7 +39,7 @@
     </div>
 
 
-    <div class="row" style="height:400px" >
+    <!-- <div class="row" style="height:400px" >
         <div class="col-lg-12 grid-margin stretch-card" >
             <div class="card"><div class="card-body"><h4 class="card-title">List of Subjects</h4> <div class="table-responsive">
                 <table class="scrollbar-pink table"><thead>
@@ -52,7 +52,7 @@
                     Instructor
                     </th> 
                     <th>
-                    Location
+                    Description
                     </th> 
                     <th>
                     
@@ -60,7 +60,7 @@
                 </tr>
                 
                 </thead> 
-                    <!-- <fetchOfficess v-on:getdetails="getdetails" v-bind:officedata="officedata" v-bind:office="office" :key="office.id" v-for="office in offices"></fetchOfficess> -->
+                    <fetchOfficess v-on:getdetails="getdetails" v-bind:officedata="officedata" v-bind:office="office" :key="office.id" v-for="office in offices"></fetchOfficess>
                 <tbody>
               
                 </tbody>
@@ -70,7 +70,7 @@
              </div>
              </div>
          </div>
-    </div>
+    </div> -->
     
    
 </div>

@@ -242,7 +242,7 @@ var regex = exports.regex = function regex(type, expr) {
 "use strict";
 
 
-var bind = __webpack_require__(9);
+var bind = __webpack_require__(11);
 var isBuffer = __webpack_require__(28);
 
 /*global toString:true*/
@@ -11360,7 +11360,7 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(45).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(45).setImmediate))
 
 /***/ }),
 /* 4 */
@@ -12295,33 +12295,6 @@ if (false) {
 /* 5 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
 /*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
@@ -12401,7 +12374,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -12629,6 +12602,33 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12652,10 +12652,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(11);
+    adapter = __webpack_require__(13);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(11);
+    adapter = __webpack_require__(13);
   }
   return adapter;
 }
@@ -12726,604 +12726,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(2);
-var settle = __webpack_require__(31);
-var buildURL = __webpack_require__(33);
-var parseHeaders = __webpack_require__(34);
-var isURLSameOrigin = __webpack_require__(35);
-var createError = __webpack_require__(12);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(36);
-
-module.exports = function xhrAdapter(config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    var requestData = config.data;
-    var requestHeaders = config.headers;
-
-    if (utils.isFormData(requestData)) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false;
-
-    // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if ("development" !== 'test' &&
-        typeof window !== 'undefined' &&
-        window.XDomainRequest && !('withCredentials' in request) &&
-        !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-      request.onprogress = function handleProgress() {};
-      request.ontimeout = function handleTimeout() {};
-    }
-
-    // HTTP basic authentication
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-    }
-
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-
-    // Set the request timeout in MS
-    request.timeout = config.timeout;
-
-    // Listen for ready state
-    request[loadEvent] = function handleLoad() {
-      if (!request || (request.readyState !== 4 && !xDomain)) {
-        return;
-      }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
-      // Prepare the response
-      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-      var response = {
-        data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-        headers: responseHeaders,
-        config: config,
-        request: request
-      };
-
-      settle(resolve, reject, response);
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(createError('Network Error', config, null, request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
-        request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(37);
-
-      // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-          cookies.read(config.xsrfCookieName) :
-          undefined;
-
-      if (xsrfValue) {
-        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-      }
-    }
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-          // Remove Content-Type if data is undefined
-          delete requestHeaders[key];
-        } else {
-          // Otherwise add header to the request
-          request.setRequestHeader(key, val);
-        }
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
-    }
-
-    // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-        if (config.responseType !== 'json') {
-          throw e;
-        }
-      }
-    }
-
-    // Handle progress if needed
-    if (typeof config.onDownloadProgress === 'function') {
-      request.addEventListener('progress', config.onDownloadProgress);
-    }
-
-    // Not all browsers support upload events
-    if (typeof config.onUploadProgress === 'function' && request.upload) {
-      request.upload.addEventListener('progress', config.onUploadProgress);
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (!request) {
-          return;
-        }
-
-        request.abort();
-        reject(cancel);
-        // Clean up request
-        request = null;
-      });
-    }
-
-    if (requestData === undefined) {
-      requestData = null;
-    }
-
-    // Send the request
-    request.send(requestData);
-  });
-};
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var enhanceError = __webpack_require__(32);
-
-/**
- * Create an Error with the specified message, config, error code, request and response.
- *
- * @param {string} message The error message.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The created error.
- */
-module.exports = function createError(message, config, code, request, response) {
-  var error = new Error(message);
-  return enhanceError(error, config, code, request, response);
-};
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-
-module.exports = Cancel;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-exports.pushParams = pushParams;
-exports.popParams = popParams;
-exports.withParams = withParams;
-
-var stack = [];
-
-// exported for tests
-var target = exports.target = null;
-var _setTarget = exports._setTarget = function _setTarget(x) {
-  exports.target = target = x;
-};
-
-function pushParams() {
-  if (target !== null) {
-    stack.push(target);
-  }
-  exports.target = target = {};
-}
-
-function popParams() {
-  var lastTarget = target;
-  var newTarget = exports.target = target = stack.pop() || null;
-  if (newTarget) {
-    if (!Array.isArray(newTarget.$sub)) {
-      newTarget.$sub = [];
-    }
-    newTarget.$sub.push(lastTarget);
-  }
-  return lastTarget;
-}
-
-function addParams(params) {
-  if (typeof params === 'object' && !Array.isArray(params)) {
-    exports.target = target = _extends({}, target, params);
-  } else {
-    throw new Error('params must be an object');
-  }
-}
-
-function withParamsDirect(params, validator) {
-  return withParamsClosure(function (add) {
-    return function () {
-      add(params);
-
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      return validator.apply(this, args);
-    };
-  });
-}
-
-function withParamsClosure(closure) {
-  var validator = closure(addParams);
-  return function () {
-    pushParams();
-    try {
-      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-
-      return validator.apply(this, args);
-    } finally {
-      popParams();
-    }
-  };
-}
-
-function withParams(paramsOrClosure, maybeValidator) {
-  if (typeof paramsOrClosure === 'object' && maybeValidator !== undefined) {
-    return withParamsDirect(paramsOrClosure, maybeValidator);
-  }
-  return withParamsClosure(paramsOrClosure);
-}
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(74)
-/* template */
-var __vue_template__ = __webpack_require__(75)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Input.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-63bf743a", Component.options)
-  } else {
-    hotAPI.reload("data-v-63bf743a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19856,10 +19262,10 @@ if (GlobalVue) {
 
 /* harmony default export */ __webpack_exports__["a"] = (plugin);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(7)))
 
 /***/ }),
-/* 18 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26824,11 +26230,605 @@ var index_esm = {
 
 
 /***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(2);
+var settle = __webpack_require__(31);
+var buildURL = __webpack_require__(33);
+var parseHeaders = __webpack_require__(34);
+var isURLSameOrigin = __webpack_require__(35);
+var createError = __webpack_require__(14);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(36);
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+    var loadEvent = 'onreadystatechange';
+    var xDomain = false;
+
+    // For IE 8/9 CORS support
+    // Only supports POST and GET calls and doesn't returns the response headers.
+    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+    if ("development" !== 'test' &&
+        typeof window !== 'undefined' &&
+        window.XDomainRequest && !('withCredentials' in request) &&
+        !isURLSameOrigin(config.url)) {
+      request = new window.XDomainRequest();
+      loadEvent = 'onload';
+      xDomain = true;
+      request.onprogress = function handleProgress() {};
+      request.ontimeout = function handleTimeout() {};
+    }
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request[loadEvent] = function handleLoad() {
+      if (!request || (request.readyState !== 4 && !xDomain)) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
+        status: request.status === 1223 ? 204 : request.status,
+        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(37);
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+          cookies.read(config.xsrfCookieName) :
+          undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (config.withCredentials) {
+      request.withCredentials = true;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(32);
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.pushParams = pushParams;
+exports.popParams = popParams;
+exports.withParams = withParams;
+
+var stack = [];
+
+// exported for tests
+var target = exports.target = null;
+var _setTarget = exports._setTarget = function _setTarget(x) {
+  exports.target = target = x;
+};
+
+function pushParams() {
+  if (target !== null) {
+    stack.push(target);
+  }
+  exports.target = target = {};
+}
+
+function popParams() {
+  var lastTarget = target;
+  var newTarget = exports.target = target = stack.pop() || null;
+  if (newTarget) {
+    if (!Array.isArray(newTarget.$sub)) {
+      newTarget.$sub = [];
+    }
+    newTarget.$sub.push(lastTarget);
+  }
+  return lastTarget;
+}
+
+function addParams(params) {
+  if (typeof params === 'object' && !Array.isArray(params)) {
+    exports.target = target = _extends({}, target, params);
+  } else {
+    throw new Error('params must be an object');
+  }
+}
+
+function withParamsDirect(params, validator) {
+  return withParamsClosure(function (add) {
+    return function () {
+      add(params);
+
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      return validator.apply(this, args);
+    };
+  });
+}
+
+function withParamsClosure(closure) {
+  var validator = closure(addParams);
+  return function () {
+    pushParams();
+    try {
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      return validator.apply(this, args);
+    } finally {
+      popParams();
+    }
+  };
+}
+
+function withParams(paramsOrClosure, maybeValidator) {
+  if (typeof paramsOrClosure === 'object' && maybeValidator !== undefined) {
+    return withParamsDirect(paramsOrClosure, maybeValidator);
+  }
+  return withParamsClosure(paramsOrClosure);
+}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(74)
+/* template */
+var __vue_template__ = __webpack_require__(75)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Input.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-63bf743a", Component.options)
+  } else {
+    hotAPI.reload("data-v-63bf743a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(20);
-module.exports = __webpack_require__(207);
+module.exports = __webpack_require__(260);
 
 
 /***/ }),
@@ -26856,7 +26856,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('con
  */
 // testing area
 Vue.component('test', __webpack_require__(49));
-Vue.component('inputhead', __webpack_require__(16));
+Vue.component('inputhead', __webpack_require__(18));
 Vue.component('message', __webpack_require__(76));
 Vue.component('example-component', __webpack_require__(79));
 
@@ -26895,19 +26895,26 @@ Vue.component('office', __webpack_require__(138));
 Vue.component('regrequest', __webpack_require__(144));
 
 // instructor area
-Vue.component('tighawidins', __webpack_require__(156));
-Vue.component('dashins', __webpack_require__(159));
-Vue.component('insstudents', __webpack_require__(165));
-Vue.component('insoffice', __webpack_require__(181));
-Vue.component('insrequest', __webpack_require__(187));
+Vue.component('tighawidins', __webpack_require__(159));
+Vue.component('dashins', __webpack_require__(162));
+Vue.component('insstudents', __webpack_require__(168));
+Vue.component('insoffice', __webpack_require__(184));
+Vue.component('insrequest', __webpack_require__(190));
 
 //  user area
 // Vue.component('tighawiduser', require('./components/user/tighawid.vue'));
 
 // students area
-Vue.component('tighawidstu', __webpack_require__(199));
-Vue.component('dashstu', __webpack_require__(202));
-Vue.component('dashreq', __webpack_require__(205));
+Vue.component('tighawidstu', __webpack_require__(202));
+Vue.component('dashstu', __webpack_require__(205));
+Vue.component('dashreq', __webpack_require__(211));
+
+// registrar area
+Vue.component('rtighawidreg', __webpack_require__(217));
+Vue.component('rdash-1', __webpack_require__(220));
+Vue.component('rregstudents', __webpack_require__(226));
+Vue.component('roffice', __webpack_require__(239));
+Vue.component('rregrequest', __webpack_require__(245));
 
 var app = new Vue({
   el: '#app'
@@ -44063,7 +44070,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(23)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(23)(module)))
 
 /***/ }),
 /* 23 */
@@ -56861,7 +56868,7 @@ module.exports = __webpack_require__(27);
 
 
 var utils = __webpack_require__(2);
-var bind = __webpack_require__(9);
+var bind = __webpack_require__(11);
 var Axios = __webpack_require__(29);
 var defaults = __webpack_require__(8);
 
@@ -56896,9 +56903,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(14);
+axios.Cancel = __webpack_require__(16);
 axios.CancelToken = __webpack_require__(43);
-axios.isCancel = __webpack_require__(13);
+axios.isCancel = __webpack_require__(15);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -57051,7 +57058,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(12);
+var createError = __webpack_require__(14);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -57486,7 +57493,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(2);
 var transformData = __webpack_require__(40);
-var isCancel = __webpack_require__(13);
+var isCancel = __webpack_require__(15);
 var defaults = __webpack_require__(8);
 var isAbsoluteURL = __webpack_require__(41);
 var combineURLs = __webpack_require__(42);
@@ -57646,7 +57653,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(14);
+var Cancel = __webpack_require__(16);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -57802,7 +57809,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
 /* 46 */
@@ -57995,7 +58002,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(12)))
 
 /***/ }),
 /* 47 */
@@ -59695,7 +59702,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _vval = __webpack_require__(52);
 
-var _params = __webpack_require__(15);
+var _params = __webpack_require__(17);
 
 var NUL = function NUL() {
   return null;
@@ -60511,7 +60518,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 /* istanbul ignore next */
-var withParams =  false ? require('./withParamsBrowser').withParams : __webpack_require__(15).withParams;
+var withParams =  false ? require('./withParamsBrowser').withParams : __webpack_require__(17).withParams;
 
 exports.default = withParams;
 
@@ -61129,7 +61136,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Input_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Input_vue__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Input_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Input_vue__);
 //
 //
@@ -62037,10 +62044,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             active4: '',
 
             admindatas: [],
-            pagedash: false,
+            pagedash: true,
             pagestudents: false,
             pagerequest: false,
-            pageoffice: true,
+            pageoffice: false,
 
             count: '',
             countt: '',
@@ -69822,12 +69829,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("span", { staticClass: "d-none d-lg-inline" }, [
-                            _vm._v(
-                              " " +
-                                _vm._s(registrardata.first) +
-                                " " +
-                                _vm._s(registrardata.last)
-                            )
+                            _vm._v(" Registrar")
                           ]),
                           _vm._v(" "),
                           _c(
@@ -70072,9 +70074,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "sidebar-progress" }, [
-      _c("p", [_vm._v("School Year: 2017-2018")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("2nd Semester")])
+      _c("p", [_vm._v("School Year: 2017-2018")])
     ])
   },
   function() {
@@ -71246,7 +71246,7 @@ var content = __webpack_require__(128);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(7)("5e95fcd6", content, false, {});
+var update = __webpack_require__(6)("5e95fcd6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -71265,7 +71265,7 @@ if(false) {
 /* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -71320,7 +71320,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vee_validate__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vee_validate__ = __webpack_require__(10);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -72091,7 +72091,7 @@ var content = __webpack_require__(133);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(7)("112e3457", content, false, {});
+var update = __webpack_require__(6)("112e3457", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -72110,7 +72110,7 @@ if(false) {
 /* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -72130,7 +72130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_v_tooltip__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_v_tooltip__ = __webpack_require__(9);
 //
 //
 //
@@ -76300,6 +76300,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -76307,6 +76315,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: { listsreq: __WEBPACK_IMPORTED_MODULE_0__fetchreq___default.a },
     data: function data() {
         return {
+            user: '',
+            active: '',
+            type: '',
             requirements: [],
             inputrequired: {
                 name: '',
@@ -76324,6 +76335,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('requirementdata').then(function (response) {
                 _this.requirements = response.data.rlists;
+            }), axios.get('registrardata').then(function (response) {
+                _this.type = response.data.type;
+                _this.user = response.data.user;
+            }), axios.get('activitylog').then(function (response) {
+                _this.active = response.data.ac;
             });
         },
         addRequire: function addRequire() {
@@ -76333,6 +76349,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.fetchRequire();
                 _this2.inputrequired.name = '';
                 _this2.inputrequired.description = '';
+            });
+        },
+        activate: function activate() {
+            var _this3 = this;
+
+            axios.post('/act').then(function (response) {
+                _this3.fetchRequire();
+            });
+        },
+        deactivate: function deactivate() {
+            var _this4 = this;
+
+            axios.post('/act').then(function (response) {
+                _this4.fetchRequire();
             });
         }
     }
@@ -76642,7 +76672,41 @@ var render = function() {
         ])
       ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _vm.type == "3" && _vm.user == "Finance"
+      ? _c("div", {}, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 grid-margin stretch-card" }, [
+              _vm.active == "0"
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "pull-right btn btn-success mr-2",
+                      staticStyle: { cursor: "pointer" },
+                      attrs: { type: "button" },
+                      on: { click: _vm.activate }
+                    },
+                    [_vm._v("Activate Clearances")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.active == "1"
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "pull-right btn btn-danger  mr-2",
+                      staticStyle: { cursor: "pointer" },
+                      attrs: { type: "button" },
+                      on: { click: _vm.deactivate }
+                    },
+                    [_vm._v("Deactivate Clearances")]
+                  )
+                : _vm._e()
+            ])
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -76691,7 +76755,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(145)
 /* template */
-var __vue_template__ = __webpack_require__(155)
+var __vue_template__ = __webpack_require__(158)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -76741,7 +76805,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsucc___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fetchsucc__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej__ = __webpack_require__(152);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__fetchrej__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fetchrest__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fetchrest__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fetchrest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__fetchrest__);
 //
 //
@@ -77049,6 +77113,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         signClearance: function signClearance(requestdata) {
             var _this2 = this;
 
+            alert(requestdata.id);
             axios.post('/signdata/', requestdata).then(function (response) {
                 _this2.$emit('refresh');
             });
@@ -77451,6 +77516,151 @@ if (false) {
 /* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(156)
+/* template */
+var __vue_template__ = __webpack_require__(157)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\registrar\\fetchrest.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-36913b58", Component.options)
+  } else {
+    hotAPI.reload("data-v-36913b58", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 156 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['requestdata'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {
+        rejectClearance: function rejectClearance(requestdata) {
+            var _this = this;
+
+            axios.patch('/signdata/' + requestdata.id, requestdata).then(function (response) {
+                _this.$emit('refresh');
+            });
+        },
+        signClearance: function signClearance(requestdata) {
+            var _this2 = this;
+
+            axios.post('/signdata/', requestdata).then(function (response) {
+                _this2.$emit('refresh');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", { staticClass: "py-1" }, [
+      _c("img", {
+        attrs: {
+          src: "userprofilepic/" + _vm.requestdata.profilepic,
+          alt: "image"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.fullname) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.idno) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.yearlevel) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("td")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-36913b58", module.exports)
+  }
+}
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -77782,15 +77992,15 @@ if (false) {
 }
 
 /***/ }),
-/* 156 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(157)
+var __vue_script__ = __webpack_require__(160)
 /* template */
-var __vue_template__ = __webpack_require__(158)
+var __vue_template__ = __webpack_require__(161)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77829,11 +78039,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 157 */
+/* 160 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -78210,7 +78421,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 158 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78461,7 +78672,7 @@ var render = function() {
               _vm._v(" "),
               _vm.pagestudents ? _c("insstudents") : _vm._e(),
               _vm._v(" "),
-              _vm.pagerequest ? _c("insrequest") : _vm._e(),
+              _vm.pagerequest ? _c("regrequest") : _vm._e(),
               _vm._v(" "),
               _vm.pageoffice ? _c("insoffice") : _vm._e(),
               _vm._v(" "),
@@ -78575,15 +78786,15 @@ if (false) {
 }
 
 /***/ }),
-/* 159 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(160)
+var __vue_script__ = __webpack_require__(163)
 /* template */
-var __vue_template__ = __webpack_require__(164)
+var __vue_template__ = __webpack_require__(167)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78622,12 +78833,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 160 */
+/* 163 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__departmentfetch__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__departmentfetch__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__departmentfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__departmentfetch__);
 //
 //
@@ -78918,15 +79129,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 161 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(162)
+var __vue_script__ = __webpack_require__(165)
 /* template */
-var __vue_template__ = __webpack_require__(163)
+var __vue_template__ = __webpack_require__(166)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78965,7 +79176,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 162 */
+/* 165 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79002,7 +79213,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 163 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79058,7 +79269,7 @@ if (false) {
 }
 
 /***/ }),
-/* 164 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79489,15 +79700,15 @@ if (false) {
 }
 
 /***/ }),
-/* 165 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(166)
+var __vue_script__ = __webpack_require__(169)
 /* template */
-var __vue_template__ = __webpack_require__(180)
+var __vue_template__ = __webpack_require__(183)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79536,14 +79747,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 166 */
+/* 169 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchsub__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchsub__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchsub___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchsub__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__studentsfetch__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__studentsfetch__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__studentsfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__studentsfetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue__);
@@ -79767,15 +79978,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 167 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(168)
+var __vue_script__ = __webpack_require__(171)
 /* template */
-var __vue_template__ = __webpack_require__(169)
+var __vue_template__ = __webpack_require__(172)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79814,7 +80025,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 168 */
+/* 171 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79895,8 +80106,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             studentlists: [],
             stfd: {
-                subid: '2',
-                stid: '2'
+                subid: '',
+                stid: ''
             }
         };
     },
@@ -79932,7 +80143,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 169 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79972,15 +80183,6 @@ var render = function() {
           }
         },
         [_vm._v("Manage Students")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "badge  light-green accent-2",
-          staticStyle: { cursor: "pointer" }
-        },
-        [_vm._v("View students")]
       )
     ]),
     _vm._v(" "),
@@ -80127,19 +80329,19 @@ if (false) {
 }
 
 /***/ }),
-/* 170 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(171)
+  __webpack_require__(174)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(173)
+var __vue_script__ = __webpack_require__(176)
 /* template */
-var __vue_template__ = __webpack_require__(179)
+var __vue_template__ = __webpack_require__(182)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -80178,17 +80380,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 171 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(172);
+var content = __webpack_require__(175);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(7)("567e8dfb", content, false, {});
+var update = __webpack_require__(6)("567e8dfb", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -80204,10 +80406,10 @@ if(false) {
 }
 
 /***/ }),
-/* 172 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -80218,18 +80420,18 @@ exports.push([module.i, "\n.jiesd {\n  position: absolute;\n  top: 25%;\n  right
 
 
 /***/ }),
-/* 173 */
+/* 176 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__studentsdatafetch__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__studentsdatafetch__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__studentsdatafetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__studentsdatafetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vee_validate__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vee_validate__ = __webpack_require__(10);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -80937,19 +81139,19 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_
 });
 
 /***/ }),
-/* 174 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(175)
+  __webpack_require__(178)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(177)
+var __vue_script__ = __webpack_require__(180)
 /* template */
-var __vue_template__ = __webpack_require__(178)
+var __vue_template__ = __webpack_require__(181)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -80988,17 +81190,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 175 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(176);
+var content = __webpack_require__(179);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(7)("8380bef4", content, false, {});
+var update = __webpack_require__(6)("8380bef4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -81014,10 +81216,10 @@ if(false) {
 }
 
 /***/ }),
-/* 176 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -81028,7 +81230,7 @@ exports.push([module.i, "\n.tooltip.info .tooltip-inner {\n  background: rgba(0,
 
 
 /***/ }),
-/* 177 */
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -81037,7 +81239,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_v_tooltip__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_v_tooltip__ = __webpack_require__(9);
 //
 //
 //
@@ -81451,7 +81653,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_v_to
 });
 
 /***/ }),
-/* 178 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82635,7 +82837,7 @@ if (false) {
 }
 
 /***/ }),
-/* 179 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -84995,7 +85197,7 @@ if (false) {
 }
 
 /***/ }),
-/* 180 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -85169,7 +85371,7 @@ var render = function() {
                       _c("div", { staticClass: "card" }, [
                         _c("div", { staticClass: "card-body" }, [
                           _c("h4", { staticClass: "card-title" }, [
-                            _vm._v("Subject List Added")
+                            _vm._v("Subjects List Added")
                           ]),
                           _vm._v(" "),
                           _c("p", { staticClass: "card-description" }),
@@ -85245,7 +85447,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("h4", { staticClass: "card-title" }, [
-            _vm._v("Subject List Added")
+            _vm._v("Students List Added")
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "card-description" }),
@@ -85310,15 +85512,15 @@ if (false) {
 }
 
 /***/ }),
-/* 181 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(182)
+var __vue_script__ = __webpack_require__(185)
 /* template */
-var __vue_template__ = __webpack_require__(186)
+var __vue_template__ = __webpack_require__(189)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -85357,12 +85559,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 182 */
+/* 185 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchreq__);
 //
 //
@@ -85488,15 +85690,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 183 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(184)
+var __vue_script__ = __webpack_require__(187)
 /* template */
-var __vue_template__ = __webpack_require__(185)
+var __vue_template__ = __webpack_require__(188)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -85535,7 +85737,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 184 */
+/* 187 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -85581,7 +85783,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 185 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -85625,7 +85827,7 @@ if (false) {
 }
 
 /***/ }),
-/* 186 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -85901,15 +86103,15 @@ if (false) {
 }
 
 /***/ }),
-/* 187 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(188)
+var __vue_script__ = __webpack_require__(191)
 /* template */
-var __vue_template__ = __webpack_require__(198)
+var __vue_template__ = __webpack_require__(201)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -85948,17 +86150,57 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 188 */
+/* 191 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchrequest__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchrequest__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchrequest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchrequest__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsucc__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsucc__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsucc___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fetchsucc__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__fetchrej__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -86125,15 +86367,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 189 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(190)
+var __vue_script__ = __webpack_require__(193)
 /* template */
-var __vue_template__ = __webpack_require__(191)
+var __vue_template__ = __webpack_require__(194)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -86172,7 +86414,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 190 */
+/* 193 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86230,7 +86472,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 191 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -86304,15 +86546,15 @@ if (false) {
 }
 
 /***/ }),
-/* 192 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(193)
+var __vue_script__ = __webpack_require__(196)
 /* template */
-var __vue_template__ = __webpack_require__(194)
+var __vue_template__ = __webpack_require__(197)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -86351,7 +86593,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 193 */
+/* 196 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86401,7 +86643,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 194 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -86457,15 +86699,15 @@ if (false) {
 }
 
 /***/ }),
-/* 195 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(196)
+var __vue_script__ = __webpack_require__(199)
 /* template */
-var __vue_template__ = __webpack_require__(197)
+var __vue_template__ = __webpack_require__(200)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -86504,7 +86746,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 196 */
+/* 199 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86562,7 +86804,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 197 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -86621,7 +86863,7 @@ if (false) {
 }
 
 /***/ }),
-/* 198 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -86732,6 +86974,42 @@ var render = function() {
                         return _c("fetchreject", {
                           key: requestreject.id,
                           attrs: { requestdata: requestreject },
+                          on: { refresh: _vm.fetchrequestdata }
+                        })
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
+          _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v("Students List (Pending)")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-description" }),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table-responsive scrollbar-pink table table-striped"
+                  },
+                  [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.requestrests, function(requestrest) {
+                        return _c("fetchrest", {
+                          key: requestrest.id,
+                          attrs: { requestdata: requestrest },
                           on: { refresh: _vm.fetchrequestdata }
                         })
                       })
@@ -86867,6 +87145,46 @@ var staticRenderFns = [
         _c("th")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\n                            User\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Full name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Id No.\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Year level\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -86879,15 +87197,15 @@ if (false) {
 }
 
 /***/ }),
-/* 199 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(200)
+var __vue_script__ = __webpack_require__(203)
 /* template */
-var __vue_template__ = __webpack_require__(201)
+var __vue_template__ = __webpack_require__(204)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -86926,7 +87244,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 200 */
+/* 203 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87307,23 +87625,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 201 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "container-scroller" },
-      [
-        _vm._l(_vm.studentdatas, function(studentdata) {
-          return _c(
+  return _c(
+    "div",
+    _vm._l(_vm.studentdatas, function(studentdata) {
+      return _c(
+        "div",
+        { key: studentdata.id, staticClass: "container-scroller" },
+        [
+          _c(
             "nav",
             {
-              key: studentdata.id,
               staticClass:
                 " navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
             },
@@ -87431,126 +87749,115 @@ var render = function() {
                 ]
               )
             ]
-          )
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "container-fluid page-body-wrapper " }, [
-          _c(
-            "div",
-            { staticClass: "row row-offcanvas row-offcanvas-right" },
-            [
-              _c(
-                "nav",
-                {
-                  staticClass: "sidebar sidebar-offcanvas",
-                  attrs: { id: "sidebar" }
-                },
-                [
-                  _c("ul", { staticClass: "nav" }, [
-                    _c("li", { staticClass: "nav-item", class: _vm.active1 }, [
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "container-fluid page-body-wrapper " }, [
+            _c(
+              "div",
+              { staticClass: "row row-offcanvas row-offcanvas-right" },
+              [
+                _c(
+                  "nav",
+                  {
+                    staticClass: "sidebar sidebar-offcanvas",
+                    attrs: { id: "sidebar" }
+                  },
+                  [
+                    _c("ul", { staticClass: "nav" }, [
                       _c(
-                        "a",
-                        {
-                          staticClass: "nav-link ",
-                          attrs: { href: "#" },
-                          on: { click: _vm.pageactivedash }
-                        },
+                        "li",
+                        { staticClass: "nav-item", class: _vm.active1 },
                         [
-                          _c("span", { staticClass: "menu-title" }, [
-                            _vm._v("Clearance")
-                          ]),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "mdi mdi-home menu-icon" })
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link ",
+                              attrs: { href: "#" },
+                              on: { click: _vm.pageactivedash }
+                            },
+                            [
+                              _c("span", { staticClass: "menu-title" }, [
+                                _vm._v("Clearance")
+                              ]),
+                              _vm._v(" "),
+                              _c("i", { staticClass: "mdi mdi-home menu-icon" })
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "nav-item", class: _vm.active3 },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { href: "#" },
+                              on: { click: _vm.pageactiverequest }
+                            },
+                            [
+                              _c("span", { staticClass: "menu-title" }, [
+                                _vm._v("Request ")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "menu-sub-title" }, [
+                                _vm._v("( 2 new updates )")
+                              ]),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "mdi mdi-format-list-bulleted menu-icon"
+                              })
+                            ]
+                          )
                         ]
                       )
                     ]),
                     _vm._v(" "),
-                    _c("li", { staticClass: "nav-item", class: _vm.active3 }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { href: "#" },
-                          on: { click: _vm.pageactiverequest }
-                        },
-                        [
-                          _c("span", { staticClass: "menu-title" }, [
-                            _vm._v("Request ")
-                          ]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "menu-sub-title" }, [
-                            _vm._v("( 2 new updates )")
-                          ]),
-                          _vm._v(" "),
-                          _c("i", {
-                            staticClass:
-                              "mdi mdi-format-list-bulleted menu-icon"
-                          })
-                        ]
-                      )
+                    _c("div", { staticClass: "sidebar-progress" }, [
+                      _c("p", [_vm._v("Clearance Target")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "progress progress-sm" }, [
+                        _c("div", {
+                          staticClass: "progress-bar bg-gradient-success",
+                          style: "width:" + _vm.percent + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": "100",
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "100"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.count) + " Successfully Signed ")
+                      ])
                     ]),
                     _vm._v(" "),
-                    _c("li", { staticClass: "nav-item", class: _vm.active4 }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { href: "#" },
-                          on: { click: _vm.pageactiveoffice }
-                        },
-                        [
-                          _c("span", { staticClass: "menu-title" }, [
-                            _vm._v("My Profile")
-                          ]),
-                          _vm._v(" "),
-                          _c("i", {
-                            staticClass: "mdi mdi-table-large menu-icon"
-                          })
-                        ]
-                      )
+                    _c("div", { staticClass: "sidebar-progress" }, [
+                      _c("p", [_vm._v("School Year: 2017-2018")]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(studentdata.semester))])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "sidebar-progress" }, [
-                    _c("p", [_vm._v("Clearance Target")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "progress progress-sm" }, [
-                      _c("div", {
-                        staticClass: "progress-bar bg-gradient-success",
-                        style: "width:" + _vm.percent + "%",
-                        attrs: {
-                          role: "progressbar",
-                          "aria-valuenow": "100",
-                          "aria-valuemin": "0",
-                          "aria-valuemax": "100"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(_vm._s(_vm.count) + " Successfully Signed ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ]
-              ),
-              _vm._v(" "),
-              _vm.pagedash ? _c("dashstu") : _vm._e(),
-              _vm._v(" "),
-              _vm.pagerequest ? _c("dashreq") : _vm._e(),
-              _vm._v(" "),
-              _vm.pageoffice ? _c("insoffice") : _vm._e(),
-              _vm._v(" "),
-              _vm._m(3)
-            ],
-            1
-          )
-        ])
-      ],
-      2
-    )
-  ])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.pagedash ? _c("dashstu") : _vm._e(),
+                _vm._v(" "),
+                _vm.pagerequest ? _c("dashreq") : _vm._e(),
+                _vm._v(" "),
+                _vm._m(2, true)
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    })
+  )
 }
 var staticRenderFns = [
   function() {
@@ -87584,16 +87891,6 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "mdi mdi-menu" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "sidebar-progress" }, [
-      _c("p", [_vm._v("School Year: 2017-2018")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("2nd Semester")])
-    ])
   },
   function() {
     var _vm = this
@@ -87652,15 +87949,15 @@ if (false) {
 }
 
 /***/ }),
-/* 202 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(203)
+var __vue_script__ = __webpack_require__(206)
 /* template */
-var __vue_template__ = __webpack_require__(204)
+var __vue_template__ = __webpack_require__(210)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -87699,7 +87996,281 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 203 */
+/* 206 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchoffice__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchoffice___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchoffice__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { fetchoffice: __WEBPACK_IMPORTED_MODULE_0__fetchoffice___default.a },
+    data: function data() {
+        return {
+            hi: true,
+            getsdatas: '',
+            loadarea: true,
+            offices: []
+        };
+    },
+
+    methods: {
+        print: function print() {
+            this.hi = false;
+            window.print();
+        },
+        fetchStudentdata: function fetchStudentdata() {
+            var _this = this;
+
+            axios.get('studentsdata').then(function (response) {
+                _this.getsdatas = response.data.studentsdata;
+                _this.loadarea = false;
+            }), axios.get('officedata').then(function (response) {
+                _this.offices = response.data.officedata;
+            });
+        }
+    },
+    created: function created() {
+        this.fetchStudentdata();
+    }
+});
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(208)
+/* template */
+var __vue_template__ = __webpack_require__(209)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\studentsaccount\\fetchoffice.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-717ac728", Component.options)
+  } else {
+    hotAPI.reload("data-v-717ac728", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 208 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87722,99 +88293,84 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            getsdatas: '',
-            loadarea: true
+            status: ''
         };
     },
 
+    props: ['office'],
     methods: {
-        fetchStudentdata: function fetchStudentdata() {
-            var _this = this;
+        getStatus: function getStatus() {
+            // axios.('d').then(response=>{
 
-            axios.get('studentsdata').then(function (response) {
-                _this.getsdatas = response.data.studentsdata;
-                _this.loadarea = false;
-            });
+            // })
         }
     },
     created: function created() {
-        this.fetchStudentdata();
+        this.getStatus();
     }
 });
 
 /***/ }),
-/* 204 */
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row ", staticStyle: { height: "37px" } }, [
+    _c(
+      "div",
+      {
+        staticClass: "col-md-12 stretch-card grid-margin",
+        staticStyle: { "font-size": "15px" }
+      },
+      [
+        _c("div", { staticClass: "col-md-3 offset-md-1" }, [
+          _vm._v("\n        " + _vm._s(_vm.office.name) + "\n        ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-5" }, [
+          _vm._v("\n        " + _vm._s(_vm.office.assign) + "\n        ")
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c(
+        "label",
+        {
+          staticClass: "badge badge-gradient-warning",
+          staticStyle: { cursor: "pointer" }
+        },
+        [_vm._v("Pending")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-717ac728", module.exports)
+  }
+}
+
+/***/ }),
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -87850,9 +88406,10 @@ var render = function() {
                       { staticClass: "stretch-card grid-margin" },
                       [
                         _c("center", [
-                          _vm._v(
-                            "\r\n                                    CHRIST THE KING COLLEGE DE MARANDING\r\n                                    "
-                          ),
+                          _c("p", { staticClass: "lead" }, [
+                            _vm._v("CHRIST THE KING COLLEGE DE MARANDING")
+                          ]),
+                          _vm._v(" "),
                           _c("br"),
                           _vm._v(" "),
                           _c("p", [_vm._v("Maranding Lala Lanao del Norte")]),
@@ -87861,8 +88418,7 @@ var render = function() {
                           ),
                           _c("br"),
                           _vm._v(
-                            "\r\n                                    S.Y. " +
-                              _vm._s(getsdata.sy)
+                            "\r\n                                    S.Y. 2017-2018"
                           ),
                           _c("br"),
                           _vm._v(
@@ -87908,9 +88464,314 @@ var render = function() {
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
-                  _vm._m(2, true)
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12 stretch-card grid-margin" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "col-md-3 offset-md-1" },
+                          [_c("B", [_vm._v("OFFICE")])],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-5" }, [
+                          _vm._v(
+                            "\r\n                                    IN CHARGE\r\n                                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._v(
+                            "\r\n                                    SIGNATURE\r\n                                    "
+                          )
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.offices, function(office) {
+                    return _c("fetchoffice", {
+                      key: office.id,
+                      attrs: { office: office }
+                    })
+                  }),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12 stretch-card grid-margin" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "col-md-3 offset-md-1" },
+                          [_c("B", [_vm._v("SUBJECTS")])],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-5" }, [
+                          _vm._v(
+                            "\r\n                                    INSTRUCTOR\r\n                                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._v(
+                            "\r\n                                    SIGNATURE\r\n                                    "
+                          )
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      attrs: { "data-toggle": "modal", "data-target": "#print" }
+                    },
+                    [_vm._v("Print")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal fade",
+                      attrs: {
+                        id: "print",
+                        tabindex: "-1",
+                        "aria-labelledby": "exampleModalLongTitle"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "modal-dialog modal-lg",
+                          attrs: { role: "document" }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-content" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col-lg-12 grid-margin stretch-card"
+                              },
+                              [
+                                _c("div", { staticClass: "card" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "card-body" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "row offset-2" },
+                                        [
+                                          _vm._m(2, true),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "stretch-card grid-margin"
+                                            },
+                                            [
+                                              _c("center", [
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "lead" },
+                                                  [
+                                                    _vm._v(
+                                                      "CHRIST THE KING COLLEGE DE MARANDING"
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("br"),
+                                                _vm._v(" "),
+                                                _c("p", [
+                                                  _vm._v(
+                                                    "Maranding Lala Lanao del Norte"
+                                                  )
+                                                ]),
+                                                _vm._v(
+                                                  "\r\n\r\n                                    Clearance for College "
+                                                ),
+                                                _c("br"),
+                                                _vm._v(
+                                                  "\r\n                                    S.Y. 2017-2018"
+                                                ),
+                                                _c("br"),
+                                                _vm._v(
+                                                  "\r\n                                    " +
+                                                    _vm._s(getsdata.semester) +
+                                                    "\r\n\r\n                                "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._m(3, true)
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("center", [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-md-4 " },
+                                            [
+                                              _vm._v(
+                                                "\r\n                                Name: " +
+                                                  _vm._s(getsdata.fullname) +
+                                                  "\r\n                            "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-md-4 " },
+                                            [
+                                              _vm._v(
+                                                "\r\n                                Course: " +
+                                                  _vm._s(getsdata.department) +
+                                                  "\r\n                            "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-md-4" },
+                                            [
+                                              _vm._v(
+                                                "\r\n                                Year: " +
+                                                  _vm._s(getsdata.yearlevel) +
+                                                  "\r\n                                \r\n                            "
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("hr"),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "col-md-12 stretch-card grid-margin"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "col-md-3 offset-md-1"
+                                              },
+                                              [_c("B", [_vm._v("OFFICE")])],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-5" },
+                                              [
+                                                _vm._v(
+                                                  "\r\n                                    IN CHARGE\r\n                                    "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-4" },
+                                              [
+                                                _vm._v(
+                                                  "\r\n                                    SIGNATURE\r\n                                    "
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.offices, function(office) {
+                                        return _c("fetchoffice", {
+                                          key: office.id,
+                                          attrs: { office: office }
+                                        })
+                                      }),
+                                      _vm._v(" "),
+                                      _c("hr"),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "col-md-12 stretch-card grid-margin"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "col-md-3 offset-md-1"
+                                              },
+                                              [_c("B", [_vm._v("SUBJECTS")])],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-5" },
+                                              [
+                                                _vm._v(
+                                                  "\r\n                                    INSTRUCTOR\r\n                                    "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-4" },
+                                              [
+                                                _vm._v(
+                                                  "\r\n                                    SIGNATURE\r\n                                    "
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _vm.hi
+                                        ? _c(
+                                            "button",
+                                            { on: { click: _vm.print } },
+                                            [_vm._v("Print")]
+                                          )
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
                 ],
-                1
+                2
               )
             ])
           ])
@@ -87946,34 +88807,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12 stretch-card grid-margin" }, [
-        _c("div", { staticClass: "col-md-6 offset-md-1" }, [
-          _vm._v(
-            "\r\n                                    Registrar\r\n                                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _vm._v(
-            "\r\n                                    Registrar\r\n                                    "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-12 stretch-card grid-margin" }, [
-        _c("div", { staticClass: "col-md-6 offset-md-1" }, [
-          _vm._v(
-            "\r\n                                    Registrar\r\n                                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _vm._v(
-            "\r\n                                    Registrar\r\n                                    "
-          )
-        ])
-      ])
+    return _c("div", { staticClass: "stretch-card grid-margin" }, [
+      _c("img", {
+        attrs: { src: "images/ckcm.png", height: "100", wdith: "100", alt: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ml-5 stretch-card grid-margin" }, [
+      _c("img", {
+        staticStyle: { "margin-top": "13px" },
+        attrs: { src: "images/comsci.png", height: "75", width: "75", alt: "" }
+      })
     ])
   }
 ]
@@ -87987,15 +88835,15 @@ if (false) {
 }
 
 /***/ }),
-/* 205 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(220)
+var __vue_script__ = __webpack_require__(212)
 /* template */
-var __vue_template__ = __webpack_require__(206)
+var __vue_template__ = __webpack_require__(216)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -88034,298 +88882,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 206 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content-wrapper " }, [
-    _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
-      _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("h4", { staticClass: "card-title" }, [
-              _vm._v("List of Offices")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "table-responsive" }, [
-              _c(
-                "table",
-                { staticClass: "scrollbar-pink table" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.offices, function(office) {
-                    return _c("fetchOfficess", {
-                      key: office.id,
-                      attrs: { officedata: _vm.officedata, office: office },
-                      on: { getdetails: _vm.getdetails }
-                    })
-                  }),
-                  _vm._v(" "),
-                  _c("tbody")
-                ],
-                2
-              )
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(1)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [
-          _vm._v(
-            "\r\n                    Office Name  \r\n                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\r\n                    Assignee\r\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\r\n                    Description\r\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
-      _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("h4", { staticClass: "card-title" }, [
-              _vm._v("List of Subjects")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "table-responsive" }, [
-              _c("table", { staticClass: "scrollbar-pink table" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", [
-                      _vm._v(
-                        "\r\n                    Subject Code \r\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th", [
-                      _vm._v(
-                        "\r\n                    Instructor\r\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th", [
-                      _vm._v(
-                        "\r\n                    Location\r\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tbody")
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1f992106", module.exports)
-  }
-}
-
-/***/ }),
-/* 207 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(218)
-/* template */
-var __vue_template__ = __webpack_require__(219)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\registrar\\fetchrest.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-36913b58", Component.options)
-  } else {
-    hotAPI.reload("data-v-36913b58", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 218 */
+/* 212 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['requestdata'],
-    data: function data() {
-        return {};
-    },
-
-    methods: {
-        rejectClearance: function rejectClearance(requestdata) {
-            var _this = this;
-
-            axios.patch('/signdata/' + requestdata.id, requestdata).then(function (response) {
-                _this.$emit('refresh');
-            });
-        },
-        signClearance: function signClearance(requestdata) {
-            var _this2 = this;
-
-            axios.post('/signdata/', requestdata).then(function (response) {
-                _this2.$emit('refresh');
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 219 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("tr", [
-    _c("td", { staticClass: "py-1" }, [
-      _c("img", {
-        attrs: {
-          src: "userprofilepic/" + _vm.requestdata.profilepic,
-          alt: "image"
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.fullname) + "\n    ")]),
-    _vm._v(" "),
-    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.idno) + "\n    ")]),
-    _vm._v(" "),
-    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.yearlevel) + "\n    ")]),
-    _vm._v(" "),
-    _c("td", [
-      _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
-    ]),
-    _vm._v(" "),
-    _c("td")
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-36913b58", module.exports)
-  }
-}
-
-/***/ }),
-/* 220 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchreq__);
 //
 //
@@ -88440,15 +89002,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 221 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(223)
+var __vue_script__ = __webpack_require__(214)
 /* template */
-var __vue_template__ = __webpack_require__(222)
+var __vue_template__ = __webpack_require__(215)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -88487,7 +89049,103 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 222 */
+/* 214 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['office', 'officedata'],
+    data: function data() {
+        return {
+            active: '',
+            reqlists: [],
+            addingloading: false
+
+        };
+    },
+
+    methods: {
+        fetchReq: function fetchReq() {
+            var _this = this;
+
+            axios.get('requirementdata').then(function (response) {
+                _this.reqlists = response.data.all;
+            });
+            axios.get('activitylog').then(function (response) {
+                _this.active = response.data.ac;
+            });
+        },
+        requestNow: function requestNow(officedata) {
+            var _this2 = this;
+
+            this.addingloading = true;
+            // alert(officedata.user_id)
+            axios.post('requestdata', officedata).then(function (response) {
+                _this2.addingloading = false;
+            });
+        }
+    },
+    created: function created() {
+        this.fetchReq();
+    }
+});
+
+/***/ }),
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -88574,7 +89232,44 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(1)
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                ),
+                _vm._v(" "),
+                !_vm.addingloading && _vm.active == "1"
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        staticStyle: { cursor: "pointer" },
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.requestNow(_vm.officedata)
+                          }
+                        }
+                      },
+                      [_vm._v("Request")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.addingloading
+                  ? _c("img", {
+                      staticClass: "mx-4",
+                      attrs: {
+                        src: "images/loading1.gif",
+                        height: "50",
+                        alt: ""
+                      }
+                    })
+                  : _vm._e()
+              ])
             ])
           ]
         )
@@ -88607,21 +89302,6 @@ var staticRenderFns = [
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -88634,7 +89314,132 @@ if (false) {
 }
 
 /***/ }),
-/* 223 */
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper " }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("List of Offices")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c(
+                "table",
+                { staticClass: "scrollbar-pink table" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.offices, function(office) {
+                    return _c("fetchOfficess", {
+                      key: office.id,
+                      attrs: { officedata: _vm.officedata, office: office },
+                      on: { getdetails: _vm.getdetails }
+                    })
+                  }),
+                  _vm._v(" "),
+                  _c("tbody")
+                ],
+                2
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\r\n                    Office Name  \r\n                    "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\r\n                    Assignee\r\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\r\n                    Location\r\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1f992106", module.exports)
+  }
+}
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(218)
+/* template */
+var __vue_template__ = __webpack_require__(219)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\tighawid.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5ea143cf", Component.options)
+  } else {
+    hotAPI.reload("data-v-5ea143cf", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 218 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -88690,29 +89495,8435 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['office', 'officedata'],
     data: function data() {
         return {
-            reqlists: []
+            active1: 'active',
+            active2: '',
+            active3: '',
+            active4: '',
 
+            registrardatas: [],
+            pagedash: false,
+            pagestudents: false,
+            pageoffice: true,
+            pagerequest: false,
+
+            count: '',
+            countt: '',
+            percent: ''
+
+        };
+    },
+    created: function created() {
+        this.fetchUserre();
+    },
+
+    methods: {
+        fetchUserre: function fetchUserre() {
+            var _this = this;
+
+            axios.get('registrardata').then(function (response) {
+                _this.registrardatas = response.data.odata;
+                setTimeout(_this.fetchUserre(), 1000);
+            }), axios.get('signdata').then(function (response) {
+                _this.count = response.data.count;
+                _this.countt = response.data.countt;
+                var dec = _this.countt - _this.count;
+                var nice = dec / _this.countt;
+                var nicer = nice * 100;
+                _this.percent = 100 - nicer;
+            });
+        },
+        logout: function logout(e) {
+            e.preventDefault();
+            document.getElementById('logout-form').submit();
+        },
+        pageactivedash: function pageactivedash() {
+            this.active1 = 'active';
+            this.active2 = '';
+            this.active3 = '';
+            this.active4 = '';
+
+            this.pagedash = true;
+            this.pagestudents = false;
+            this.pagerequest = false;
+            this.pageoffice = false;
+        },
+        pageactivestudents: function pageactivestudents() {
+            this.active1 = '';
+            this.active2 = 'active';
+            this.active3 = '';
+            this.active4 = '';
+
+            this.pagedash = false;
+            this.pagestudents = true;
+            this.pagerequest = false;
+            this.pageoffice = false;
+        },
+        pageactiverequest: function pageactiverequest() {
+            this.active1 = '';
+            this.active2 = '';
+            this.active3 = 'active';
+            this.active4 = '';
+
+            this.pagedash = false;
+            this.pagestudents = false;
+            this.pagerequest = true;
+            this.pageoffice = false;
+        },
+        pageactiveoffice: function pageactiveoffice() {
+            this.active1 = '';
+            this.active2 = '';
+            this.active3 = '';
+            this.active4 = 'active';
+
+            this.pagedash = false;
+            this.pagestudents = false;
+            this.pagerequest = false;
+            this.pageoffice = true;
+        }
+    },
+    mounted: function mounted() {
+        this.csrf = window.myToken.csrfToken;
+    }
+});
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    _vm._l(_vm.registrardatas, function(registrardata) {
+      return _c(
+        "div",
+        { key: registrardata.id, staticClass: "container-scroller" },
+        [
+          _c(
+            "nav",
+            {
+              staticClass:
+                " navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
+            },
+            [
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "navbar-menu-wrapper d-flex align-items-stretch"
+                },
+                [
+                  _c("ul", { staticClass: "navbar-nav navbar-nav-right" }, [
+                    _c("li", { staticClass: "nav-item dropdown" }),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item dropdown" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link dropdown-toggle nav-profile",
+                          attrs: {
+                            id: "profileDropdown",
+                            href: "#",
+                            "data-toggle": "dropdown",
+                            "aria-expanded": "false"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "ckcmascs/images/faces-clipart/pic-1.png",
+                              alt: "image"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "d-none d-lg-inline" }, [
+                            _vm._v(" " + _vm._s(registrardata.name))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "d-none d-lg-inline teal-text ml-1",
+                              staticStyle: { "font-size": "9px" }
+                            },
+                            [_vm._v("Office")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "dropdown-menu navbar-dropdown w-100",
+                          attrs: { "aria-labelledby": "profileDropdown" }
+                        },
+                        [
+                          _c("div", { staticClass: "dropdown-divider" }),
+                          _vm._v(" "),
+                          _c(
+                            "form",
+                            {
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "logout-form",
+                                action: "/logout",
+                                method: "POST"
+                              }
+                            },
+                            [
+                              _c("input", {
+                                attrs: { type: "hidden", name: "_token" },
+                                domProps: { value: _vm.csrf }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { href: "#" },
+                              on: { click: _vm.logout }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "mdi mdi-logout mr-2 text-primary"
+                              }),
+                              _vm._v(
+                                "\r\n                Signout\r\n                "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1, true)
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "container-fluid page-body-wrapper " }, [
+            _c(
+              "div",
+              { staticClass: "row row-offcanvas row-offcanvas-right" },
+              [
+                _c(
+                  "nav",
+                  {
+                    staticClass: "sidebar sidebar-offcanvas",
+                    attrs: { id: "sidebar" }
+                  },
+                  [
+                    _c("ul", { staticClass: "nav" }, [
+                      registrardata.name != "Finance"
+                        ? _c(
+                            "li",
+                            { staticClass: "nav-item", class: _vm.active3 },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { href: "#" },
+                                  on: { click: _vm.pageactiverequest }
+                                },
+                                [
+                                  _c("span", { staticClass: "menu-title" }, [
+                                    _vm._v("Request ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "menu-sub-title" },
+                                    [_vm._v("( 2 new updates )")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("i", {
+                                    staticClass:
+                                      "mdi mdi-format-list-bulleted menu-icon"
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "nav-item", class: _vm.active4 },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { href: "#" },
+                              on: { click: _vm.pageactiveoffice }
+                            },
+                            [
+                              _c("span", { staticClass: "menu-title" }, [
+                                _vm._v("My Office")
+                              ]),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "mdi mdi-table-large menu-icon"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "sidebar-progress" }, [
+                      _c("p", [_vm._v("Clearance Target")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "progress progress-sm" }, [
+                        _c("div", {
+                          staticClass: "progress-bar bg-gradient-success",
+                          style: "width:" + _vm.percent + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": "100",
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "100"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.count) + " Successfully Signed ")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(2, true)
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.pagedash ? _c("dash-1") : _vm._e(),
+                _vm._v(" "),
+                _vm.pagestudents ? _c("regstudents") : _vm._e(),
+                _vm._v(" "),
+                _vm.pagerequest ? _c("regrequest") : _vm._e(),
+                _vm._v(" "),
+                _vm.pageoffice ? _c("office") : _vm._e(),
+                _vm._v(" "),
+                _vm._m(3, true)
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
+      },
+      [
+        _c("a", {
+          staticClass: "navbar-brand brand-logo-mini",
+          attrs: { href: "/" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass:
+          "navbar-toggler navbar-toggler-right d-lg-none align-self-center",
+        attrs: { type: "button", "data-toggle": "offcanvas" }
+      },
+      [_c("span", { staticClass: "mdi mdi-menu" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "sidebar-progress" }, [
+      _c("p", [_vm._v("School Year: 2017-2018")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "footer" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "d-sm-flex justify-content-center justify-content-sm-between"
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass:
+                "text-muted text-center text-sm-left d-block d-sm-inline-block"
+            },
+            [
+              _vm._v("Copyright © 2018 "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "https://www.ckcmascs.com/", target: "_blank" }
+                },
+                [_vm._v("Automated Student Clearance")]
+              ),
+              _vm._v(". All rights reserved.")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass:
+                "float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
+            },
+            [
+              _vm._v("A system with quality & made with "),
+              _c("i", { staticClass: "mdi mdi-heart text-danger" })
+            ]
+          )
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5ea143cf", module.exports)
+  }
+}
+
+/***/ }),
+/* 220 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(221)
+/* template */
+var __vue_template__ = __webpack_require__(225)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\dash.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c3cfda0c", Component.options)
+  } else {
+    hotAPI.reload("data-v-c3cfda0c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 221 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__departmentfetch__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__departmentfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__departmentfetch__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { fetch: __WEBPACK_IMPORTED_MODULE_0__departmentfetch___default.a },
+    data: function data() {
+        return {
+            registrardatas: [],
+            datadepartments: [],
+            studentslists: [],
+            studentscount: '',
+            loadarea: true,
+            count: '',
+            countt: '',
+            countde: ''
+        };
+    },
+    created: function created() {
+
+        this.fetchUser();
+    },
+
+    methods: {
+        fetchUser: function fetchUser() {
+            var _this = this;
+
+            axios.get('registrardata').then(function (response) {
+                _this.registrardatas = response.data.registrardata;
+                _this.loadarea = false;
+            }), axios.get("departmentdata").then(function (response) {
+                _this.datadepartments = response.data.datadepartments2;
+                _this.countde = response.data.countde;
+            }), axios.get('signdata').then(function (response) {
+                _this.count = response.data.count;
+                _this.countt = response.data.countt;
+            });
+            axios.get("studentsdata").then(function (response) {
+                _this.studentslist = response.data.studentslist;
+                _this.studentscount = response.data.count;
+                setTimeout(_this.fetchUser(), 1000);
+            });
+        },
+        logout: function logout(e) {
+            e.preventDefault();
+            document.getElementById('logout-form').submit();
+        }
+    },
+    mounted: function mounted() {
+        this.csrf = window.myToken.csrfToken;
+    }
+});
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(223)
+/* template */
+var __vue_template__ = __webpack_require__(224)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\departmentfetch.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-217f5970", Component.options)
+  } else {
+    hotAPI.reload("data-v-217f5970", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 223 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+        props: ['datadepartment']
+
+});
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", [_vm._v("\n        " + _vm._s(_vm.datadepartment.id) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n        " + _vm._s(_vm.datadepartment.name) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n        " + _vm._s(_vm.datadepartment.total) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    May 10, 2015\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    May 15, 2015\n    ")])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "progress" }, [
+        _c("div", {
+          staticClass: "progress-bar bg-gradient-success",
+          staticStyle: { width: "25%" },
+          attrs: {
+            role: "progressbar",
+            "aria-valuenow": "25",
+            "aria-valuemin": "0",
+            "aria-valuemax": "100"
+          }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-217f5970", module.exports)
+  }
+}
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content-wrapper " },
+    [
+      _c("center", [
+        _vm.loadarea
+          ? _c("img", {
+              staticStyle: { "margin-top": "20%" },
+              attrs: { height: "100px", src: "images/loading1.gif", alt: "" }
+            })
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.registrardatas, function(registrardata) {
+        return _c("div", { key: registrardata.id }, [
+          _c("div", { staticClass: "row " }, [
+            _c("div", { staticClass: "col-md-4 stretch-card grid-margin " }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card  text-white",
+                  staticStyle: {
+                    height: "130px",
+                    "background-color": "#37474F"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+                      _vm._v("Total Students")
+                    ]),
+                    _vm._v(" "),
+                    _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+                      _vm._v(" " + _vm._s(_vm.countt))
+                    ])
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card text-white",
+                  staticStyle: {
+                    height: "130px",
+                    "background-color": "#4B515D"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+                      _vm._v("Total Deparment")
+                    ]),
+                    _vm._v(" "),
+                    _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+                      _vm._v(_vm._s(_vm.countde))
+                    ])
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 stretch-card grid-margin" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card  text-white",
+                  staticStyle: {
+                    height: "130px",
+                    "background-color": "#3F729B"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "font-weight-normal mb-3" }, [
+                      _vm._v("Pending Clearances")
+                    ]),
+                    _vm._v(" "),
+                    _c("h2", { staticClass: "font-weight-normal mb-5" }, [
+                      _vm._v(_vm._s(_vm.countt - _vm.count))
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0, true),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12 grid-margin stretch-card" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h4", { staticClass: "card-title" }, [
+                    _vm._v("Department Status")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "table-responsive" }, [
+                    _c("table", { staticClass: "table" }, [
+                      _vm._m(1, true),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.datadepartments, function(datadepartment) {
+                          return _c("fetch", {
+                            key: datadepartment.id,
+                            attrs: { datadepartment: datadepartment }
+                          })
+                        })
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 grid-margin" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("h4", { staticClass: "card-title" }, [_vm._v("Recent Status")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table" }, [
+                _c("thead", [
+                  _c("tr", [
+                    _c("th", [
+                      _vm._v(
+                        "\r\n                            Id No.\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\r\n                            Subject\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\r\n                            Assignee\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\r\n                            Status\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\r\n                            Department\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\r\n                            Last Update\r\n                            "
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            5669\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            Fund is not recieved\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "py-1" }, [
+                      _c("img", {
+                        staticClass: "mr-2",
+                        attrs: {
+                          src: "ckcmascs/images/faces/face1.jpg",
+                          alt: "image"
+                        }
+                      }),
+                      _vm._v(
+                        "\r\n                            David Grey\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "label",
+                        { staticClass: "badge  light-green accent-2" },
+                        [_vm._v("CLEARED")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            Dec 5, 2017\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            WD-12345\r\n                            "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            5670\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            High loading time\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "py-1" }, [
+                      _c("img", {
+                        staticClass: "mr-2",
+                        attrs: {
+                          src: "ckcmascs/images/faces/face2.jpg",
+                          alt: "image"
+                        }
+                      }),
+                      _vm._v(
+                        "\r\n                            Stella Johnson\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("label", { staticClass: "badge  yellow accent-2" }, [
+                        _vm._v("PROGRESS")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            Dec 12, 2017\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            WD-12346\r\n                            "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            5671\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            Website down for one week\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "py-1" }, [
+                      _c("img", {
+                        staticClass: "mr-2",
+                        attrs: {
+                          src: "ckcmascs/images/faces/face3.jpg",
+                          alt: "image"
+                        }
+                      }),
+                      _vm._v(
+                        "\r\n                            Marina Michel\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("label", { staticClass: "badge   red accent-2" }, [
+                        _vm._v("ON HOLD")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            Dec 16, 2017\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            WD-12347\r\n                            "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            5672\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            Loosing control on server\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "py-1" }, [
+                      _c("img", {
+                        staticClass: "mr-2",
+                        attrs: {
+                          src: "ckcmascs/images/faces/face4.jpg",
+                          alt: "image"
+                        }
+                      }),
+                      _vm._v(
+                        "\r\n                            John Doe\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "label",
+                        { staticClass: "badge  light-green accent-2" },
+                        [_vm._v("CLEARED")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            Dec 3, 2017\r\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\r\n                            WD-12348\r\n                            "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\r\n                            #\r\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\r\n                            Department Name\r\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\r\n                            Overall Progress\r\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\r\n                            Total Students\r\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\r\n                            Pending\r\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\r\n                            Cleared\r\n                            "
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c3cfda0c", module.exports)
+  }
+}
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(227)
+/* template */
+var __vue_template__ = __webpack_require__(238)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\students.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c289e400", Component.options)
+  } else {
+    hotAPI.reload("data-v-c289e400", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 227 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__studentsfetch__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__studentsfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__studentsfetch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { fetch: __WEBPACK_IMPORTED_MODULE_0__studentsfetch___default.a },
+    data: function data() {
+        return {
+            loaderarea: true,
+            checkStudent: [],
+            // registrardatas:[],
+            datadepartments: [],
+            pickedinfo: {
+                stotal: '',
+                id: '',
+                name: '',
+                dean: '',
+                description: '',
+                logo: '',
+                srclogo: '',
+                createdat: ''
+
+            }
+        };
+    },
+    created: function created() {
+
+        this.fetchUser();
+    },
+
+    methods: {
+        getdetails: function getdetails(datadepartment) {
+            this.pickedinfo.stotal = datadepartment.stotal;
+            this.pickedinfo.id = datadepartment.id;
+            this.pickedinfo.name = datadepartment.name;
+            this.pickedinfo.dean = datadepartment.dean;
+            this.pickedinfo.description = datadepartment.description;
+            this.pickedinfo.logo = datadepartment.logo;
+            this.pickedinfo.srclogo = "/departmentlogo/" + datadepartment.logo;
+            this.pickedinfo.createdat = datadepartment.created;
+        },
+        fetchUser: function fetchUser() {
+            var _this = this;
+
+            axios.get("departmentdata").then(function (response) {
+                _this.datadepartments = response.data.datadepartments2;
+                _this.loaderarea = false;
+                setTimeout(_this.fetchUser(), 1000);
+            });
+        },
+        logout: function logout(e) {
+            e.preventDefault();
+            document.getElementById('logout-form').submit();
+        }
+    },
+    mounted: function mounted() {
+        this.csrf = window.myToken.csrfToken;
+        // this.showToastr();
+    }
+});
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(229)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(231)
+/* template */
+var __vue_template__ = __webpack_require__(237)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\studentsfetch.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cefb5c2c", Component.options)
+  } else {
+    hotAPI.reload("data-v-cefb5c2c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(230);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("459a5018", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cefb5c2c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./studentsfetch.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cefb5c2c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./studentsfetch.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.jiesd {\n  position: absolute;\n  top: 25%;\n  right: 0;\n  width: 5px;\n  height: 5px;\n  background-image: linear-gradient(300deg, #ff5858, #f09819);\n  border-radius: 100%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 231 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__studentsdatafetch__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__studentsdatafetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__studentsdatafetch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__deveodk_vue_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vee_validate__ = __webpack_require__(10);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_validate__["a" /* default */]);
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'scopes-example',
+    data: function data() {
+        var _getcor;
+
+        return {
+            datasubmitteds: [],
+            addingloading: false,
+            search: '',
+            checkedNames: [],
+            addsave: false,
+            studentlists: [],
+            from: '',
+            to: '',
+            password: '',
+            addcor: _defineProperty({
+                idno: '',
+                first: '',
+                second: '',
+                last: '',
+                semester: '',
+                dob: '',
+                em: '',
+                contactn: '',
+                pad: '',
+                had: '',
+                ffullname: '',
+                mfullname: '',
+                department: '',
+                sex: '',
+                lastshool: '',
+                sy: '',
+                yearlevel: '',
+                pob: ''
+            }, 'department', ''),
+            getcor: (_getcor = {
+                id: '',
+                idno: '',
+                first: '',
+                second: '',
+                last: '',
+                semester: '',
+                dob: '',
+                em: '',
+                contactn: '',
+                pad: '',
+                had: '',
+                ffullname: '',
+                mfullname: '',
+                department: '',
+                sex: '',
+                lastshool: '',
+                sy: '',
+                yearlevel: '',
+                pob: ''
+            }, _defineProperty(_getcor, 'department', ''), _defineProperty(_getcor, 'fullname', ''), _defineProperty(_getcor, 'profilepic', ''), _defineProperty(_getcor, 'user_id', ''), _defineProperty(_getcor, 'modalid', ''), _getcor)
+        };
+    },
+
+    watch: {
+        from: function from(val) {
+            this.from = val;
+            this.to = val * 1 + 1;
+        }
+    },
+    props: ['datadepartment', 'getdetails'],
+    components: { studentslist: __WEBPACK_IMPORTED_MODULE_0__studentsdatafetch___default.a },
+    created: function created() {
+        this.fetchStudentsdata();
+    },
+
+    methods: {
+        validateForm: function validateForm(scope) {
+            var _this = this;
+
+            this.$validator.validateAll(scope).then(function (result) {
+                if (result) {
+                    // eslint-disable-next-line
+                    _this.addsave = true;
+                }
+            });
+        },
+        validateForm1: function validateForm1(scope) {
+            var _this2 = this;
+
+            this.$validator.validateAll(scope).then(function (result) {
+                if (result) {
+                    // eslint-disable-next-line
+                    _this2.createStudentdata();
+                }
+            });
+        },
+        clearCor: function clearCor() {
+            this.addcor.idno = "";
+            this.addcor.first = "";
+            this.addcor.second = "";
+            this.addcor.last = "";
+            this.addcor.semester = "";
+            this.addcor.dob = "";
+            this.addcor.em = "";
+            this.addcor.contactn = "";
+            this.addcor.sex = "";
+            this.addcor.yearlevel = "";
+            this.addcor.pad = "";
+            this.addcor.had = "";
+            this.addcor.ffullname = "";
+            this.addcor.mfullname = "";
+            this.addcor.department = "";
+            this.addcor.lastshool = "";
+            // this.addcor.sy=""
+            this.addcor.pob = "";
+            this.addcor.department = "";
+            this.password = "";
+        },
+        returnadd: function returnadd() {
+            this.addsave = false;
+        },
+        fetchStudentsdata: function fetchStudentsdata() {
+            var _this3 = this;
+
+            axios.get('studentsdata').then(function (response) {
+                _this3.studentlists = response.data.studentlists;
+                setTimeout(_this3.fetchStudentsdata, 1000);
+            });
+            // console.log(this.datadepartment.name);
+        },
+        fetchStudentsdataref: function fetchStudentsdataref() {
+            var _this4 = this;
+
+            axios.get('studentsdata').then(function (response) {
+                _this4.studentlists = response.data.studentlists;
+                console.log("refresh");
+            });
+            // console.log(this.datadepartment.name);
+        },
+        deleteStudent: function deleteStudent(getcor) {
+            alert(getcor.idno);
+            this.showToastr();
+            // axios.delete('/studentsdata/'+getcor.user_id).then(response=>{
+            //     this.fetchStudentsdata();
+            // })
+        },
+        createStudentdata: function createStudentdata() {
+            var _this5 = this;
+
+            this.addingloading = true;
+            var vm = this;
+            this.addcor.sy = this.from;
+            this.addcor.department = this.getdetails.name;
+            console.log(this.addcor);
+            axios.post('studentsdata', this.addcor).then(function (response) {
+                // this.fetchStudentsdata();   
+                _this5.clearCor();
+                _this5.fetchStudentsdataref();
+                _this5.$toastr('add', {
+                    title: 'Successfully Added ',
+                    msg: '',
+                    clickClose: true,
+                    timeout: 5000,
+                    position: 'toast-bottom-right',
+                    type: 'success'
+                });
+                _this5.addsave = false;
+                _this5.addingloading = false;
+            }).catch(function (error) {
+                var errors = error.response;
+                console.log(errors);
+
+                if (errors.statusText === "Internal Server Error" || errors.status === 500) {
+                    if (errors.data) {
+                        vm.$toastr('add', {
+                            title: " Somethings wrong :'(",
+                            msg: "",
+                            clickClose: true,
+                            timeout: 5000,
+                            position: 'toast-bottom-right',
+                            type: 'error'
+                        });
+                        alert('load your page, wla guro connection');
+                    }
+                }
+            });
+        },
+        getStudent: function getStudent(list) {
+            this.getcor.id = list.id;
+            this.getcor.user_id = list.user_id;
+            this.getcor.idno = list.idno;
+            this.getcor.first = list.first;
+            this.getcor.second = list.second;
+            this.getcor.last = list.last;
+            this.getcor.semester = list.semester;
+            this.getcor.dob = list.dob;
+            this.getcor.em = list.em;
+            this.getcor.contactn = list.contactn;
+            this.getcor.pad = list.pad;
+            this.getcor.had = list.had;
+            this.getcor.ffullname = list.ffullname;
+            this.getcor.mfullname = list.mfullname;
+            this.getcor.department = list.department;
+            this.getcor.sex = list.sex;
+            this.getcor.lastschool = list.lastschool;
+            this.getcor.sy = list.sy;
+            this.getcor.yearlevel = list.yearlevel;
+            this.getcor.pob = list.pob;
+            this.getcor.department = list.department;
+            this.getcor.fullname = list.fullname;
+            this.getcor.profilepic = list.profilepic;
+            this.getcor.modalid = list.id;
+        },
+        showToastr: function showToastr(getcor) {
+            this.$toastr('add', {
+                title: 'Successfully Delete ',
+                msg: '',
+                clickClose: true,
+                timeout: 5000,
+                position: 'toast-top-right',
+                type: 'success'
+            });
+        }
+    },
+    computed: {
+        filteredList: function filteredList() {
+            var _this6 = this;
+
+            return this.studentlists.filter(function (studentslist) {
+                return studentslist.idno.toLowerCase().includes(_this6.search.toLowerCase());
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(233)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(235)
+/* template */
+var __vue_template__ = __webpack_require__(236)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\studentsdatafetch.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-73ee5500", Component.options)
+  } else {
+    hotAPI.reload("data-v-73ee5500", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(234);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("7da47bfa", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73ee5500\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./studentsdatafetch.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73ee5500\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./studentsdatafetch.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.tooltip.info .tooltip-inner {\n  background: rgba(0, 68, 153, 0.9);\n  color: white;\n  padding: 24px;\n  border-radius: 5px;\n  -webkit-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);\n          box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);\n  max-width: 250px;\n}\n.tooltip.info .tooltip-arrow {\n  border-color: rgba(0, 68, 153, 0.9);\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 235 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__deveodk_vue_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_v_tooltip__ = __webpack_require__(9);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_v_tooltip__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            addingloading: false,
+            addsave: false,
+            showbtnnaw: false,
+            showloading: false
+        };
+    },
+
+    props: ['list', 'getcor'],
+    methods: {
+        showbtn: function showbtn() {
+            this.showbtnnaw = true;
+        },
+        hidebtn: function hidebtn() {
+            this.showbtnnaw = false;
+        },
+        nextadd: function nextadd() {
+            this.addsave = true;
+        },
+        returnadd: function returnadd() {
+            this.addsave = false;
+        },
+
+        // deleteStudentm(){
+        //     alert(this.checkStudent);
+        //     axios.delete('/studentsdata/', {id : this.checkStudent}).then(response=>{
+        //         this.$emit('refresh');
+        //     })
+        // },
+        updateStudent: function updateStudent(newCor) {
+            var _this = this;
+
+            this.addingloading = true;
+            // alert(newCor.id);
+            this.$http.patch("/studentsdata/" + newCor.id, newCor).then(function (response) {
+                _this.$emit('refresh');
+                _this.$toastr('add', {
+                    title: 'Successfully Updated ',
+                    msg: '',
+                    clickClose: true,
+                    timeout: 5000,
+                    position: 'toast-bottom-right',
+                    type: 'success'
+                });
+                _this.addingloading = false;
+                _this.addsave = false;
+            });
+        },
+        deleteStudent: function deleteStudent(list) {
+            var _this2 = this;
+
+            this.showloading = true;
+            var vm = this;
+            axios.delete('/studentsdata/' + list.user_id).then(function (response) {
+                // console.log(reponse);
+                _this2.$emit('refresh');
+                _this2.$toastr('add', {
+                    title: 'Successfully Deleted ' + list.last,
+                    msg: '',
+                    clickClose: true,
+                    timeout: 5000,
+                    position: 'toast-bottom-right',
+                    type: 'success'
+                });
+            }).catch(function (error) {
+                var errors = error.response;
+                console.log(errors);
+
+                if (errors.statusText === "Internal Server Error" || errors.status === 500) {
+                    if (errors.data) {
+                        vm.$toastr('add', {
+                            title: " Somethings wrong :'(",
+                            msg: "",
+                            clickClose: true,
+                            timeout: 5000,
+                            position: 'toast-bottom-right',
+                            type: 'error'
+                        });
+                    }
+                }
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "tr",
+    {
+      staticStyle: { "border-left": "1px solid #2ecc71" },
+      on: { mouseover: _vm.showbtn, mouseleave: _vm.hidebtn }
+    },
+    [
+      _c("td", [_vm._v(" " + _vm._s(_vm.list.idno))]),
+      _vm._v(" "),
+      _c("td", { staticClass: "text-success" }, [
+        _vm._v(_vm._s(_vm.list.fullname))
+      ]),
+      _vm._v(" "),
+      _vm.showloading
+        ? _c("td", [
+            _c("img", {
+              attrs: { src: "images/loading1.gif", alt: "loading..." }
+            })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.showbtnnaw && !_vm.showloading ? _c("td", [_vm._m(0)]) : _vm._e(),
+      _vm._v(" "),
+      _vm.showbtnnaw && !_vm.showloading
+        ? _c("td", [
+            _c(
+              "label",
+              {
+                staticClass: "badge badge-warning white-text",
+                staticStyle: { cursor: "pointer" },
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#viewModal" + _vm.list.id
+                },
+                on: {
+                  click: function($event) {
+                    _vm.$emit("getStudent", _vm.list)
+                  }
+                }
+              },
+              [_c("i", { staticClass: "mdi mdi-update" })]
+            ),
+            _vm._v("  "),
+            _c(
+              "label",
+              {
+                staticClass: "badge badge-danger ",
+                staticStyle: { cursor: "pointer" },
+                on: {
+                  click: function($event) {
+                    _vm.deleteStudent(_vm.list)
+                  }
+                }
+              },
+              [_c("i", { staticClass: "mdi mdi-delete" })]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "viewModal" + _vm.getcor.modalid,
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h4", { staticClass: "card-title" }, [
+                        _vm._v("College of " + _vm._s(_vm.getcor.department))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "form",
+                        {
+                          staticClass: "form-sample",
+                          attrs: { method: "post" }
+                        },
+                        [
+                          !_vm.addsave
+                            ? _c("div", [
+                                _c("p", { staticClass: "card-description" }, [
+                                  _vm._v(
+                                    "\n                Personal info\n                "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Id No.")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.idno,
+                                                expression: "getcor.idno"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.getcor.idno
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "idno",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Surname")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.last,
+                                                expression: "getcor.last"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.getcor.last
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "last",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Firstname")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.first,
+                                                expression: "getcor.first"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.getcor.first
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "first",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Middlename")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.second,
+                                                expression: "getcor.second"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.getcor.second
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "second",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Semester ")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.getcor.semester,
+                                                  expression: "getcor.semester"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.getcor,
+                                                    "semester",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    value: "1st Semester"
+                                                  }
+                                                },
+                                                [_vm._v("1st Semester")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    value: "2nd Semester"
+                                                  }
+                                                },
+                                                [_vm._v("2nd Semester")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                { attrs: { value: "Summer" } },
+                                                [_vm._v("Summer")]
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _vm.getcor.sex == "Male"
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "form-group row" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "col-sm-3 col-form-label"
+                                              },
+                                              [_vm._v("Membership")]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(2),
+                                            _vm._v(" "),
+                                            _vm._m(3)
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.getcor.sex != "Male"
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "form-group row" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "col-sm-3 col-form-label"
+                                              },
+                                              [_vm._v("Sex")]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(4),
+                                            _vm._v(" "),
+                                            _vm._m(5)
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Date of Birth")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.dob,
+                                                expression: "getcor.dob"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              type: "date",
+                                              placeholder: "dd/mm/yyyy"
+                                            },
+                                            domProps: { value: _vm.getcor.dob },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "dob",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Email")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.em,
+                                                expression: "getcor.em"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              type: "text",
+                                              placeholder: "ckcmascs@eg.com"
+                                            },
+                                            domProps: { value: _vm.getcor.em },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "em",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Contact Number")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.contactn,
+                                                expression: "getcor.contactn"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { value: "+63" },
+                                            domProps: {
+                                              value: _vm.getcor.contactn
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "contactn",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Year Level")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.getcor.yearlevel,
+                                                  expression: "getcor.yearlevel"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.getcor,
+                                                    "yearlevel",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("option", [
+                                                _vm._v("1st Year")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("option", [
+                                                _vm._v("2nd Year")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("option", [
+                                                _vm._v("3rd Year")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("option", [
+                                                _vm._v("4th Year")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("option", [_vm._v("5th Year")])
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.addsave
+                            ? _c("div", [
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Present Address")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("textarea", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.pad,
+                                                expression: "getcor.pad"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { rows: "3" },
+                                            domProps: { value: _vm.getcor.pad },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "pad",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Home Address")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("textarea", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.had,
+                                                expression: "getcor.had"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { rows: "3" },
+                                            domProps: { value: _vm.getcor.had },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "had",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Father's ")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.ffullname,
+                                                expression: "getcor.ffullname"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              type: "text",
+                                              placeholder:
+                                                "Surname/Firstname/Middlename"
+                                            },
+                                            domProps: {
+                                              value: _vm.getcor.ffullname
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "ffullname",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Mother's ")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.mfullname,
+                                                expression: "getcor.mfullname"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              type: "text",
+                                              placeholder:
+                                                "Surname/Firstname/Middlename"
+                                            },
+                                            domProps: {
+                                              value: _vm.getcor.mfullname
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "mfullname",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("Place of Birth")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("textarea", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.pob,
+                                                expression: "getcor.pob"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              id: "exampleTextarea3",
+                                              rows: "4"
+                                            },
+                                            domProps: { value: _vm.getcor.pob },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "pob",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group row" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "col-sm-3 col-form-label"
+                                          },
+                                          [_vm._v("School Last Attended")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-9" }, [
+                                          _c("textarea", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.getcor.lastschool,
+                                                expression: "getcor.lastschool"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              id: "exampleTextarea4",
+                                              rows: "3"
+                                            },
+                                            domProps: {
+                                              value: _vm.getcor.lastschool
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.getcor,
+                                                  "lastschool",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" })
+                              ])
+                            : _vm._e()
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  !_vm.addsave
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("Close")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.addsave
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button" },
+                          on: { click: _vm.nextadd }
+                        },
+                        [_vm._v("Next")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.addsave
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-light",
+                          attrs: { type: "submit" },
+                          on: { click: _vm.returnadd }
+                        },
+                        [_vm._v("Return")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.addsave && !_vm.addingloading
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              _vm.updateStudent(_vm.getcor)
+                            }
+                          }
+                        },
+                        [_vm._v("Save changes")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.addsave && _vm.addingloading
+                    ? _c("img", {
+                        staticClass: "mx-4",
+                        attrs: {
+                          src: "images/loading1.gif",
+                          height: "50",
+                          alt: ""
+                        }
+                      })
+                    : _vm._e()
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "badge badge-gradient-warning px-3" }, [
+      _vm._v("Actions "),
+      _c("i", { staticClass: "mdi mdi-border-color" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [
+          _vm._v("Certificate Of Registration\n                    "),
+          _c(
+            "span",
+            {
+              staticClass: "card-description",
+              staticStyle: { "font-size": "12px" }
+            },
+            [_vm._v("(School Year: 2017-2018)")]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-4" }, [
+      _c("div", { staticClass: "form-radio" }, [
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: {
+              type: "radio",
+              name: "membershipRadios",
+              value: "Male",
+              checked: ""
+            }
+          }),
+          _vm._v(
+            "\n                            Male\n                            "
+          ),
+          _c("i", { staticClass: "input-helper" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-5" }, [
+      _c("div", { staticClass: "form-radio" }, [
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "radio", name: "membershipRadios", value: "Female" }
+          }),
+          _vm._v(
+            "\n                            Female\n                            "
+          ),
+          _c("i", { staticClass: "input-helper" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-4" }, [
+      _c("div", { staticClass: "form-radio" }, [
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "radio", name: "membershipRadios", value: "Male" }
+          }),
+          _vm._v(
+            "\n                            Male\n                            "
+          ),
+          _c("i", { staticClass: "input-helper" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-5" }, [
+      _c("div", { staticClass: "form-radio" }, [
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: {
+              type: "radio",
+              name: "membershipRadios",
+              value: "Female",
+              checked: ""
+            }
+          }),
+          _vm._v(
+            "\n                            Female\n                            "
+          ),
+          _c("i", { staticClass: "input-helper" })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-73ee5500", module.exports)
+  }
+}
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-6 grid-margin stretch-card" }, [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("i", {
+          staticClass: "float-right  mdi mdi-account-multiple-plus addbtn",
+          staticStyle: { "font-size": "30px", cursor: "pointer" },
+          attrs: { "data-toggle": "modal", "data-target": "#exampleModal" },
+          on: {
+            click: function($event) {
+              _vm.$emit("getdetails", _vm.datadepartment)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade scrollbar-pink",
+            attrs: {
+              id: "exampleModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-lg",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v("College of " + _vm._s(_vm.getdetails.name))
+                        ]),
+                        _vm._v(" "),
+                        !_vm.addsave
+                          ? _c("div", [
+                              _c(
+                                "form",
+                                {
+                                  staticClass: "form-sample",
+                                  attrs: {
+                                    method: "post",
+                                    "data-vv-scope": "form-1",
+                                    novalidate: ""
+                                  },
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      _vm.validateForm("form-1")
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("p", { staticClass: "card-description" }, [
+                                    _vm._v(
+                                      "\r\n                        Personal info\r\n                        "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "form-group row ",
+                                          class: {
+                                            "has-error": _vm.errors.has("id no")
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Id No.")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.idno,
+                                                    expression: "addcor.idno"
+                                                  },
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required",
+                                                    expression: "'required'"
+                                                  }
+                                                ],
+                                                staticClass:
+                                                  "form-control animated ",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid ": _vm.errors.has(
+                                                    "form-1.Id No."
+                                                  )
+                                                },
+                                                attrs: {
+                                                  autocomplete: "off",
+                                                  name: "Id No.",
+                                                  type: "text",
+                                                  placeholder: ""
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.idno
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "idno",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Id No."
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Id No.')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Id No."
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Id No."
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Surname")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.last,
+                                                    expression: "addcor.last"
+                                                  },
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required|alpha",
+                                                    expression:
+                                                      "'required|alpha'"
+                                                  }
+                                                ],
+                                                staticClass:
+                                                  "form-control animated",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-1.Surname"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  autocomplete: "off",
+                                                  type: "text",
+                                                  name: "Surname"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.last
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "last",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Surname"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Surname')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Surname"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Surname"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Firstname")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.first,
+                                                    expression: "addcor.first"
+                                                  },
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required|alpha",
+                                                    expression:
+                                                      "'required|alpha'"
+                                                  }
+                                                ],
+                                                staticClass:
+                                                  "form-control animated",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-1.Firstname"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  autocomplete: "off",
+                                                  type: "text",
+                                                  name: "Firstname"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.first
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "first",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Firstname"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Firstname')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Firstname"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Firstname"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Middlename")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.second,
+                                                    expression: "addcor.second"
+                                                  },
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required|alpha",
+                                                    expression:
+                                                      "'required|alpha'"
+                                                  }
+                                                ],
+                                                staticClass:
+                                                  "form-control animated",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-1.Middlename"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  autocomplete: "off",
+                                                  type: "text",
+                                                  name: "Middlename"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.second
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "second",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Middlename"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Middlename')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Middlename"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Middlename"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Semester ")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c(
+                                                "select",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "validate",
+                                                      rawName: "v-validate",
+                                                      value: "required",
+                                                      expression: "'required'"
+                                                    },
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.addcor.semester,
+                                                      expression:
+                                                        "addcor.semester"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  class: {
+                                                    input: true,
+                                                    "is-invalid": _vm.errors.has(
+                                                      "form-1.Semester"
+                                                    )
+                                                  },
+                                                  attrs: { name: "Semester" },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$selectedVal = Array.prototype.filter
+                                                        .call(
+                                                          $event.target.options,
+                                                          function(o) {
+                                                            return o.selected
+                                                          }
+                                                        )
+                                                        .map(function(o) {
+                                                          var val =
+                                                            "_value" in o
+                                                              ? o._value
+                                                              : o.value
+                                                          return val
+                                                        })
+                                                      _vm.$set(
+                                                        _vm.addcor,
+                                                        "semester",
+                                                        $event.target.multiple
+                                                          ? $$selectedVal
+                                                          : $$selectedVal[0]
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "option",
+                                                    {
+                                                      attrs: {
+                                                        value: "1st Semester"
+                                                      }
+                                                    },
+                                                    [_vm._v("1st Semester")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "option",
+                                                    {
+                                                      attrs: {
+                                                        value: "2nd Semester"
+                                                      }
+                                                    },
+                                                    [_vm._v("2nd Semester")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "option",
+                                                    {
+                                                      attrs: { value: "Summer" }
+                                                    },
+                                                    [_vm._v("Summer")]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Semester"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Semester')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Semester"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Semester"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Sex ")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-4" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "form-radio" },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "form-check-label"
+                                                    },
+                                                    [
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "validate",
+                                                            rawName:
+                                                              "v-validate",
+                                                            value:
+                                                              "required|in:Male,Female",
+                                                            expression:
+                                                              "'required|in:Male,Female'"
+                                                          },
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.addcor.sex,
+                                                            expression:
+                                                              "addcor.sex"
+                                                          }
+                                                        ],
+                                                        staticClass:
+                                                          "form-check-input",
+                                                        attrs: {
+                                                          name: "Sex",
+                                                          type: "radio",
+                                                          value: "Male",
+                                                          checked: ""
+                                                        },
+                                                        domProps: {
+                                                          checked: _vm._q(
+                                                            _vm.addcor.sex,
+                                                            "Male"
+                                                          )
+                                                        },
+                                                        on: {
+                                                          change: function(
+                                                            $event
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.addcor,
+                                                              "sex",
+                                                              "Male"
+                                                            )
+                                                          }
+                                                        }
+                                                      }),
+                                                      _vm._v(
+                                                        "\r\n                                    Male\r\n                                "
+                                                      ),
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "input-helper"
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-5" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "form-radio" },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "form-check-label"
+                                                    },
+                                                    [
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.addcor.sex,
+                                                            expression:
+                                                              "addcor.sex"
+                                                          }
+                                                        ],
+                                                        staticClass:
+                                                          "form-check-input",
+                                                        attrs: {
+                                                          name: "Sex",
+                                                          type: "radio",
+                                                          value: "Female"
+                                                        },
+                                                        domProps: {
+                                                          checked: _vm._q(
+                                                            _vm.addcor.sex,
+                                                            "Female"
+                                                          )
+                                                        },
+                                                        on: {
+                                                          change: function(
+                                                            $event
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.addcor,
+                                                              "sex",
+                                                              "Female"
+                                                            )
+                                                          }
+                                                        }
+                                                      }),
+                                                      _vm._v(
+                                                        "\r\n                                    Female\r\n                                "
+                                                      ),
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "input-helper"
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: _vm.errors.has(
+                                                "form-1.Sex"
+                                              ),
+                                              expression:
+                                                "errors.has('form-1.Sex')"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "animated invalid-feedback",
+                                          staticStyle: { "font-size": "10px" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.errors.first("form-1.Sex")
+                                            )
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Date of Birth")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required",
+                                                    expression: "'required'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.dob,
+                                                    expression: "addcor.dob"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-1.Date of Birth"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  type: "date",
+                                                  name: "Date of Birth",
+                                                  placeholder: "dd/mm/yyyy"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.dob
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "dob",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Date of Birth"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Date of Birth')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Date of Birth"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Date of Birth"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Email")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required|email",
+                                                    expression:
+                                                      "'required|email'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.em,
+                                                    expression: "addcor.em"
+                                                  }
+                                                ],
+                                                staticClass:
+                                                  "border-3 form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-1.Email"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  type: "email",
+                                                  name: "Email",
+                                                  placeholder: "ckcmascs@eg.com"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.em
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "em",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Email"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Email')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Email"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Email"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Contact Number")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required|numeric",
+                                                    expression:
+                                                      "'required|numeric'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.contactn,
+                                                    expression:
+                                                      "addcor.contactn"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-1.Contact Number"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  name: "Contact Number",
+                                                  value: "+63"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.contactn
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "contactn",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Contact Number"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Contact Number')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Contact Number"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Contact Number"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Year Level")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c(
+                                                "select",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "validate",
+                                                      rawName: "v-validate",
+                                                      value: "required",
+                                                      expression: "'required'"
+                                                    },
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.addcor.yearlevel,
+                                                      expression:
+                                                        "addcor.yearlevel"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  class: {
+                                                    input: true,
+                                                    "is-invalid": _vm.errors.has(
+                                                      "form-1.Year Level"
+                                                    )
+                                                  },
+                                                  attrs: { name: "Year Level" },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$selectedVal = Array.prototype.filter
+                                                        .call(
+                                                          $event.target.options,
+                                                          function(o) {
+                                                            return o.selected
+                                                          }
+                                                        )
+                                                        .map(function(o) {
+                                                          var val =
+                                                            "_value" in o
+                                                              ? o._value
+                                                              : o.value
+                                                          return val
+                                                        })
+                                                      _vm.$set(
+                                                        _vm.addcor,
+                                                        "yearlevel",
+                                                        $event.target.multiple
+                                                          ? $$selectedVal
+                                                          : $$selectedVal[0]
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("option", [
+                                                    _vm._v("1st Year")
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("option", [
+                                                    _vm._v("2nd Year")
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("option", [
+                                                    _vm._v("3rd Year")
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("option", [
+                                                    _vm._v("4th Year")
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("option", [
+                                                    _vm._v("5th Year")
+                                                  ])
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-1.Year Level"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-1.Year Level')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-1.Year Level"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-1.Year Level"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.addsave
+                          ? _c("div", [
+                              _c(
+                                "form",
+                                {
+                                  staticClass: "form-sample",
+                                  attrs: {
+                                    method: "post",
+                                    "data-vv-scope": "form-2",
+                                    novalidate: ""
+                                  },
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      _vm.validateForm1("form-2")
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Present Address")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("textarea", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required",
+                                                    expression: "'required'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.pad,
+                                                    expression: "addcor.pad"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-2.Present Address"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  name: "Present Address",
+                                                  id: "exampleTextarea1",
+                                                  rows: "3"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.pad
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "pad",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-2.Present Address"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-2.Present Address')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-2.Present Address"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-2.Present Address"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Home Address")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("textarea", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required",
+                                                    expression: "'required'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.had,
+                                                    expression: "addcor.had"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-2.Home Address"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  name: "Home Address",
+                                                  id: "exampleTextarea2",
+                                                  rows: "3"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.had
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "had",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-2.Home Address"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-2.Home Address')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-2.Home Address"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-2.Home Address"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Father's")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required",
+                                                    expression: "'required'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.ffullname,
+                                                    expression:
+                                                      "addcor.ffullname"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-2.Fathers Fullname"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  name: "Fathers Fullname"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.ffullname
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "ffullname",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-2.Fathers Fullname"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-2.Fathers Fullname')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-2.Fathers Fullname"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-2.Fathers Fullname"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Mother's")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required",
+                                                    expression: "'required'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.mfullname,
+                                                    expression:
+                                                      "addcor.mfullname"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-2.Mothers Fullname"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  name: "Mothers Fullname",
+                                                  rows: "1"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.mfullname
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "mfullname",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-2.Mothers Fullname"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-2.Mothers Fullname')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-2.Mothers Fullname"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-2.Mothers Fullname"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("Place of Birth")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("textarea", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required",
+                                                    expression: "'required'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.addcor.pob,
+                                                    expression: "addcor.pob"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-2.Place of Birth"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  name: "Place of Birth",
+                                                  rows: "3"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.pob
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "pob",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-2.Place of Birth"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-2.Place of Birth')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-2.Place of Birth"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-2.Place of Birth"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group row" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "col-sm-3 col-form-label"
+                                            },
+                                            [_vm._v("School Last Attended")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-sm-9" },
+                                            [
+                                              _c("textarea", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required",
+                                                    expression: "'required'"
+                                                  },
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value:
+                                                      _vm.addcor.lastschool,
+                                                    expression:
+                                                      "addcor.lastschool"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  input: true,
+                                                  "is-invalid": _vm.errors.has(
+                                                    "form-2.School Last Attended"
+                                                  )
+                                                },
+                                                attrs: {
+                                                  name: "School Last Attended",
+                                                  rows: "3"
+                                                },
+                                                domProps: {
+                                                  value: _vm.addcor.lastschool
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.addcor,
+                                                      "lastschool",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value: _vm.errors.has(
+                                                        "form-2.School Last Attended"
+                                                      ),
+                                                      expression:
+                                                        "errors.has('form-2.School Last Attended')"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "animated invalid-feedback",
+                                                  class: {
+                                                    input: true,
+                                                    flash: _vm.errors.has(
+                                                      "form-2.School Last Attended"
+                                                    )
+                                                  },
+                                                  staticStyle: {
+                                                    "font-size": "10px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.errors.first(
+                                                        "form-2.School Last Attended"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" })
+                                ]
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    !_vm.addsave
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-secondary",
+                            attrs: { type: "button", "data-dismiss": "modal" }
+                          },
+                          [_vm._v("Close")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.addsave
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.validateForm("form-1")
+                              }
+                            }
+                          },
+                          [_vm._v("Next")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.addsave
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-light",
+                            attrs: { type: "submit" },
+                            on: { click: _vm.returnadd }
+                          },
+                          [_vm._v("Return")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.addsave && _vm.addingloading
+                      ? _c("img", {
+                          staticClass: "mx-4",
+                          attrs: {
+                            src: "images/loading1.gif",
+                            height: "50",
+                            alt: ""
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.addsave && !_vm.addingloading
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { type: "submit" },
+                            on: {
+                              click: function($event) {
+                                _vm.validateForm1("form-2")
+                              }
+                            }
+                          },
+                          [_vm._v("Add Student")]
+                        )
+                      : _vm._e()
+                  ])
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade scrollbar-pink",
+            attrs: {
+              id: "exampleModal2",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-md",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "exampleModalLabel" }
+                      },
+                      [
+                        _vm._v(
+                          "College of " +
+                            _vm._s(_vm.getdetails.name) +
+                            " Information\r\n                            "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-header white" }, [
+                        _c("div", { staticClass: "media" }, [
+                          _c("img", {
+                            staticClass: "mx-5 my-2 ",
+                            staticStyle: { "border-radius": "50%" },
+                            attrs: {
+                              src: _vm.getdetails.srclogo,
+                              alt: "Department Logo",
+                              height: "80px",
+                              width: "80px"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("i", {
+                            staticClass:
+                              "mdi mdi-clipboard-account text-info d-flex align-self-start mr-3",
+                            staticStyle: { "font-size": "24px" }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "media-body col-sm-0" }, [
+                            _c("p", { staticClass: "card-text mt-2" }, [
+                              _vm._v(
+                                _vm._s(_vm.getdetails.stotal) +
+                                  " Registered Students"
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("h4", { staticClass: "card-title" }, [
+                            _vm._v("Department Description")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "media" }, [
+                            _c("i", {
+                              staticClass:
+                                "mdi mdi-information-variant icon-md text-info d-flex align-self-start mr-3"
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "media-body" }, [
+                              _c(
+                                "p",
+                                { staticClass: "card-text text-success" },
+                                [
+                                  _vm._v(
+                                    "Associate Dean: " +
+                                      _vm._s(_vm.getdetails.dean)
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "card-text" }, [
+                                _vm._v(_vm._s(_vm.getdetails.description))
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      !_vm.addsave
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-secondary",
+                              attrs: { type: "button", "data-dismiss": "modal" }
+                            },
+                            [_vm._v("Close")]
+                          )
+                        : _vm._e()
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "mr-2 mb-2 ",
+          staticStyle: { "border-radius": "50%" },
+          attrs: {
+            src: "/departmentlogo/" + _vm.datadepartment.logo,
+            alt: "Department Logo",
+            height: "60px",
+            width: "60px"
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "h4",
+          {
+            staticClass: "card-title mb-3",
+            staticStyle: { "margin-top": "-60px", "margin-left": "70px" }
+          },
+          [
+            _vm._v(
+              " \r\n                " +
+                _vm._s(_vm.datadepartment.name) +
+                "  \r\n                 "
+            ),
+            _c("i", {
+              staticClass: " mdi mdi-information-outline addbtn",
+              staticStyle: { "font-size": "20px", cursor: "pointer" },
+              attrs: {
+                "data-toggle": "modal",
+                "data-target": "#exampleModal2"
+              },
+              on: {
+                click: function($event) {
+                  _vm.$emit("getdetails", _vm.datadepartment)
+                }
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "pull-right row mx-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
+              }
+            ],
+            staticClass: "  form-control",
+            attrs: { type: "", placeholder: "Search Id No..." },
+            domProps: { value: _vm.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "table-responsive scrollbar-pink",
+            staticStyle: { height: "410px", "margin-top": "-40px" }
+          },
+          [
+            _c("table", { staticClass: "table-striped table table-hover" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.filteredList, function(studentlist) {
+                  return studentlist.department == _vm.datadepartment.name
+                    ? _c("studentslist", {
+                        key: studentlist.id,
+                        attrs: {
+                          checked: _vm.checkedNames,
+                          getcor: _vm.getcor,
+                          list: studentlist
+                        },
+                        on: {
+                          refresh: _vm.fetchStudentsdataref,
+                          deleteStudent: _vm.deleteStudent,
+                          getStudent: _vm.getStudent
+                        }
+                      })
+                    : _vm._e()
+                })
+              )
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [
+          _vm._v("Certificate Of Registration\r\n                            "),
+          _c(
+            "span",
+            {
+              staticClass: "card-description",
+              staticStyle: { "font-size": "12px" }
+            },
+            [_vm._v("(School Year: 2017-2018)")]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Id No.")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Fullname")]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-cefb5c2c", module.exports)
+  }
+}
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper " }, [
+    _c(
+      "div",
+      {},
+      [
+        _c("center", [
+          _vm.loaderarea
+            ? _c("img", {
+                staticStyle: { "margin-top": "20%" },
+                attrs: { height: "100px", src: "images/loading1.gif", alt: "" }
+              })
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.datadepartments, function(datadepartment) {
+            return _c("fetch", {
+              key: datadepartment.id,
+              attrs: {
+                getdetails: _vm.pickedinfo,
+                datadepartment: datadepartment
+              },
+              on: { getdetails: _vm.getdetails }
+            })
+          })
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c289e400", module.exports)
+  }
+}
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(240)
+/* template */
+var __vue_template__ = __webpack_require__(244)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\office.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-24b58924", Component.options)
+  } else {
+    hotAPI.reload("data-v-24b58924", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 240 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq__ = __webpack_require__(241);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchreq__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { listsreq: __WEBPACK_IMPORTED_MODULE_0__fetchreq___default.a },
+    data: function data() {
+        return {
+            finance: true,
+            requirements: [],
+            inputrequired: {
+                name: '',
+                description: ''
+            }
+        };
+    },
+    created: function created() {
+        this.fetchRequire();
+    },
+
+    methods: {
+        fetchRequire: function fetchRequire() {
+            var _this = this;
+
+            axios.get('requirementdata').then(function (response) {
+                _this.requirements = response.data.rlists;
+            });
+        },
+        addRequire: function addRequire() {
+            var _this2 = this;
+
+            axios.post('requirementdata', this.inputrequired).then(function (response) {
+                _this2.fetchRequire();
+                _this2.inputrequired.name = '';
+                _this2.inputrequired.description = '';
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(242)
+/* template */
+var __vue_template__ = __webpack_require__(243)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\fetchreq.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2b6e3be8", Component.options)
+  } else {
+    hotAPI.reload("data-v-2b6e3be8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 242 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['list'],
+    data: function data() {
+        return {
+            showdel: false,
+            requirements: []
         };
     },
 
     methods: {
-        fetchReq: function fetchReq() {
+        showbtn: function showbtn() {
+            this.showdel = true;
+        },
+        hidebtn: function hidebtn() {
+            this.showdel = false;
+        },
+        deletet: function deletet(list) {
             var _this = this;
 
-            axios.get('requirementdata').then(function (response) {
-                _this.reqlists = response.data.all;
+            axios.delete('/requirementdata/' + list.id).then(function (response) {
+                // console.log(reponse);
+                _this.$emit('refresh');
             });
         }
-    },
-    created: function created() {
-        this.fetchReq();
     }
 });
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c(
+      "td",
+      [
+        _c("center", [
+          _c("i", {
+            staticClass: "mdi mdi-delete-circle icon-md text-danger",
+            staticStyle: { cursor: "pointer" },
+            on: {
+              click: function($event) {
+                _vm.deletet(_vm.list)
+              }
+            }
+          })
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.list.name) + " ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.list.description) + " ")])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2b6e3be8", module.exports)
+  }
+}
+
+/***/ }),
+/* 244 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper " }, [
+    !_vm.finance
+      ? _c(
+          "div",
+          {},
+          [
+            _c("center"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6 grid-margin stretch-card" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v("Add Requirements")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-description" }),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        staticClass: "forms-sample",
+                        attrs: { method: "post" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.addRequire($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-3 col-form-label",
+                              attrs: { for: "exampleInputEmail2" }
+                            },
+                            [_vm._v("Title")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-9" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.inputrequired.name,
+                                  expression: "inputrequired.name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "exampleInputEmail2",
+                                placeholder: "Enter req. title"
+                              },
+                              domProps: { value: _vm.inputrequired.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.inputrequired,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-3 col-form-label",
+                              attrs: { for: "exampleInputPassword2" }
+                            },
+                            [_vm._v("Description")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-9" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.inputrequired.description,
+                                  expression: "inputrequired.description"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "exampleInputPassword2",
+                                placeholder: "Enter the description"
+                              },
+                              domProps: {
+                                value: _vm.inputrequired.description
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.inputrequired,
+                                    "description",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          { staticClass: "pull-right mr-3 btn btn-light" },
+                          [_vm._v("Cancel")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "pull-right btn btn-success mr-2",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Submit")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6 grid-margin stretch-card" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v("List of Requirements")
+                    ]),
+                    _vm._v(" "),
+                    _c("table", { staticClass: "table table-bordered" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.requirements, function(requirement) {
+                          return _c("listsreq", {
+                            key: requirement.id,
+                            attrs: { list: requirement },
+                            on: { refresh: _vm.fetchRequire }
+                          })
+                        })
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ],
+          1
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\r\n                          Delete\r\n                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\r\n                          Title\r\n                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\r\n                          Description\r\n                        "
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-24b58924", module.exports)
+  }
+}
+
+/***/ }),
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(246)
+/* template */
+var __vue_template__ = __webpack_require__(259)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\request.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-016dac52", Component.options)
+  } else {
+    hotAPI.reload("data-v-016dac52", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 246 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchrequest__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchrequest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchrequest__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsucc__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsucc___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fetchsucc__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej__ = __webpack_require__(253);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fetchrej___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__fetchrej__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fetchrest__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fetchrest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__fetchrest__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { fetchrequest: __WEBPACK_IMPORTED_MODULE_0__fetchrequest___default.a, fetchsucc: __WEBPACK_IMPORTED_MODULE_1__fetchsucc___default.a, fetchreject: __WEBPACK_IMPORTED_MODULE_2__fetchrej___default.a, fetchrest: __WEBPACK_IMPORTED_MODULE_3__fetchrest___default.a },
+    data: function data() {
+        return {
+            requests: [],
+            requestdones: [],
+            requestrejects: [],
+            requestrests: []
+
+        };
+    },
+    created: function created() {
+        this.fetchrequestdata();
+    },
+
+    methods: {
+        fetchrequestdata: function fetchrequestdata() {
+            var _this = this;
+
+            axios.get('requestdata').then(function (response) {
+                _this.requests = response.data.requestdata;
+                _this.requestrests = response.data.rest;
+            }), axios.get('signdata').then(function (response) {
+                _this.requestdones = response.data.requestsucc;
+            });
+            axios.get('rejectdata').then(function (response) {
+                _this.requestrejects = response.data.requestreject;
+                setTimeout(_this.fetchrequestdata(), 1000);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(248)
+/* template */
+var __vue_template__ = __webpack_require__(249)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\fetchrequest.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-415ae07d", Component.options)
+  } else {
+    hotAPI.reload("data-v-415ae07d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 248 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['requestdata'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {
+        rejectClearance: function rejectClearance(requestdata) {
+            var _this = this;
+
+            // alert(requestdata.id);
+            axios.delete('/requestdata/' + requestdata.bid).then(function (response) {
+                _this.$emit('refresh');
+            });
+        },
+        signClearance: function signClearance(requestdata) {
+            var _this2 = this;
+
+            alert('sdf');
+            axios.post('signdata', requestdata).then(function (response) {
+                alert('sdf');
+                // alert(response.data.alert)
+                _this2.$emit('refresh');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", { staticClass: "py-1" }, [
+      _c("img", {
+        attrs: {
+          src: "userprofilepic/" + _vm.requestdata.profilepic,
+          alt: "image"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.fullname) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.idno) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.yearlevel) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger btn-sm",
+          staticStyle: { cursor: "pointer" },
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.rejectClearance(_vm.requestdata)
+            }
+          }
+        },
+        [_c("i", { staticClass: "mdi mdi-delete-empty" }), _vm._v("Reject")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success btn-sm",
+          staticStyle: { cursor: "pointer" },
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.signClearance(_vm.requestdata)
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "mdi mdi-clipboard-check" }),
+          _vm._v("Sign Ndow")
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-415ae07d", module.exports)
+  }
+}
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(251)
+/* template */
+var __vue_template__ = __webpack_require__(252)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\fetchsucc.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0002de78", Component.options)
+  } else {
+    hotAPI.reload("data-v-0002de78", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 251 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['requestdata'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {
+        rejectClearance: function rejectClearance(requestdata) {
+            var _this = this;
+
+            axios.patch('/signdata/' + requestdata.id, requestdata).then(function (response) {
+                _this.$emit('refresh');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", { staticClass: "py-1" }, [
+      _c("img", {
+        attrs: {
+          src: "userprofilepic/" + _vm.requestdata.profilepic,
+          alt: "image"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.fullname) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.idno) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.yearlevel) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger btn-sm",
+          staticStyle: { cursor: "pointer" },
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.rejectClearance(_vm.requestdata)
+            }
+          }
+        },
+        [_c("i", { staticClass: "mdi mdi-delete-empty" }), _vm._v("Reject")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0002de78", module.exports)
+  }
+}
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(254)
+/* template */
+var __vue_template__ = __webpack_require__(255)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\fetchrej.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c3384f6", Component.options)
+  } else {
+    hotAPI.reload("data-v-2c3384f6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 254 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['requestdata'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {
+        rejectClearance: function rejectClearance(requestdata) {
+            var _this = this;
+
+            // alert(requestdata.id);
+            axios.delete('/requestdata/' + requestdata.bid).then(function (response) {
+                _this.$emit('refresh');
+            });
+        },
+        signClearance: function signClearance(requestdata) {
+            var _this2 = this;
+
+            axios.patch('/rejectdata/' + requestdata.id, requestdata).then(function (response) {
+                _this2.$emit('refresh');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", { staticClass: "py-1" }, [
+      _c("img", {
+        attrs: {
+          src: "userprofilepic/" + _vm.requestdata.profilepic,
+          alt: "image"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.fullname) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.idno) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.yearlevel) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success btn-sm",
+          staticStyle: { cursor: "pointer" },
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.signClearance(_vm.requestdata)
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "mdi mdi-clipboard-check" }),
+          _vm._v("Sign Now")
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2c3384f6", module.exports)
+  }
+}
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(257)
+/* template */
+var __vue_template__ = __webpack_require__(258)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\office\\registrar\\fetchrest.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-65f6c956", Component.options)
+  } else {
+    hotAPI.reload("data-v-65f6c956", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 257 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['requestdata'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {
+        rejectClearance: function rejectClearance(requestdata) {
+            var _this = this;
+
+            axios.patch('/signdata/' + requestdata.id, requestdata).then(function (response) {
+                _this.$emit('refresh');
+            });
+        },
+        signClearance: function signClearance(requestdata) {
+            var _this2 = this;
+
+            axios.post('/signdata/', requestdata).then(function (response) {
+                _this2.$emit('refresh');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", { staticClass: "py-1" }, [
+      _c("img", {
+        attrs: {
+          src: "userprofilepic/" + _vm.requestdata.profilepic,
+          alt: "image"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.fullname) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.idno) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.yearlevel) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("td")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-65f6c956", module.exports)
+  }
+}
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper " }, [
+    _c(
+      "div",
+      {},
+      [
+        _c("center"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
+          _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v("Request Students List")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-description" }),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table-responsive scrollbar-pink table table-striped"
+                  },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.requests, function(request) {
+                        return _c("fetchrequest", {
+                          key: request.id,
+                          attrs: { requestdata: request },
+                          on: { refresh: _vm.fetchrequestdata }
+                        })
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
+          _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v("Already Sign List")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-description" }),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table-responsive scrollbar-pink table table-striped"
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.requestdones, function(requestdone) {
+                        return _c("fetchsucc", {
+                          key: requestdone.id,
+                          attrs: { requestdata: requestdone },
+                          on: { refresh: _vm.fetchrequestdata }
+                        })
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
+          _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v("Rejected List")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-description" }),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table-responsive scrollbar-pink table table-striped"
+                  },
+                  [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.requestrejects, function(requestreject) {
+                        return _c("fetchreject", {
+                          key: requestreject.id,
+                          attrs: { requestdata: requestreject },
+                          on: { refresh: _vm.fetchrequestdata }
+                        })
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row", staticStyle: { height: "400px" } }, [
+          _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v("Students List (Pending)")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-description" }),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table-responsive scrollbar-pink table table-striped"
+                  },
+                  [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.requestrests, function(requestrest) {
+                        return _c("fetchrest", {
+                          key: requestrest.id,
+                          attrs: { requestdata: requestrest },
+                          on: { refresh: _vm.fetchrequestdata }
+                        })
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\n                            User\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Full name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Id No.\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Year level\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\n                            User\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Full name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Id No.\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Year level\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\n                            User\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Full name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Id No.\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Year level\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\n                            User\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Full name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Id No.\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Year level\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-016dac52", module.exports)
+  }
+}
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

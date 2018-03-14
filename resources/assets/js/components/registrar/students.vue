@@ -10,7 +10,7 @@
         </div>
     </div>
 </div>  
-
+<!-- v-if="type!=3 && type!='' " -->
 </template>
 
 <script>

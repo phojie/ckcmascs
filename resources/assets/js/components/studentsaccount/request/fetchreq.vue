@@ -41,8 +41,9 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <!-- <button style="cursor:pointer" v-if="!addingloading"  type="button" @click="createOffice" class="btn btn-primary">Save</button> -->
-            <!-- <img v-if="addingloading" src="images/loading1.gif"  class="mx-4"  height="50" style="" alt=""> -->
+            
+            <button style="cursor:pointer" v-if="!addingloading && active=='1'"  type="button" @click="requestNow(officedata)" class="btn btn-primary">Request</button>
+            <img v-if="addingloading" src="images/loading1.gif"  class="mx-4"  height="50" style="" alt="">
         </div>
         </div>
     </div>
@@ -54,7 +55,9 @@ export default {
     props:['office','officedata'],
     data(){
         return{
-        reqlists:[],
+            active:'',
+            reqlists:[],
+            addingloading:false
        
         }
     },
@@ -63,6 +66,16 @@ export default {
         fetchReq(){
             axios.get('requirementdata').then(response=>{
                 this.reqlists=response.data.all
+            })
+            axios.get('activitylog').then(response=>{
+                this.active=response.data.ac;
+            })
+        },
+         requestNow(officedata){
+             this.addingloading=true
+            // alert(officedata.user_id)
+            axios.post('requestdata',officedata).then(response=>{
+                this.addingloading=false
             })
         }
     },

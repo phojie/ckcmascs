@@ -10,7 +10,7 @@
         <td>
             <label  @click="deletethis(lsub)" style="cursor:pointer" class="badge  red accent-2">Delete</label>
             <label @click="$emit('getdetails',lsub)" data-toggle="modal" data-target="#ms" style="cursor:pointer"  class="badge  yellow accent-2">Manage Students</label>
-            <label style="cursor:pointer"  class="badge  light-green accent-2">View students</label>
+            <!-- <label style="cursor:pointer"  class="badge  light-green accent-2">View students</label> -->
             
             
         <!-- <i  class="mdi mdi-delete-circle icon-md text-danger" style="cursor: pointer;"></i> |
@@ -74,8 +74,8 @@ export default {
         return{
             studentlists:[],
             stfd:{
-                subid:'2',
-                stid:'2'
+                subid:'',
+                stid:''
             }
         }
     },

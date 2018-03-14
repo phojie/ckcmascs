@@ -16,9 +16,25 @@ class officeController extends Controller
      */
     public function index()
     {
-        $get=office::all();
+        $myid=auth::user()->id;
+        $getdata=DB::table('offices')
+            ->where('user_id',$myid)
+            ->first();
+
+        $getstatus=DB::table('signeds')
+            ->where('toid',$myid)
+            ->get();
+
+        
+        $get=DB::table('offices')
+            ->get();        
+
+
+
         return response()->json([
-            'officedata'=>$get
+            'officedata'=>$get,
+            'profof'=> $getdata,
+            'getstatus'=>$getstatus
         ]);
     }
 

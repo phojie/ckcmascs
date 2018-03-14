@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\log;
+use DB;
 class logController extends Controller
 {
     /**
@@ -14,8 +15,16 @@ class logController extends Controller
     public function index()
     {
        $getlog= Log::all();
-       return response()->json(["activitylog"=>$getlog]);
+    //    return response()->json([]);
 
+            $get=DB::table('finance_as')
+                ->where('id','1')
+                ->first();
+            
+            return response()->json([
+                'ac'=>$get->activation,
+                "activitylog"=>$getlog
+            ]);
     }
 
     /**
@@ -36,7 +45,10 @@ class logController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        
+
+       
     }
 
     /**
@@ -70,7 +82,7 @@ class logController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      
     }
 
     /**

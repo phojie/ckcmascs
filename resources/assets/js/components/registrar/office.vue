@@ -101,6 +101,14 @@
                   
         </div> -->
     </div>
+    <div v-if="type=='3' && user=='Finance'" class="">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <button v-if="active=='0'" style="cursor:pointer" @click="activate" type="button" class="pull-right btn btn-success mr-2">Activate Clearances</button>
+                <button v-if="active=='1'" style="cursor:pointer" @click="deactivate" type="button" class="pull-right btn btn-danger  mr-2">Deactivate Clearances</button>
+            </div>
+        </div>
+    </div>  
 </div>  
 
 </template>
@@ -110,8 +118,11 @@
 import listsreq from './fetchreq'
 export default {
     components:{listsreq},
-    data(){
+    data(){ 
         return{
+            user:'',
+            active:'',
+            type:'',
             requirements:[],
             inputrequired:{
                 name:'',
@@ -127,13 +138,32 @@ export default {
         fetchRequire(){
             axios.get('requirementdata').then(response=>{
                 this.requirements=response.data.rlists;
+            }),
+            axios.get('registrardata').then(response=>{
+                this.type=response.data.type;
+                this.user=response.data.user;
+            }),
+            axios.get('activitylog').then(response=>{
+                this.active=response.data.ac;
             })
+
+          
         },
         addRequire(){
             axios.post('requirementdata',this.inputrequired).then(response=>{
                 this.fetchRequire();
                 this.inputrequired.name='';
                 this.inputrequired.description='';
+            })
+        },
+        activate(){
+            axios.post('/act').then(response=>{
+                this.fetchRequire()
+            })
+        },
+        deactivate(){
+            axios.post('/act').then(response=>{
+                this.fetchRequire()
             })
         }
     }

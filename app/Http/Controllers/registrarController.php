@@ -7,6 +7,7 @@ use app\user;
 use app\staff;
 use auth;
 use DB;
+
 class registrarController extends Controller
 {
     /**
@@ -17,6 +18,8 @@ class registrarController extends Controller
     public function index()
     {
         $user=auth::user()->id;
+        $type=auth::user()->type;
+        $username=auth::user()->name;
         // $useracc=DB::table("users")
         //     ->where('id',$user)
         //     ->get();
@@ -31,6 +34,11 @@ class registrarController extends Controller
             ->leftJoin('users','users.id','=','user_id')
             ->get();
 
+        $officedata=DB::table('offices')
+            ->where('user_id',$user)
+            ->get();
+
+
         // $userdata=DB::table("users")
         // ->where('id',$user)
         // ->get();
@@ -38,6 +46,10 @@ class registrarController extends Controller
         // return $userdata;
         return response()->json([
             'registrardata'=>$userdata,
+            'user'=>$username,
+            'odata'=>$officedata,
+            'type'=>$type
+
             // 'accdata'=>$useracc
         ]);
     }

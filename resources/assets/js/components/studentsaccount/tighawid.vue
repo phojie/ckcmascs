@@ -1,8 +1,8 @@
 <template>
 <div>
-    <div class="container-scroller">
+    <div  v-for="studentdata in studentdatas" :key="studentdata.id" class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    <nav v-for="studentdata in studentdatas" :key="studentdata.id" class=" navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <nav class=" navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
        <!-- <center><a class="navbar-brand brand-logo" href="/">Ckcmascs.cf</a></center> -->
         <a class="navbar-brand brand-logo-mini" href="/"></a>
@@ -218,12 +218,12 @@
                 <i class="mdi mdi-chart-bar menu-icon"></i>
                 </a>
             </li> -->
-            <li class="nav-item"  :class="active4">
+            <!-- <li class="nav-item"  :class="active4">
                 <a class="nav-link" href="#"  @click="pageactiveoffice">
                 <span class="menu-title">My Profile</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
                 </a>
-            </li>
+            </li> -->
             <!-- <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="!#auth" aria-expanded="false" aria-controls="auth">
                 <span class="menu-title">Setting</span>
@@ -250,7 +250,7 @@
              <div class="sidebar-progress">
            
             <p>School Year: 2017-2018</p>
-            <p>2nd Semester</p>
+            <p>{{studentdata.semester}}</p>
             
             </div>
         </nav>
@@ -258,7 +258,7 @@
         <dashstu v-if="pagedash"></dashstu>
 		<!-- <insstudents v-if="pagestudents"></insstudents> -->
 		<dashreq v-if="pagerequest"></dashreq>
-		<insoffice v-if="pageoffice"></insoffice>
+		<!-- <insoffice v-if="pageoffice"></insoffice> -->
 
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->

@@ -141,7 +141,7 @@
                 <img :src="'userprofilepic/'+registrardata.profilepic" alt="image">
                 <!-- <img :src="ckcmascs/images/faces-clipart/pic-1.png" alt="image"> -->
                 
-                <span class="d-none d-lg-inline"> {{registrardata.first}} {{registrardata.last}}</span>
+                <span class="d-none d-lg-inline"> Registrar</span>
                
                 <span class="d-none d-lg-inline teal-text ml-1" style="font-size:9px;">Registrar</span>
                 
@@ -250,7 +250,7 @@
              <div class="sidebar-progress">
            
             <p>School Year: 2017-2018</p>
-            <p>2nd Semester</p>
+            <!-- <p>2nd Semester</p> -->
             
             </div>
         </nav>

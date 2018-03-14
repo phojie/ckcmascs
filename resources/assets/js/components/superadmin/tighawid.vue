@@ -131,10 +131,10 @@ export default {
           active4:'',
           
 		  admindatas:[],
-		  pagedash:false,
+		  pagedash:true,
           pagestudents:false,
           pagerequest:false,
-          pageoffice:true,
+          pageoffice:false,
 
           count:'',
           countt:'',

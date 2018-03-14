@@ -42,6 +42,7 @@ export default {
             )
         },
         signClearance(requestdata){
+            alert(requestdata.id)
             axios.post('/signdata/',requestdata).then(
                 response=>{
                     this.$emit('refresh');

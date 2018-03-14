@@ -33,4 +33,25 @@ class adminController extends Controller
 
 
     }
+
+    public function act(){
+        $get=DB::table('finance_as')
+            ->where('id','1')
+            ->first();
+
+        if($get->activation==0){
+            DB::table('finance_as')
+            ->where('id','1')
+            ->update([
+                'activation'=>'1'
+            ]);
+        }
+        else{
+            DB::table('finance_as')
+            ->where('id','1')
+            ->update([
+                'activation'=>'0'
+            ]);
+        }
+    }
 }

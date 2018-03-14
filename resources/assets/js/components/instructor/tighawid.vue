@@ -257,7 +257,8 @@
         <!-- partial -->
         <dashins v-if="pagedash"></dashins>
 		<insstudents v-if="pagestudents"></insstudents>
-		<insrequest v-if="pagerequest"></insrequest>
+		<regrequest v-if="pagerequest"></regrequest>
+		<!-- <insrequest v-if="pagerequest"></insrequest> -->
 		<insoffice v-if="pageoffice"></insoffice>
 
         <!-- content-wrapper ends -->

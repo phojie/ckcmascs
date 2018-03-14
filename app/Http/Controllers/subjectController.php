@@ -12,7 +12,8 @@ class subjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+public function index()
+
     {   
         $getuserid=auth::user()->id;
 
