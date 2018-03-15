@@ -52,7 +52,14 @@ public function __construct()
                     
                 // }
             }
+            else{
+                return "lol";
+            }
+            
 
+        }
+        else{
+            return "lol";
         }
         
        
