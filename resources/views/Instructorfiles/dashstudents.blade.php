@@ -2,5 +2,5 @@
 @section('maoniangbody')
 
     <tighawidstu></tighawidstu>
-
+    
 @endsection

@@ -62,7 +62,7 @@ public function __construct()
         //     return "lol";
         // }
         
-            return "fdfd";
+            return view('instructorfiles.dashstudents');
         
        
        
