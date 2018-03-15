@@ -19,9 +19,6 @@ Route::get('/test', function() {
     return view('testing');
 });
 
-Route::get('/ins',function(){
-    return view('instructorfiles.dashinstructor');
-});
 
 
 
