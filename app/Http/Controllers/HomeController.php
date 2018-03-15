@@ -27,7 +27,6 @@ public function __construct()
     {
         $gettype=auth::user()->type;
         $getid=auth::user()->id;
-        // $user=user::find($getid)->staff;
         $user=DB::table('staff')
             ->where('user_id',$getid)
             ->first();
@@ -38,22 +37,13 @@ public function __construct()
         elseif($gettype == -1 || $gettype == 3){
             return view('registrarfiles.dashregistrar');
         }
-        //  elseif($gettype == -1 ){
-        //     return view('registrarfiles.dashregistrar');
-        //  }
         elseif($gettype == 2 ){
             return view('instructorfiles.dashstudents');
-            // return 'Im in';
         }
-       
-  
-
         elseif($gettype == 1)
         {
             if($user->ad==1){
                 return "your account was disable";
-                // return view('adminfiles.dashadmin');
-                
             }
             elseif($user->ad==0){
     
