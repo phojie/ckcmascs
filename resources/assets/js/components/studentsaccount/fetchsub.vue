@@ -1,16 +1,17 @@
 <template>
-    <div  class="row " style="height:37px">
+    <div class="row " style="height:37px">
         <div style="font-size:15px" class="col-md-12 stretch-card grid-margin">
             <div class="col-md-3 offset-md-1">
-            {{office.name}}
+            {{sub.subject}}
             </div>
             <div class="col-md-5">
-            {{office.assign}}
+            {{sub.fullname}}
             </div>
             <div  class="col-md-3">
-               <label  v-if="office.status!='Signed'" class="badge badge-gradient-warning" style="cursor: pointer;">Pending</label>
+            
+               <label v-if="sub.status!='Signed'"  class="badge badge-gradient-warning" style="cursor: pointer;">Pending</label>
                 
-               <label v-if="office.status=='Signed'" class="badge badge-gradient-success" style="cursor: pointer;">Signed</label>
+               <label v-if="sub.status=='Signed'"  class="badge badge-gradient-success" style="cursor: pointer;">Signed</label>
             </div>
         </div>
     </div>
@@ -23,7 +24,7 @@ export default {
             status:''
             }
     },
-    props:['office'],
+    props:['sub'],
     methods:{
         getStatus(){
             // axios.('d').then(response=>{

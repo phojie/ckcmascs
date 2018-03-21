@@ -3,7 +3,7 @@
         <td><center><i @click="deletet(list)" style="cursor:pointer" class="mdi mdi-delete-circle icon-md text-danger"></i></center></td>
         <td>{{list.name}} </td>
         <td>{{list.description}} </td>
-        <td>{{list.description}} </td>
+        <td>{{list.Subjects}} </td>
         
    
     </tr>

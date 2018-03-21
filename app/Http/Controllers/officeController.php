@@ -24,12 +24,11 @@ class officeController extends Controller
         $getstatus=DB::table('signeds')
             ->where('toid',$myid)
             ->get();
-
         
         $get=DB::table('offices')
+            ->leftJoin('signeds','offices.user_id','signeds.toid')
+            // ->where('byid','!=',$myid)
             ->get();        
-
-
 
         return response()->json([
             'officedata'=>$get,

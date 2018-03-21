@@ -24,8 +24,30 @@ class instructorController extends Controller
         // $userdata=DB::table("staff")
         //     ->where('user_id',$user)
         //     ->get();
+        
+        $getsub=DB::table('studentssubs')
+            ->where('student',$user)
+            ->get();
 
+        // $getins=DB::table('')
+        $getsts=DB::table('signeds')
+            ->where('byid',$user)
+            ->get();
 
+        $getins=DB::table('studentssubs')
+            ->leftJoin('staff','studentssubs.instructor','staff.user_id')
+            ->where('student',$user)
+            ->leftJoin('signeds','studentssubs.instructor','signeds.toid')
+            ->leftJoin('subjects','studentssubs.subjectcode','subjects.id')
+            // ->where('')
+            ->get();
+
+        $ge=DB::table('signeds')
+            ->where('byid',$user)
+            // ->leftJoin('students','signeds.byid','students.user_id')
+            ->leftJoin('staff','signeds.toid','staff.user_id')
+            ->get();
+      
         $userdata=DB::table("staff")
             ->where('user_id',$user)
             ->leftJoin('users','users.id','=','user_id')
@@ -35,6 +57,9 @@ class instructorController extends Controller
         // return $userdata;
         return response()->json([
             'instructordata'=>$userdata,
+            'subdata'=>$getsub,
+            'getins'=>$getins,
+            'ge'=>$ge
             // 'accdata'=>$useracc
         ]);
     }

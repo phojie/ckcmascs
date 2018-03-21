@@ -42,6 +42,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('rejectdata', 'rejectController');
     Route::resource('subjectdata', 'subjectController');
     Route::resource('officedata', 'officeController');
+    Route::resource('studentsSubdata', 'studentsSubController');
     
     Route::post('/act','adminController@act');
     Route::post('/updatedartmentlogo', 'uploadimageController@updatedartmentlogo');

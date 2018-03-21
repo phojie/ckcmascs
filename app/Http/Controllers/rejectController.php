@@ -53,7 +53,28 @@ class rejectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datenw = date("F j, Y");
+
+        $myid=auth::user()->id;
+        \Log::info('ds');
+        DB::table('signeds')->insert([
+            'byid'=> $request->bid,
+            'toid'=> $myid,
+            'subject'=>$request->subject,
+            'status' => 'Rejected',
+            'updated'=>$datenw
+        ]);
+
+        DB::table('requestfroms')
+            ->where('bid',$request->bid)
+            ->where('toid',$myid)
+            ->where('subject',$request->subject)
+            ->delete();
+
+        //     \Log::info('sfdf');
+        return response()->json([
+            'alert'=>'alert'
+        ]);
     }
 
     /**
@@ -90,6 +111,7 @@ class rejectController extends Controller
         DB::table('signeds')
         ->where('byid', $request->byid)
         ->where('toid', $request->toid)
+        ->where('subject', $request->subject)
         ->update(['status' => 'Signed']);
     }
 

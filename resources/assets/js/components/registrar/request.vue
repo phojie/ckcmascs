@@ -30,6 +30,9 @@
                                 Department
                                 </th>
                                 <th>
+                                Subject
+                                </th>
+                                <th>
                                 </th>
                             </tr>
                             </thead>
@@ -68,6 +71,9 @@
                                 </th>
                                 <th>
                                 Department
+                                </th>
+                                <th>
+                                Subject
                                 </th>
                                 <th>
                                 </th>
@@ -110,6 +116,9 @@
                                 Department
                                 </th>
                                 <th>
+                                Subject
+                                </th>
+                                <th>
                                 </th>
                             </tr>
                             </thead>
@@ -128,7 +137,7 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                        <h4 class="card-title">Students List (Pending)</h4>
+                        <h4 class="card-title">Students List</h4>
                         <p class="card-description">
                         </p>
                         <table class="table-responsive scrollbar-pink table table-striped">
@@ -148,6 +157,9 @@
                                 </th>
                                 <th>
                                 Department
+                                </th>
+                                <th>
+                                Subject
                                 </th>
                                 <th>
                                 </th>

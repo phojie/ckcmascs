@@ -22,6 +22,11 @@ class studentsController extends Controller
         $getid=auth::user()->id;
 
         $st=student::all();
+
+        $getmystudent=DB::Table('studentssubs')
+            ->where('instructor',$getid)
+            ->count();
+
         $count=DB::table('students')
             ->count();
 
@@ -31,6 +36,7 @@ class studentsController extends Controller
 
     return response()->json([
             "studentlists"=>$st,
+            'getmystudent'=>$getmystudent,
             "count"=>$count,
             'studentsdata'=>$getdata
         ]);

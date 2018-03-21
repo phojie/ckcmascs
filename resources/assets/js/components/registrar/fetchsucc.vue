@@ -16,6 +16,11 @@
         {{requestdata.department}}
         </td>
         <td>
+        {{requestdata.subject}}
+        </td>
+        <td>
+        </td>
+        <td>
         <button type="button" @click="rejectClearance(requestdata)" style="cursor:pointer" class="btn btn-danger btn-sm"><i class="mdi mdi-delete-empty"></i>Reject</button>
         <!-- <button type="button" @click="signClearance(requestdata)" style="cursor:pointer" class="btn btn-success btn-sm"><i class="mdi mdi-clipboard-check"></i>Sign Now</button> -->
         

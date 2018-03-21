@@ -59,9 +59,27 @@ class requestController extends Controller
     public function store(Request $request)
     {
         $getid=auth::user()->id;
-        DB::table('requestfroms')->insert([
-            'bid'=>$getid,'toid'=>$request->user_id
-        ]);
+        
+        $countid=DB::table('requestfroms')
+            ->where('bid',$getid)
+            ->where('toid',$request->user_id)
+            ->where('subject',$request->subject)
+            ->count();
+
+        $countiid=DB::table('signeds')
+            ->where('byid',$getid)
+            ->where('toid',$request->user_id)
+            ->where('subject',$request->subject)
+            ->count();
+        if($countid>0 || $countiid>0){
+            
+        }
+        else{
+            DB::table('requestfroms')->insert([
+                'bid'=>$getid,'toid'=>$request->user_id,'subject'=>$request->subject
+            ]);
+        }
+       
     }
 
     /**

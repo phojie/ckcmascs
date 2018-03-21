@@ -32,6 +32,7 @@ export default {
 
         }
     },
+    
     methods:{
         rejectClearance(requestdata){
             // alert(requestdata.id);

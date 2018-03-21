@@ -29,12 +29,8 @@
                         <div class="form-group row">
                             <label for="exampleFormControlSelect42" class="col-sm-3 col-form-label">Subject</label>
                             <div class="col-sm-9">
-                                <select class=" form-control form-control-sm" id="exampleFormControlSelect42">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <select v-model="inputrequired.subject" class=" form-control form-control-sm" id="exampleFormControlSelect42">
+                                <option v-for="mysub in mysubs" >{{mysub.subject}}</option>
                                 </select>
                             </div>
                         </div>
@@ -90,10 +86,12 @@ export default {
     components:{listsreq},
     data(){
         return{
+            mysubs:[],
             requirements:[],
             inputrequired:{
                 name:'',
-                description:''
+                description:'',
+                subject:''
             }       
         }
     },
@@ -105,6 +103,10 @@ export default {
         fetchRequire(){
             axios.get('requirementdata').then(response=>{
                 this.requirements=response.data.rlists;
+            }),
+            axios.get('subjectdata').then(response=>{
+                this.mysubs=response.data.getsubs;
+                 
             })
         },
         addRequire(){
@@ -113,7 +115,8 @@ export default {
                 this.inputrequired.name='';
                 this.inputrequired.description='';
             })
-        }
+        },
+        
     }
 }
 </script>

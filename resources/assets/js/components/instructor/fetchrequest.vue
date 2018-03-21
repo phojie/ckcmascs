@@ -34,7 +34,6 @@ export default {
     },
     methods:{
         rejectClearance(requestdata){
-            // alert(requestdata.id);
             axios.delete('/requestdata/'+requestdata.bid).then(
                 response=>{
                     this.$emit('refresh');

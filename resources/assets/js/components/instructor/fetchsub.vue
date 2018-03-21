@@ -46,16 +46,25 @@
                             </th> </tr>
                             </thead> 
                             <tbody>
-                                <tr v-for="studentlist in studentlists" :key="studentlist.id">
-                                    <td>{{studentlist.id}}</td>
+                                
+                                <tr v-for="studentlist in filteredList" :key="studentlist.id">
+                                    
+                                    <td>{{studentlist.idno}}</td>
                                     <td>{{studentlist.fullname}}</td>
                                     <td>{{studentlist.department}}</td>
                                     <td>{{studentlist.yearlevel}}</td>
-                                    <td><label @click="addst(idsub,studentlist)" class="badge  light-green accent-2" style="cursor: pointer;">Add</label></td>
+                                    <td v-for="addedlist in addedlists" :key="addedlist.id">
+                                        <label v-if="studentlist.user_id==addedlist.student && addedlist.subjectcode==idsub.id" @click="delst(addedlist.id)" class="badge  red accent-2" style="cursor: pointer;">Cancel</label>
+                                   
+                                    </td>
+                                        <label   @click="addst(idsub,studentlist)" class="badge  light-green accent-2" style="cursor: pointer;">Add</label>
+                                    
                                 </tr>
                             </tbody></table></div></div></div>
+
                     </div>
                     <div class="modal-footer">
+                   <input type="text" v-model="search" class="col-md-5 form-control" placeholder="Search Fullname" aria-label="Username" aria-describedby="colored-addon3">
                         <!-- <button type="button" class="btn btn-success mr-2">Add</button> -->
                     </div>
                 </div>
@@ -72,21 +81,32 @@ export default {
     props:['lsub','idsub'],
     data(){
         return{
+            c:'',
+            addedlists:[],
             studentlists:[],
+            search:'',
+            jie:[],
             stfd:{
+                instructor:'',
                 subid:'',
                 stid:''
             }
         }
-    },
+    },  
     methods:{
         addst(idsub,studentlist){
+            this.stfd.instructor=idsub.user_id
             this.stfd.subid=idsub.id
             this.stfd.stid=studentlist.user_id
-            console.log(stfd.subid)
-            // alert(studentlist.user_id + " " + idsub.id)
-            // axios.post('subjectdata',this.studentd).then(response=>{
-            // })
+         
+            axios.post('studentsSubdata',this.stfd).then(response=>{
+                this.fetchStudentsdata();
+            })
+        },
+        delst(id){
+            axios.delete("/studentsSubdata/" + id).then(response=>{
+                this.fetchStudentsdata();
+            })
         },
         deletethis(getsubid){
             axios.delete('/subjectdata/'+getsubid.id).then(response=>{
@@ -94,17 +114,27 @@ export default {
             })
         },
         fetchStudentsdata(){
-              axios.get('studentsdata').then(response=>{
+            axios.get('studentsdata').then(response=>{
                 this.studentlists=response.data.studentlists;
-                setTimeout(this.fetchStudentsdata,1000);
                 
-                }
-            )
+                })
+            axios.get('studentsSubdata').then(response=>{
+                this.addedlists=response.data.data;
+                this.c=response.data.count;
+                })
+            
         }
     },
     created(){
         this.fetchStudentsdata()
-    }
+    },
+    computed:{
+        filteredList() {
+        return this.studentlists.filter(studentlist  => {
+            return studentlist.fullname.toLowerCase().includes(this.search.toLowerCase())
+                })
+            }
+    },
 
 }
 </script>

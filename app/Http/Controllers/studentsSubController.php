@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use auth;
-use App\requirement;
-class requirementsController extends Controller
+use DB;
+class studentsSubController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +14,18 @@ class requirementsController extends Controller
      */
     public function index()
     {
-        $userid=auth::user()->id;        
-        $allclearance=DB::table('requirements')
-            ->get();
-        $clearance=DB::table('requirements')
-            ->where('byid',$userid)
-            ->get();
+        $getid=auth::user()->id;
+        $data=DB::table('studentssubs')
+                ->where('instructor',$getid)
+                ->get();
+
+        $count=DB::table('studentssubs')
+            ->where('instructor',$getid)
+            ->count();
 
         return response()->json([
-            'rlists'=>$clearance,
-            'all'=>$allclearance
+            'data'=>$data,
+            'count'=>$count
         ]);
     }
 
@@ -46,15 +47,14 @@ class requirementsController extends Controller
      */
     public function store(Request $request)
     {
-        $datenw = date("F j, Y");
+        DB::table('studentssubs')->insert([
+            'instructor'=>$request->instructor,
+            'student'=>$request->stid,
+            'subjectcode'=>$request->subid
+        ]);
 
-        $gettheid=auth::user()->id;        
-        DB::table('requirements')->insert([
-            'byid'=> $gettheid, 
-            'name'=> $request->name,
-            'description'=> $request->description,
-            'subjects'=>$request->subject,
-            'updated'=>$datenw
+        return response()->json([
+            'alert'=>$request->instructor
         ]);
     }
 
@@ -100,7 +100,8 @@ class requirementsController extends Controller
      */
     public function destroy($id)
     {
-        requirement::destroy($id);
-
+        DB::table('studentssubs')
+            ->where('id',$id)
+            ->delete();
     }
 }

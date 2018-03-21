@@ -33,7 +33,7 @@
             <div class="card text-white" style="background-color: rgb(75, 81, 93);">
                 <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Total Students</h4> 
-                <h2 class="font-weight-normal mb-5">{{count}}</h2>
+                <h2 class="font-weight-normal mb-5">{{counttt}}</h2>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7 grid-margin stretch-card">
+                <!-- <div class="col-lg-7 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                         <h4 class="card-title">Students List Added</h4>
@@ -110,13 +110,17 @@
                             </thead>
                             <tbody>
                                
-                                <!-- <fetchsucc v-on:refresh="fetchrequestdata" v-bind:requestdata="requestdone" :key="requestdone.id" v-for="requestdone in requestdones"></fetchsucc> -->
+                               <ul  v-for="student in students">
+                                <li>{{student.id}}
+                                </li>
+                               </ul>
+                                <fetchsucc v-on:refresh="fetchrequestdata" v-bind:requestdata="requestdone" :key="requestdone.id" v-for="requestdone in requestdones"></fetchsucc>
                            
                             </tbody>
                         </table>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -136,7 +140,8 @@ export default {
     components:{fetch,fetchsub},
     data(){
         return{
-            count:'',
+            students:[],
+            counttt:'',
             countt:'',
             loaderarea:true,
             checkStudent:[],
@@ -157,7 +162,8 @@ export default {
                 createdat:''
             },
             pickedsub:{
-                id:''
+                id:'',
+                user_id:''
             },
             subs:[]
         }
@@ -169,6 +175,7 @@ export default {
     methods: {
         getsubdata(getid){
            this.pickedsub.id=getid.id
+           this.pickedsub.user_id=getid.user_id
         },
         createSubject(){
             axios.post('subjectdata',this.addsub).then(response=>{
@@ -204,6 +211,7 @@ export default {
             axios.get("studentsdata").then(
                 response=>{
                     this.count=response.data.count;
+                    this.counttt=response.data.getmystudent;
                 }
             )
             

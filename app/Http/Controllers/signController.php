@@ -69,6 +69,7 @@ class signController extends Controller
         DB::table('signeds')->insert([
             'byid'=> $request->bid,
             'toid'=> $myid,
+            'subject'=>$request->subject,
             'status' => 'Signed',
             'updated'=>$datenw
         ]);
@@ -76,7 +77,9 @@ class signController extends Controller
         DB::table('requestfroms')
             ->where('bid',$request->bid)
             ->where('toid',$myid)
+            ->where('subject',$request->subject)
             ->delete();
+
             \Log::info('sfdf');
         return response()->json([
             'alert'=>'alert'
@@ -119,6 +122,7 @@ class signController extends Controller
         DB::table('signeds')
             ->where('byid', $request->byid)
             ->where('toid', $request->toid)
+            ->where('subject', $request->subject)
             ->update(['status' => 'Rejected']);
     }
 

@@ -76976,6 +76976,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -77094,6 +77106,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['requestdata'],
@@ -77105,15 +77120,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         rejectClearance: function rejectClearance(requestdata) {
             var _this = this;
 
-            // alert(requestdata.id);
-            axios.delete('/requestdata/' + requestdata.bid).then(function (response) {
+            axios.post('/rejectdata/', requestdata).then(function (response) {
                 _this.$emit('refresh');
             });
+            // alert(requestdata.id);
+            // axios.delete('/requestdata/'+requestdata.bid).then(
+            //     response=>{
+            //         this.$emit('refresh');
+            //     }
+            // )
         },
         signClearance: function signClearance(requestdata) {
             var _this2 = this;
 
-            alert(requestdata.id);
             axios.post('/signdata/', requestdata).then(function (response) {
                 _this2.$emit('refresh');
             });
@@ -77148,6 +77167,8 @@ var render = function() {
     _c("td", [
       _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
     ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.subject) + "\n    ")]),
     _vm._v(" "),
     _c("td", [
       _c(
@@ -77274,6 +77295,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['requestdata'],
@@ -77319,6 +77345,10 @@ var render = function() {
     _c("td", [
       _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
     ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.subject) + "\n    ")]),
+    _vm._v(" "),
+    _c("td"),
     _vm._v(" "),
     _c("td", [
       _c(
@@ -77427,6 +77457,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['requestdata'],
@@ -77480,6 +77515,10 @@ var render = function() {
     _c("td", [
       _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
     ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.subject) + "\n    ")]),
+    _vm._v(" "),
+    _c("td"),
     _vm._v(" "),
     _c("td", [
       _c(
@@ -77785,7 +77824,7 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-body" }, [
                 _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Students List (Pending)")
+                  _vm._v("Students List")
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "card-description" }),
@@ -77857,43 +77896,9 @@ var staticRenderFns = [
           )
         ]),
         _vm._v(" "),
-        _c("th")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
         _c("th", [
           _vm._v(
-            "\n                            User\n                            "
-          )
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v(
-            "\n                            Full name\n                            "
-          )
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v(
-            "\n                            Id No.\n                            "
-          )
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v(
-            "\n                            Year level\n                            "
-          )
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v(
-            "\n                            Department\n                            "
+            "\n                            Subject\n                            "
           )
         ]),
         _vm._v(" "),
@@ -77937,6 +77942,12 @@ var staticRenderFns = [
           )
         ]),
         _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Subject\n                            "
+          )
+        ]),
+        _vm._v(" "),
         _c("th")
       ])
     ])
@@ -77974,6 +77985,58 @@ var staticRenderFns = [
         _c("th", [
           _vm._v(
             "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Subject\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\n                            User\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Full name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Id No.\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Year level\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Department\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v(
+            "\n                            Subject\n                            "
           )
         ]),
         _vm._v(" "),
@@ -79886,6 +79949,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -79896,7 +79963,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: { fetch: __WEBPACK_IMPORTED_MODULE_1__studentsfetch___default.a, fetchsub: __WEBPACK_IMPORTED_MODULE_0__fetchsub___default.a },
     data: function data() {
         return {
-            count: '',
+            students: [],
+            counttt: '',
             countt: '',
             loaderarea: true,
             checkStudent: [],
@@ -79917,7 +79985,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 createdat: ''
             },
             pickedsub: {
-                id: ''
+                id: '',
+                user_id: ''
             },
             subs: []
         };
@@ -79930,6 +79999,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         getsubdata: function getsubdata(getid) {
             this.pickedsub.id = getid.id;
+            this.pickedsub.user_id = getid.user_id;
         },
         createSubject: function createSubject() {
             var _this = this;
@@ -79964,6 +80034,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             axios.get("studentsdata").then(function (response) {
                 _this2.count = response.data.count;
+                _this2.counttt = response.data.getmystudent;
             });
         },
         logout: function logout(e) {
@@ -80098,14 +80169,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: ['lsub', 'idsub'],
     data: function data() {
         return {
+            c: '',
+            addedlists: [],
             studentlists: [],
+            search: '',
+            jie: [],
             stfd: {
+                instructor: '',
                 subid: '',
                 stid: ''
             }
@@ -80114,32 +80199,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         addst: function addst(idsub, studentlist) {
-            this.stfd.subid = idsub.id;
-            this.stfd.stid = studentlist.user_id;
-            console.log(stfd.subid);
-            // alert(studentlist.user_id + " " + idsub.id)
-            // axios.post('subjectdata',this.studentd).then(response=>{
-            // })
-        },
-        deletethis: function deletethis(getsubid) {
             var _this = this;
 
+            this.stfd.instructor = idsub.user_id;
+            this.stfd.subid = idsub.id;
+            this.stfd.stid = studentlist.user_id;
+
+            axios.post('studentsSubdata', this.stfd).then(function (response) {
+                _this.fetchStudentsdata();
+            });
+        },
+        delst: function delst(id) {
+            var _this2 = this;
+
+            axios.delete("/studentsSubdata/" + id).then(function (response) {
+                _this2.fetchStudentsdata();
+            });
+        },
+        deletethis: function deletethis(getsubid) {
+            var _this3 = this;
+
             axios.delete('/subjectdata/' + getsubid.id).then(function (response) {
-                _this.$emit('refresh');
+                _this3.$emit('refresh');
             });
         },
         fetchStudentsdata: function fetchStudentsdata() {
-            var _this2 = this;
+            var _this4 = this;
 
             axios.get('studentsdata').then(function (response) {
-                _this2.studentlists = response.data.studentlists;
-                setTimeout(_this2.fetchStudentsdata, 1000);
+                _this4.studentlists = response.data.studentlists;
+            });
+            axios.get('studentsSubdata').then(function (response) {
+                _this4.addedlists = response.data.data;
+                _this4.c = response.data.count;
             });
         }
     },
     created: function created() {
         this.fetchStudentsdata();
+    },
+
+    computed: {
+        filteredList: function filteredList() {
+            var _this5 = this;
+
+            return this.studentlists.filter(function (studentlist) {
+                return studentlist.fullname.toLowerCase().includes(_this5.search.toLowerCase());
+            });
+        }
     }
+
 });
 
 /***/ }),
@@ -80221,19 +80330,46 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.studentlists, function(studentlist) {
-                            return _c("tr", { key: studentlist.id }, [
-                              _c("td", [_vm._v(_vm._s(studentlist.id))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(studentlist.fullname))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(_vm._s(studentlist.department))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(studentlist.yearlevel))]),
-                              _vm._v(" "),
-                              _c("td", [
+                          _vm._l(_vm.filteredList, function(studentlist) {
+                            return _c(
+                              "tr",
+                              { key: studentlist.id },
+                              [
+                                _c("td", [_vm._v(_vm._s(studentlist.idno))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(studentlist.fullname))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(studentlist.department))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(studentlist.yearlevel))
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.addedlists, function(addedlist) {
+                                  return _c("td", { key: addedlist.id }, [
+                                    studentlist.user_id == addedlist.student &&
+                                    addedlist.subjectcode == _vm.idsub.id
+                                      ? _c(
+                                          "label",
+                                          {
+                                            staticClass: "badge  red accent-2",
+                                            staticStyle: { cursor: "pointer" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.delst(addedlist.id)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Cancel")]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                }),
+                                _vm._v(" "),
                                 _c(
                                   "label",
                                   {
@@ -80247,8 +80383,9 @@ var render = function() {
                                   },
                                   [_vm._v("Add")]
                                 )
-                              ])
-                            ])
+                              ],
+                              2
+                            )
                           })
                         )
                       ])
@@ -80257,7 +80394,34 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" })
+              _c("div", { staticClass: "modal-footer" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "col-md-5 form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Search Fullname",
+                    "aria-label": "Username",
+                    "aria-describedby": "colored-addon3"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                })
+              ])
             ])
           ]
         )
@@ -85328,7 +85492,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("h2", { staticClass: "font-weight-normal mb-5" }, [
-                        _vm._v(_vm._s(_vm.count))
+                        _vm._v(_vm._s(_vm.counttt))
                       ])
                     ])
                   ]
@@ -85400,9 +85564,7 @@ var render = function() {
                         ])
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(1)
+                  )
                 ]
               )
             : _vm._e()
@@ -85434,68 +85596,6 @@ var staticRenderFns = [
         _c("th", [
           _vm._v(
             "\r\n                                Action\r\n                                "
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-7 grid-margin stretch-card" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("h4", { staticClass: "card-title" }, [
-            _vm._v("Students List Added")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-description" }),
-          _vm._v(" "),
-          _c(
-            "table",
-            {
-              staticClass: "table-responsive scrollbar-pink table table-striped"
-            },
-            [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [
-                    _vm._v(
-                      "\r\n                                User\r\n                                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("th", [
-                    _vm._v(
-                      "\r\n                                Full name\r\n                                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("th", [
-                    _vm._v(
-                      "\r\n                                Id No.\r\n                                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("th", [
-                    _vm._v(
-                      "\r\n                                Year level\r\n                                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("th", [
-                    _vm._v(
-                      "\r\n                                Department\r\n                                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("th")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody")
-            ]
           )
         ])
       ])
@@ -85647,10 +85747,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -85658,10 +85754,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: { listsreq: __WEBPACK_IMPORTED_MODULE_0__fetchreq___default.a },
     data: function data() {
         return {
+            mysubs: [],
             requirements: [],
             inputrequired: {
                 name: '',
-                description: ''
+                description: '',
+                subject: ''
             }
         };
     },
@@ -85675,6 +85773,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('requirementdata').then(function (response) {
                 _this.requirements = response.data.rlists;
+            }), axios.get('subjectdata').then(function (response) {
+                _this.mysubs = response.data.getsubs;
             });
         },
         addRequire: function addRequire() {
@@ -85813,7 +85913,7 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.list.description) + " ")]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.list.description) + " ")])
+    _c("td", [_vm._v(_vm._s(_vm.list.Subjects) + " ")])
   ])
 }
 var staticRenderFns = []
@@ -85957,7 +86057,59 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(0),
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-sm-3 col-form-label",
+                            attrs: { for: "exampleFormControlSelect42" }
+                          },
+                          [_vm._v("Subject")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-9" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.inputrequired.subject,
+                                  expression: "inputrequired.subject"
+                                }
+                              ],
+                              staticClass: " form-control form-control-sm",
+                              attrs: { id: "exampleFormControlSelect42" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.inputrequired,
+                                    "subject",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.mysubs, function(mysub) {
+                              return _c("option", [
+                                _vm._v(_vm._s(mysub.subject))
+                              ])
+                            })
+                          )
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c(
                         "button",
@@ -85999,7 +86151,7 @@ var render = function() {
                       staticStyle: { height: "200px" }
                     },
                     [
-                      _vm._m(1),
+                      _vm._m(0),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -86024,42 +86176,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-sm-3 col-form-label",
-          attrs: { for: "exampleFormControlSelect42" }
-        },
-        [_vm._v("Subject")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-9" }, [
-        _c(
-          "select",
-          {
-            staticClass: " form-control form-control-sm",
-            attrs: { id: "exampleFormControlSelect42" }
-          },
-          [
-            _c("option", [_vm._v("1")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("2")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("3")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("4")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("5")])
-          ]
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -86330,6 +86446,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -86362,6 +86481,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.requestrejects = response.data.requestreject;
                 setTimeout(_this.fetchrequestdata(), 1000);
             });
+        }
+    },
+    computed: {
+        uniq: function uniq() {
+            return _.uniqBy(this.requests, 'fullname');
+        },
+        uniq2: function uniq2() {
+            return _.uniqBy(this.requestdones, 'fullname');
+        },
+        uniq3: function uniq3() {
+            return _.uniqBy(this.requestrejects, 'fullname');
         }
     }
 });
@@ -86456,7 +86586,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         rejectClearance: function rejectClearance(requestdata) {
             var _this = this;
 
-            // alert(requestdata.id);
             axios.delete('/requestdata/' + requestdata.bid).then(function (response) {
                 _this.$emit('refresh');
             });
@@ -86624,6 +86753,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['requestdata'],
@@ -86669,6 +86801,8 @@ var render = function() {
     _c("td", [
       _vm._v("\n    " + _vm._s(_vm.requestdata.department) + "\n    ")
     ]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.requestdata.subject) + "\n    ")]),
     _vm._v(" "),
     _c("td", [
       _c(
@@ -86784,6 +86918,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {};
     },
 
+
     methods: {
         rejectClearance: function rejectClearance(requestdata) {
             var _this = this;
@@ -86898,7 +87033,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      _vm._l(_vm.requests, function(request) {
+                      _vm._l(_vm.uniq, function(request) {
                         return _c("fetchrequest", {
                           key: request.id,
                           attrs: { requestdata: request },
@@ -86934,7 +87069,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      _vm._l(_vm.requestdones, function(requestdone) {
+                      _vm._l(_vm.uniq2, function(requestdone) {
                         return _c("fetchsucc", {
                           key: requestdone.id,
                           attrs: { requestdata: requestdone },
@@ -86970,7 +87105,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      _vm._l(_vm.requestrejects, function(requestreject) {
+                      _vm._l(_vm.uniq3, function(requestreject) {
                         return _c("fetchreject", {
                           key: requestreject.id,
                           attrs: { requestdata: requestreject },
@@ -86990,7 +87125,7 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-body" }, [
                 _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Students List (Pending)")
+                  _vm._v("Students List")
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "card-description" }),
@@ -87062,7 +87197,11 @@ var staticRenderFns = [
           )
         ]),
         _vm._v(" "),
-        _c("th")
+        _c("th", [
+          _vm._v(
+            "\n                            Subject\n                            "
+          )
+        ])
       ])
     ])
   },
@@ -87102,7 +87241,11 @@ var staticRenderFns = [
           )
         ]),
         _vm._v(" "),
-        _c("th")
+        _c("th", [
+          _vm._v(
+            "\n                            Subject\n                            "
+          )
+        ])
       ])
     ])
   },
@@ -87142,7 +87285,11 @@ var staticRenderFns = [
           )
         ]),
         _vm._v(" "),
-        _c("th")
+        _c("th", [
+          _vm._v(
+            "\n                            Subject\n                            "
+          )
+        ])
       ])
     ])
   },
@@ -88003,6 +88150,33 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchoffice__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchoffice___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchoffice__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsub__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsub___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fetchsub__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -88191,19 +88365,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { fetchoffice: __WEBPACK_IMPORTED_MODULE_0__fetchoffice___default.a },
+    components: { fetchoffice: __WEBPACK_IMPORTED_MODULE_0__fetchoffice___default.a, fetchsub: __WEBPACK_IMPORTED_MODULE_1__fetchsub___default.a },
     data: function data() {
         return {
+            hidew: false,
+            ye: true,
             hi: true,
             getsdatas: '',
             loadarea: true,
-            offices: []
+            offices: [],
+            subs: [],
+            phojie: ''
         };
     },
 
     methods: {
+        hidenow: function hidenow() {
+            this.hidew = false;
+        },
+        water: function water(getsdata) {
+            this.hidew = true;
+            var str = getsdata.fullname + "@ckcm";
+            var str2 = str.replace(/\s/g, '');
+            this.phojie = str2.repeat(600);
+        },
         print: function print() {
-            this.hi = false;
             window.print();
         },
         fetchStudentdata: function fetchStudentdata() {
@@ -88214,11 +88400,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.loadarea = false;
             }), axios.get('officedata').then(function (response) {
                 _this.offices = response.data.officedata;
+            }), axios.get('instructor').then(function (response) {
+                _this.subs = response.data.ge;
+                setTimeout(_this.fetchStudentdata(), 1000);
             });
         }
     },
     created: function created() {
         this.fetchStudentdata();
+    },
+
+    computed: {
+        uniq: function uniq() {
+            return _.uniqBy(this.offices, 'name');
+        },
+        uniq1: function uniq1() {
+            return _.uniqBy(this.subs, 'subject');
+        }
     }
 });
 
@@ -88338,28 +88536,34 @@ var render = function() {
           _vm._v("\n        " + _vm._s(_vm.office.assign) + "\n        ")
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "col-md-3" }, [
+          _vm.office.status != "Signed"
+            ? _c(
+                "label",
+                {
+                  staticClass: "badge badge-gradient-warning",
+                  staticStyle: { cursor: "pointer" }
+                },
+                [_vm._v("Pending")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.office.status == "Signed"
+            ? _c(
+                "label",
+                {
+                  staticClass: "badge badge-gradient-success",
+                  staticStyle: { cursor: "pointer" }
+                },
+                [_vm._v("Signed")]
+              )
+            : _vm._e()
+        ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c(
-        "label",
-        {
-          staticClass: "badge badge-gradient-warning",
-          staticStyle: { cursor: "pointer" }
-        },
-        [_vm._v("Pending")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -88392,6 +88596,25 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.getsdatas, function(getsdata) {
         return _c("div", { key: getsdata.id, staticClass: "row" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-lg badge badge-gradient-success",
+              staticStyle: { "margin-left": "30px" },
+              attrs: {
+                "data-toggle": "modal",
+                "data-target": "#print",
+                "data-backdrop": "false"
+              },
+              on: {
+                click: function($event) {
+                  _vm.water(getsdata)
+                }
+              }
+            },
+            [_vm._v("Print now")]
+          ),
+          _vm._v(" "),
           _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
             _c("div", { staticClass: "card" }, [
               _c(
@@ -88491,11 +88714,13 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._l(_vm.offices, function(office) {
-                    return _c("fetchoffice", {
-                      key: office.id,
-                      attrs: { office: office }
-                    })
+                  _vm._l(_vm.uniq, function(office) {
+                    return office.name != "Finance"
+                      ? _c("fetchoffice", {
+                          key: office.id,
+                          attrs: { office: office }
+                        })
+                      : _vm._e()
                   }),
                   _vm._v(" "),
                   _c("hr"),
@@ -88527,249 +88752,405 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      attrs: { "data-toggle": "modal", "data-target": "#print" }
-                    },
-                    [_vm._v("Print")]
-                  ),
+                  _vm._l(_vm.uniq1, function(sub) {
+                    return _c("fetchsub", { key: sub.id, attrs: { sub: sub } })
+                  }),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "modal fade",
-                      attrs: {
-                        id: "print",
-                        tabindex: "-1",
-                        "aria-labelledby": "exampleModalLongTitle"
-                      }
-                    },
-                    [
-                      _c(
+                  _vm.hidew
+                    ? _c(
                         "div",
                         {
-                          staticClass: "modal-dialog modal-lg",
-                          attrs: { role: "document" }
+                          staticClass: "modal fade",
+                          attrs: {
+                            id: "print",
+                            tabindex: "-1",
+                            "aria-labelledby": "exampleModalLongTitle"
+                          }
                         },
                         [
-                          _c("div", { staticClass: "modal-content" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "col-lg-12 grid-margin stretch-card"
-                              },
-                              [
-                                _c("div", { staticClass: "card" }, [
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                width: "100%",
+                                height: "100%",
+                                margin: "0",
+                                padding: "0",
+                                overflow: "hidden"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    height: "auto",
+                                    "min-height": "400%",
+                                    "border-radius": "0"
+                                  }
+                                },
+                                [
                                   _c(
                                     "div",
-                                    { staticClass: "card-body" },
+                                    { staticClass: "grid-margin stretch-card" },
                                     [
                                       _c(
                                         "div",
-                                        { staticClass: "row offset-2" },
+                                        {
+                                          staticClass: "card",
+                                          staticStyle: { height: "200%" }
+                                        },
                                         [
-                                          _vm._m(2, true),
+                                          _vm.ye
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass: "card-body",
+                                                  staticStyle: {
+                                                    position: "absolute",
+                                                    "z-index": "2",
+                                                    opacity: "0.3",
+                                                    width: "100%",
+                                                    height: "10%"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "button",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-primary",
+                                                      staticStyle: {
+                                                        border: "0px",
+                                                        width: "100px"
+                                                      },
+                                                      on: { click: _vm.print }
+                                                    },
+                                                    [_vm._v("Print")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "button",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-danger",
+                                                      staticStyle: {
+                                                        border: "0px"
+                                                      },
+                                                      attrs: {
+                                                        "data-dismiss": "modal",
+                                                        type: "button"
+                                                      },
+                                                      on: { click: _vm.hidenow }
+                                                    },
+                                                    [_vm._v("X")]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
                                           _vm._v(" "),
                                           _c(
                                             "div",
                                             {
-                                              staticClass:
-                                                "stretch-card grid-margin"
+                                              staticClass: "card-body",
+                                              staticStyle: {
+                                                position: "absolute",
+                                                "z-index": "1",
+                                                opacity: "0.2",
+                                                width: "100%",
+                                                height: "10%"
+                                              }
                                             },
                                             [
+                                              _c(
+                                                "i",
+                                                { staticClass: "grey-text" },
+                                                [
+                                                  _c("span", [
+                                                    _vm._v(_vm._s(_vm.phojie))
+                                                  ])
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "mt-5  card-body" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "row offset-3" },
+                                                [
+                                                  _vm._m(2, true),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "stretch-card grid-margin"
+                                                    },
+                                                    [
+                                                      _c("center", [
+                                                        _c(
+                                                          "p",
+                                                          {
+                                                            staticClass: "lead"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "CHRIST THE KING COLLEGE DE MARANDING"
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "p",
+                                                          {
+                                                            staticStyle: {
+                                                              "font-size":
+                                                                "15px"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "Maranding Lala Lanao del Norte"
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(
+                                                          "\r\n\r\n                                    Clearance for College "
+                                                        ),
+                                                        _c("br"),
+                                                        _vm._v(
+                                                          "\r\n                                    S.Y. 2017-2018"
+                                                        ),
+                                                        _c("br"),
+                                                        _vm._v(
+                                                          "\r\n                                    " +
+                                                            _vm._s(
+                                                              getsdata.semester
+                                                            ) +
+                                                            "\r\n\r\n                                "
+                                                        )
+                                                      ])
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _vm._m(3, true)
+                                                ]
+                                              ),
+                                              _vm._v(" "),
                                               _c("center", [
                                                 _c(
-                                                  "p",
-                                                  { staticClass: "lead" },
+                                                  "div",
+                                                  { staticClass: "row" },
                                                   [
-                                                    _vm._v(
-                                                      "CHRIST THE KING COLLEGE DE MARANDING"
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "col-md-4 "
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\r\n                                Name: " +
+                                                            _vm._s(
+                                                              getsdata.fullname
+                                                            ) +
+                                                            "\r\n                            "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "col-md-4 "
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\r\n                                Course: " +
+                                                            _vm._s(
+                                                              getsdata.department
+                                                            ) +
+                                                            "\r\n                            "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "col-md-4"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\r\n                                Year: " +
+                                                            _vm._s(
+                                                              getsdata.yearlevel
+                                                            ) +
+                                                            "\r\n                                \r\n                            "
+                                                        )
+                                                      ]
                                                     )
                                                   ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c("br"),
-                                                _vm._v(" "),
-                                                _c("p", [
-                                                  _vm._v(
-                                                    "Maranding Lala Lanao del Norte"
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("hr"),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "row" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "col-md-12 stretch-card grid-margin"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-md-3 offset-md-1"
+                                                        },
+                                                        [
+                                                          _c("B", [
+                                                            _vm._v("OFFICE")
+                                                          ])
+                                                        ],
+                                                        1
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-md-5"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\r\n                                    IN CHARGE\r\n                                    "
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-md-4"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\r\n                                    SIGNATURE\r\n                                    "
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
                                                   )
-                                                ]),
-                                                _vm._v(
-                                                  "\r\n\r\n                                    Clearance for College "
-                                                ),
-                                                _c("br"),
-                                                _vm._v(
-                                                  "\r\n                                    S.Y. 2017-2018"
-                                                ),
-                                                _c("br"),
-                                                _vm._v(
-                                                  "\r\n                                    " +
-                                                    _vm._s(getsdata.semester) +
-                                                    "\r\n\r\n                                "
-                                                )
-                                              ])
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._l(_vm.uniq, function(
+                                                office
+                                              ) {
+                                                return office.name != "Finance"
+                                                  ? _c("fetchoffice", {
+                                                      key: office.id,
+                                                      attrs: { office: office }
+                                                    })
+                                                  : _vm._e()
+                                              }),
+                                              _vm._v(" "),
+                                              _c("hr"),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "row" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "col-md-12 stretch-card grid-margin"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-md-3 offset-md-1"
+                                                        },
+                                                        [
+                                                          _c("B", [
+                                                            _vm._v("SUBJECTS")
+                                                          ])
+                                                        ],
+                                                        1
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-md-5"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\r\n                                    INSTRUCTOR\r\n                                    "
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-md-4"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\r\n                                    SIGNATURE\r\n                                    "
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._l(_vm.uniq1, function(sub) {
+                                                return _c("fetchsub", {
+                                                  key: sub.id,
+                                                  attrs: { sub: sub }
+                                                })
+                                              })
                                             ],
-                                            1
+                                            2
                                           ),
                                           _vm._v(" "),
-                                          _vm._m(3, true)
+                                          _c("br"),
+                                          _vm._v(" "),
+                                          _c("br"),
+                                          _vm._v(" "),
+                                          _c("br"),
+                                          _vm._v(" "),
+                                          _c("br")
                                         ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("center", [
-                                        _c("div", { staticClass: "row" }, [
-                                          _c(
-                                            "div",
-                                            { staticClass: "col-md-4 " },
-                                            [
-                                              _vm._v(
-                                                "\r\n                                Name: " +
-                                                  _vm._s(getsdata.fullname) +
-                                                  "\r\n                            "
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            { staticClass: "col-md-4 " },
-                                            [
-                                              _vm._v(
-                                                "\r\n                                Course: " +
-                                                  _vm._s(getsdata.department) +
-                                                  "\r\n                            "
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            { staticClass: "col-md-4" },
-                                            [
-                                              _vm._v(
-                                                "\r\n                                Year: " +
-                                                  _vm._s(getsdata.yearlevel) +
-                                                  "\r\n                                \r\n                            "
-                                              )
-                                            ]
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("hr"),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "row" }, [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "col-md-12 stretch-card grid-margin"
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "col-md-3 offset-md-1"
-                                              },
-                                              [_c("B", [_vm._v("OFFICE")])],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              { staticClass: "col-md-5" },
-                                              [
-                                                _vm._v(
-                                                  "\r\n                                    IN CHARGE\r\n                                    "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              { staticClass: "col-md-4" },
-                                              [
-                                                _vm._v(
-                                                  "\r\n                                    SIGNATURE\r\n                                    "
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.offices, function(office) {
-                                        return _c("fetchoffice", {
-                                          key: office.id,
-                                          attrs: { office: office }
-                                        })
-                                      }),
-                                      _vm._v(" "),
-                                      _c("hr"),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "row" }, [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "col-md-12 stretch-card grid-margin"
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "col-md-3 offset-md-1"
-                                              },
-                                              [_c("B", [_vm._v("SUBJECTS")])],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              { staticClass: "col-md-5" },
-                                              [
-                                                _vm._v(
-                                                  "\r\n                                    INSTRUCTOR\r\n                                    "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              { staticClass: "col-md-4" },
-                                              [
-                                                _vm._v(
-                                                  "\r\n                                    SIGNATURE\r\n                                    "
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm.hi
-                                        ? _c(
-                                            "button",
-                                            { on: { click: _vm.print } },
-                                            [_vm._v("Print")]
-                                          )
-                                        : _vm._e()
-                                    ],
-                                    2
+                                      )
+                                    ]
                                   )
-                                ])
-                              ]
-                            )
-                          ])
+                                ]
+                              )
+                            ]
+                          )
                         ]
                       )
-                    ]
-                  )
+                    : _vm._e()
                 ],
                 2
               )
@@ -88889,6 +89270,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchreq___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchreq__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchreqsub__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchreqsub___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fetchreqsub__);
 //
 //
 //
@@ -88968,17 +89351,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { fetchOfficess: __WEBPACK_IMPORTED_MODULE_0__fetchreq___default.a },
+    components: { fetchOfficess: __WEBPACK_IMPORTED_MODULE_0__fetchreq___default.a, fetchsub: __WEBPACK_IMPORTED_MODULE_1__fetchreqsub___default.a },
     data: function data() {
         return {
+            subs: [],
             offices: [],
             officedata: {
                 user_id: '',
-                name: ''
+                name: '',
+                subject: ''
+            },
+            subdata: {
+                user_id: '',
+                fullname: '',
+                subject: ''
             }
         };
     },
@@ -88988,16 +89380,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.officedata.name = office.name;
             this.officedata.user_id = office.user_id;
         },
+        getdetails2: function getdetails2(sub) {
+            this.subdata.fullname = sub.fullname;
+            this.subdata.user_id = sub.user_id;
+            this.subdata.subject = sub.subject;
+        },
         fetchOffices: function fetchOffices() {
             var _this = this;
 
             axios.get('officedata').then(function (response) {
                 _this.offices = response.data.officedata;
+            }), axios.get('instructor').then(function (response) {
+                _this.subs = response.data.getins;
             });
         }
     },
     created: function created() {
         this.fetchOffices();
+    },
+
+    computed: {
+        uniq: function uniq() {
+            return _.uniqBy(this.subs, 'subject');
+        },
+        uniq1: function uniq1() {
+            return _.uniqBy(this.offices, 'name');
+        }
     }
 });
 
@@ -89337,11 +89745,44 @@ var render = function() {
                 [
                   _vm._m(0),
                   _vm._v(" "),
-                  _vm._l(_vm.offices, function(office) {
+                  _vm._l(_vm.uniq1, function(office) {
                     return _c("fetchOfficess", {
                       key: office.id,
                       attrs: { officedata: _vm.officedata, office: office },
                       on: { getdetails: _vm.getdetails }
+                    })
+                  }),
+                  _vm._v(" "),
+                  _c("tbody")
+                ],
+                2
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("List of Subjects")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c(
+                "table",
+                { staticClass: "scrollbar-pink table" },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._l(_vm.uniq, function(sub) {
+                    return _c("fetchsub", {
+                      key: sub.id,
+                      attrs: { sub: sub, subdata: _vm.subdata },
+                      on: { getdetails: _vm.getdetails2 }
                     })
                   }),
                   _vm._v(" "),
@@ -89375,6 +89816,30 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [
           _vm._v("\r\n                    Location\r\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v(
+            "\r\n                    Subject Code \r\n                    "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\r\n                    Instructor\r\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\r\n                    Description\r\n                    ")
         ]),
         _vm._v(" "),
         _c("th")
@@ -97924,6 +98389,476 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(271)
+/* template */
+var __vue_template__ = __webpack_require__(272)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\studentsaccount\\fetchsub.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-46356d84", Component.options)
+  } else {
+    hotAPI.reload("data-v-46356d84", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 271 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            status: ''
+        };
+    },
+
+    props: ['sub'],
+    methods: {
+        getStatus: function getStatus() {
+            // axios.('d').then(response=>{
+
+            // })
+        }
+    },
+    created: function created() {
+        this.getStatus();
+    }
+});
+
+/***/ }),
+/* 272 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row ", staticStyle: { height: "37px" } }, [
+    _c(
+      "div",
+      {
+        staticClass: "col-md-12 stretch-card grid-margin",
+        staticStyle: { "font-size": "15px" }
+      },
+      [
+        _c("div", { staticClass: "col-md-3 offset-md-1" }, [
+          _vm._v("\n        " + _vm._s(_vm.sub.subject) + "\n        ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-5" }, [
+          _vm._v("\n        " + _vm._s(_vm.sub.fullname) + "\n        ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _vm.sub.status != "Signed"
+            ? _c(
+                "label",
+                {
+                  staticClass: "badge badge-gradient-warning",
+                  staticStyle: { cursor: "pointer" }
+                },
+                [_vm._v("Pending")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.sub.status == "Signed"
+            ? _c(
+                "label",
+                {
+                  staticClass: "badge badge-gradient-success",
+                  staticStyle: { cursor: "pointer" }
+                },
+                [_vm._v("Signed")]
+              )
+            : _vm._e()
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-46356d84", module.exports)
+  }
+}
+
+/***/ }),
+/* 273 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(274)
+/* template */
+var __vue_template__ = __webpack_require__(275)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\studentsaccount\\request\\fetchreqsub.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-46725501", Component.options)
+  } else {
+    hotAPI.reload("data-v-46725501", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 274 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['sub', 'subdata'],
+    data: function data() {
+        return {
+            addingloading: false,
+            reqlists: []
+
+        };
+    },
+
+    methods: {
+        requestNow: function requestNow(subdata) {
+            var _this = this;
+
+            this.addingloading = true;
+            // alert(officedata.user_id)
+            axios.post('requestdata', subdata).then(function (response) {
+                _this.addingloading = false;
+            });
+        },
+        fetchReq: function fetchReq() {
+            var _this2 = this;
+
+            axios.get('requirementdata').then(function (response) {
+                _this2.reqlists = response.data.all;
+            });
+        }
+    },
+    created: function created() {
+        this.fetchReq();
+    }
+});
+
+/***/ }),
+/* 275 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.sub.subject) + " \n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.sub.fullname) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.sub.description) + "\n    ")]),
+    _vm._v(" "),
+    _c("td", [
+      _c(
+        "label",
+        {
+          staticClass: "badge badge-gradient-secondary",
+          staticStyle: {
+            "line-height": "2",
+            height: "30px",
+            cursor: "pointer"
+          },
+          attrs: { "data-toggle": "modal", "data-target": "#addsub" },
+          on: {
+            click: function($event) {
+              _vm.$emit("getdetails", _vm.sub)
+            }
+          }
+        },
+        [_vm._v("View Requirements")]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addsub",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLongTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-md", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-md-12 grid-margin stretch-card" },
+                  [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v(
+                            "Office of " + _vm._s(_vm.subdata.fullname) + " "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-description" }, [
+                          _c(
+                            "ul",
+                            { staticClass: "list-arrow" },
+                            _vm._l(_vm.reqlists, function(reqlist) {
+                              return reqlist.Subjects == _vm.subdata.subject
+                                ? _c("li", { key: reqlist }, [
+                                    _vm._v(_vm._s(reqlist.description))
+                                  ])
+                                : _vm._e()
+                            })
+                          )
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                ),
+                _vm._v(" "),
+                !_vm.addingloading
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        staticStyle: { cursor: "pointer" },
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.requestNow(_vm.subdata)
+                          }
+                        }
+                      },
+                      [_vm._v("Request")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.addingloading
+                  ? _c("img", {
+                      staticClass: "mx-4",
+                      attrs: {
+                        src: "images/loading1.gif",
+                        height: "50",
+                        alt: ""
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
+        [_vm._v("List of Requirements")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-46725501", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

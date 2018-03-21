@@ -26,7 +26,7 @@
                 </tr>
                 
                 </thead> 
-                    <fetchOfficess v-on:getdetails="getdetails" v-bind:officedata="officedata" v-bind:office="office" :key="office.id" v-for="office in offices"></fetchOfficess>
+                    <fetchOfficess v-on:getdetails="getdetails" v-bind:officedata="officedata" v-bind:office="office" :key="office.id" v-for="office in uniq1"></fetchOfficess>
                 <tbody>
               
                 </tbody>
@@ -39,7 +39,8 @@
     </div>
 
 
-    <!-- <div class="row" style="height:400px" >
+
+    <div class="row" >
         <div class="col-lg-12 grid-margin stretch-card" >
             <div class="card"><div class="card-body"><h4 class="card-title">List of Subjects</h4> <div class="table-responsive">
                 <table class="scrollbar-pink table"><thead>
@@ -60,7 +61,7 @@
                 </tr>
                 
                 </thead> 
-                    <fetchOfficess v-on:getdetails="getdetails" v-bind:officedata="officedata" v-bind:office="office" :key="office.id" v-for="office in offices"></fetchOfficess>
+                    <fetchsub v-on:getdetails="getdetails2" v-bind:sub="sub" v-bind:subdata="subdata" :key="sub.id" v-for="sub in uniq"></fetchsub>
                 <tbody>
               
                 </tbody>
@@ -70,7 +71,7 @@
              </div>
              </div>
          </div>
-    </div> -->
+    </div>
     
    
 </div>
@@ -79,16 +80,24 @@
 
 <script>
 import fetchOfficess from './fetchreq'
+import fetchsub from './fetchreqsub'
 
 export default {
-    components:{fetchOfficess},
+    components:{fetchOfficess,fetchsub},
     data(){
         return{
+            subs:[],
             offices:[],
             officedata:{
                 user_id:'',
-                name:''  
-        }
+                name:'',
+                subject:''
+            },
+            subdata:{
+                user_id:'',
+                fullname:'',
+                subject:''  
+            }
         }
     },
     methods:{
@@ -96,14 +105,31 @@ export default {
             this.officedata.name=office.name
             this.officedata.user_id=office.user_id
         },
+        getdetails2(sub){
+            this.subdata.fullname=sub.fullname
+            this.subdata.user_id=sub.user_id
+            this.subdata.subject=sub.subject
+        },
         fetchOffices(){
             axios.get('officedata').then(response=>{
                  this.offices=response.data.officedata
+            }),
+            axios.get('instructor').then(
+                response=>{
+                this.subs=response.data.getins
             })
         }
     },
     created(){
         this.fetchOffices()
+    },
+    computed: {
+    uniq () {
+        return _.uniqBy(this.subs, 'subject')
+        },
+    uniq1 () {
+        return _.uniqBy(this.offices, 'name')
+        },
     }
 }
 </script>

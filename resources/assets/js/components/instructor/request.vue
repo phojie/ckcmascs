@@ -30,12 +30,13 @@
                                 Department
                                 </th>
                                 <th>
+                                Subject
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                                
-                                <fetchrequest v-on:refresh="fetchrequestdata" v-bind:requestdata="request" :key="request.id" v-for="request in requests"></fetchrequest>
+                                <fetchrequest v-on:refresh="fetchrequestdata" v-bind:requestdata="request" :key="request.id" v-for="request in uniq"></fetchrequest>
                            
                             </tbody>
                         </table>
@@ -70,12 +71,13 @@
                                 Department
                                 </th>
                                 <th>
+                                Subject
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                                
-                                <fetchsucc v-on:refresh="fetchrequestdata" v-bind:requestdata="requestdone" :key="requestdone.id" v-for="requestdone in requestdones"></fetchsucc>
+                                <fetchsucc v-on:refresh="fetchrequestdata" v-bind:requestdata="requestdone" :key="requestdone.id" v-for="requestdone in uniq2"></fetchsucc>
                            
                             </tbody>
                         </table>
@@ -110,12 +112,13 @@
                                 Department
                                 </th>
                                 <th>
+                                Subject
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                                
-                                <fetchreject v-on:refresh="fetchrequestdata" v-bind:requestdata="requestreject" :key="requestreject.id" v-for="requestreject in requestrejects"></fetchreject>
+                                <fetchreject v-on:refresh="fetchrequestdata" v-bind:requestdata="requestreject" :key="requestreject.id" v-for="requestreject in uniq3"></fetchreject>
                            
                             </tbody>
                         </table>
@@ -128,7 +131,7 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                        <h4 class="card-title">Students List (Pending)</h4>
+                        <h4 class="card-title">Students List</h4>
                         <p class="card-description">
                         </p>
                         <table class="table-responsive scrollbar-pink table table-striped">
@@ -199,6 +202,17 @@ export default {
                 setTimeout(this.fetchrequestdata(), 1000); 
             })
         }
+    },
+    computed: {
+    uniq () {
+        return _.uniqBy(this.requests, 'fullname')
+    },
+    uniq2 () {
+        return _.uniqBy(this.requestdones, 'fullname')
+    },
+    uniq3 () {
+        return _.uniqBy(this.requestrejects, 'fullname')
+    },
     }
 }
 </script>
