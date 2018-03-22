@@ -4,6 +4,7 @@
 @extends('html.layadmin')
 @section('maoniangbody')
 
-    <tighawidstu></tighawidstu>
+asdadasdsad
+    {{--  <tighawidstu></tighawidstu>  --}}
     
 @endsection

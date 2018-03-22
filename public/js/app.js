@@ -87402,6 +87402,280 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -87505,9 +87779,313 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\r\n    dsdsf\r\n")])
+  return _c(
+    "div",
+    _vm._l(_vm.studentdatas, function(studentdata) {
+      return _c(
+        "div",
+        { key: studentdata.id, staticClass: "container-scroller" },
+        [
+          _c(
+            "nav",
+            {
+              staticClass:
+                " navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
+            },
+            [
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "navbar-menu-wrapper d-flex align-items-stretch"
+                },
+                [
+                  _c("ul", { staticClass: "navbar-nav navbar-nav-right" }, [
+                    _c("li", { staticClass: "nav-item dropdown" }),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item dropdown" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link dropdown-toggle nav-profile",
+                          attrs: {
+                            id: "profileDropdown",
+                            href: "#",
+                            "data-toggle": "dropdown",
+                            "aria-expanded": "false"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "userprofilepic/" + studentdata.profilepic,
+                              alt: "image"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "d-none d-lg-inline" }, [
+                            _vm._v(
+                              " " +
+                                _vm._s(studentdata.first) +
+                                " " +
+                                _vm._s(studentdata.last)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "d-none d-lg-inline teal-text ml-1",
+                              staticStyle: { "font-size": "9px" }
+                            },
+                            [_vm._v("Student")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "dropdown-menu navbar-dropdown w-100",
+                          attrs: { "aria-labelledby": "profileDropdown" }
+                        },
+                        [
+                          _c("div", { staticClass: "dropdown-divider" }),
+                          _vm._v(" "),
+                          _c(
+                            "form",
+                            {
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "logout-form",
+                                action: "/logout",
+                                method: "POST"
+                              }
+                            },
+                            [
+                              _c("input", {
+                                attrs: { type: "hidden", name: "_token" },
+                                domProps: { value: _vm.csrf }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { href: "#" },
+                              on: { click: _vm.logout }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "mdi mdi-logout mr-2 text-primary"
+                              }),
+                              _vm._v(
+                                "\r\n                Signout\r\n                "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1, true)
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "container-fluid page-body-wrapper " }, [
+            _c(
+              "div",
+              { staticClass: "row row-offcanvas row-offcanvas-right" },
+              [
+                _c(
+                  "nav",
+                  {
+                    staticClass: "sidebar sidebar-offcanvas",
+                    attrs: { id: "sidebar" }
+                  },
+                  [
+                    _c("ul", { staticClass: "nav" }, [
+                      _c(
+                        "li",
+                        { staticClass: "nav-item", class: _vm.active1 },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link ",
+                              attrs: { href: "#" },
+                              on: { click: _vm.pageactivedash }
+                            },
+                            [
+                              _c("span", { staticClass: "menu-title" }, [
+                                _vm._v("Clearance")
+                              ]),
+                              _vm._v(" "),
+                              _c("i", { staticClass: "mdi mdi-home menu-icon" })
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "nav-item", class: _vm.active3 },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { href: "#" },
+                              on: { click: _vm.pageactiverequest }
+                            },
+                            [
+                              _c("span", { staticClass: "menu-title" }, [
+                                _vm._v("Request ")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "menu-sub-title" }, [
+                                _vm._v("( 2 new updates )")
+                              ]),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "mdi mdi-format-list-bulleted menu-icon"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "sidebar-progress" }, [
+                      _c("p", [_vm._v("Clearance Target")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "progress progress-sm" }, [
+                        _c("div", {
+                          staticClass: "progress-bar bg-gradient-success",
+                          style: "width:" + _vm.percent + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": "100",
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "100"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.count) + " Successfully Signed ")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "sidebar-progress" }, [
+                      _c("p", [_vm._v("School Year: 2017-2018")]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(studentdata.semester))])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.pagedash ? _c("dashstu") : _vm._e(),
+                _vm._v(" "),
+                _vm.pagerequest ? _c("dashreq") : _vm._e(),
+                _vm._v(" "),
+                _vm._m(2, true)
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    })
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
+      },
+      [
+        _c("a", {
+          staticClass: "navbar-brand brand-logo-mini",
+          attrs: { href: "/" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass:
+          "navbar-toggler navbar-toggler-right d-lg-none align-self-center",
+        attrs: { type: "button", "data-toggle": "offcanvas" }
+      },
+      [_c("span", { staticClass: "mdi mdi-menu" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "footer" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "d-sm-flex justify-content-center justify-content-sm-between"
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass:
+                "text-muted text-center text-sm-left d-block d-sm-inline-block"
+            },
+            [
+              _vm._v("Copyright © 2018 "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "https://www.ckcmascs.com/", target: "_blank" }
+                },
+                [_vm._v("Automated Student Clearance")]
+              ),
+              _vm._v(". All rights reserved.")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass:
+                "float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
+            },
+            [
+              _vm._v("A system with quality & made with "),
+              _c("i", { staticClass: "mdi mdi-heart text-danger" })
+            ]
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
