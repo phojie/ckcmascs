@@ -98,10 +98,11 @@
             </div>
         </nav>
         <!-- partial -->
-        <dashad v-if="pagedash"></dashad>
+        
+        <!-- <dashad v-if="pagedash"></dashad>
 		<managedash v-if="pagestudents"></managedash>
 		<managep v-if="pagerequest"></managep>
-		<manageoff v-if="pageoffice"></manageoff>
+		<manageoff v-if="pageoffice"></manageoff> -->
 
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
