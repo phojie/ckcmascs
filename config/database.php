@@ -59,7 +59,7 @@ return [
             'host' => 'sql12.freemysqlhosting.net',
             'port' => '3306',
             'database' => 'sql12228015',
-            'username' => ' sql12228015',
+            'username' => 'sql12228015',
             'password' => 'a3JuHSwarD',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
