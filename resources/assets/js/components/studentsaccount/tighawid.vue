@@ -255,9 +255,9 @@
             </div>
         </nav>
         <!-- partial -->
-        <dashstu v-if="pagedash"></dashstu>
+        <!-- <dashstu v-if="pagedash"></dashstu> -->
 		<!-- <insstudents v-if="pagestudents"></insstudents> -->
-		<dashreq v-if="pagerequest"></dashreq>
+		<!-- <dashreq v-if="pagerequest"></dashreq> -->
 		<!-- <insoffice v-if="pageoffice"></insoffice> -->
 
         <!-- content-wrapper ends -->
