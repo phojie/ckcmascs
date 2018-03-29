@@ -23,13 +23,6 @@ Vue.component('inputhead', require('./components/Input.vue'));
 Vue.component('message', require('./components/Message.vue'));
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-// testing area exit
-
-
-// department area
-// Vue.component('new-department', require('./components/deparment/new-department.vue'));
-// Vue.component('view-department', require('./components/deparment/view-department.vue'));
-// Vue.component('new-staff', require('./components/deparment/new-staff.vue'));
 
 
 
@@ -37,15 +30,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 Vue.component('loginarea', require('./components/homepage/loginarea.vue'));
 
 
-// admin area
-// Vue.component('tighawid', require('./components/admin/tighawid.vue'));
-// Vue.component('departmentpage', require('./components/admin/department.vue'));
-// Vue.component('staffpage', require('./components/admin/staff.vue'));
-// Vue.component('setting', require('./components/admin/setting.vue'));
-// Vue.component('log', require('./components/admin/log.vue'));
-// Vue.component('dash', require('./components/admin/dash.vue'));
 
-// Superadmin
 Vue.component('tighawid', require('./components/superadmin/tighawid.vue'));
 Vue.component('dashad', require('./components/superadmin/dash.vue'));
 Vue.component('managedash', require('./components/superadmin/department/dash.vue'));
@@ -69,7 +54,6 @@ Vue.component('insoffice', require('./components/instructor/office.vue'));
 Vue.component('insrequest', require('./components/instructor/request.vue'));
 
 //  user area
-// Vue.component('tighawiduser', require('./components/user/tighawid.vue'));
 
 // students area
 Vue.component('tighawidstu', require('./components/studentsaccount/tighawid.vue'));

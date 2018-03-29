@@ -26860,27 +26860,9 @@ Vue.component('inputhead', __webpack_require__(18));
 Vue.component('message', __webpack_require__(76));
 Vue.component('example-component', __webpack_require__(79));
 
-// testing area exit
-
-
-// department area
-// Vue.component('new-department', require('./components/deparment/new-department.vue'));
-// Vue.component('view-department', require('./components/deparment/view-department.vue'));
-// Vue.component('new-staff', require('./components/deparment/new-staff.vue'));
-
-
 // homepage area
 Vue.component('loginarea', __webpack_require__(82));
 
-// admin area
-// Vue.component('tighawid', require('./components/admin/tighawid.vue'));
-// Vue.component('departmentpage', require('./components/admin/department.vue'));
-// Vue.component('staffpage', require('./components/admin/staff.vue'));
-// Vue.component('setting', require('./components/admin/setting.vue'));
-// Vue.component('log', require('./components/admin/log.vue'));
-// Vue.component('dash', require('./components/admin/dash.vue'));
-
-// Superadmin
 Vue.component('tighawid', __webpack_require__(85));
 Vue.component('dashad', __webpack_require__(88));
 Vue.component('managedash', __webpack_require__(94));
@@ -26902,7 +26884,6 @@ Vue.component('insoffice', __webpack_require__(184));
 Vue.component('insrequest', __webpack_require__(190));
 
 //  user area
-// Vue.component('tighawiduser', require('./components/user/tighawid.vue'));
 
 // students area
 Vue.component('tighawidstu', __webpack_require__(202));
@@ -88059,13 +88040,9 @@ var staticRenderFns = [
             },
             [
               _vm._v("Copyright © 2018 "),
-              _c(
-                "a",
-                {
-                  attrs: { href: "https://www.ckcmascs.com/", target: "_blank" }
-                },
-                [_vm._v("Automated Student Clearance")]
-              ),
+              _c("a", { attrs: { href: "/", target: "_blank" } }, [
+                _vm._v("Automated Student Clearance")
+              ]),
               _vm._v(". All rights reserved.")
             ]
           ),
