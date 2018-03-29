@@ -1,8 +1,5 @@
-@extends('html.layadmin')
-@section('maoniangbody')
+dfd
 
+    {{--  <tighawidins></tighawidins>  --}}
 
-    <tighawidins></tighawidins>
-
- 
-@endsection
+dfdfd
