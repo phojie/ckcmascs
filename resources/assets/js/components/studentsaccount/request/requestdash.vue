@@ -26,7 +26,7 @@
                 </tr>
                 
                 </thead> 
-                    <fetchOfficess v-on:getdetails="getdetails" v-bind:officedata="officedata" v-bind:office="office" :key="office.id" v-for="office in uniq1"></fetchOfficess>
+                    <fetchOfficess v-on:getdetails="getdetails" v-bind:officedata="officedata" v-bind:office="office" v-if="office.name != 'Finance'"  :key="office.id" v-for="office in uniq1"></fetchOfficess>
                 <tbody>
               
                 </tbody>

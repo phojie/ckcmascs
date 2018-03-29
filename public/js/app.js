@@ -90184,11 +90184,13 @@ var render = function() {
                   _vm._m(0),
                   _vm._v(" "),
                   _vm._l(_vm.uniq1, function(office) {
-                    return _c("fetchOfficess", {
-                      key: office.id,
-                      attrs: { officedata: _vm.officedata, office: office },
-                      on: { getdetails: _vm.getdetails }
-                    })
+                    return office.name != "Finance"
+                      ? _c("fetchOfficess", {
+                          key: office.id,
+                          attrs: { officedata: _vm.officedata, office: office },
+                          on: { getdetails: _vm.getdetails }
+                        })
+                      : _vm._e()
                   }),
                   _vm._v(" "),
                   _c("tbody")
