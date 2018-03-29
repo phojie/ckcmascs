@@ -61,9 +61,10 @@ public function __construct()
         // else{
         //     return "lol";
         // }
-        // if($gettype == 1){
-           return 'TESTING'; // return view('instructorfiles.dashinstructor');
-        // }
+       
+        
+            return view('instructorfiles.dashstudents');
+        
         
     }
 }
