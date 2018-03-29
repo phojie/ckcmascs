@@ -62,7 +62,7 @@ public function __construct()
         //     return "lol";
         // }
         if($gettype == 1){
-            return view('instructorfiles.dashinstructor');
+           return 'TESTING'; // return view('instructorfiles.dashinstructor');
         }
         
     }
