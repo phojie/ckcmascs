@@ -1,7 +1,6 @@
-
 @extends('html.layadmin')
 @section('maoniangbody')
 
-    <tighawidstu></tighawidstu>
-   
+    {{--  <tighawidstu></tighawidstu>  --}}
+   asdasd
 @endsection
