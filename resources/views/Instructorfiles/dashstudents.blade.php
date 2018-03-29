@@ -2,5 +2,5 @@
 @section('maoniangbody')
 
     {{--  <tighawidstu></tighawidstu>  --}}
-   asdasd
+   asdasdasdsd
 @endsection
