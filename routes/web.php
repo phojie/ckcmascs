@@ -16,7 +16,8 @@ Auth::routes();
 
 
 Route::get('/test', function() {
-    return view('testing');
+    return view('instructorfiles.dashstudents');
+    // return view('testing');
 });
 
 
