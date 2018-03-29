@@ -63,7 +63,7 @@ public function __construct()
         // }
        
         
-            return view('adminfiles.superadmin');
+            return view('adminfiles.ins');
         // return view('instructorfiles.dashstudents');
         
         
