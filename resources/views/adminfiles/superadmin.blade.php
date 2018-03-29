@@ -2,8 +2,8 @@
 @section('maoniangbody')
 
 
-    {{--  <tighawid></tighawid>  --}}
-    <tighawidins></tighawidins>
+    <tighawid></tighawid>
+    {{--  <tighawidins></tighawidins>  --}}
 
  
 @endsection
