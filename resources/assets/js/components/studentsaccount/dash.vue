@@ -6,7 +6,7 @@
     </center>
 
     <div class="row" v-for="getsdata in getsdatas" :key="getsdata.id">
-    <button style="margin-left:30px;"  @click="water(getsdata)" class="btn btn-lg badge badge-gradient-success" data-toggle="modal" data-target="#print" data-backdrop="false" >Print now</button>
+    <button style="margin-left:30px;"  @click="water(getsdata)" class="btn btn-lg badge badge-gradient-success" data-toggle="modal" data-target="#print" data-backdrop="false" >Print now | Note: For validity of your Clearance please follow this setup in printing. *Scale:61, *Color: BW/none, *Margin:none, *Page: 1, *Layout: portrait  </button>
     
          <div class="col-lg-12 grid-margin stretch-card" >
             <div class="card" >
@@ -85,7 +85,7 @@
                                 </div>
                                 
                     </div>
-                        <fetchsub  v-bind:sub="sub" :key="sub.id" v-for="sub in uniq1"></fetchsub>
+                        <fetchsub v-if="sub.toid!='26'" v-bind:sub="sub" :key="sub.id" v-for="sub in uniq1"></fetchsub>
 
                     
                             
@@ -108,40 +108,41 @@
             </div>
     
                 <div style="" class="mt-5  card-body">
-                        <div class="row offset-3">
+                        <div class="row offset-1">
                             <div class="stretch-card grid-margin">
-                                <img src="images/Ckcm.png" height="100" wdith="100" alt="">
+                                <img src="images/Ckcm.png" height="120" wdith="120" alt="">
                             </div>
                             <div class="stretch-card grid-margin">
                                 <center>
-                                    <p class="lead">CHRIST THE KING COLLEGE DE MARANDING</p>
+                                    <p class="lead" style="font-size:30px">CHRIST THE KING COLLEGE DE MARANDING</p>
                                     
-                                    <p style="font-size:15px">Maranding Lala Lanao del Norte</p>
-
-                                    Clearance for College <br>
-                                    S.Y. 2017-2018<br>
-                                    {{getsdata.semester}}
+                                    <p class="lead" >Maranding Lala Lanao del Norte</p>
+                                    <p style="font-size:20px">
+                                        Clearance for College <br>
+                                        S.Y. 2017-2018<br>
+                                        {{getsdata.semester}}
+                                    </p>
 
                                 </center>
 
                             </div>
                             <div class="ml-5 stretch-card grid-margin">
-                                <img src="images/ComSci.png" style="margin-top:13px" height="75" width="75" alt="">
+                                <img src="images/ComSci.png" style="margin-top:13px" height="95" width="95" alt="">
                             </div>
                             
                         </div>
 
                     <center>
                         <div class="row">
-                            <div class="col-md-4 ">
+                            <div class=" text-capitalize lead col-md-4 ">
                                 Name: {{getsdata.fullname}}
                             </div>
 
-                            <div class="col-md-4 ">
+                            <div class="text-capitalize lead col-md-4 ">
                                 Course: {{getsdata.department}}
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="text-capitalize lead col-md-4">
                                 Year: {{getsdata.yearlevel}}
                                 
                             </div>
@@ -150,7 +151,7 @@
                         </div>
                     </center>
                         <hr>
-                            <div class="row">
+                            <div class="lead row">
                                 <div class="col-md-12 stretch-card grid-margin">
                                     <div class="col-md-3 offset-md-1">
                                     <B>OFFICE</B>
@@ -165,12 +166,12 @@
                                 
                             </div>
 
-                        <fetchoffice v-if="office.name!='Finance'"  v-bind:office="office" :key="office.id" v-for="office in uniq "></fetchoffice>
-                    <hr>
+                        <fetchoffice v-if="office.name!='Finance' "  v-bind:office="office" :key="office.id" v-for="office in uniq "></fetchoffice>
+                    <hr >
                     <div class="row">
                                 <div class="col-md-12 stretch-card grid-margin">
                                     <div class="col-md-3 offset-md-1">
-                                    <B>SUBJECTS</B>
+                                    SUBJECTS
                                     </div>
                                     <div class="col-md-5">
                                     INSTRUCTOR
@@ -181,7 +182,7 @@
                                 </div>
                                 
                     </div>
-                        <fetchsub  v-bind:sub="sub" :key="sub.id" v-for="sub in uniq1"></fetchsub>
+                        <fetchsub v-if="sub.toid!='26'" v-bind:sub="sub" :key="sub.id" v-for="sub in uniq1"></fetchsub>
                                 
                             </div>
 

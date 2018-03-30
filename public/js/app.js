@@ -88338,6 +88338,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -88502,14 +88503,14 @@ var render = function() {
       "div",
       {
         staticClass: "col-md-12 stretch-card grid-margin",
-        staticStyle: { "font-size": "15px" }
+        staticStyle: { "font-size": "18px" }
       },
       [
-        _c("div", { staticClass: "col-md-3 offset-md-1" }, [
+        _c("div", { staticClass: "text-capitalize col-md-3 offset-md-1" }, [
           _vm._v("\n        " + _vm._s(_vm.office.name) + "\n        ")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-5" }, [
+        _c("div", { staticClass: "text-capitalize col-md-5" }, [
           _vm._v("\n        " + _vm._s(_vm.office.assign) + "\n        ")
         ]),
         _vm._v(" "),
@@ -88519,7 +88520,7 @@ var render = function() {
                 "label",
                 {
                   staticClass: "badge badge-gradient-warning",
-                  staticStyle: { cursor: "pointer" }
+                  staticStyle: { "font-size": "18px", cursor: "pointer" }
                 },
                 [_vm._v("Pending")]
               )
@@ -88530,7 +88531,7 @@ var render = function() {
                 "label",
                 {
                   staticClass: "badge badge-gradient-success",
-                  staticStyle: { cursor: "pointer" }
+                  staticStyle: { "font-size": "18px", cursor: "pointer" }
                 },
                 [_vm._v("Signed")]
               )
@@ -88656,24 +88657,24 @@ var render = function() {
       "div",
       {
         staticClass: "col-md-12 stretch-card grid-margin",
-        staticStyle: { "font-size": "15px" }
+        staticStyle: { "font-size": "18px" }
       },
       [
-        _c("div", { staticClass: "col-md-3 offset-md-1" }, [
+        _c("div", { staticClass: "text-capitalize col-md-3 offset-md-1" }, [
           _vm._v("\n        " + _vm._s(_vm.sub.subject) + "\n        ")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-5" }, [
+        _c("div", { staticClass: "text-capitalize col-md-5" }, [
           _vm._v("\n        " + _vm._s(_vm.sub.fullname) + "\n        ")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "text-capitalize col-md-3" }, [
           _vm.sub.status != "Signed"
             ? _c(
                 "label",
                 {
                   staticClass: "badge badge-gradient-warning",
-                  staticStyle: { cursor: "pointer" }
+                  staticStyle: { "font-size": "18px", cursor: "pointer" }
                 },
                 [_vm._v("Pending")]
               )
@@ -88684,7 +88685,7 @@ var render = function() {
                 "label",
                 {
                   staticClass: "badge badge-gradient-success",
-                  staticStyle: { cursor: "pointer" }
+                  staticStyle: { "font-size": "18px", cursor: "pointer" }
                 },
                 [_vm._v("Signed")]
               )
@@ -88743,7 +88744,11 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Print now")]
+            [
+              _vm._v(
+                "Print now | Note: For validity of your Clearance please follow this setup in printing. *Scale:61, *Color: BW/none, *Margin:none, *Page: 1, *Layout: portrait  "
+              )
+            ]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-12 grid-margin stretch-card" }, [
@@ -88884,7 +88889,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.uniq1, function(sub) {
-                    return _c("fetchsub", { key: sub.id, attrs: { sub: sub } })
+                    return sub.toid != "26"
+                      ? _c("fetchsub", { key: sub.id, attrs: { sub: sub } })
+                      : _vm._e()
                   }),
                   _vm._v(" "),
                   _vm.hidew
@@ -89011,7 +89018,7 @@ var render = function() {
                                             [
                                               _c(
                                                 "div",
-                                                { staticClass: "row offset-3" },
+                                                { staticClass: "row offset-1" },
                                                 [
                                                   _vm._m(2, true),
                                                   _vm._v(" "),
@@ -89026,7 +89033,11 @@ var render = function() {
                                                         _c(
                                                           "p",
                                                           {
-                                                            staticClass: "lead"
+                                                            staticClass: "lead",
+                                                            staticStyle: {
+                                                              "font-size":
+                                                                "30px"
+                                                            }
                                                           },
                                                           [
                                                             _vm._v(
@@ -89038,10 +89049,7 @@ var render = function() {
                                                         _c(
                                                           "p",
                                                           {
-                                                            staticStyle: {
-                                                              "font-size":
-                                                                "15px"
-                                                            }
+                                                            staticClass: "lead"
                                                           },
                                                           [
                                                             _vm._v(
@@ -89049,20 +89057,32 @@ var render = function() {
                                                             )
                                                           ]
                                                         ),
-                                                        _vm._v(
-                                                          "\r\n\r\n                                    Clearance for College "
-                                                        ),
-                                                        _c("br"),
-                                                        _vm._v(
-                                                          "\r\n                                    S.Y. 2017-2018"
-                                                        ),
-                                                        _c("br"),
-                                                        _vm._v(
-                                                          "\r\n                                    " +
-                                                            _vm._s(
-                                                              getsdata.semester
-                                                            ) +
-                                                            "\r\n\r\n                                "
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "p",
+                                                          {
+                                                            staticStyle: {
+                                                              "font-size":
+                                                                "20px"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\r\n                                        Clearance for College "
+                                                            ),
+                                                            _c("br"),
+                                                            _vm._v(
+                                                              "\r\n                                        S.Y. 2017-2018"
+                                                            ),
+                                                            _c("br"),
+                                                            _vm._v(
+                                                              "\r\n                                        " +
+                                                                _vm._s(
+                                                                  getsdata.semester
+                                                                ) +
+                                                                "\r\n                                    "
+                                                            )
+                                                          ]
                                                         )
                                                       ])
                                                     ],
@@ -89081,7 +89101,8 @@ var render = function() {
                                                     _c(
                                                       "div",
                                                       {
-                                                        staticClass: "col-md-4 "
+                                                        staticClass:
+                                                          " text-capitalize lead col-md-4 "
                                                       },
                                                       [
                                                         _vm._v(
@@ -89097,7 +89118,8 @@ var render = function() {
                                                     _c(
                                                       "div",
                                                       {
-                                                        staticClass: "col-md-4 "
+                                                        staticClass:
+                                                          "text-capitalize lead col-md-4 "
                                                       },
                                                       [
                                                         _vm._v(
@@ -89113,7 +89135,8 @@ var render = function() {
                                                     _c(
                                                       "div",
                                                       {
-                                                        staticClass: "col-md-4"
+                                                        staticClass:
+                                                          "text-capitalize lead col-md-4"
                                                       },
                                                       [
                                                         _vm._v(
@@ -89133,7 +89156,7 @@ var render = function() {
                                               _vm._v(" "),
                                               _c(
                                                 "div",
-                                                { staticClass: "row" },
+                                                { staticClass: "lead row" },
                                                 [
                                                   _c(
                                                     "div",
@@ -89199,66 +89222,15 @@ var render = function() {
                                               _vm._v(" "),
                                               _c("hr"),
                                               _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "row" },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "col-md-12 stretch-card grid-margin"
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "col-md-3 offset-md-1"
-                                                        },
-                                                        [
-                                                          _c("B", [
-                                                            _vm._v("SUBJECTS")
-                                                          ])
-                                                        ],
-                                                        1
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "col-md-5"
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\r\n                                    INSTRUCTOR\r\n                                    "
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "col-md-4"
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\r\n                                    SIGNATURE\r\n                                    "
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              ),
+                                              _vm._m(4, true),
                                               _vm._v(" "),
                                               _vm._l(_vm.uniq1, function(sub) {
-                                                return _c("fetchsub", {
-                                                  key: sub.id,
-                                                  attrs: { sub: sub }
-                                                })
+                                                return sub.toid != "26"
+                                                  ? _c("fetchsub", {
+                                                      key: sub.id,
+                                                      attrs: { sub: sub }
+                                                    })
+                                                  : _vm._e()
                                               })
                                             ],
                                             2
@@ -89321,7 +89293,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "stretch-card grid-margin" }, [
       _c("img", {
-        attrs: { src: "images/Ckcm.png", height: "100", wdith: "100", alt: "" }
+        attrs: { src: "images/Ckcm.png", height: "120", wdith: "120", alt: "" }
       })
     ])
   },
@@ -89332,8 +89304,34 @@ var staticRenderFns = [
     return _c("div", { staticClass: "ml-5 stretch-card grid-margin" }, [
       _c("img", {
         staticStyle: { "margin-top": "13px" },
-        attrs: { src: "images/ComSci.png", height: "75", width: "75", alt: "" }
+        attrs: { src: "images/ComSci.png", height: "95", width: "95", alt: "" }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12 stretch-card grid-margin" }, [
+        _c("div", { staticClass: "col-md-3 offset-md-1" }, [
+          _vm._v(
+            "\r\n                                    SUBJECTS\r\n                                    "
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-5" }, [
+          _vm._v(
+            "\r\n                                    INSTRUCTOR\r\n                                    "
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4" }, [
+          _vm._v(
+            "\r\n                                    SIGNATURE\r\n                                    "
+          )
+        ])
+      ])
     ])
   }
 ]
