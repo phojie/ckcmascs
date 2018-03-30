@@ -89311,7 +89311,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "ml-5 stretch-card grid-margin" }, [
       _c("img", {
         staticStyle: { "margin-top": "13px" },
-        attrs: { src: "images/Comsci.png", height: "75", width: "75", alt: "" }
+        attrs: { src: "images/ComSci.png", height: "75", width: "75", alt: "" }
       })
     ])
   },
@@ -89332,7 +89332,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "ml-5 stretch-card grid-margin" }, [
       _c("img", {
         staticStyle: { "margin-top": "13px" },
-        attrs: { src: "images/Comsci.png", height: "75", width: "75", alt: "" }
+        attrs: { src: "images/ComSci.png", height: "75", width: "75", alt: "" }
       })
     ])
   }

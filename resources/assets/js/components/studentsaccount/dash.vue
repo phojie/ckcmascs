@@ -30,7 +30,7 @@
 
                             </div>
                             <div class="ml-5 stretch-card grid-margin">
-                                <img src="images/Comsci.png" style="margin-top:13px" height="75" width="75" alt="">
+                                <img src="images/ComSci.png" style="margin-top:13px" height="75" width="75" alt="">
                             </div>
                             
                         </div>
@@ -126,7 +126,7 @@
 
                             </div>
                             <div class="ml-5 stretch-card grid-margin">
-                                <img src="images/Comsci.png" style="margin-top:13px" height="75" width="75" alt="">
+                                <img src="images/ComSci.png" style="margin-top:13px" height="75" width="75" alt="">
                             </div>
                             
                         </div>
