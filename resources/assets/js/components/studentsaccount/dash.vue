@@ -13,7 +13,7 @@
                 <div class="card-body">
                         <div class="row offset-2">
                             <div class="stretch-card grid-margin">
-                                <img src="images/ckcm.png" height="100" wdith="100" alt="">
+                                <img src="images/Ckcm.png" height="100" wdith="100" alt="">
                             </div>
                             <div class="stretch-card grid-margin">
                                 <center>
@@ -30,7 +30,7 @@
 
                             </div>
                             <div class="ml-5 stretch-card grid-margin">
-                                <img src="images/comsci.png" style="margin-top:13px" height="75" width="75" alt="">
+                                <img src="images/Comsci.png" style="margin-top:13px" height="75" width="75" alt="">
                             </div>
                             
                         </div>
@@ -110,7 +110,7 @@
                 <div style="" class="mt-5  card-body">
                         <div class="row offset-3">
                             <div class="stretch-card grid-margin">
-                                <img src="images/ckcm.png" height="100" wdith="100" alt="">
+                                <img src="images/Ckcm.png" height="100" wdith="100" alt="">
                             </div>
                             <div class="stretch-card grid-margin">
                                 <center>
@@ -126,7 +126,7 @@
 
                             </div>
                             <div class="ml-5 stretch-card grid-margin">
-                                <img src="images/comsci.png" style="margin-top:13px" height="75" width="75" alt="">
+                                <img src="images/Comsci.png" style="margin-top:13px" height="75" width="75" alt="">
                             </div>
                             
                         </div>
