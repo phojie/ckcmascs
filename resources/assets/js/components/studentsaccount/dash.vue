@@ -151,7 +151,6 @@
                         </div>
                     </center>
                     <hr style="height:2px;border:none;color:#333;background-color:#333;" />
-                        <hr>
                             <div class="lead row">
                                 <div class="col-md-12 stretch-card grid-margin">
                                     <div class="col-md-3 offset-md-1">

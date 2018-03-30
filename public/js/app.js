@@ -88345,7 +88345,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -89167,8 +89166,6 @@ var render = function() {
                                                   "background-color": "#333"
                                                 }
                                               }),
-                                              _vm._v(" "),
-                                              _c("hr"),
                                               _vm._v(" "),
                                               _c(
                                                 "div",
