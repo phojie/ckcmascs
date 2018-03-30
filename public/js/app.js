@@ -89161,9 +89161,7 @@ var render = function() {
                                               _c("hr", {
                                                 staticStyle: {
                                                   height: "2px",
-                                                  border: "none",
-                                                  color: "black",
-                                                  "background-color": "black"
+                                                  border: "none"
                                                 }
                                               }),
                                               _vm._v(" "),
@@ -89236,9 +89234,7 @@ var render = function() {
                                               _c("hr", {
                                                 staticStyle: {
                                                   height: "2px",
-                                                  border: "none",
-                                                  color: "black",
-                                                  "background-color": "black"
+                                                  border: "none"
                                                 }
                                               }),
                                               _vm._v(" "),
@@ -89333,7 +89329,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12 stretch-card grid-margin" }, [
+      _c("div", { staticClass: "lead col-md-12 stretch-card grid-margin" }, [
         _c("div", { staticClass: "col-md-3 offset-md-1" }, [
           _vm._v(
             "\r\n                                    SUBJECTS\r\n                                    "

@@ -150,7 +150,7 @@
 
                         </div>
                     </center>
-                    <hr style="height:2px;border:none;color:black;background-color:black;" />
+                    <hr style="height:2px;border:none;" />
                             <div class="lead row">
                                 <div class="col-md-12 stretch-card grid-margin">
                                     <div class="col-md-3 offset-md-1">
@@ -167,9 +167,9 @@
                             </div>
 
                         <fetchoffice v-if="office.name!='Finance' "  v-bind:office="office" :key="office.id" v-for="office in uniq "></fetchoffice>
-                    <hr style="height:2px;border:none;color:black;background-color:black;" />
+                    <hr style="height:2px;border:none;" />
                     <div class="row">
-                                <div class="col-md-12 stretch-card grid-margin">
+                                <div class="lead col-md-12 stretch-card grid-margin">
                                     <div class="col-md-3 offset-md-1">
                                     SUBJECTS
                                     </div>
