@@ -87805,14 +87805,20 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _c("span", { staticClass: "d-none d-lg-inline" }, [
-                            _vm._v(
-                              " " +
-                                _vm._s(studentdata.first) +
+                          _c(
+                            "span",
+                            {
+                              staticClass: "text-capitalize  d-none d-lg-inline"
+                            },
+                            [
+                              _vm._v(
                                 " " +
-                                _vm._s(studentdata.last)
-                            )
-                          ]),
+                                  _vm._s(studentdata.first) +
+                                  " " +
+                                  _vm._s(studentdata.last)
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
                             "span",
@@ -88129,6 +88135,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchoffice___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fetchoffice__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsub__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchsub___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fetchsub__);
+//
 //
 //
 //
@@ -88746,7 +88753,7 @@ var render = function() {
             },
             [
               _vm._v(
-                "Print now | Note: For validity of your Clearance please follow this setup in printing. *Scale:61, *Color: BW/none, *Margin:none, *Page: 1, *Layout: portrait  "
+                "Print now | Note: For validity of your Clearance please follow this setup in printing. *Scale:67, *Color: BW/none, *Margin:none, *Page: 1, *Layout: portrait  "
               )
             ]
           ),
@@ -89152,6 +89159,15 @@ var render = function() {
                                                 )
                                               ]),
                                               _vm._v(" "),
+                                              _c("hr", {
+                                                staticStyle: {
+                                                  height: "2px",
+                                                  border: "none",
+                                                  color: "#333",
+                                                  "background-color": "#333"
+                                                }
+                                              }),
+                                              _vm._v(" "),
                                               _c("hr"),
                                               _vm._v(" "),
                                               _c(
@@ -89220,7 +89236,14 @@ var render = function() {
                                                   : _vm._e()
                                               }),
                                               _vm._v(" "),
-                                              _c("hr"),
+                                              _c("hr", {
+                                                staticStyle: {
+                                                  height: "2px",
+                                                  border: "none",
+                                                  color: "#333",
+                                                  "background-color": "#333"
+                                                }
+                                              }),
                                               _vm._v(" "),
                                               _vm._m(4, true),
                                               _vm._v(" "),

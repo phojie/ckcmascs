@@ -6,7 +6,7 @@
     </center>
 
     <div class="row" v-for="getsdata in getsdatas" :key="getsdata.id">
-    <button style="margin-left:30px;"  @click="water(getsdata)" class="btn btn-lg badge badge-gradient-success" data-toggle="modal" data-target="#print" data-backdrop="false" >Print now | Note: For validity of your Clearance please follow this setup in printing. *Scale:61, *Color: BW/none, *Margin:none, *Page: 1, *Layout: portrait  </button>
+    <button style="margin-left:30px;"  @click="water(getsdata)" class="btn btn-lg badge badge-gradient-success" data-toggle="modal" data-target="#print" data-backdrop="false" >Print now | Note: For validity of your Clearance please follow this setup in printing. *Scale:67, *Color: BW/none, *Margin:none, *Page: 1, *Layout: portrait  </button>
     
          <div class="col-lg-12 grid-margin stretch-card" >
             <div class="card" >
@@ -150,6 +150,7 @@
 
                         </div>
                     </center>
+                    <hr style="height:2px;border:none;color:#333;background-color:#333;" />
                         <hr>
                             <div class="lead row">
                                 <div class="col-md-12 stretch-card grid-margin">
@@ -167,7 +168,7 @@
                             </div>
 
                         <fetchoffice v-if="office.name!='Finance' "  v-bind:office="office" :key="office.id" v-for="office in uniq "></fetchoffice>
-                    <hr >
+                    <hr style="height:2px;border:none;color:#333;background-color:#333;" />
                     <div class="row">
                                 <div class="col-md-12 stretch-card grid-margin">
                                     <div class="col-md-3 offset-md-1">

@@ -141,7 +141,7 @@
                 <img :src="'userprofilepic/'+studentdata.profilepic" alt="image">
                 <!-- <img :src="ckcmascs/images/faces-clipart/pic-1.png" alt="image"> -->
                 
-                <span class="d-none d-lg-inline"> {{studentdata.first}} {{studentdata.last}}</span>
+                <span class="text-capitalize  d-none d-lg-inline"> {{studentdata.first}} {{studentdata.last}}</span>
                
                 <span class="d-none d-lg-inline teal-text ml-1" style="font-size:9px;">Student</span>
                 
