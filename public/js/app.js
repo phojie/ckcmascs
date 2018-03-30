@@ -89300,7 +89300,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "stretch-card grid-margin" }, [
       _c("img", {
-        attrs: { src: "images/ckcm.png", height: "100", wdith: "100", alt: "" }
+        attrs: { src: "images/Ckcm.png", height: "100", wdith: "100", alt: "" }
       })
     ])
   },
@@ -89311,7 +89311,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "ml-5 stretch-card grid-margin" }, [
       _c("img", {
         staticStyle: { "margin-top": "13px" },
-        attrs: { src: "images/comsci.png", height: "75", width: "75", alt: "" }
+        attrs: { src: "images/Comsci.png", height: "75", width: "75", alt: "" }
       })
     ])
   },
@@ -89321,7 +89321,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "stretch-card grid-margin" }, [
       _c("img", {
-        attrs: { src: "images/ckcm.png", height: "100", wdith: "100", alt: "" }
+        attrs: { src: "images/Ckcm.png", height: "100", wdith: "100", alt: "" }
       })
     ])
   },
@@ -89332,7 +89332,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "ml-5 stretch-card grid-margin" }, [
       _c("img", {
         staticStyle: { "margin-top": "13px" },
-        attrs: { src: "images/comsci.png", height: "75", width: "75", alt: "" }
+        attrs: { src: "images/omsci.png", height: "75", width: "75", alt: "" }
       })
     ])
   }
