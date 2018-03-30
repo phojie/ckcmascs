@@ -89162,8 +89162,8 @@ var render = function() {
                                                 staticStyle: {
                                                   height: "2px",
                                                   border: "none",
-                                                  color: "#333",
-                                                  "background-color": "#333"
+                                                  color: "black",
+                                                  "background-color": "black"
                                                 }
                                               }),
                                               _vm._v(" "),
@@ -89237,8 +89237,8 @@ var render = function() {
                                                 staticStyle: {
                                                   height: "2px",
                                                   border: "none",
-                                                  color: "#333",
-                                                  "background-color": "#333"
+                                                  color: "black",
+                                                  "background-color": "black"
                                                 }
                                               }),
                                               _vm._v(" "),
