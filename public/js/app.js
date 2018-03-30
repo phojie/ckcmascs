@@ -89160,8 +89160,8 @@ var render = function() {
                                               _vm._v(" "),
                                               _c("hr", {
                                                 staticStyle: {
-                                                  height: "2px",
-                                                  border: "none"
+                                                  height: "0px",
+                                                  border: "1px solid black"
                                                 }
                                               }),
                                               _vm._v(" "),
@@ -89233,8 +89233,8 @@ var render = function() {
                                               _vm._v(" "),
                                               _c("hr", {
                                                 staticStyle: {
-                                                  height: "2px",
-                                                  border: "none"
+                                                  height: "0px",
+                                                  border: "1px solid black"
                                                 }
                                               }),
                                               _vm._v(" "),
