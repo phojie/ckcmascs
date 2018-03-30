@@ -68253,6 +68253,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 location: ''
             },
             getoffice: {
+                id: '',
                 name: '',
                 assign: '',
                 email: '',
@@ -68291,11 +68292,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             axios.get('/officedata').then(function (response) {
-                _this2.offices = response.data.officedata;
+                _this2.offices = response.data.getf;
                 _this2.loadarea = false;
             });
         },
         getdetails: function getdetails(get) {
+            this.getoffice.id = get.id;
             this.getoffice.name = get.name;
             this.getoffice.assign = get.assign;
             this.getoffice.email = get.email;
@@ -68518,10 +68520,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
         },
-        deleteOffice: function deleteOffice(get) {
+        deleteOffice: function deleteOffice(getof) {
             var _this2 = this;
 
-            axios.delete('/officedata/' + get.id).then(function (response) {
+            axios.delete('/officedata/' + getof.id).then(function (response) {
                 if (response.data.updatenow = 'update') {
                     _this2.$toastr('add', {
                         title: 'Successfully Deleted',
@@ -68657,7 +68659,8 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "You are about to delete Office " + _vm._s(_vm.getof.name)
+                      "You are about to delete Office of " +
+                        _vm._s(_vm.getof.name)
                     )
                   ]
                 ),
@@ -68685,7 +68688,7 @@ var render = function() {
                     attrs: { type: "button", "data-dismiss": "modal" },
                     on: {
                       click: function($event) {
-                        _vm.deleteOffice(_vm.get)
+                        _vm.deleteOffice(_vm.getof)
                       }
                     }
                   },

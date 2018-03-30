@@ -24,6 +24,10 @@ class officeController extends Controller
         $getstatus=DB::table('signeds')
             ->where('toid',$myid)
             ->get();
+
+            $getf=DB::table('offices')
+                ->get();
+        
         
         $get=DB::table('offices')
             ->leftJoin('signeds','offices.user_id','signeds.toid')
@@ -31,6 +35,7 @@ class officeController extends Controller
             ->get();        
 
         return response()->json([
+            'getf'=>$getf,
             'officedata'=>$get,
             'profof'=> $getdata,
             'getstatus'=>$getstatus

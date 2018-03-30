@@ -89,6 +89,7 @@ export default {
               location:''
           },
           getoffice:{
+              id:'',
               name:'',
               assign:'',
               email:'',
@@ -126,12 +127,13 @@ export default {
         fetchoffice(){
             axios.get('/officedata').then(
                 response=>{
-                    this.offices=response.data.officedata
+                    this.offices=response.data.getf
                     this.loadarea=false
                 }
             )
         },
         getdetails(get){
+            this.getoffice.id=get.id;
             this.getoffice.name=get.name;
             this.getoffice.assign=get.assign;
             this.getoffice.email=get.email;

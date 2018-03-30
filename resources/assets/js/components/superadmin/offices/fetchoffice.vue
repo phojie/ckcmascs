@@ -39,7 +39,7 @@
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">You are about to delete Office {{getof.name}}</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">You are about to delete Office of {{getof.name}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -59,7 +59,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button style="cursor:pointer" type="button" data-dismiss="modal" @click="deleteOffice(get)" class="btn btn-danger">Delete</button>
+                <button style="cursor:pointer" type="button" data-dismiss="modal" @click="deleteOffice(getof)" class="btn btn-danger">Delete</button>
             </div>
             </div>
         </div>
@@ -147,8 +147,8 @@ export default {
                 }
             })
         },
-        deleteOffice(get){
-            axios.delete('/officedata/'+get.id).then(response=>{
+        deleteOffice(getof){
+            axios.delete('/officedata/'+getof.id).then(response=>{
                 if(response.data.updatenow='update'){
                     this.$toastr('add', 
                         { 
