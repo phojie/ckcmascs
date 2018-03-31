@@ -41,7 +41,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button style="cursor:pointer" v-if="!addingloading"  type="button" @click="requestNow(subdata)" class="btn btn-primary">Request</button>
+            <button style="cursor:pointer" v-if="!addingloading && active=='1'"  type="button" @click="requestNow(subdata)" class="btn btn-primary">Request</button>
             <img v-if="addingloading" src="images/loading1.gif"  class="mx-4"  height="50" style="" alt="">
         </div>
         </div>
@@ -54,6 +54,7 @@ export default {
     props:['sub','subdata'],
     data(){
         return{
+        active:'',
         addingloading:false,
         reqlists:[],
        
@@ -70,6 +71,9 @@ export default {
         fetchReq(){
             axios.get('requirementdata').then(response=>{
                 this.reqlists=response.data.all
+            })
+            axios.get('activitylog').then(response=>{
+                this.active=response.data.ac;
             })
         },
        

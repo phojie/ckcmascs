@@ -89978,6 +89978,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['sub', 'subdata'],
     data: function data() {
         return {
+            active: '',
             addingloading: false,
             reqlists: []
 
@@ -89999,6 +90000,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('requirementdata').then(function (response) {
                 _this2.reqlists = response.data.all;
+            });
+            axios.get('activitylog').then(function (response) {
+                _this2.active = response.data.ac;
             });
         }
     },
@@ -90105,7 +90109,7 @@ var render = function() {
                   [_vm._v("Close")]
                 ),
                 _vm._v(" "),
-                !_vm.addingloading
+                !_vm.addingloading && _vm.active == "1"
                   ? _c(
                       "button",
                       {
